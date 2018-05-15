@@ -2,7 +2,7 @@ package com.accp.entity;
 
 /**
  *
- * 面料表
+ * 面料表1
  *
  */
 public class Lining {
