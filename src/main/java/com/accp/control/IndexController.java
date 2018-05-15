@@ -1,7 +1,10 @@
 package com.accp.control;
 
 import com.accp.biz.Smbms_UserService;
+import com.accp.biz.Smbms_roleService;
 import com.accp.dao.RedisDao;
+import com.accp.entity.Smbms_role;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /***
  *
@@ -21,6 +25,9 @@ import javax.annotation.Resource;
 public class IndexController {
 	@Resource
 	private Smbms_UserService userService;
+
+	@Resource
+	private Smbms_roleService roleService;
 
 	/* redis */
 	@Autowired
@@ -44,6 +51,7 @@ public class IndexController {
 	 */
 	@RequestMapping("/add")
 	public String add(String userCode, String userPassword,Model model) {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+redisDao.getValue("rrrrr"));
 		System.out.println("userCode");
 		System.out.println("userPassword");
 		if(userService.list(userCode,userPassword)>0){
@@ -54,10 +62,21 @@ public class IndexController {
 
 	/*redis*/
 	public void testRedis(){
+		List<Smbms_role> rr=roleService.list();
+		String str=null;
+		try{
+			str= JSON.toJSONString(rr);//转换成JSON格式
+		}catch (Exception e){
+			System.out.println("出现转换格式错误！");
+		}
 		redisDao.setKey("name","forezp");
 		redisDao.setKey("age","11");
+		redisDao.setKey("rrrrr",str);
+
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+redisDao.getValue("name"));
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+redisDao.getValue("age"));
+		System.out.println("#######################"+redisDao.getValue("rrrrr")+"###########################");
+
 	}
 
 }
