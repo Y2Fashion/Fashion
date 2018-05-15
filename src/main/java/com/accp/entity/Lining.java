@@ -1,6 +1,7 @@
 package com.accp.entity;
 
 /**
+ *
  * 面料表
  *
  */
