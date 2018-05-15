@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.Smbms_UserDao">
+	<resultMap type="Smbms_User" id="Smbms_UserMap">
+		<!-- property属性名        column表中的列名 -->
+		<result property="id" column="id"/>
+		<result property="userCode" column="userCode"/>
+		<result property="userName" column="userName"/>
+		<result property="userPassword" column="userPassword"/>
+		<result property="gender" column="gender"/>
+		<result property="birthday" column="birthday"/>
+		<result property="phone" column="phone"/>
+		<result property="address" column="address"/>
+		<result property="userRole" column="userRole"/>
+		<result property="createdBy" column="createdBy"/>
+		<result property="creationDate" column="creationDate"/>
+		<result property="modifyBy" column="modifyBy"/>
+		<result property="modifyDate" column="modifyDate"/>
+		<result property="idPicPath" column="idPicPath"/>
+		<association property="smbms_role" javaType="Smbms_role">
+			<result property="id" column="id"/>
+			<result property="roleCode" column="roleCode"/>
+			<result property="roleName" column="roleName"/>
+			<result property="createdBy" column="createdBy"/>
+			<result property="creationDate" column="creationDate"/>
+			<result property="modifyBy" column="modifyBy"/>
+			<result property="modifyDate" column="modifyDate"/>
+		</association>
+	</resultMap> 
+	<!-- 验证用户名与密码是否一致     返回id -->
+	<select id="select" resultType="Integer">
+		SELECT id FROM smbms_user
+		<where>
+			<if test="userCode !=null and userCode!=''">
+				and userCode=#{userCode}
+		 	</if>
+		 	<if test="userPassword !=null and userPassword!=''">
+		 	 	and userPassword=#{userPassword}
+		 	</if>
+		</where>
+	</select>
+</mapper>
