@@ -4,7 +4,6 @@ import com.accp.biz.Smbms_UserService;
 import com.accp.biz.Smbms_roleService;
 import com.accp.dao.RedisDao;
 import com.accp.entity.Smbms_role;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +38,7 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		testRedis();
 		/*mav.addObject("message", str);*/
-		mav.setViewName("indexs");
+		mav.setViewName("index");
 		return mav;
 	}
 
@@ -57,7 +56,7 @@ public class IndexController {
 		if(userService.list(userCode,userPassword)>0){
 			return "add";
 		}
-		return "indexs";
+		return "index";
 	}
 
 	/*redis*/
@@ -65,7 +64,7 @@ public class IndexController {
 		List<Smbms_role> rr=roleService.list();
 		String str=null;
 		try{
-			str= JSON.toJSONString(rr);//转换成JSON格式
+			//str= JSON.toJSONString(rr);//转换成JSON格式
 		}catch (Exception e){
 			System.out.println("出现转换格式错误！");
 		}

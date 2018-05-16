@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta content="no-cache" http-equiv="Pragma">
+		<title>灰色全羊毛立领中山装男士西服套装</title>
+		<meta name="Keywords" content="衣邦人，贝嘟科技，方琴，服装定制，男士正装品牌，女士职业装品牌，男士大衣哪家好，羊绒衫品牌哪家好，男士商务西裤，男士休闲裤，西装定制，定制衬衫，量身定制，免费上门">
+		<meta name="Description" content="衣邦人 贝嘟科技 量身定制 触手可及 男士正装 女士旗袍 美女着装顾问 特斯拉 上门量体 凯莱乔治 李加林 私人定制">
+		<meta http-equiv="mobile-agent" content="format=html5; url=//m.ybren.com/home/itemdetail/" />
+		<meta http-equiv="mobile-agent" content="format=xhtml; url=//m.ybren.com/home/itemdetail/" />
+		<meta http-equiv="mobile-agent" content="format=wml; url=//m.ybren.com/home/itemdetail/" />
+
+		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
+		<link href="/Public/css/common.css"rel="stylesheet"/>
+		
+		<link href="/Public/css/swiper.min.css" rel="stylesheet"/>
+		<link href="/Public/css/goods.css"rel="stylesheet"/>
+		<script src="//ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>	
+		<style type="text/css">
+			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
+			ul,ol,li{list-style:none; vertical-align: top;}
+			img{border:0}
+			a{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+			body{
+				margin: 0;
+				padding: 0;
+				background-color: #eff3f5;
+				overflow-x: hidden;	
+				font-family:"Microsoft YaHei",微软雅黑,sans-serif;	
+				color: #222222;		
+			}
+			.content .right .ftit .t_title .coup {font-size: 8px;border: 1px solid #e60039;border-radius: 2px;color: #e60039;padding: 0px 4px;height: 16px;
+					line-height: 16px;float: left;margin-right: 5px;margin-top: 4px;
+			}
+			.content .right .ftit .p_desc {color: #005bac;font-size: 10px;margin-bottom:5px;text-align: left;}
+                        .detail{    text-align: center;}
+					   		
+		</style>
+		<script>
+                    
+                        function   getFbrics(page){
+                            
+                                var itemid="";
+                            $.post( "/index.php/Home/Index/ajaxFbrics.html",{"page":page,"item_id":itemid},function(data) {             
+                                $('#Fabrics').html(data);
+    		        	
+			    },'html');
+                                
+                        }
+                    
+			$(function(){								
+				$(".li_simg").click(function(){
+					var src =$(this).attr('_src');
+					$('.div_big_img').attr('src',src);
+				});
+				
+				$(".chbox_type").click(function(){
+					$('.chbox_type').css('background','#4b4b4b');
+					$(this).css('background','#8e0202');
+					$('.t').hide();
+					var type =$(this).attr('type');
+					$('.'+type).show();
+				});
+				
+				
+			});
+		</script>
+		
+	</head>
+	<body>
+		<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-86988233-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!--<div style="display:none">-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9618726c6a17a014651e4fedc8a09130";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+<!--<style type="text/css">
+	#qiao-wrap{display: none!important;}
+</style>-->
+<style type="text/css">
+	#YSF-BTN-HOLDER{display: none!important;}
+</style>
+<div class="head"><!--头部-->
+			<div class="topbar">		  
+				<img src="//ossstatic.ybren.com/PC/web/index/fourpoint.jpg" alt="贝嘟科技">	
+				<a class="logo" href="//www.ybren.com/"><img src="//ossstatic.ybren.com/PC/web/index/logo.png" alt="贝嘟科技"></a>	
+			</div>					
+		</div>
+		<div class="nav">
+			<ul class="son">
+				<li><a href="//www.ybren.com?from=Items">首页</a></li>
+				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+					<ul>
+						<li ><a href="/home/category/137/from/Items">男士西装</a></li><li ><a href="/home/category/143/from/Items">男士T恤</a></li><li ><a href="/home/category/140/from/Items">男士衬衫</a></li><li ><a href="/home/category/142/from/Items">男士裤装</a></li><li ><a href="/home/category/212/from/Items">男士新中式</a></li><li ><a href="/home/category/141/from/Items">男士外套</a></li><li ><a href="/home/category/195/from/Items">男士童装</a></li><li ><a href="/home/category/145/from/Items">女士西装</a></li><li ><a href="/home/category/191/from/Items">女士真丝</a></li><li ><a href="/home/category/146/from/Items">女士衬衫</a></li><li ><a href="/home/category/148/from/Items">女士裤装</a></li><li ><a href="/home/category/204/from/Items">女士针织</a></li><li ><a href="/home/category/147/from/Items">女士外套</a></li><li ><a href="/home/category/218/from/Items">配饰</a></li>		
+					</ul>
+				</li>
+				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
+					<ul>
+						<!-- <li><a href="/index.php/Home/Index/Fabric/from/Items">国际面料</a></li> -->
+						<li><a href="/index.php/Home/Index/maintenance/from/Items">保养手册</a></li>
+                        <li><a href="/index.php/Home/Activity/Daka/from/Items">大咖定制秀</a></li>
+                        <li><a href="/index.php/Home/Index/brandCooper/from/Items">合作品牌</a></li>
+                        <li><a href="/index.php/Home/Index/service?from=Items">售后服务</a></li>
+					</ul>
+				</li>
+				<li><a href="/index.php/Home/Index/yuyue/from/Items">预约量体</a></li>
+ <!--                <li  ><a  href="/index.php/Home/Activity/YbrenerReg/from/Items">衣邦客</a></li> -->
+ 				<li><a  href="/index.php/Home/Index/bigEvent/from/Items">大事记</a></li>
+				<li class="son_li"><a href="javascript:void(0);" class="click">企业相关</a>
+					<ul>
+						<li><a href="/index.php/Home/Index/company/from/Items">关于衣邦人</a></li>
+						<!-- <li><a href="/index.php/Home/Index/ggxx/from/Items">高管信息</a></li> -->
+						<!-- <li><a href="/index.php/Home/Index/bigEvent/from/Items">大事记</a></li> -->
+						<li><a href="/index.php/Home/Index/media/from/Items">新闻动态</a></li>
+						<li><a href="/index.php/Home/Index/business/from/Items">商务合作</a></li>
+						<li><a href="/index.php/Home/Index/contact/from/Items">联系我们</a></li>
+					</ul>
+				</li>
+				<div style="clear: both;"></div>
+			</ul>		  
+		</div>
+
+ <script type="text/javascript">
+                    function kefu(){
+                        var H = $(window).height();
+                        var W = $(window).width();
+                        var t = H/2-250;
+                        var l = W/2-250;
+                        window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
+                    }
+			$(function() {
+				$('.r3').hover(function(){
+					$('.wx_code').show();
+				},function(){
+					$('.wx_code').hide();
+				});
+				
+				$('.r4').hover(function(){
+					$('.app_code').show();
+				},function(){
+					$('.app_code').hide();
+				});
+			});
+		</script>
+
+	<div class="right_sevice">
+			<a onclick="kefu()" class="r1">在线客服</a>			
+			<a class="r3" href="###">官方微信</a>
+			<a class="r4" href="###">APP下载</a>
+			<a class="r2" href="/index.php/Home/Index/yuyue/from/Items/frompage/pc-item"></a>
+			<img class="wx_code" src="//ossstatic.ybren.com/PC/web/index/WeixinHover_01.png"/>
+			<img class="app_code" src="//ossstatic.ybren.com/PC/web/index/AppHover_01.png"/>
+		</div>
+		<script type="text/javascript">
+		 	function kefu(){
+                        var H = $(window).height();
+                        var W = $(window).width();
+                        var t = H/2-250;
+                        var l = W/2-250;
+                        window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
+                    }
+			$(function() {
+				$('.r3').hover(function(){
+					$('.wx_code').show();
+				},function(){
+					$('.wx_code').hide();
+				});
+				
+				$('.r4').hover(function(){
+					$('.app_code').show();
+				},function(){
+					$('.app_code').hide();
+				});
+			});
+		</script>	
+
+<!--头部-->				
+		<div class="content">
+			<div class="left">
+				<p style="width: 100px;font-size: 14px;color: #222222;">—&nbsp;搭配推荐&nbsp;—</p>
+				<div class="left_list">
+					<a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS0140&from=Items"><img src="//appstatic.ybren.com/Uploads/Items/products/2017-02-22/58ad64a610023.jpg" alt=""></a><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS0171&from=Items"><img src="//appstatic.ybren.com/Uploads/Items/Cover/2015-11-14/564697cfa0dc0.jpg" alt=""></a>       
+				</div>									
+			</div>
+			<div class="right">
+				<div class="dtop">
+					<div class="bigimg"><img  class="div_big_img" src="//appstatic.ybren.com/Uploads/Items/Cover/2016-02-17/56c43ca3a96a1.jpg" alt=""></div>
+					<div class="tips">
+						<div class="ftit">
+							<div class="t_title">
+								<h2>
+									 
+									
+									灰色全羊毛立领中山装男士西服套装</h2>
+								<p class="p_desc">100%羊毛  SUPER120S</p>
+								<p></p>
+								<p><span class="ts tst">最终价格以定制方为准</span></p>
+								<p><span class="ts"><s>吊牌价：￥6960.00</s></span></p>
+								<p class="money"><span>会员价：<font color="#D00F12">￥3480.00</font></span></p>
+							</div>
+						</div>
+						<ul class="small_img">
+                            <li class="li_simg" _src="//appstatic.ybren.com/Uploads/Items/Cover/2016-02-17/56c43ca3a96a1.jpg"><img src="//appstatic.ybren.com/Uploads/Items/Cover/2016-02-17/56c43ca3a96a1.jpg" alt=""></li><li class="li_simg" _src="//appstatic.ybren.com/Uploads/Items/products/2016-02-17/56c43ca3c8dda.jpg"><img src="//appstatic.ybren.com/Uploads/Items/products/2016-02-17/56c43ca3c8dda.jpg" alt=""></li><li class="li_simg" _src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-08-31/59a77531de339.jpg"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-08-31/59a77531de339.jpg" alt=""></li>     							
+						</ul>
+						<div class="chbox">
+							<span class="chbox_type act" type="t1">默认面料</span>
+							<span class="chbox_type" type="t2">可选面料</span>
+							 <span class="chbox_type" type="t3">定制工艺</span>							<span class="chbox_type" type="t4">优质服务</span>
+						</div>
+						<div class="list">
+							<div class="t t1">
+                                                            
+                                <div class="list__t1_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4b21b1bb6.jpg" alt=""><img class="selectling" src="//ossstatic.ybren.com/PC/good_img/selectling.png"></div>
+								<div class="list__t1_right">
+									<h2>默认面料</h2>
+									<p>
+										编号：DBM587A<br />										
+										成分：100%羊毛<br />
+										颜色：灰色<br />
+										花型：素色									</p>
+									
+								</div>
+                                <div style="clear: both;"></div>
+								<div class="t1_desc">120支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型。灰色英伦绅，适合商务休闲或者时尚派对、宴会等。</div>                            
+							</div>
+                                <div class="t t2" id="Fabrics">
+                                                       
+                                 <div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4b21b1bb6.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM587A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型。灰色英伦绅，适合商务休闲或者时尚派对、宴会等。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM579A<br />
+									颜色：宝蓝<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2016-08-25/57be9bb565354_thumb.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN041A<br />
+									颜色：藏青色<br />
+									成分：80%聚酯纤维20%黏胶									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">聚酯纤维面料，表面光滑有质感，易成形不易皱，轻便潇洒，维护简单。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN802A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2017-03-17/58cb9e44bb9e8.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBQ397A<br />
+									颜色：绿色<br />
+									成分：100%聚酯纤维									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">素色-绿色</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-09/56406da085428.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBF344A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，面料透气，穿着舒适。既适合商务又适合休闲。适合四季穿着</div><div class="list__t2_left"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Fabrics/2017-08-04/59846a770701d.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBP659A<br />
+									颜色：黑色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN296A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2017-03-17/58cb9e0adef32.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM562A<br />
+									颜色：黑色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBQ819A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">条纹-蓝色</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4bdae4707.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN801A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，呢面光滑，纹路清晰，无皱褶。质地轻薄，有光泽感，适合正式场合，四季皆可</div><div class="list__t2_left"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Fabrics/2017-08-04/59846f991750c.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM561A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBQ811A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4badd5643.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN328A<br />
+									颜色：天蓝<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型。颜色鲜明纯粹，适合商务休闲或者时尚派对、宴会等。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBQ807A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-14/5646a7962035d.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN321A<br />
+									颜色：咖啡<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">超细高纱支纯羊毛面料，细腻柔软，不易皱，易打理。 黑色适合商务休闲</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4b17dbeb9.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM560A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">110支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型。灰色经典内敛，适合商务休闲等场所。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBL647A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Fabrics/2017-08-04/59846e715e74f.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBQ799A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN315A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4b0d85f45.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBL622A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型，宝蓝条纹低调百搭，适合商务休闲等场所。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBP704A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN314A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4ade7a705.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBK708A<br />
+									颜色：米色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，米色柔和，适合较为时尚休闲的轻松场合，适合四季穿着</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBP674A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN301A<br />
+									颜色：黑色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">条纹-黑色</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBM590A<br />
+									颜色：黑色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text"></div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2016-08-15/57b153709597f.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DKP005A<br />
+									颜色：啡色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">羊毛是纺织工业的重要原料，特具许多优良特性，如弹性好、吸湿性强、不易玷污、光泽柔和。100%羊毛面料手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型，西裤折痕持久挺直。不板、不烂、吸湿性好，不会紧贴皮肤，令人有粘湿之感。又有外观大方，有膘光感，纹路清晰，悬垂较好及耐脏等优点。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4bef052df.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN803A<br />
+									颜色：黑色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，呢面光滑，纹路清晰，无皱褶。质地轻薄，有光泽感，适合正式场合，四季皆可</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-17/564ad4fa82382.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBK052A<br />
+									颜色：灰色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，手感柔软而富有弹性，身骨挺括、热塑性好，经过熨烫，平整有型。灰色整洁时尚、具有个性。适合商务休闲或者时尚派对、宴会等。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Uploads/Fabrics/2015-11-05/563b4d30435e2.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBP673A<br />
+									颜色：蓝色<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">120支超细高纱支纯羊毛面料，宝蓝色时尚个性，适合商务休闲或者时尚派对、宴会等。</div><div class="list__t2_left"><img src="//appstatic.ybren.com/Public/Common/images/default/fabrics.jpg" alt=""></div>
+								<div class="list__t2_right">
+									<font style="font-size: 14px;" color="#ff58le">会员价：￥3480.00</font><br />
+									<s style="color: #757575;font-size: 12px;">吊牌价：￥6960.00</s><br />
+									编号：DBN299A<br />
+									颜色：藏青<br />
+									成分：100%羊毛									
+								</div>
+								<div style="clear: both;"></div>
+								<div class="text">条纹-藏青色</div>    
+                                                            <!--<div><a  onclick ="getFbrics(2)" >下一页</a> </div>--> 
+							</div>
+                                                    <div class="t t3">
+                                                                                                                  
+                                                               <div class="t3_list">
+                                                                   <div class="t3_list_title"><span>前口袋<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912c6eb614.jpg" alt=""><p>无口袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912ecba911.jpg" alt=""><p>直口袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912f8e3289.jpg" alt=""><p>单开线</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912d476897.jpg" alt=""><p>2.5斜插口袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912e09583c.jpg" alt=""><p>3.2斜插口袋</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>手表袋<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592913333ee2a.jpg" alt=""><p>无表袋</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40510.jpg" alt=""><p>正常左表袋</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>裤褶<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5929129f164ef.jpg" alt=""><p>无褶裤</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912aa93456.jpg" alt=""><p>单褶褶向侧缝</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592912b89db55.jpg" alt=""><p>单褶褶向前门</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>后袋形式<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40345.jpg" alt=""><p>标准盖后袋</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40351.jpg" alt=""><p>单开线后袋</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40354.jpg" alt=""><p>双开线后袋</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40355.jpg" alt=""><p>双开线锁眼钉扣</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5929133d92c5a.jpg" alt=""><p>无后袋</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>宝剑头<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40475.jpg" alt=""><p>尖宝剑头,挂钩钉扣</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40473.jpg" alt=""><p>无宝剑头,挂钩</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40474.jpg" alt=""><p>无宝剑头,钉扣</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>防磨带<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2015-11-03/5638800475aad.jpg" alt=""><p>不需要</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/592915631ff68.jpg" alt=""><p>脚口加防磨带</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>脚口形式<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads//Process/20150001/40319.jpg" alt=""><p>2.5cm外翻翘</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59291348959a1.jpg" alt=""><p>内折边5.0cm</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>前门扣<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f699f1fdf.jpg" alt=""><p>单排四粒扣</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f674dbb26.jpg" alt=""><p>单排一粒扣</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f683188a6.jpg" alt=""><p>单排二粒扣</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f68f0a1bc.jpg" alt=""><p>单排三粒扣</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6c0bd7d2.jpg" alt=""><p>双排二扣一</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6a9501d3.jpg" alt=""><p>双排四扣二</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6b5d5c7d.jpg" alt=""><p>双排六扣二</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>驳头选择<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6f923d2c.jpg" alt=""><p>平驳头</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f706118b2.jpg" alt=""><p>戗驳头</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/5928f7309a550.jpg" alt=""><p>青果领</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>口袋形式<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b03cfa1f.jpg" alt=""><p>无胸袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b115878c.jpg" alt=""><p>正常胸袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b407c536.jpg" alt=""><p>明贴胸袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b1ec4e6a.jpg" alt=""><p>船型胸袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b3173289.jpg" alt=""><p>双开线胸袋</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>下口袋<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b528d8ac.jpg" alt=""><p>正常下口袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290b6ea0f81.jpg" alt=""><p>正常明贴下口袋</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59291199d6539.jpg" alt=""><p>正常单开线</p></li><li><img src="//appstatic.ybren.com/Uploads//Process/20150001/31070.jpg" alt=""><p>单开线斜插袋</p></li>  
+                                                                        </ul>       
+                                                                  </div><div class="t3_list">
+                                                                   <div class="t3_list_title"><span>后开衩<img src="//ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+                                                                    <ul>
+                                                                   <li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290c0a85d75.jpg" alt=""><p>无开衩</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290c163fbd9.jpg" alt=""><p>单开衩</p></li><li><img src="//appstatic.ybren.com/Uploads/Process/2017-05-27/59290c23653c1.jpg" alt=""><p>双开衩</p></li>  
+                                                                        </ul>       
+                                                                  </div>    
+                                                            
+							</div>							<div class="t t4"><img src="//ossstatic.ybren.com/PC/good_img/t4.jpg" alt=""></div>
+						</div>
+						<a class="yuyue" href="/index.php/Home/Index/yuyue.html?from=Items">立即预约专业着装顾问免费上门量体</a>
+					</div>
+				</div>
+				<div class="step">
+					<img src="//ossstatic.ybren.com/PC/good_img/step.jpg" alt="" />
+                                        <!--<img src="//ossstatic.ybren.com/PC/good_img/coupon.jpg" alt="" />-->
+				</div>
+                            <div class="detail">
+                                    <img src="Items/Desc/0/62//56386c37eb98c.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c37f40b6.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c38068d5.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c380ea7c.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c3815e3c.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c381ed81.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c38274f7.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c382b560.jpg" alt=""><br/><img src="Items/Desc/0/62//56386c382f573.jpg" alt=""><br/>       
+                            </div>
+				<div class="rmtj"><img src="//ossstatic.ybren.com/PC/good_img/hotsale.png" alt="" ></div>
+				<div class="swiper-container">
+			        <div class="swiper-wrapper">
+                                                                        
+                                            <div class="swiper-slide"><ul>
+                                                        <li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1500&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-04-20/5ad9bab6186e9.jpg" alt="" ><span><font color="#FA5F29">会员价￥6480.00</font><br />灰色格纹春夏时尚套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1499&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-04-20/5ad9ba2e7baf5.jpg" alt="" ><span><font color="#FA5F29">会员价￥6480.00</font><br />蓝色格纹春夏时尚套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1390&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-04-11/5acd8c570417e.jpg" alt="" ><span><font color="#FA5F29">会员价￥2480.00</font><br />深藏青条纹全羊毛男士商务西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1281&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655e6830fec.jpg" alt="" ><span><font color="#FA5F29">会员价￥6280.00</font><br />蓝色条纹全麻精品西服套装</span></a></li>  
+                                                </ul></div><div class="swiper-slide"><ul>
+                                                        <li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1282&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655d2fe9bf5.jpg" alt="" ><span><font color="#FA5F29">会员价￥5980.00</font><br />蓝色格纹全羊毛双排扣精品西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1251&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-16/5a5d6831d7a16.jpg" alt="" ><span><font color="#FA5F29">会员价￥9059.00</font><br />灰色大格全羊毛高端商务经典西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1250&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-16/5a5d67a5a5187.jpg" alt="" ><span><font color="#FA5F29">会员价￥8999.00</font><br />灰色全羊毛立领中式套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=ys1014&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9cd9367edd9.jpg" alt="" ><span><font color="#FA5F29">会员价￥6360.00</font><br />蓝色马赛克格纹明星同款面料西服套装</span></a></li>  
+                                                </ul></div><div class="swiper-slide"><ul>
+                                                        <li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS1018&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e27c0bda0e.jpg" alt="" ><span><font color="#FA5F29">会员价￥6060.00</font><br />灰色大格纹全羊毛经典双排扣商务西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS0572&from=Items"><img src="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-07/5a9fc83f7b12c.jpg" alt="" ><span><font color="#FA5F29">会员价￥5060.00</font><br />蓝色细腻小格纹戗驳头男士商务西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS0211&from=Items"><img src="//appstatic.ybren.com/Uploads/Items/products/2017-02-15/58a419fa38d8a.jpg" alt="" ><span><font color="#FA5F29">会员价￥3580.00</font><br />灰色方格全羊毛男士商务西服套装</span></a></li><li><a href="/index.php/Home/Index/itemDetail.html?erp_item_id=YS0114&from=Items"><img src="//appstatic.ybren.com/Uploads/Items/products/2017-02-15/58a418da9b675.jpg" alt="" ><span><font color="#FA5F29">会员价￥3580.00</font><br />灰色条纹全羊毛男士商务西服套装</span></a></li>  
+                                                </ul></div>     
+                                    
+			        </div>
+
+			        <!-- Add Pagination -->
+			        <!--<div class="swiper-pagination"></div>-->
+			        <!-- Add Arrows -->
+			        <div class="swiper-button-next"></div>
+			        <div class="swiper-button-prev"></div>
+				</div>
+					
+			    <!-- Swiper JS -->
+			    <script src="//ossstatic.ybren.com/PC/js/swiper.min.js"></script>
+			
+			    <!-- Initialize Swiper -->
+			    <script>
+			    var swiper = new Swiper('.swiper-container', {
+			        pagination: '.swiper-pagination',
+			        paginationClickable: true,
+			        nextButton: '.swiper-button-next',
+			        prevButton: '.swiper-button-prev',
+			        spaceBetween: 30
+			    });
+			    </script>
+			</div>
+			
+		</div>
+          </div>
+                  <div class="foot">
+			<div class="foot_logo">
+				<img src="//ossstatic.ybren.com/PC/web/index/foot01.jpg" alt="" />				
+			</div>
+			<div class="fmidd">
+				<div class="fsec">					
+					<ul class="fsec1" style="margin-left: 150px;">
+						<li style="padding-bottom: 5px;padding-left: 0;"><a class="ftitle" target="_blank" href="javascript:void(0)">关于我们</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/company?from=Items">公司简介</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/brandCooper?from=Items">合作品牌</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/media?from=Items">新闻动态</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/business?from=Items">商务合作</a></li>
+					</ul>
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
+
+						<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric?from=Items">面料品牌</a></li> -->
+                        <li><a target="_blank" href="/index.php/Home/Index/maintenance?from=Items">保养手册</a></li>
+                        <li><a target="_blank" href="/index.php/Home/Index/service?from=Items">售后服务</a></li>
+						<li><a target="_blank" href="/index.php/Home/Activity/Daka/from/Items">大咖定制秀</a></li>
+					</ul>					
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">联系我们</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/yuyue/10703/from/Items">预约量体</a></li>
+						<li><a target="_blank" href="/index.php/Home/Index/succeed/from/Items">风尚人物</a></li>
+						<!-- <li><a target="_blank" href="/index.php/Home/Activity/YbrenerReg/from/Items">衣邦客</a></li>								 -->
+					</ul>
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">预约热线</a></li>
+						<li>400-673-8899</li>
+						<li>(北京时间9：00-21：30)</li>
+						<!-- <li>24小时客服在线</li> -->
+
+					</ul>
+					<div class="code">
+						<p><img src="//ossstatic.ybren.com/PC/web/index/code01.png"></p>
+						<p class="pt">衣邦人公众微信号</p>
+					</div>
+					<div class="code">
+						<p><img src="//ossstatic.ybren.com/PC/web/index/code02.png"></p>
+						<p class="pt">衣邦人APP客户端</p>
+					</div>
+				</div>
+			</div>
+			<div class="foot_logo_2" >
+				衣邦人，率先将互联网，专业着装顾问上门量体，和工业4.0技术引入量身定制行业的服装定制平台。客户可以免费预约衣邦人的专业着装顾问，上门量体采集身材数据，<br>并提供专业着装建议。提供西装定做，西服定制，女士正装，职业装，商务正装定制，西装，衬衫定制等服装定制服务。
+								<div style="width:300px;margin:0 auto; padding:20px 0;">
+					<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802000773" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="//ossstatic.ybren.com/PC/web/index/beian.png" style="float:left;width: 20px;height: 20px;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33011802000773号</p></a>
+				</div>
+			</div>
+			<div class="infomation"><p class="p1">Copyright&copy;2015-2018 ybren.com,&nbsp;&nbsp;All Rights Reserved.</p><p class="p2">版权所有:杭州贝嘟科技有限公司&nbsp;&nbsp;&nbsp;浙ICP备15008318号</p></div>
+</div>
+
+<style type="text/css">		
+    #cnzz_stat_icon_1255644252{display: none;}
+    #cnzz_stat_icon_1257829290{display: none;}
+</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255644252'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1255644252%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257829290'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257829290%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+	</body>
+</html>
