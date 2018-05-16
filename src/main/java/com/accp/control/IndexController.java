@@ -62,6 +62,7 @@ public class IndexController {
 
 	/*redis*/
 	public void testRedis(){
+        redisDao.remove("roleList");
 		List<Smbms_role> rr=roleService.list();
 		String str=null;
 		try{
@@ -69,14 +70,31 @@ public class IndexController {
 		}catch (Exception e){
 			System.out.println("出现转换格式错误！");
 		}
-		redisDao.setKey("name","forezp");
+        try{
+		    boolean fff=redisDao.exists("roleList");
+            redisDao.addList("roleList",rr);
+        }catch (Exception e){
+            System.out.println("保存错误！");
+        }
+        boolean xxx=redisDao.exists("name");
+        System.out.println("%%%%%%%%%%%%%%%%%%"+xxx);
+        redisDao.setKey("name","forezp");
 		redisDao.setKey("age","11");
+		boolean zzz=redisDao.exists("name");
+        System.out.println("%%%%%%%%%%%%%%%%%%"+zzz);
 		redisDao.setKey("rrrrr",str);
 
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+redisDao.getValue("name"));
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+redisDao.getValue("age"));
 		System.out.println("#######################"+redisDao.getValue("rrrrr")+"###########################");
-
+        List<Object> list2s=redisDao.getList("roleList");
+        boolean sss=redisDao.exists("roleList");
+        for (Object item:list2s) {
+            List<Smbms_role> list3s=(List<Smbms_role>)item;
+            for (Smbms_role rs2:list3s) {
+                System.out.println("输出List中的数据："+rs2.getRoleName()+"--------"+rs2.getCreatedBy());
+            }
+        }
 	}
 
 }
