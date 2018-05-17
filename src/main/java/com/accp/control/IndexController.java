@@ -4,6 +4,7 @@ import com.accp.biz.Smbms_UserService;
 import com.accp.biz.Smbms_roleService;
 import com.accp.dao.RedisDao;
 import com.accp.entity.Smbms_role;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class IndexController {
 	public ModelAndView index(@RequestParam(required=false,defaultValue="xxx",value="uname") String username) {
 		/*String str = "学框架就学Spring  MVC";*/
 		ModelAndView mav = new ModelAndView();
-		testRedis();
+		//testRedis();
 		/*mav.addObject("message", str);*/
 		mav.setViewName("index");
 		return mav;
@@ -60,12 +61,12 @@ public class IndexController {
 	}
 
 	/*redis*/
-	public void testRedis(){
+	/*public void testRedis(){
         redisDao.remove("roleList");
 		List<Smbms_role> rr=roleService.list();
 		String str=null;
 		try{
-			//str= JSON.toJSONString(rr);//转换成JSON格式
+			str= JSON.toJSONString(rr);//转换成JSON格式
 		}catch (Exception e){
 			System.out.println("出现转换格式错误！");
 		}
@@ -94,6 +95,6 @@ public class IndexController {
                 System.out.println("输出List中的数据："+rs2.getRoleName()+"--------"+rs2.getCreatedBy());
             }
         }
-	}
+	}*/
 
 }
