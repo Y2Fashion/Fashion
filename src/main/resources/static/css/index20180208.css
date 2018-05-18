@@ -31,8 +31,8 @@ body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			.nav ul li:hover a{color: #ea5514;background: #454545;}
 			.nav .son a{color: #fefefe;display: block;font-size: 14px;}
 			.nav .son_li{position: relative;z-index: 1;}
-			.nav .son_li{background:url("arrow1.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/arrow1.png*/ no-repeat ;background-position:94px 18px;}	
-			.nav .son_li:hover{background:url("arrow2.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/arrow2.png*/ no-repeat #454545;background-position:94px 18px;}
+			.nav .son_li{background:url("../image/arrow1.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/arrow1.png*/ no-repeat ;background-position:94px 18px;}
+			.nav .son_li:hover{background:url("../image/arrow2.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/arrow2.png*/ no-repeat #454545;background-position:94px 18px;}
 			.nav .son_li:hover .click{color: #fa4905;border-top: 4px solid #fa4905;line-height: 32px;}	
 			.nav .son_li:hover ul{display: block;border-bottom: 6px solid #454545;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);}
 			.son .son_li ul{position: absolute;z-index: 3000;display: none;left:0;top:36px;}
@@ -45,8 +45,8 @@ body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			.right_sevice a{display: block;width:70px;height:50px;text-align: center;color: #FFFFFF;border-bottom: 1px dashed #FFFFFF;line-height: 50px;margin-bottom:5px;cursor: pointer;}
 			.right_sevice a:hover{color: #E2AE19;}
 			.right_sevice .r1{}
-			.right_sevice .r2{overflow: hidden;border-bottom: none;height:70px;width: 70px;background: url("yy.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/yy.png*/ no-repeat center center;background-size: cover;}
-			.right_sevice .r2:hover{background: url("yy2.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/yy2.png*/ no-repeat center center;background-size: cover;}
+			.right_sevice .r2{overflow: hidden;border-bottom: none;height:70px;width: 70px;background: url("../image/yy.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/yy.png*/ no-repeat center center;background-size: cover;}
+			.right_sevice .r2:hover{background: url("../image/yy2.png")/*tpa=https://ossstatic.ybren.com/PC/web/index/yy2.png*/ no-repeat center center;background-size: cover;}
 			.right_sevice .r3{}
 			.right_sevice .r4{border-bottom: none}			
 			.right_sevice .wx_code{width:140px;height:140px;position: absolute;top:102px;left:-140px;display: none;}
@@ -103,7 +103,7 @@ body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			.ycont ul li .time{color: #A9A9A9;}
 			#city{overflow: hidden;width:412px;}
 			#city select{width:100px;height:34px;-webkit-appearance: none;appearance: none;border-right:none;margin-left:30px;text-align: center;line-height: 34px;
-						background: url("down.jpg")/*tpa=https://ossstatic.ybren.com/PC/web/index/down.jpg*/ no-repeat left 80px top 8px;color: #000000;
+						background: url("../image/down.jpg")/*tpa=https://ossstatic.ybren.com/PC/web/index/down.jpg*/ no-repeat left 80px top 8px;color: #000000;
 			}
 			#city select:first-child{}
 			#city select:last-child{border-left:none;}
@@ -118,7 +118,7 @@ body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			.div_video object{width: 100%;}
 			.content{width: 100%;margin:0 auto;text-align: center;background: #222222;padding: 0px 0 80px;}
 			.content img{width: 100%;float: left;}	
-			.content .clear1{margin:0 auto;width:1070px;height:512px;overflow: hidden;background: #FFFFFF;background: url("clear1.jpg")/*tpa=https://ossstatic.ybren.com/PC/web/index/clear1.jpg*/ no-repeat;}
+			.content .clear1{margin:0 auto;width:1070px;height:512px;overflow: hidden;background: #FFFFFF;background: url("../image/clear1.jpg")/*tpa=https://ossstatic.ybren.com/PC/web/index/clear1.jpg*/ no-repeat;}
 			.content .clear1 .cvid{width:592px;height:373px;cursor: pointer;float: right;margin:56px 67px 0 0;}	
 			.content .dimg{overflow: hidden;width: 1070px;margin: 0 auto;}
 			.content .dimg img{float: left;width: 100%;}	
@@ -144,7 +144,7 @@ body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			.content .list .l_bot ul li .lishow{display: block;width:248px;height:43px;line-height:43px;color: #FFFFFF;font-weight: bold;font-size:18px;}
 
 			.vide_mark{position: fixed;display: none;z-index: 10000;top: 0;left: 0;width: 100%;transition: opacity 0.15s linear;height: 100%;
-			    	   background: url("mark_bj.png")/*tpa=https://www.kela.cn/Public/images/home/mall-index/mark_bj.png*/;
+			    	   background: url("../image/mark_bj.png")/*tpa=https://www.kela.cn/Public/images/home/mall-index/mark_bj.png*/;
 			}
 
 			.vide_mark .vide_content_div {
