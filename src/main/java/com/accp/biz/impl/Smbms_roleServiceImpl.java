@@ -1,7 +1,6 @@
 package com.accp.biz.impl;
 
 import com.accp.biz.Smbms_roleService;
-import com.accp.dao.Smbms_roleDao;
 import com.accp.entity.Smbms_role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

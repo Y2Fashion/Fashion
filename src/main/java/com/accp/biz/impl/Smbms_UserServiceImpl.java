@@ -1,6 +1,5 @@
 package com.accp.biz.impl;
 
-import com.accp.dao.Smbms_UserDao;
 import com.accp.biz.Smbms_UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
