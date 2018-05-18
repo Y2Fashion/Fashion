@@ -11,6 +11,7 @@ public class Commodity {
     private Double vipPrice;//商品会员价
     private String photoPath;//商品图片路径
     private String state;//状态
+    private Integer type;//类型
 
     public Integer getId() {
         return id;
@@ -58,5 +59,13 @@ public class Commodity {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
