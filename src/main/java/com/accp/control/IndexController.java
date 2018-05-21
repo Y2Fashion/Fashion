@@ -1,16 +1,19 @@
 package com.accp.control;
 
-import com.accp.biz.Smbms_UserService;
-import com.accp.biz.Smbms_roleService;
+import com.accp.biz.FirstTypeBiz;
+import com.accp.biz.SecondTypeBiz;
 import com.accp.dao.RedisDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.accp.entity.FirstType;
+import com.accp.entity.SecondType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /***
  *
@@ -20,21 +23,29 @@ import javax.annotation.Resource;
 @Controller
 public class IndexController {
 	@Resource
-	private Smbms_UserService userService;
-
+	private FirstTypeBiz firstBiz;
 	@Resource
-	private Smbms_roleService roleService;
-
-	/* redis */
-	@Autowired
-	RedisDao redisDao;
+	private SecondTypeBiz secondBiz;
 
 	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public ModelAndView index(@RequestParam(required=false,defaultValue="xxx",value="uname") String username) {
+	public ModelAndView index(Model model) {
+		List<FirstType> first=firstBiz.getList();//得到一级表的全部信息
+		List<SecondType> second=secondBiz.getList();//得到二级表的全部信息
+		List<SecondType> sss=new ArrayList<SecondType>();
+		for (SecondType li:second) {//index页面的产品
+			for (FirstType li2:first) {
+				if(li.getfId()==li2.getfId()){
+					String type=li2.getFirstType()+li.getSecondType();
+					li.setSecondType(type);
+					sss.add(li);
+					break;
+				}
+			}
+		}
+		model.addAttribute("secondType", sss);
+//WAP-BDS-PZ
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		return mav;
 	}
-	
-
 }
