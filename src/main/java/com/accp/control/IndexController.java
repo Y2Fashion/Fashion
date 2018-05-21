@@ -1,7 +1,5 @@
 package com.accp.control;
 
-import com.accp.biz.Smbms_UserService;
-import com.accp.biz.Smbms_roleService;
 import com.accp.dao.RedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +17,7 @@ import javax.annotation.Resource;
  */
 @Controller
 public class IndexController {
-	@Resource
-	private Smbms_UserService userService;
 
-	@Resource
-	private Smbms_roleService roleService;
 
 	/* redis */
 	@Autowired
@@ -35,6 +29,19 @@ public class IndexController {
 		mav.setViewName("index");
 		return mav;
 	}
-	
+	@RequestMapping(value = "/bigEvent",method = RequestMethod.GET)
+	public ModelAndView bigEvent(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("bigEvent");
+		return mav;
+	}
+
+	@RequestMapping(value = "/make",method = RequestMethod.GET)
+	public ModelAndView make(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("pc-baoyang");
+		return view;
+	}
+
 
 }
