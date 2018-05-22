@@ -161,7 +161,7 @@ ga('send', 'pageview');
 				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
 					<ul>
 						<li th:each="second:${secondType}">
-							<a th:href="${second.sId}" th:text="${second.secondType}"></a>
+							<a th:href="@{'http://localhost:8080/wbp?id='+${second.sId}}" th:text="${second.secondType}"></a>
 						</li>
 					</ul>
 				</li>

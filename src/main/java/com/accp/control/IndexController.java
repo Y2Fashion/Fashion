@@ -43,7 +43,7 @@ public class IndexController {
 			}
 		}
 		model.addAttribute("secondType", sss);
-//WAP-BDS-PZ
+		//修改了
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		return mav;
