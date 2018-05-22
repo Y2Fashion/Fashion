@@ -5,6 +5,7 @@ import com.accp.biz.SecondTypeBiz;
 import com.accp.dao.RedisDao;
 import com.accp.entity.FirstType;
 import com.accp.entity.SecondType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
