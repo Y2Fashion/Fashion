@@ -1,10 +1,14 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  * 三级分类表
  */
 
-public class ThirdType {
+public class ThirdType implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer tId;//三级id
     private String thirdType;// 三级类型
     private Integer sId;//二级ID

@@ -14,30 +14,47 @@ import java.util.List;
 @Controller
 public class CommodityController {
 
+
     @Resource
-    private CommodityBiz biz;
-    @Resource
-    private RedisDao redisDao;
+    private RedisUtil redisUtil;
 
     @RequestMapping("/selectCommodityList")
     public String findType(Model model,Integer typeId){
-        if(redisDao.exists(typeId.toString())){
-            List<Object> list=redisDao.getList(typeId.toString());
-            List<Commodity> commodityList=(List<Commodity>)(Object)list;
+        List<Commodity> commodityList=new ArrayList<Commodity>();
+        String key=typeId+"产品";
+        if(redisUtil.exists(key)){
+            commodityList=(List<Commodity>) redisUtil.lRange(key,0,redisUtil.length(key)).get(0);
         }else{
             Commodity commodity=new Commodity();
             commodity.setType(typeId);
-            List<Commodity> commodityList=biz.findType(commodity);
-            redisDao.addList("id",commodityList);
-            model.addAttribute(commodityList);
+            commodityList=biz.findType(commodity);
+            redisUtil.lPush(key,commodityList);
         }
-        return "WAP-BDS-PZ";
+        model.addAttribute(commodityList);
+
+    @RequestMapping("/ajaxCommodityList")
+    @ResponseBody
+    public List<Commodity> ajaxCommodityList(Integer typeId){
+        List<Commodity> commodityList=new ArrayList<Commodity>();
+        String key=typeId+"产品";
+        if(redisUtil.exists(key)){
+            commodityList=(List<Commodity>) redisUtil.lRange(key,0,redisUtil.length(key)).get(0);
+        }else{
+            Commodity commodity=new Commodity();
+            commodity.setType(typeId);
+            commodityList=biz.findType(commodity);
+            redisUtil.lPush(key,commodityList);
+        }
+        return commodityList;
     }
-    @RequestMapping("/selectCommodity")
-    public String findAll(Model model,Integer id){
-        Commodity commodity=biz.findId(id);
-        model.addAttribute(commodity);
-        return null;
+
+        @RequestMapping("/selectCommodity")
+        public String findAll(Model model,Integer id){
+            Commodity commodity=biz.findId(id);
+            model.addAttribute(commodity);
+            return null;
+        }
+
     }
 
 

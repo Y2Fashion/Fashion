@@ -1,10 +1,14 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  * 订单表
  *
  */
-public class Order {
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer orderId;//订单id
     private String  clienteleName;//客户名
     private String  clientelePhone;//客户电话

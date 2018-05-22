@@ -2,7 +2,6 @@ package com.accp.control;
 
 import com.accp.biz.FirstTypeBiz;
 import com.accp.biz.SecondTypeBiz;
-import com.accp.dao.RedisDao;
 import com.accp.entity.FirstType;
 import com.accp.entity.SecondType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-	/* redis */
-	@Autowired
-	RedisDao redisDao;
+
     @Resource
 	private  FirstTypeBiz firstBiz;
 
@@ -49,7 +46,7 @@ public class IndexController {
 			}
 		}
 		model.addAttribute("secondType", sss);
-//WAP-BDS-PZ
+		//修改了
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		return mav;

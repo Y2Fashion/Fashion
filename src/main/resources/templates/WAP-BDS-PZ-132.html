@@ -13,11 +13,11 @@
 		<meta http-equiv="mobile-agent" content="format=wml; url=https://m.ybren.com/home/itemdetail/" />
 
 		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
-		<link href="common.css" tppabs="https://www.ybren.com/Public/css/common.css"rel="stylesheet"/>
+		<link href="/static/css/common.css" tppabs="https://www.ybren.com/Public/css/common.css"rel="stylesheet"/>
 		
-		<link href="swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css" rel="stylesheet"/>
-		<link href="goods.css" tppabs="https://www.ybren.com/Public/css/goods.css"rel="stylesheet"/>
-		<script src="jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>	
+		<link href="/static/css/swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css" rel="stylesheet"/>
+		<link href="/static/css/goods.css" tppabs="https://www.ybren.com/Public/css/goods.css"rel="stylesheet"/>
+		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>
 		<style type="text/css">
 			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			ul,ol,li{list-style:none; vertical-align: top;}
@@ -99,38 +99,79 @@ var _hmt = _hmt || [];
 </style>
 <div class="head"><!--头部-->
 			<div class="topbar">		  
-				<img src="fourpoint.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fourpoint.jpg" alt="贝嘟科技">	
-				<a class="logo" href="index.htm" tppabs="https://www.ybren.com/"><img src="logo.png" tppabs="https://ossstatic.ybren.com/PC/web/index/logo.png" alt="贝嘟科技"></a>	
+				<img src="/static/image/fourpoint.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fourpoint.jpg" alt="贝嘟科技">
+				<a class="logo" href="index.htm" tppabs="https://www.ybren.com/"><img src="/static/image/logo.png" tppabs="https://ossstatic.ybren.com/PC/web/index/logo.png" alt="贝嘟科技"></a>
 			</div>					
 		</div>
 		<div class="nav">
 			<ul class="son">
-				<li><a href="-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/?from=WAP-BDS-PZ">首页</a></li>
+				<li><a href="index.html" tppabs="https://www.ybren.com/?from=WAP-BDS-PZ">首页</a></li>
 				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
 					<ul>
-						<li ><a href="WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/home/category/137/from/WAP-BDS-PZ">男士西装</a></li><li ><a href="WAP-BDS-PZ-1.htm" tppabs="https://www.ybren.com/home/category/143/from/WAP-BDS-PZ">男士T恤</a></li><li ><a href="WAP-BDS-PZ-2.htm" tppabs="https://www.ybren.com/home/category/140/from/WAP-BDS-PZ">男士衬衫</a></li><li ><a href="WAP-BDS-PZ-3.htm" tppabs="https://www.ybren.com/home/category/142/from/WAP-BDS-PZ">男士裤装</a></li><li ><a href="WAP-BDS-PZ-4.htm" tppabs="https://www.ybren.com/home/category/212/from/WAP-BDS-PZ">男士新中式</a></li><li ><a href="WAP-BDS-PZ-5.htm" tppabs="https://www.ybren.com/home/category/141/from/WAP-BDS-PZ">男士外套</a></li><li ><a href="WAP-BDS-PZ-6.htm" tppabs="https://www.ybren.com/home/category/195/from/WAP-BDS-PZ">男士童装</a></li><li ><a href="WAP-BDS-PZ-7.htm" tppabs="https://www.ybren.com/home/category/145/from/WAP-BDS-PZ">女士西装</a></li><li ><a href="WAP-BDS-PZ-8.htm" tppabs="https://www.ybren.com/home/category/191/from/WAP-BDS-PZ">女士真丝</a></li><li ><a href="WAP-BDS-PZ-9.htm" tppabs="https://www.ybren.com/home/category/146/from/WAP-BDS-PZ">女士衬衫</a></li><li ><a href="WAP-BDS-PZ-10.htm" tppabs="https://www.ybren.com/home/category/148/from/WAP-BDS-PZ">女士裤装</a></li><li ><a href="WAP-BDS-PZ-11.htm" tppabs="https://www.ybren.com/home/category/204/from/WAP-BDS-PZ">女士针织</a></li><li ><a href="WAP-BDS-PZ-12.htm" tppabs="https://www.ybren.com/home/category/147/from/WAP-BDS-PZ">女士外套</a></li><li ><a href="WAP-BDS-PZ-13.htm" tppabs="https://www.ybren.com/home/category/218/from/WAP-BDS-PZ">配饰</a></li>		
+						<li >
+							<a href="/selectCommodityList?typeId=1" tppabs="https://www.ybren.com/home/category/137/from/WAP-BDS-PZ">男士西装</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=2" tppabs="https://www.ybren.com/home/category/143/from/WAP-BDS-PZ">男士T恤</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=3" tppabs="https://www.ybren.com/home/category/140/from/WAP-BDS-PZ">男士衬衫</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=4" tppabs="https://www.ybren.com/home/category/142/from/WAP-BDS-PZ">男士裤装</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=5" tppabs="https://www.ybren.com/home/category/212/from/WAP-BDS-PZ">男士新中式</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=6" tppabs="https://www.ybren.com/home/category/141/from/WAP-BDS-PZ">男士外套</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=7" tppabs="https://www.ybren.com/home/category/195/from/WAP-BDS-PZ">男士童装</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=8" tppabs="https://www.ybren.com/home/category/145/from/WAP-BDS-PZ">女士西装</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=9" tppabs="https://www.ybren.com/home/category/191/from/WAP-BDS-PZ">女士真丝</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=10" tppabs="https://www.ybren.com/home/category/146/from/WAP-BDS-PZ">女士衬衫</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=11" tppabs="https://www.ybren.com/home/category/148/from/WAP-BDS-PZ">女士裤装</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=12" tppabs="https://www.ybren.com/home/category/204/from/WAP-BDS-PZ">女士针织</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=13" tppabs="https://www.ybren.com/home/category/147/from/WAP-BDS-PZ">女士外套</a>
+						</li>
+						<li >
+							<a href="/selectCommodityList?typeId=14" tppabs="https://www.ybren.com/home/category/218/from/WAP-BDS-PZ">配饰</a>
+						</li>
 					</ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
 					<ul>
 						<!-- <li><a href="/index.php/Home/Index/Fabric/from/WAP-BDS-PZ">国际面料</a></li> -->
-						<li><a href="javascript:if(confirm('https://www.ybren.com/index.php/Home/Index/maintenance/from/WAP-BDS-PZ  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/index.php/Home/Index/maintenance/from/WAP-BDS-PZ'" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance/from/WAP-BDS-PZ">保养手册</a></li>
-                        <li><a href="WAP-BDS-PZ-33.htm" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka/from/WAP-BDS-PZ">大咖定制秀</a></li>
-                        <li><a href="WAP-BDS-PZ-34.htm" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper/from/WAP-BDS-PZ">合作品牌</a></li>
-                        <li><a href="service-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/service?from=WAP-BDS-PZ">售后服务</a></li>
+						<li><a href="/maintenance" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance/from/WAP-BDS-PZ">保养手册</a></li>
+						<li><a href="/Dake" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka/from/WAP-BDS-PZ">大咖定制秀</a></li>
+						<li><a href="/brandCooper" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper/from/WAP-BDS-PZ">合作品牌</a></li>
+						<li><a href="/service" tppabs="https://www.ybren.com/index.php/Home/Index/service?from=WAP-BDS-PZ">售后服务</a></li>
 					</ul>
 				</li>
-				<li><a href="WAP-BDS-PZ-35.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/from/WAP-BDS-PZ">预约量体</a></li>
- <!--                <li  ><a  href="/index.php/Home/Activity/YbrenerReg/from/WAP-BDS-PZ">衣邦客</a></li> -->
- 				<li><a  href="WAP-BDS-PZ-36.htm" tppabs="https://www.ybren.com/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li>
+				<li><a href="/yuyue" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/from/WAP-BDS-PZ">预约量体</a></li>
+				<!--                <li  ><a  href="/index.php/Home/Activity/YbrenerReg/from/WAP-BDS-PZ">衣邦客</a></li> -->
+				<li><a  href="/bigEvent" tppabs="https://www.ybren.com/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li>
 				<li class="son_li"><a href="javascript:void(0);" class="click">企业相关</a>
 					<ul>
-						<li><a href="WAP-BDS-PZ-37.htm" tppabs="https://www.ybren.com/index.php/Home/Index/company/from/WAP-BDS-PZ">关于衣邦人</a></li>
+						<li><a href="/company" tppabs="https://www.ybren.com/index.php/Home/Index/company/from/WAP-BDS-PZ">关于衣邦人</a></li>
 						<!-- <li><a href="/index.php/Home/Index/ggxx/from/WAP-BDS-PZ">高管信息</a></li> -->
 						<!-- <li><a href="/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li> -->
-						<li><a href="WAP-BDS-PZ-38.htm" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
-						<li><a href="WAP-BDS-PZ-39.htm" tppabs="https://www.ybren.com/index.php/Home/Index/business/from/WAP-BDS-PZ">商务合作</a></li>
-						<li><a href="WAP-BDS-PZ-40.htm" tppabs="https://www.ybren.com/index.php/Home/Index/contact/from/WAP-BDS-PZ">联系我们</a></li>
+						<li><a href="media.html" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
+						<li><a href="/business" tppabs="https://www.ybren.com/index.php/Home/Index/business/from/WAP-BDS-PZ">商务合作</a></li>
+						<li><a href="/contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact/from/WAP-BDS-PZ">联系我们</a></li>
 					</ul>
 				</li>
 				<div style="clear: both;"></div>

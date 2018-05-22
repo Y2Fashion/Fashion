@@ -1,11 +1,15 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * 面料表1
  *
  */
-public class Lining {
+public class Lining implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer lId;//面料Id
     private String ingredient;//面料成分
     private String color;//面料颜色
