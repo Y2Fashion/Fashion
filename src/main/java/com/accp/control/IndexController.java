@@ -22,10 +22,15 @@ import java.util.List;
  */
 @Controller
 public class IndexController {
-	@Resource
-	private FirstTypeBiz firstBiz;
-	@Resource
-	private SecondTypeBiz secondBiz;
+
+	/* redis */
+	@Autowired
+	RedisDao redisDao;
+    @Resource
+	private  FirstTypeBiz firstBiz;
+
+    @Resource
+    private SecondTypeBiz secondBiz;
 
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public ModelAndView index(Model model) {
@@ -48,4 +53,19 @@ public class IndexController {
 		mav.setViewName("index");
 		return mav;
 	}
+	@RequestMapping(value = "/bigEvent",method = RequestMethod.GET)
+	public ModelAndView bigEvent(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("bigEvent");
+		return mav;
+	}
+
+	@RequestMapping(value = "/make",method = RequestMethod.GET)
+	public ModelAndView make(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("pc-baoyang");
+		return view;
+	}
+
+
 }
