@@ -15,8 +15,7 @@ import java.util.List;
 @Controller
 public class CommodityController {
 
-    @Resource
-    private CommodityBiz biz;
+
     @Resource
     private RedisUtil redisUtil;
 
@@ -33,8 +32,6 @@ public class CommodityController {
             redisUtil.lPush(key,commodityList);
         }
         model.addAttribute(commodityList);
-        return "WAP-BDS-PZ";
-    }
 
     @RequestMapping("/ajaxCommodityList")
     @ResponseBody
@@ -52,10 +49,10 @@ public class CommodityController {
         return commodityList;
     }
 
-    @RequestMapping("/selectCommodity")
-    public String findAll(Model model,Integer id){
-        Commodity commodity=biz.findId(id);
-        model.addAttribute(commodity);
-        return null;
-    }
+        @RequestMapping("/selectCommodity")
+        public String findAll(Model model,Integer id){
+            Commodity commodity=biz.findId(id);
+            model.addAttribute(commodity);
+            return null;
+        }
 }

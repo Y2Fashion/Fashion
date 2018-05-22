@@ -9,5 +9,8 @@
         <module name="boot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="boot" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
