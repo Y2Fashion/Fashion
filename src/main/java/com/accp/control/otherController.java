@@ -68,4 +68,22 @@ public class otherController {
     public String goToUserAgreement(){
         return "userAgreement";
     }
+
+    /**
+     * 预约量体
+     * @return
+     */
+    @RequestMapping("/yuyue")
+    public String yuyue(){
+        return "yuyue";
+    }
+    /**
+     * 新闻动态
+     * @return
+     */
+    @RequestMapping("/media")
+    public String media(){
+        return "media";
+    }
+
 }
