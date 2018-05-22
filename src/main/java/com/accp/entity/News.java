@@ -1,12 +1,15 @@
 package com.accp.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 新闻表
  *
  */
-public class News {
+public class News implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer id;//新闻Id
     private String  title;//新闻标题
     private String content;//新闻内容

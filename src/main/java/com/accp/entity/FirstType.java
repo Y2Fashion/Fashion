@@ -1,10 +1,14 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  * 一级分类表
  *
  */
-public class FirstType {
+public class FirstType implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer    fId;//一级Id
     private String firstType;//一级类型
 

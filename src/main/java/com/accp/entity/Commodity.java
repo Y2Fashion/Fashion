@@ -1,10 +1,14 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  * 商品表
  *
  */
-public class Commodity {
+public class Commodity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer id;//商品id
     private String commodityName;//商品名称
     private Double originalPrice;//商品原价格
@@ -12,6 +16,15 @@ public class Commodity {
     private String photoPath;//商品图片路径
     private String state;//状态
     private Integer type;//类型
+    private Integer liNingId;//材质Id
+
+    public Integer getLiNingId() {
+        return liNingId;
+    }
+
+    public void setLiNingId(Integer liNingId) {
+        this.liNingId = liNingId;
+    }
 
     public Integer getId() {
         return id;

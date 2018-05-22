@@ -1,9 +1,13 @@
 package com.accp.entity;
 
+import java.io.Serializable;
+
 /**
  * 二级分类表
  */
-public class SecondType {
+public class SecondType implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Integer sId;//二级id
     private String secondType;//二级类型
     private Integer fId;//一级ID
