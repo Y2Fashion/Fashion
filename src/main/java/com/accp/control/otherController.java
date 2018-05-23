@@ -38,9 +38,9 @@ public class otherController {
     }
 
     // 大咖定制秀
-    @RequestMapping("/Dake")
+    @RequestMapping("/Daka")
     public String goToDake(){
-        return "Dake";
+        return "Daka";
     }
 
 
@@ -54,7 +54,7 @@ public class otherController {
     // 售后服务
     @RequestMapping("/service")
     public String goToService(){
-        return "servicet";
+        return "service";
     }
 
     // 风尚人物
@@ -68,4 +68,21 @@ public class otherController {
     public String goToUserAgreement(){
         return "userAgreement";
     }
+    // 首页
+    @RequestMapping("/index")
+    public String goToIndex(){
+        return "index";
+    }
+
+    // 预约页面
+    @RequestMapping("/yuyue")
+    public String goToYuYue(){
+        return "yuyue";
+    }
+    // 新闻动态
+    @RequestMapping("/media")
+    public String goToMedia(){
+        return "media";
+    }
+
 }

@@ -45,6 +45,25 @@ ga('send', 'pageview');
 		</div>
 		<script type="text/javascript">
 			$(function() {
+
+			    $("#pull").hover(function () {
+					$.ajax({
+						url:"/pull",
+						dataType:"json",
+						success:function (data) {
+                            $(".son_li ul").children().filter("li").remove();
+							for(var i=0;i<data.length;i++){
+							    var pull='<li>'+
+                                    '<a href="selectCommodityList?id='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '</li>';
+                                $.each($("#pull ul"),function(i,t){
+                                    $(t).html(pull+$(t).html());
+                                })
+							}
+                        }
+					})
+                })
+
 				$(window).scroll( function() { 
 					var h =$(window).scrollTop();
 					if(h>=800){
@@ -158,11 +177,8 @@ ga('send', 'pageview');
 		<div class="nav">
 			<ul class="son">
 				<li><a href="">首页</a></li>
-				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
                     <ul>
-                        <li th:each="second:${secondType}">
-                            <a th:href="@{'http://localhost:8080/wbp?id='+${second.sId}}" th:text="${second.secondType}"></a>
-                        </li>
                     </ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
