@@ -24,6 +24,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
+
     @Resource
 	private  FirstTypeBiz firstBiz;
 
@@ -58,6 +59,13 @@ public class IndexController {
 			redisUtil.lPush("pull",sss);
 		}
 		return sss;
+	}
+
+	@RequestMapping(value = "/make",method = RequestMethod.GET)
+	public ModelAndView make(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("pc-baoyang");
+		return view;
 	}
 
 

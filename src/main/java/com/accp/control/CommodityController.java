@@ -15,7 +15,8 @@ import java.util.List;
 @Controller
 public class CommodityController {
 
-
+    @Resource
+    private  CommodityBiz biz;
     @Resource
     private RedisUtil redisUtil;
     @Resource
@@ -58,4 +59,6 @@ public class CommodityController {
             model.addAttribute(commodity);
             return null;
         }
+
+
 }
