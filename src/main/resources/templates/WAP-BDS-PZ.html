@@ -80,7 +80,7 @@
                         url:"/pull",
                         dataType:"json",
                         success:function (data) {
-                            $(".son_li ul").children().filter("li").remove();
+                            $("#pull ul").children().filter("li").remove();
                             for(var i=0;i<data.length;i++){
                                 var pull='<li>'+
                                     '<a href="selectCommodityList?id='+data[i].sId+'">'+data[i].secondType+'</a>'+

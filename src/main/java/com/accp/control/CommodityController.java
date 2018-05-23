@@ -20,7 +20,7 @@ public class CommodityController {
     @Resource
     private RedisUtil redisUtil;
     @Resource
-    private CommodityBiz biz;
+    private CommodityBiz commodityBiz;
 
     @RequestMapping("/selectCommodityList")
     public String findType(Model model,Integer typeId) {
