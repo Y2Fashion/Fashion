@@ -68,11 +68,6 @@ public class otherController {
     public String goToUserAgreement(){
         return "userAgreement";
     }
-    // 首页
-    @RequestMapping("/index")
-    public String goToIndex(){
-        return "index";
-    }
 
     // 预约页面
     @RequestMapping("/yuyue")

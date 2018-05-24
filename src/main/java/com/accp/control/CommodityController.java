@@ -1,11 +1,15 @@
 package com.accp.control;
 
-import com.accp.biz.CommodityBiz;
+import com.accp.biz.*;
 import com.accp.entity.Commodity;
+import com.accp.entity.Lining;
+import com.accp.entity.SecondType;
+import com.accp.entity.ThirdType;
 import com.accp.util.RedisUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -21,6 +25,11 @@ public class CommodityController {
     private RedisUtil redisUtil;
     @Resource
     private CommodityBiz commodityBiz;
+    @Resource
+    private ThirdTypeBiz thirdTypeBiz;
+    @Resource
+    private LiNingBiz liNingBiz;
+
 
     @RequestMapping("/selectCommodityList")
     public String findType(Model model,Integer typeId) {
@@ -53,12 +62,54 @@ public class CommodityController {
         return commodityList;
     }
 
-        @RequestMapping("/selectCommodity")
-        public String findAll(Model model,Integer id){
-            Commodity commodity=biz.findId(id);
-            model.addAttribute(commodity);
-            return null;
+    // 首页
+    @RequestMapping("/index")
+    public String goToIndex(Model model){
+        List<Commodity> xiZhuangHitsList=null;
+        List<Commodity> chenSanHitsList=null;
+        List<Commodity> kuZhuangHitsList=null;
+        List<Commodity> waiTaoHitsList=null;
+        List<Commodity> niuZaiKuHitsList=null;
+        List<Commodity> nvShiHitsList=null;
+        if(redisUtil.exists("xiZhuangHitsList")){
+            xiZhuangHitsList=(List<Commodity>)redisUtil.lRange("xiZhuangHitsList",0,redisUtil.length("xiZhuangHitsList")).get(0);
+            chenSanHitsList=(List<Commodity>)redisUtil.lRange("chenSanHitsList",0,redisUtil.length("chenSanHitsList")).get(0);
+            kuZhuangHitsList=(List<Commodity>)redisUtil.lRange("kuZhuangHitsList",0,redisUtil.length("kuZhuangHitsList")).get(0);
+            waiTaoHitsList=(List<Commodity>)redisUtil.lRange("waiTaoHitsList",0,redisUtil.length("waiTaoHitsList")).get(0);
+            niuZaiKuHitsList=(List<Commodity>)redisUtil.lRange("niuZaiKuHitsList",0,redisUtil.length("niuZaiKuHitsList")).get(0);
+            nvShiHitsList=(List<Commodity>)redisUtil.lRange("nvShiHitsList",0,redisUtil.length("nvShiHitsList")).get(0);
+        }else{
+            xiZhuangHitsList=commodityBiz.getCommoditys("1");
+            chenSanHitsList=commodityBiz.getCommoditys("3");
+            kuZhuangHitsList=commodityBiz.getCommoditys("4");
+            waiTaoHitsList=commodityBiz.getCommoditys("6");
+            niuZaiKuHitsList=commodityBiz.getCommoditys(32);
+            nvShiHitsList=commodityBiz.getCommoditys(true);
+            redisUtil.lPush("xiZhuangHitsList",xiZhuangHitsList);
+            redisUtil.lPush("chenSanHitsList",chenSanHitsList);
+            redisUtil.lPush("kuZhuangHitsList",kuZhuangHitsList);
+            redisUtil.lPush("waiTaoHitsList",waiTaoHitsList);
+            redisUtil.lPush("niuZaiKuHitsList",niuZaiKuHitsList);
+            redisUtil.lPush("nvShiHitsList",nvShiHitsList);
         }
+        model.addAttribute("xiZhuangHitsList",xiZhuangHitsList);
+        model.addAttribute("chenSanHitsList",chenSanHitsList);
+        model.addAttribute("kuZhuangHitsList",kuZhuangHitsList);
+        model.addAttribute("waiTaoHitsList",waiTaoHitsList);
+        model.addAttribute("niuZaiKuHitsList",niuZaiKuHitsList);
+        model.addAttribute("nvShiHitsList",nvShiHitsList);
+        return "index";
+    }
 
-
+    //衣服详细页面
+    @RequestMapping("/selectCommodity")
+    public String goToXiangXi(Model model,Integer id) {
+        Commodity commodity=biz.findId(id);
+        Lining lining=liNingBiz.getLiNingById(id);
+        List<Lining> LiNingList=liNingBiz.getLiNingList();
+        model.addAttribute("lining",lining);
+        model.addAttribute("commodity",commodity);
+        model.addAttribute("LiNingList",LiNingList);
+        return "WAP-BDS-PZ-132";
+    }
 }

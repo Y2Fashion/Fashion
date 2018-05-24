@@ -24,4 +24,13 @@ public class SecondTypeBizImpl implements SecondTypeBiz {
     public List<SecondType> getList() {
         return secondDao.selectList();
     }
+
+    /**
+     * 按一级分类ID查询二级表操作全部
+     * @return
+     */
+    @Override
+    public List<SecondType> getListById(Object id) {
+        return secondDao.selectListById(id);
+    }
 }

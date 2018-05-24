@@ -11,4 +11,26 @@
     <select id="findId" resultType="Commodity" parameterType="Integer">
         SELECT * FROM commodity WHERE id=#{id};
     </select>
+    <!--添加点击量-->
+    <select id="UpHits" parameterType="Commodity">
+        update Commodity
+        <set>
+            <if test="commodityName!=null and commodityName!=''">commodityName=#{commodityName}</if>
+            <if test="originalPrice!=null and originalPrice!=''">originalPrice=#{originalPrice}</if>
+            <if test="vipPrice!=null and vipPrice!=''">vipPrice=#{vipPrice}</if>
+            <if test="photoPath!=null and photoPath!=''">photoPath=#{photoPath}</if>
+            <if test="state!=null and state!=''">state=#{state}</if>
+            <if test="type!=null and type!=''">type=#{type}</if>
+            <if test="liNingId!=null and liNingId!=''">liNingId=#{liNingId}</if>
+            <if test="hits!=null and hits!=''">hits=#{hits}</if>
+        </set>
+        where id=#{id}
+    </select>
+    <select id="selectCommodityList" resultType="Commodity">
+        select * from Commodity where type in
+        <foreach collection="array" item="thirdTypes" open="(" separator="," close=")">
+          #{thirdTypes}
+        </foreach>
+        order by hits desc limit 0,8;
+    </select>
 </mapper>

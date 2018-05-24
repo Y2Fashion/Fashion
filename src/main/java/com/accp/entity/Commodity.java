@@ -16,14 +16,23 @@ public class Commodity implements Serializable {
     private String photoPath;//商品图片路径
     private String state;//状态
     private Integer type;//类型
-    private Integer liNingId;//材质Id
+    private Integer lId;//材质Id
+    private Integer hits;
 
-    public Integer getLiNingId() {
-        return liNingId;
+    public Integer getHits() {
+        return hits;
     }
 
-    public void setLiNingId(Integer liNingId) {
-        this.liNingId = liNingId;
+    public void setHits(Integer hits) {
+        this.hits = hits;
+    }
+
+    public Integer getlId() {
+        return lId;
+    }
+
+    public void setlId(Integer lId) {
+        this.lId = lId;
     }
 
     public Integer getId() {
