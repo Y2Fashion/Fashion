@@ -101,6 +101,27 @@ ga('send', 'pageview');
 </script>
 <!--<div style="display:none">-->
 <script>
+
+    $(function () {
+        $("#pull").hover(function () {
+            $.ajax({
+                url:"/pull",
+                dataType:"json",
+                success:function (data) {
+                    $("#pull ul").children().filter("li").remove();
+                    for(var i=0;i<data.length;i++){
+                        var pull='<li>'+
+                            '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                            '</li>';
+                        $.each($("#pull ul"),function(i,t){
+                            $(t).html(pull+$(t).html());
+                        })
+                    }
+                }
+            })
+        })
+    })
+
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");

@@ -73,9 +73,9 @@ public class CommodityBizImpl implements CommodityBiz {
     public List<Commodity> getCommoditys(boolean bool) {
         List<ThirdType> thirdTypes=null;
         List<ThirdType> thirdTypeList=new ArrayList<ThirdType>();
-        int id=2;
+        int id=1;
         if(bool){
-            id=1;
+            id=2;
         }
         List<SecondType> secondTypes=secondTypeBiz.getListById(id);
         for (SecondType secondType:secondTypes) {

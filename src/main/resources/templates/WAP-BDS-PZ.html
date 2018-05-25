@@ -81,9 +81,9 @@
                         dataType:"json",
                         success:function (data) {
                             $("#pull ul").children().filter("li").remove();
-                            for(var i=0;i<data.length;i++){
+                            for(var i=data.length-1;i>=0;i--){
                                 var pull='<li>'+
-                                    '<a href="selectCommodityList?id='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                     '</li>';
                                 $.each($("#pull ul"),function(i,t){
                                     $(t).html(pull+$(t).html());
@@ -105,24 +105,24 @@
 					 dataType:"json",
                     success: function(data) {
                         $(".list").children().filter("li").remove();
-                        for(var i=0,l=data.length;i<l;i++){
-                                var htm='<li>'+
-                                    		'<a href="/selectCommodity?id='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
-											'<img src="/static/image/'+data[i].photoPath+'" alt="暂无样品" >'+
-                                			'<div class="desc">'+
-											'<p class="p_title">'+
-                                			'<span class="name">'+data[i].commodityName+'</span>'+
-                                			'<span class="coup">'+data[i].state+'</span>'+
-                                			'</p>'+
-                                			'<p class="p_desc" th:text="${commodity.liNingId}">100%羊毛</p>'+
-                                			'<p class="p_num" ><font color="#222222">￥：'+data[i].vipPrice+'</font></p>'+
-								 			'</div>'+
-                            	 			'</a>'+
-										'</li>';
-								$.each($(".list"),function(i,t){
-									$(t).html(htm+$(t).html())
-								})
-                            }
+                        for(var i=0;i<data.length;i++){
+                            var htm='<li>'+
+                                '<a href="/selectCommodity?typeId='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
+                                '<img src="/static/image/'+data[i].photoPath+'" alt="暂无样品" >'+
+                                '<div class="desc">'+
+                                '<p class="p_title">'+
+                                '<span class="name">'+data[i].commodityName+'</span>'+
+                                '<span class="coup">'+data[i].state+'</span>'+
+                                '</p>'+
+                                '<p class="p_desc"">'+data[i].lining.ingredient+'</p>'+
+                                '<p class="p_num" ><font color="#222222">￥'+data[i].vipPrice+'</font></p>'+
+                                '</div>'+
+                                '</a>'+
+                                '</li>';
+                            $.each($(".list"),function(i,t){
+                                $(t).html(htm+$(t).html())
+                            })
+                        }
                     }
                 });
             }
@@ -186,7 +186,7 @@ var _hmt = _hmt || [];
 						<li><a href="/company" tppabs="https://www.ybren.com/index.php/Home/Index/company/from/WAP-BDS-PZ">关于衣邦人</a></li>
 						<!-- <li><a href="/index.php/Home/Index/ggxx/from/WAP-BDS-PZ">高管信息</a></li> -->
 						<!-- <li><a href="/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li> -->
-						<li><a href="media.html" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
+						<li><a href="/media" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
 						<li><a href="/business" tppabs="https://www.ybren.com/index.php/Home/Index/business/from/WAP-BDS-PZ">商务合作</a></li>
 						<li><a href="/contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact/from/WAP-BDS-PZ">联系我们</a></li>
 					</ul>

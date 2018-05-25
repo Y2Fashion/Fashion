@@ -1,12 +1,18 @@
 package com.accp.control;
 
+import com.accp.biz.FigureBiz;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 
 @Controller
 public class otherController {
+
+    @Resource
+    private FigureBiz figureBiz;
+
    //大事记网页
     @RequestMapping("/bigEvent")
     public String goToBigEvent(){
@@ -59,7 +65,8 @@ public class otherController {
 
     // 风尚人物
     @RequestMapping("/succeed")
-    public String goToSucceed(){
+    public String goToSucceed(Model model){
+        model.addAttribute("figureList",figureBiz.getFigureList());
         return "succeed";
     }
 
@@ -79,5 +86,7 @@ public class otherController {
     public String goToMedia(){
         return "media";
     }
+
+
 
 }

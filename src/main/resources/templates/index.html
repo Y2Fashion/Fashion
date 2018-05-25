@@ -52,7 +52,7 @@ ga('send', 'pageview');
                             $("#pull ul").children().filter("li").remove();
                             $("#headPull ul").children().filter("li").remove();
                             var headpull='';
-							for(var i=0;i<data.length;i++){
+                            for(var i=data.length-1;i>=0;i--){
 							    var pull='<li>'+
                                     '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                     '</li>';
@@ -164,18 +164,6 @@ ga('send', 'pageview');
                                                             <a href="/selectCommodityList?typeId=31" tppabs="https://www.ybren.com/home/category_son/172">牛仔裤</a>
                                                         </p>
 						</li>
-                                            <!--     <li>
-							<p class="lt">女士外套</p>
-							<p class="lc">
-                                                            <a href="/home/category_son/168">大衣</a>
-                                                        </p>
-						</li> -->
-<!--						<li style="border-bottom: none;">
-							<p class="lt">羊绒衫系列</p>
-							<p class="lc"><a href="/home/category_son/52">男士羊绒衫</a>
-                                                            <a href="/home/category_son/53">女士羊绒衫</a>
-                                                        </p>
-						</li>-->
                                                 
 					</ul>
 					
@@ -215,7 +203,7 @@ ga('send', 'pageview');
 			<a onclick="kefu()" class="r1">在线客服</a>			
 			<a class="r3" href="###">官方微信</a>
 			<a class="r4" href="###">APP下载</a>
-			<a class="r2" href="pc-index-1.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/frompage/pc-index"></a>
+			<a class="r2" href="/yuyue" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/frompage/pc-index"></a>
 			<img class="wx_code" src="/static/image/WeixinHover_01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/WeixinHover_01.png"/>
 			<img class="app_code" src="/static/image/AppHover_01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/AppHover_01.png"/>
 		</div>
