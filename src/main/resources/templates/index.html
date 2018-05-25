@@ -389,7 +389,7 @@ ga('send', 'pageview');
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li  th:each="commodity:${kuZhuangHitsList}">
+						<li th:each="commodity:${kuZhuangHitsList}">
 							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
 						<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>

@@ -12,7 +12,7 @@ public interface LiNingBiz {
     /*
     * 按id查询面料
     * */
-    Lining getLiNingById(Integer id);
+    Lining getLiNingById(String id);
     /*
     * 查询所有面料
     * */

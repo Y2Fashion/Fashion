@@ -71,7 +71,7 @@
                 })
 
 				$(".li_simg").click(function(){
-					var src =$(this).attr('_src');
+					var src =$(this).children("img").attr('src');
 					$('.div_big_img').attr('src',src);
 				});
 				
@@ -146,7 +146,7 @@ var _hmt = _hmt || [];
 						<li><a href="/company" tppabs="https://www.ybren.com/index.php/Home/Index/company/from/WAP-BDS-PZ">关于衣邦人</a></li>
 						<!-- <li><a href="/index.php/Home/Index/ggxx/from/WAP-BDS-PZ">高管信息</a></li> -->
 						<!-- <li><a href="/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li> -->
-						<li><a href="media.html" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
+						<li><a href="/media" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
 						<li><a href="/business" tppabs="https://www.ybren.com/index.php/Home/Index/business/from/WAP-BDS-PZ">商务合作</a></li>
 						<li><a href="/contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact/from/WAP-BDS-PZ">联系我们</a></li>
 					</ul>
@@ -219,110 +219,109 @@ var _hmt = _hmt || [];
 			</div>
 			<div class="right">
 				<div class="dtop">
-					<div class="bigimg"><img  class="div_big_img" src="5a9e0b71b196a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt=""></div>
+					<div class="bigimg"><img  class="div_big_img" th:src="'/static/image/'+${commodity.photoPath}" alt=""></div>
 					<div class="tips">
 						<div class="ftit">
 							<div class="t_title">
-								<h2>
-									<span class="coup">奢牌</span>
-									儒雅灰色方格纹全羊毛商务经典男士单西</h2>
-								<p class="p_desc">100%羊毛</p>
+								<span class="coup" th:text="${commodity.state}"></span><h2 th:text="${commodity.commodityName}"></h2>
+								<p class="p_desc" th:text="${commodity.lining.ingredient}"></p>
 								<p></p>
 								<p><span class="ts tst">最终价格以定制方为准</span></p>
-								<p><span class="ts"><s>吊牌价：￥9306.00</s></span></p>
-								<p class="money"><span>会员价：<font color="#D00F12">￥4653.00</font></span></p>
+								<p><span class="ts"><s th:text="'吊牌价：￥'+${commodity.originalPrice}">暂无报价</s></span></p>
+								<p class="money"><span>会员价：<font color="#D00F12" th:text="'￥'+${commodity.vipPrice}">暂无报价</font></span></p>
 							</div>
 						</div>
 						<ul class="small_img">
-                            <li class="li_simg" _src="5a9e0b71b196a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg"><img src="5a9e0b71b196a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt=""></li><li class="li_simg" _src="5a9e0b75b0440.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b75b0440.jpg"><img src="5a9e0b75b0440.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b75b0440.jpg" alt=""></li><li class="li_simg" _src="5a9e0b7976e20.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b7976e20.jpg"><img src="5a9e0b7976e20.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b7976e20.jpg" alt=""></li><li class="li_simg" _src="5a9e0b7dd4b2f.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b7dd4b2f.jpg"><img src="5a9e0b7dd4b2f.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b7dd4b2f.jpg" alt=""></li><li class="li_simg" _src="5a9e0b80ef0bd.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b80ef0bd.jpg"><img src="5a9e0b80ef0bd.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b80ef0bd.jpg" alt=""></li><li class="li_simg" _src="59a766d65c461.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-08-31/59a766d65c461.jpg"><img src="59a766d65c461.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-08-31/59a766d65c461.jpg" alt=""></li>     							
+							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
+							</li>
+							<li class="li_simg" _src="5a9e0b71b196a16.jpg">
+								<img src="/static/image/5a5d6831d7a16.jpg" alt=""/>
+							</li>
+							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
+							</li>
+							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
+							</li>
+							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
+							</li>
+							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
+							</li>
 						</ul>
 						<div class="chbox">
-							<span class="chbox_type act" type="t1">面料</span>
+							<span class="chbox_type act" type="t1">默认面料</span>
 							<span class="chbox_type" type="t2">可选面料</span>
-							 <span class="chbox_type" type="t3">定制工艺</span>
-							<span class="chbox_type" type="t4">优质服务</span>
+							<span class="chbox_type" type="t3">定制工艺</span>							<span class="chbox_type" type="t4">优质服务</span>
 						</div>
 						<div class="list">
-
 							<div class="t t1">
-                                <div class="list__t1_left">
-									<img src="59a54910b1f05.jpg" alt=""/>
-									<img class="selectling" src="selectling.png"/> >
+								<div class="list__t1_left">
+									<img th:src="'/static/image/'+${lining.imagePath}" alt=""/>
+									<img class="selectling" src="/static/image/selectling.png"/>
 								</div>
 								<div class="list__t1_right">
 									<h2>面料</h2>
-									<p th:text="'编号:'+${lining.lId}+'<br/>成分:'+${lining.ingredient}+'<br/>颜色:'+${lining.color}+'<br/>花型:'+${lining.type}">
-										编号：DBB0281<br />										
-										成分：100%羊毛<br />
-										颜色：灰色<br />
-										花型：方格									</p>
+									<p th:text="'编号:'+${lining.lId}"><br/>
+									<p th:text="'成分:'+${lining.ingredient}"><br />
+									<p th:text="'颜色:'+${lining.color}"><br />
+									<p th:text="'花型:'+${lining.type}">								</p>
 								</div>
-                                <div style="clear: both;"></div>
-								<div class="t1_desc">方格-灰色</div>                            
+								<div style="clear: both;"></div>
+								<div class="t1_desc">方格-灰色</div>
 							</div>
 							<div class="t t2" id="Fabrics">
+
 								<div th:each="lining:${LiNingList}">
 									<div class="list__t1_left">
-										<img src="59a54910b1f05.jpg" alt=""/>
-										<img class="selectling" src="selectling.png"/> >
+										<img th:width="180px" th:height="110px" th:src="'/static/image/'+${lining.imagePath}" alt=""/>
 									</div>
 									<div class="list__t1_right">
 										<h2>面料</h2>
-										<p th:text="'编号:'+${lining.lId}+'<br/>成分:'+${lining.ingredient}+'<br/>颜色:'+${lining.color}+'<br/>花型:'+${lining.type}">
-											编号：DBB0281<br />
-											成分：100%羊毛<br />
-											颜色：灰色<br />
-											花型：方格									</p>
+										<p th:text="'编号:'+${lining.lId}"><br />
+										<p th:text="'成分:'+${lining.ingredient}"><br />
+										<p th:text="'颜色:'+${lining.color}"><br />
+										<p th:text="'花型:'+${lining.type}">								</p>
 									</div>
 									<div style="clear: both;"></div>
 									<div class="t1_desc">方格-灰色</div>
 								</div>
+								<!--<div><a  onclick ="getFbrics(2)" >下一页</a> </div>-->
 							</div>
-
 							<div class="t t3">
 
 								<div class="t3_list">
-									<div class="t3_list_title">
-										<span>前门扣<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span>
-									</div>
+									<div class="t3_list_title"><span>前门扣<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
 									<ul>
-										<li><img src="/static/image/5928f674dbb26.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f674dbb26.jpg" alt=""><p>单排一粒扣</p></li><li><img src="5928f683188a6.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f683188a6.jpg" alt=""><p>单排二粒扣</p></li><li><img src="5928f68f0a1bc.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f68f0a1bc.jpg" alt=""><p>单排三粒扣</p></li><li><img src="5928f6c0bd7d2.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6c0bd7d2.jpg" alt=""><p>双排二扣一</p></li><li><img src="5928f6a9501d3.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6a9501d3.jpg" alt=""><p>双排四扣二</p></li><li><img src="5928f6b5d5c7d.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6b5d5c7d.jpg" alt=""><p>双排六扣二</p></li>
+										<li><img src="/static/image/5928f674dbb26.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f674dbb26.jpg" alt=""><p>单排一粒扣</p></li><li><img src="/static/image/5928f683188a6.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f683188a6.jpg" alt=""><p>单排二粒扣</p></li><li><img src="/static/image/5928f68f0a1bc.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f68f0a1bc.jpg" alt=""><p>单排三粒扣</p></li><li><img src="/static/image/5928f6c0bd7d2.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6c0bd7d2.jpg" alt=""><p>双排二扣一</p></li><li><img src="5928f6a9501d3.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6a9501d3.jpg" alt=""><p>双排四扣二</p></li><li><img src="/static/image/5928f6b5d5c7d.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6b5d5c7d.jpg" alt=""><p>双排六扣二</p></li>
 									</ul>
-								</div>
-								<div class="t3_list">
-									<div class="t3_list_title">
-										<span>驳头选择<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span>
-									</div>
-								</div>
+								</div><div class="t3_list">
+								<div class="t3_list_title"><span>驳头选择<img src="down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
 								<ul>
-									<li><img src="/static/image/5928f6f923d2c.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6f923d2c.jpg" alt=""><p>平驳头</p></li><li><img src="5928f706118b2.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f706118b2.jpg" alt=""><p>戗驳头</p></li><li><img src="5928f7309a550.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f7309a550.jpg" alt=""><p>青果领</p></li>
+									<li><img src="/static/image/5928f6f923d2c.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f6f923d2c.jpg" alt=""><p>平驳头</p></li><li><img src="/static/image/5928f706118b2.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f706118b2.jpg" alt=""><p>戗驳头</p></li><li><img src="/static/image/5928f7309a550.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/5928f7309a550.jpg" alt=""><p>青果领</p></li>
+								</ul>
+							</div><div class="t3_list">
+								<div class="t3_list_title"><span>口袋形式<img src="down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+								<ul>
+									<li><img src="/static/image/59290b03cfa1f.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b03cfa1f.jpg" alt=""><p>无胸袋</p></li><li><img src="/static/image/59290b115878c.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b115878c.jpg" alt=""><p>正常胸袋</p></li><li><img src="/static/image/59290b407c536.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b407c536.jpg" alt=""><p>明贴胸袋</p></li><li><img src="/static/image/59290b1ec4e6a.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b1ec4e6a.jpg" alt=""><p>船型胸袋</p></li><li><img src="/static/image/59290b3173289.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b3173289.jpg" alt=""><p>双开线胸袋</p></li>
+								</ul>
+							</div><div class="t3_list">
+								<div class="t3_list_title"><span>下口袋<img src="down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+								<ul>
+									<li><img src="/static/image/59290b528d8ac.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b528d8ac.jpg" alt=""><p>正常下口袋</p></li><li><img src="/static/image/59290b6ea0f81.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b6ea0f81.jpg" alt=""><p>正常明贴下口袋</p></li><li><img src="/static/image/59291199d6539.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59291199d6539.jpg" alt=""><p>正常单开线</p></li><li><img src="/static/image/31070.jpg" tppabs="https://appstatic.ybren.com/Uploads//Process/20150001/31070.jpg" alt=""><p>单开线斜插袋</p></li>
+								</ul>
+							</div><div class="t3_list">
+								<div class="t3_list_title"><span>后开衩<img src="down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
+								<ul>
+									<li><img src="/static/image/59290c0a85d75.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c0a85d75.jpg" alt=""><p>无开衩</p></li><li><img src="/static/image/59290c163fbd9.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c163fbd9.jpg" alt=""><p>单开衩</p></li><li><img src="/static/image/59290c23653c1.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c23653c1.jpg" alt=""><p>双开衩</p></li>
 								</ul>
 							</div>
-							<div class="t3_list">
-								<div class="t3_list_title"><span>口袋形式<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
-								<ul>
-									<li><img src="/static/image/59290b03cfa1f.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b03cfa1f.jpg" alt=""><p>无胸袋</p></li><li><img src="59290b115878c.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b115878c.jpg" alt=""><p>正常胸袋</p></li><li><img src="59290b407c536.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b407c536.jpg" alt=""><p>明贴胸袋</p></li><li><img src="59290b1ec4e6a.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b1ec4e6a.jpg" alt=""><p>船型胸袋</p></li><li><img src="59290b3173289.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b3173289.jpg" alt=""><p>双开线胸袋</p></li>
-								</ul>
 							</div>
-							<div class="t3_list">
-								<div class="t3_list_title"><span>下口袋<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span></div>
-								<ul>
-									<li><img src="/static/image/59290b528d8ac.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b528d8ac.jpg" alt=""><p>正常下口袋</p></li><li><img src="59290b6ea0f81.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290b6ea0f81.jpg" alt=""><p>正常明贴下口袋</p></li><li><img src="59291199d6539.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59291199d6539.jpg" alt=""><p>正常单开线</p></li><li><img src="31070.jpg" tppabs="https://appstatic.ybren.com/Uploads//Process/20150001/31070.jpg" alt=""><p>单开线斜插袋</p></li>
-								</ul>
-							</div>
-							<div class="t3_list">
-								<div class="t3_list_title">
-									<span>后开衩<img src="/static/image/down.png" tppabs="https://ossstatic.ybren.com/PC/good_img/down.png" alt=""></span>
-								</div>
-								<ul>
-									<li><img src="/static/image/59290c0a85d75.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c0a85d75.jpg" alt=""><p>无开衩</p></li><li><img src="59290c163fbd9.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c163fbd9.jpg" alt=""><p>单开衩</p></li><li><img src="59290c23653c1.jpg" tppabs="https://appstatic.ybren.com/Uploads/Process/2017-05-27/59290c23653c1.jpg" alt=""><p>双开衩</p></li>
-								</ul>
-							</div>
-
-						<div class="t t4">
-							<img src="/static/image/t4.jpg.png" tppabs="https://ossstatic.ybren.com/PC/good_img/t4.jpg" alt="">
+							<div class="t t4"><img src="/static/image/t4.jpg.png" tppabs="https://ossstatic.ybren.com/PC/good_img/t4.jpg" alt=""></div>
 						</div>
-						<a class="yuyue" href="yuyue.html-from=WAP-BDS-PZ.htm" >立即预约专业着装顾问免费上门量体</a>
+						<a class="yuyue" href="yuyue.html-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue.html?from=WAP-BDS-PZ">立即预约专业着装顾问免费上门量体</a>
 					</div>
 				</div>
 				<div class="step">

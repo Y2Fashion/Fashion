@@ -16,8 +16,17 @@ public class Commodity implements Serializable {
     private String photoPath;//商品图片路径
     private String state;//状态
     private Integer type;//类型
-    private Integer lId;//材质Id
+    private String lId;//材质Id
     private Integer hits;
+    private Lining lining=new Lining();
+
+    public Lining getLining() {
+        return lining;
+    }
+
+    public void setLining(Lining lining) {
+        this.lining = lining;
+    }
 
     public Integer getHits() {
         return hits;
@@ -27,11 +36,11 @@ public class Commodity implements Serializable {
         this.hits = hits;
     }
 
-    public Integer getlId() {
+    public String getlId() {
         return lId;
     }
 
-    public void setlId(Integer lId) {
+    public void setlId(String lId) {
         this.lId = lId;
     }
 

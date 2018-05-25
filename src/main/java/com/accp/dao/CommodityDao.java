@@ -28,5 +28,5 @@ public interface CommodityDao {
     /*
     * 按热度与二级类型查询
     * */
-    public List<Commodity> selectCommodityList(Integer[] thirdTypes);
+    public List<Commodity> selectCommodityList(Integer[] thirdTypeArry);
 }

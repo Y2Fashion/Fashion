@@ -1,6 +1,7 @@
 package com.accp.biz.impl;
 
 import com.accp.biz.CommodityBiz;
+import com.accp.biz.LiNingBiz;
 import com.accp.biz.SecondTypeBiz;
 import com.accp.biz.ThirdTypeBiz;
 import com.accp.dao.CommodityDao;
@@ -25,6 +26,9 @@ public class CommodityBizImpl implements CommodityBiz {
     @Resource
     private SecondTypeBiz secondTypeBiz;
 
+    @Resource
+    private LiNingBiz liNingBiz;
+
     @Override
     public List<Commodity> findType(Commodity commodity) {
         return dao.findType(commodity);
@@ -33,7 +37,9 @@ public class CommodityBizImpl implements CommodityBiz {
     @Override
     public Commodity findId(Integer id) {
         addHits(id);
-        return dao.findId(id);
+        Commodity commodity=dao.findId(id);
+        commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
+        return commodity;
     }
 
     @Override
@@ -46,15 +52,15 @@ public class CommodityBizImpl implements CommodityBiz {
     @Override
     public List<Commodity> getCommoditys(String secondTypeId) {
         List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeList(secondTypeId);
-        Integer[] integers=new Integer[thirdTypes.size()];
+        Integer[] thirdTypeArry=new Integer[thirdTypes.size()];
         int i=0;
         if(thirdTypes!=null){
             for (ThirdType third:thirdTypes) {
-                integers[i]=third.gettId();
+                thirdTypeArry[i]=third.gettId();
                 i++;
             }
         }
-        return dao.selectCommodityList(integers);
+        return dao.selectCommodityList(thirdTypeArry);
     }
 
     @Override

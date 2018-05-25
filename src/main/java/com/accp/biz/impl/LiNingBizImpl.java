@@ -19,7 +19,7 @@ public class LiNingBizImpl implements LiNingBiz {
      * */
 
     @Override
-    public Lining getLiNingById(Integer id) {
+    public Lining getLiNingById(String id) {
         return liNingDao.selecttLiNingById(id);
     }
     /*

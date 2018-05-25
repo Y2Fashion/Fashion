@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface LiNingDao {
 
-    Lining selecttLiNingById(Integer id);
+    Lining selecttLiNingById(String id);
     List<Lining> selectLiNingList();
 }

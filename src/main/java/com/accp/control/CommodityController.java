@@ -43,6 +43,9 @@ public class CommodityController {
             commodityList = biz.findType(commodity);
             redisUtil.lPush(key, commodityList);
         }
+        for (Commodity c :commodityList) {
+            c.setLining(liNingBiz.getLiNingById(c.getlId()));
+        }
         model.addAttribute(commodityList);
         return "WAP-BDS-PZ";
     }
@@ -105,7 +108,7 @@ public class CommodityController {
     @RequestMapping("/selectCommodity")
     public String goToXiangXi(Model model,Integer id) {
         Commodity commodity=biz.findId(id);
-        Lining lining=liNingBiz.getLiNingById(id);
+        Lining lining=liNingBiz.getLiNingById(commodity.getlId());
         List<Lining> LiNingList=liNingBiz.getLiNingList();
         model.addAttribute("lining",lining);
         model.addAttribute("commodity",commodity);
