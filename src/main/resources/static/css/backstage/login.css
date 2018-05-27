@@ -1,0 +1,149 @@
+
+.box{
+	width: 390px;
+	height: 320px;
+	border: solid 1px #ddd;
+	background: #FFF;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -195px;
+	margin-top: -140px;
+}
+.box h2{
+	font-weight:normal;
+	color:#666;
+	font-size:16px;
+	line-height:46px;
+	height:46px;
+	overflow:hidden;
+	text-align:center;
+	border-bottom:solid 1px #ddd;
+	background:#f7f7f7;
+}
+.input_box{
+	width:350px;
+	padding-bottom:15px;
+	margin:0 auto;
+	overflow:hidden;
+}
+.input_box input{
+	float:left;
+	width:348px;
+	height:40px;
+	font-size:14px;
+	border:solid 1px #ddd;
+	text-indent:10px;
+	outline:none;
+	line-height:40px;
+}
+.input_box button{
+	width: 350px;
+	height: 48px;
+	border: none;
+	border-radius: 2px;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	color: #FFF;
+	background-color: #62d1d5;
+}
+#error_box{
+	height:40px;
+	width:350px;
+	margin:0 auto;
+	line-height:40px;
+	color:#fc4343;
+}
+/*.beg-login-box {
+	width: 450px;
+	height: 300px;
+	background-color: rgba(255, 255, 255, 255);
+	border-radius: 10px;
+	margin-top: 20%;
+	margin-right: auto;
+	margin-bottom: 20%;
+	margin-left: auto;
+}
+
+.beg-login-box header {
+	height: 30px;
+	padding: 10px;
+	border-bottom: 1px solid aliceblue;
+}
+
+.beg-login-box header h1 {
+	text-align: center;
+	font-size: 25px;
+	line-height: 40px;
+}
+
+.beg-login-box .beg-login-main {
+	height: 185px;
+	padding: 30px 90px 0;
+}
+
+.beg-login-main .layui-form-item {
+	position: relative;
+}
+
+.beg-login-main .layui-form-item .beg-login-icon {
+	position: absolute;
+	color: #000000;
+	top: 10px;
+	left: 10px;
+}
+
+.beg-login-main .layui-form-item input {
+	padding-left: 34px;
+}
+
+.beg-login-box footer {
+	height: 35px;
+	padding: 20px 20px 0 20px;
+}
+
+.beg-login-box footer p {
+	line-height: 40px;
+	text-align: center;
+	font-size: 25px;
+}
+
+.beg-pull-left {
+	float: center !important;
+	text-align:center;
+}
+
+.beg-pull-right {
+	text-align:center;
+}
+
+.beg-clear {
+	clear: both;
+}
+
+.beg-login-remember {
+	line-height: 38px;
+}
+
+.beg-login-remember .layui-form-switch {
+	margin-top: 0px;
+}
+
+.beg-login-code-box {
+	position: relative;
+	padding: 10px;
+}
+
+.beg-login-code-box input {
+	position: absolute;
+	width: 100px;
+}
+
+.beg-login-code-box img {
+	cursor: pointer;
+	position: absolute;
+	left: 115px;
+	height: 38px;
+}
+*/
