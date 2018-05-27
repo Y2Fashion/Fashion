@@ -54,9 +54,9 @@ ga('send', 'pageview');
                             var headpull='';
                             for(var i=data.length-1;i>=0;i--){
 							    var pull='<li>'+
-                                    '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                     '</li>';
-							    headpull='<li><a href="/selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a></li>';
+							    headpull='<li><a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a></li>';
                                 $.each($("#pull ul"),function(i,t){
                                     $(t).html(pull+$(t).html());
                                 });
@@ -107,25 +107,25 @@ ga('send', 'pageview');
 						<li>
 							<p class="lt">男士西装</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=1" tppabs="https://www.ybren.com/home/category_son/150">套西</a>
-                                                            <a href="/selectCommodityList?typeId=2" tppabs="https://www.ybren.com/home/category_son/149">单西</a>
-                                                            <a href="/selectCommodityList?typeId=3" tppabs="https://www.ybren.com/home/category_son/186">商旅系列</a>
+                                                            <a href="/selectCommodityList?typeId=3" tppabs="https://www.ybren.com/home/category_son/150">套西</a>
+                                                            <a href="/selectCommodityList?typeId=1" tppabs="https://www.ybren.com/home/category_son/149">单西</a>
+                                                            <a href="/selectCommodityList?typeId=5" tppabs="https://www.ybren.com/home/category_son/186">商旅系列</a>
                                                         </p>
 						</li>
 						<li>
 							<p class="lt">男士衬衫</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=4" tppabs="https://www.ybren.com/home/category_son/157">长袖衬衫</a>
-                                                            <a href="/selectCommodityList?typeId=5" tppabs="https://www.ybren.com/home/category_son/158">短袖衬衫</a>
-                                                            <a href="/selectCommodityList?typeId=6" tppabs="https://www.ybren.com/home/category_son/187">印花衬衫</a>
+                                                            <a href="/selectCommodityList?typeId=8" tppabs="https://www.ybren.com/home/category_son/157">长袖衬衫</a>
+                                                            <a href="/selectCommodityList?typeId=9" tppabs="https://www.ybren.com/home/category_son/158">短袖衬衫</a>
+                                                            <a href="/selectCommodityList?typeId=11" tppabs="https://www.ybren.com/home/category_son/187">磨毛衬衫</a>
                                                         </p>
 						</li>
 						<li>
 							<p class="lt">男士裤装</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=20" tppabs="https://www.ybren.com/home/category_son/161">西裤</a>
-                                                            <a href="/selectCommodityList?typeId=21" tppabs="https://www.ybren.com/home/category_son/160">休闲裤</a>
-                                                            <a href="/selectCommodityList?typeId=22" tppabs="https://www.ybren.com/home/category_son/162">牛仔裤</a>
+                                                            <a href="/selectCommodityList?typeId=13" tppabs="https://www.ybren.com/home/category_son/161">西裤</a>
+                                                            <a href="/selectCommodityList?typeId=12" tppabs="https://www.ybren.com/home/category_son/160">休闲裤</a>
+                                                            <a href="/selectCommodityList?typeId=14" tppabs="https://www.ybren.com/home/category_son/162">牛仔裤</a>
                                                         </p>
 						</li>
 			<!-- 			<li>
@@ -139,29 +139,31 @@ ga('send', 'pageview');
 							<p class="lt">男士外套</p>
 							<p class="lc">
                                                             <!-- <a href="/home/category_son/152">大衣</a> -->
-                                                            <a href="/selectCommodityList?typeId=23" tppabs="https://www.ybren.com/home/category_son/153">夹克</a>
-                                                            <a href="/selectCommodityList?typeId=24" tppabs="https://www.ybren.com/home/category_son/155">皮衣</a>
+                                                            <a href="/selectCommodityList?typeId=21" tppabs="https://www.ybren.com/home/category_son/153">夹克</a>
+                                                            <a href="/selectCommodityList?typeId=22" tppabs="https://www.ybren.com/home/category_son/155">皮衣</a>
                                                         </p>
 						</li>
 						<li>
 							<p class="lt">女士西装</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=25" tppabs="https://www.ybren.com/home/category_son/165">单西</a>
-                                                            <a href="/selectCommodityList?typeId=26" tppabs="https://www.ybren.com/home/category_son/166">西裙</a>
-                                                            <a href="/selectCommodityList?typeId=27" tppabs="https://www.ybren.com/home/category_son/167">套西</a></p>
+                                                            <a href="/selectCommodityList?typeId=24" tppabs="https://www.ybren.com/home/category_son/165">单西</a>
+								                             <a href="/selectCommodityList?typeId=25" tppabs="https://www.ybren.com/home/category_son/167">套西</a>
+                                                            <a href="/selectCommodityList?typeId=26" tppabs="https://www.ybren.com/home/category_son/167">马甲</a>
+							</p>
 						</li>
 						<li>
-							<p class="lt">女士衬衫</p>
+							<p class="lt">真丝</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=28" tppabs="https://www.ybren.com/home/category_son/169">长袖衬衫</a>
-                                                            <a href="/selectCommodityList?typeId=29" tppabs="https://www.ybren.com/home/category_son/170">短袖衬衫</a>
+                                                            <a href="/selectCommodityList?typeId=28" tppabs="https://www.ybren.com/home/category_son/169">真丝上衣</a>
+                                                            <a href="/selectCommodityList?typeId=27" tppabs="https://www.ybren.com/home/category_son/170">真丝连衣裙</a>
+								                             <a href="/selectCommodityList?typeId=31" tppabs="https://www.ybren.com/home/category_son/170">真丝套装</a>
                                                         </p>
 						</li>
 						<li>
 							<p class="lt">女士裤装</p>
 							<p class="lc">
-                                                            <a href="/selectCommodityList?typeId=30" tppabs="https://www.ybren.com/home/category_son/171">西裤</a>
-                                                            <a href="/selectCommodityList?typeId=31" tppabs="https://www.ybren.com/home/category_son/172">牛仔裤</a>
+                                                            <a href="/selectCommodityList?typeId=32" tppabs="https://www.ybren.com/home/category_son/171">西裤</a>
+                                                            <a href="/selectCommodityList?typeId=33" tppabs="https://www.ybren.com/home/category_son/172">牛仔裤</a>
                                                         </p>
 						</li>
                                                 

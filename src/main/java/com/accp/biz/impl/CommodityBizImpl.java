@@ -1,9 +1,6 @@
 package com.accp.biz.impl;
 
-import com.accp.biz.CommodityBiz;
-import com.accp.biz.LiNingBiz;
-import com.accp.biz.SecondTypeBiz;
-import com.accp.biz.ThirdTypeBiz;
+import com.accp.biz.*;
 import com.accp.dao.CommodityDao;
 import com.accp.dao.ThirdTypeDao;
 import com.accp.entity.Commodity;
@@ -29,6 +26,9 @@ public class CommodityBizImpl implements CommodityBiz {
     @Resource
     private LiNingBiz liNingBiz;
 
+    @Resource
+    private PictureBiz pictureBiz;
+
     @Override
     public List<Commodity> findType(Commodity commodity) {
         return dao.findType(commodity);
@@ -39,6 +39,7 @@ public class CommodityBizImpl implements CommodityBiz {
         addHits(id);
         Commodity commodity=dao.findId(id);
         commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
+        commodity.setPictures(pictureBiz.getPictureList(id));
         return commodity;
     }
 

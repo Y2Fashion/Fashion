@@ -60,7 +60,7 @@
                             $("#pull ul").children().filter("li").remove();
                             for(var i=0;i<data.length;i++){
                                 var pull='<li>'+
-                                    '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                     '</li>';
                                 $.each($("#pull ul"),function(i,t){
                                     $(t).html(pull+$(t).html());
@@ -102,25 +102,7 @@ ga('send', 'pageview');
 <!--<div style="display:none">-->
 <script>
 
-    $(function () {
-        $("#pull").hover(function () {
-            $.ajax({
-                url:"/pull",
-                dataType:"json",
-                success:function (data) {
-                    $("#pull ul").children().filter("li").remove();
-                    for(var i=0;i<data.length;i++){
-                        var pull='<li>'+
-                            '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
-                            '</li>';
-                        $.each($("#pull ul"),function(i,t){
-                            $(t).html(pull+$(t).html());
-                        })
-                    }
-                }
-            })
-        })
-    })
+
 
 var _hmt = _hmt || [];
 (function() {
@@ -253,11 +235,11 @@ var _hmt = _hmt || [];
 							</div>
 						</div>
 						<ul class="small_img">
-							<li class="li_simg" _src="5a9e0b71b196a.jpg">
+							<li class="li_simg" _src="5a9e0b71b196a16.jpg">
 								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
 							</li>
-							<li class="li_simg" _src="5a9e0b71b196a16.jpg">
-								<img src="/static/image/5a5d6831d7a16.jpg" alt=""/>
+							<li class="li_simg" _src="5a9e0b71b196a.jpg" th:each="picture:${commodity.pictures}">
+								<img th:src="'/static/image/'+${picture.path}" alt=""/>
 							</li>
 							<li class="li_simg" _src="5a9e0b71b196a.jpg">
 								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
@@ -362,38 +344,21 @@ var _hmt = _hmt || [];
 									 <img src="/static/image/59a543486c834.jpg" alt=""><br/>
 									 <img src="/static/image/5a9e0b8ec882a.jpg" alt=""><br/>
 									 <img src="/static/image/5ab08dd187052.jpg" alt=""><br/>
-								  	 <img src="/static/image/5a322b11ac0c0.jpg" alt=""><br/>
-									 <img src="/static/image/5a322b13e0a60.jpg" alt=""><br/>
-									 <img src="/static/image/5a322b165b7b5.jpg" alt=""><br/>
-									 <img src="/static/image/59a5434ae1cc5.jpg" alt=""><br/>
-									 <img src="/static/image/59a5434d24a43.jpg" alt=""><br/>
-									 <img src="/static/image/59a5434ca5792.jpg" alt=""><br/>
-									 <img src="/static/image/59a5434de1678.jpg" alt=""><br/>
-									 <img src="/static/image/59a5434e3ae1f.jpg" alt=""><br/>
+								  	 <img th:each="picture:${commodity.pictures}" th:src="@{'/static/image/'+${picture.path}}" alt="">
+								<br/>
                             </div>
 				<div class="rmtj"><img src="/static/image/hotsale.png" tppabs="https://ossstatic.ybren.com/PC/good_img/hotsale.png" alt="" ></div>
 				<div class="swiper-container">
 			        <div class="swiper-wrapper">
-
 						<div class="swiper-slide">
 							<ul>
-								<li>
-									<a href="itemDetail.html-erp_item_id=YS1454&from=WAP-BDS-PZ.htm" >
-										<img src="5ab3677e280b4.jpg" alt="" />
-										<span><font color="#FA5F29">会员价￥3186.00</font><br />灰色肌理纹平驳头时尚单西</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="swiper-slide">
-							<ul>
-								<li>
+								<li th:each="commodityss:${commoditys}">
 									<a href="itemDetail.html-erp_item_id=YS1274&from=WAP-BDS-PZ.htm" >
-										<img src="5a655c8aeb0cd.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655c8aeb0cd.jpg" alt="" >
-										<span><font color="#FA5F29">会员价￥4386.00</font><br />灰色格纹毛麻精品西服</span>
+										<img th:src="@{'/static/image/'+${commodityss.photoPath}}" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655c8aeb0cd.jpg" alt="" >
+										<span><font color="#FA5F29" th:text="'会员价￥'+${commodityss.vipPrice}">会员价￥4386.00</font><br th:text="${commodityss.vipPrice}"/>灰色格纹毛麻精品西服</span>
 									</a>
 								</li>
-								<li>
+								<!--<li>
 									<a href="itemDetail.html-erp_item_id=YS1053&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS1053&from=WAP-BDS-PZ">
 										<img src="5a9e0ab147d0a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ab147d0a.jpg" alt="" ><span><font color="#FA5F29">会员价￥4653.00</font><br />灰色红格纹全羊毛商务经典男士单西</span>
 									</a>
@@ -408,7 +373,7 @@ var _hmt = _hmt || [];
 										<img src="5a9e09e353047.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e09e353047.jpg" alt="" >
 										<span><font color="#FA5F29">会员价￥4466.00</font><br />蓝色耀眼大格纹全羊毛商务经典男士单西</span>
 									</a>
-								</li>
+								</li>-->
 						</ul>
 						</div>
 						<div class="swiper-slide">

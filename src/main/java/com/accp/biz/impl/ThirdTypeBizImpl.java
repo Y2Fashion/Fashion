@@ -14,6 +14,11 @@ public class ThirdTypeBizImpl implements ThirdTypeBiz {
     private ThirdTypeDao thirdTypeDao;
     @Override
     public List<ThirdType> getThirdTypeList(Object sId) {
-        return thirdTypeDao.selectThirdType(sId);
+        return thirdTypeDao.selectThirdTypeList(sId);
+    }
+
+    @Override
+    public ThirdType getThirdType(Object tId) {
+        return thirdTypeDao.selectThirdType(tId);
     }
 }

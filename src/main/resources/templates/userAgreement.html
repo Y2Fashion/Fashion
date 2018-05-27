@@ -50,7 +50,7 @@
                                 $("#pull ul").children().filter("li").remove();
                                 for(var i=0;i<data.length;i++){
                                     var pull='<li>'+
-                                        '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                        '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                         '</li>';
                                     $.each($("#pull ul"),function(i,t){
                                         $(t).html(pull+$(t).html());

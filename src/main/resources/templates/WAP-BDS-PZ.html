@@ -63,6 +63,9 @@
 		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://www.ybren.com/Public/js/jquery.1.7.2.min.js"></script>
 		<script>
 			$(function(){
+
+
+
 				$('.fli span').click(function(){
 					if(!$(this).parent().hasClass('li_act')){
 						$('.fli').removeClass('li_act');
@@ -83,7 +86,7 @@
                             $("#pull ul").children().filter("li").remove();
                             for(var i=data.length-1;i>=0;i--){
                                 var pull='<li>'+
-                                    '<a href="selectCommodityList?typeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
                                     '</li>';
                                 $.each($("#pull ul"),function(i,t){
                                     $(t).html(pull+$(t).html());
@@ -204,6 +207,33 @@ var _hmt = _hmt || [];
                         window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
                     }
 			$(function() {
+                $('.fli').removeClass("li_act");
+                $(".fli").find('.sul').hide();
+                $(".sul li a").css({color: "black"});
+                var id = 1;
+                var CName = $("#CName").val();
+                var typeId = $("#typeId").val();
+                if(typeId<=23){
+                    for(var i=0;i<28;i++){
+                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
+                            var ths=$("a[name='cla']:hidden").eq(i);
+                            $(ths).parent().parent().show();
+                            $(ths).parent().parent().parent().addClass("li_act");
+                            $(ths).css({color: "red"});
+                        }
+					}
+				}else{
+                    for(var i=28;i<45;i++){
+                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
+                            var ths=$("a[name='cla']:hidden").eq(i);
+                            $(ths).parent().parent().show();
+                            $(ths).parent().parent().parent().addClass("li_act");
+                            $(ths).css({color: "red"});
+                        }
+                    }
+				}
+
+
 				$('.r3').hover(function(){
 					$('.wx_code').show();
 				},function(){
@@ -256,32 +286,35 @@ var _hmt = _hmt || [];
 				<ul class="ful">
 					<li class="li_title">男士系列</li>
 					<li class="li_act fli">
+						<input id="CName" type="hidden" th:value="${CName}">
+						<input id="typeId" type="hidden" th:value="${typeId}">
 							<span>西装</span>
 							<ul class="sul">
 								<li class="cur">
-									<a onclick="selectCommodityList(1,this)" tppabs="https://www.ybren.com/home/category_son/149/from/WAP-BDS-PZ">单西</a>
+									<a name="cla" onclick="selectCommodityList(1,this)" tppabs="https://www.ybren.com/home/category_son/149/from/WAP-BDS-PZ">单西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(2,this)" tppabs="https://www.ybren.com/home/category_son/139/from/WAP-BDS-PZ">礼服</a>
+									<a name="cla" onclick="selectCommodityList(2,this)" tppabs="https://www.ybren.com/home/category_son/139/from/WAP-BDS-PZ">礼服</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(3,this)" tppabs="https://www.ybren.com/home/category_son/150/from/WAP-BDS-PZ">套西</a>
+									<a name="cla" onclick="selectCommodityList(3,this)" tppabs="https://www.ybren.com/home/category_son/150/from/WAP-BDS-PZ">套西</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(4,this)" tppabs="https://www.ybren.com/home/category_son/151/from/WAP-BDS-PZ">西装马甲</a>
+									<a name="cla" onclick="selectCommodityList(4,this)" tppabs="https://www.ybren.com/home/category_son/151/from/WAP-BDS-PZ">西装马甲</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(5,this)" tppabs="https://www.ybren.com/home/category_son/186/from/WAP-BDS-PZ">商旅系列</a>
+									<a name="cla" onclick="selectCommodityList(5,this)" tppabs="https://www.ybren.com/home/category_son/186/from/WAP-BDS-PZ">商旅系列</a>
 								</li>
 							</ul>
-						</li><li class=" fli">
+						</li>
+					<li class=" fli">
 							<span>T恤</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(6,this)" tppabs="https://www.ybren.com/home/category_son/188/from/WAP-BDS-PZ">T恤</a>
+									<a name="cla" onclick="selectCommodityList(6,this)" tppabs="https://www.ybren.com/home/category_son/188/from/WAP-BDS-PZ">T恤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(7,this)" tppabs="https://www.ybren.com/home/category_son/164/from/WAP-BDS-PZ">羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(7,this)" tppabs="https://www.ybren.com/home/category_son/164/from/WAP-BDS-PZ">羊绒衫</a>
 								</li>
 							</ul>
 						</li>
@@ -289,32 +322,32 @@ var _hmt = _hmt || [];
 							<span>衬衫</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(8,this)" tppabs="https://www.ybren.com/home/category_son/157/from/WAP-BDS-PZ">长袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(8,this)" tppabs="https://www.ybren.com/home/category_son/157/from/WAP-BDS-PZ">长袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(9,this)" tppabs="https://www.ybren.com/home/category_son/158/from/WAP-BDS-PZ">短袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(9,this)" tppabs="https://www.ybren.com/home/category_son/158/from/WAP-BDS-PZ">短袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(10,this)" tppabs="https://www.ybren.com/home/category_son/194/from/WAP-BDS-PZ">DP衬衫</a>
+									<a name="cla" onclick="selectCommodityList(10,this)" tppabs="https://www.ybren.com/home/category_son/194/from/WAP-BDS-PZ">DP衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(11,this)" tppabs="https://www.ybren.com/home/category_son/187/from/WAP-BDS-PZ">印花衬衫</a>
+									<a name="cla" onclick="selectCommodityList(11,this)" tppabs="https://www.ybren.com/home/category_son/187/from/WAP-BDS-PZ">印花衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(12,this)" tppabs="https://www.ybren.com/home/category_son/159/from/WAP-BDS-PZ">磨毛衬衫</a>
+									<a name="cla" onclick="selectCommodityList(12,this)" tppabs="https://www.ybren.com/home/category_son/159/from/WAP-BDS-PZ">磨毛衬衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>裤装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(13,this)" tppabs="https://www.ybren.com/home/category_son/160/from/WAP-BDS-PZ">休闲裤</a>
+									<a name="cla" onclick="selectCommodityList(13,this)" tppabs="https://www.ybren.com/home/category_son/160/from/WAP-BDS-PZ">休闲裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(14,this)" tppabs="https://www.ybren.com/home/category_son/161/from/WAP-BDS-PZ">西裤</a>
+									<a name="cla" onclick="selectCommodityList(14,this)" tppabs="https://www.ybren.com/home/category_son/161/from/WAP-BDS-PZ">西裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(15,this)" tppabs="https://www.ybren.com/home/category_son/162/from/WAP-BDS-PZ">牛仔裤</a>
+									<a name="cla" onclick="selectCommodityList(15,this)" tppabs="https://www.ybren.com/home/category_son/162/from/WAP-BDS-PZ">牛仔裤</a>
 								</li>
 							</ul>
 						</li>
@@ -322,16 +355,16 @@ var _hmt = _hmt || [];
 							<span>新中式</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(16,this)" tppabs="https://www.ybren.com/home/category_son/216/from/WAP-BDS-PZ">立领衬衫</a>
+									<a name="cla" onclick="selectCommodityList(16,this)" tppabs="https://www.ybren.com/home/category_son/216/from/WAP-BDS-PZ">立领衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(17,this)" tppabs="https://www.ybren.com/home/category_son/213/from/WAP-BDS-PZ">中山装</a>
+									<a name="cla" onclick="selectCommodityList(17,this)" tppabs="https://www.ybren.com/home/category_son/213/from/WAP-BDS-PZ">中山装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(18,this)" tppabs="https://www.ybren.com/home/category_son/214/from/WAP-BDS-PZ">中式便装</a>
+									<a name="cla" onclick="selectCommodityList(18,this)" tppabs="https://www.ybren.com/home/category_son/214/from/WAP-BDS-PZ">中式便装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(19,this)" tppabs="https://www.ybren.com/home/category_son/215/from/WAP-BDS-PZ">中式礼服</a>
+									<a name="cla" onclick="selectCommodityList(19,this)" tppabs="https://www.ybren.com/home/category_son/215/from/WAP-BDS-PZ">中式礼服</a>
 								</li>
 							</ul>
 						</li>
@@ -339,16 +372,16 @@ var _hmt = _hmt || [];
 							<span>外套</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(20,this)" tppabs="https://www.ybren.com/home/category_son/152/from/WAP-BDS-PZ">大衣</a>
+									<a name="cla" onclick="selectCommodityList(20,this)" tppabs="https://www.ybren.com/home/category_son/152/from/WAP-BDS-PZ">大衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(21,this)" tppabs="https://www.ybren.com/home/category_son/202/from/WAP-BDS-PZ">风衣</a>
+									<a name="cla" onclick="selectCommodityList(21,this)" tppabs="https://www.ybren.com/home/category_son/202/from/WAP-BDS-PZ">风衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(22,this)" tppabs="https://www.ybren.com/home/category_son/153/from/WAP-BDS-PZ">夹克</a>
+									<a name="cla" onclick="selectCommodityList(22,this)" tppabs="https://www.ybren.com/home/category_son/153/from/WAP-BDS-PZ">夹克</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(23,this)" tppabs="https://www.ybren.com/home/category_son/155/from/WAP-BDS-PZ">皮衣</a>
+									<a name="cla" onclick="selectCommodityList(23,this)" tppabs="https://www.ybren.com/home/category_son/155/from/WAP-BDS-PZ">皮衣</a>
 								</li>
 							</ul>
 						</li>
@@ -356,16 +389,16 @@ var _hmt = _hmt || [];
 							<span>童装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(24,this)" href="#" tppabs="https://www.ybren.com/home/category_son/206/from/WAP-BDS-PZ">儿童羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(24,this)" href="#" tppabs="https://www.ybren.com/home/category_son/206/from/WAP-BDS-PZ">儿童羊绒衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(25,this)" href="#" tppabs="https://www.ybren.com/home/category_son/196/from/WAP-BDS-PZ">儿童正装</a>
+									<a name="cla" onclick="selectCommodityList(25,this)" href="#" tppabs="https://www.ybren.com/home/category_son/196/from/WAP-BDS-PZ">儿童正装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(26,this)" href="#" tppabs="https://www.ybren.com/home/category_son/197/from/WAP-BDS-PZ">儿童衬衫</a>
+									<a name="cla" onclick="selectCommodityList(26,this)" href="#" tppabs="https://www.ybren.com/home/category_son/197/from/WAP-BDS-PZ">儿童衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(27,this)" href="#" tppabs="https://www.ybren.com/home/category_son/208/from/WAP-BDS-PZ">儿童大衣</a>
+									<a name="cla" onclick="selectCommodityList(27,this)" href="#" tppabs="https://www.ybren.com/home/category_son/208/from/WAP-BDS-PZ">儿童大衣</a>
 								</li>
 							</ul>
 						</li>    
@@ -375,75 +408,75 @@ var _hmt = _hmt || [];
 							<span>西装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(28,this)" href="#" tppabs="https://www.ybren.com/home/category_son/165/from/WAP-BDS-PZ">单西</a>
+									<a name="cla" onclick="selectCommodityList(28,this)" href="#" tppabs="https://www.ybren.com/home/category_son/165/from/WAP-BDS-PZ">单西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(29,this)" href="#" tppabs="https://www.ybren.com/home/category_son/166/from/WAP-BDS-PZ">西裙</a>
+									<a name="cla" onclick="selectCommodityList(29,this)" href="#" tppabs="https://www.ybren.com/home/category_son/166/from/WAP-BDS-PZ">西裙</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(30,this)" href="#" tppabs="https://www.ybren.com/home/category_son/167/from/WAP-BDS-PZ">套西</a>
+									<a name="cla" onclick="selectCommodityList(30,this)" href="#" tppabs="https://www.ybren.com/home/category_son/167/from/WAP-BDS-PZ">套西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(31,this)" href="#" tppabs="https://www.ybren.com/home/category_son/207/from/WAP-BDS-PZ">马甲</a>
+									<a name="cla" onclick="selectCommodityList(31,this)" href="#" tppabs="https://www.ybren.com/home/category_son/207/from/WAP-BDS-PZ">马甲</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>真丝</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(32,this)" href="#" tppabs="https://www.ybren.com/home/category_son/193/from/WAP-BDS-PZ">真丝连衣裙</a>
+									<a name="cla" onclick="selectCommodityList(32,this)" href="#" tppabs="https://www.ybren.com/home/category_son/193/from/WAP-BDS-PZ">真丝连衣裙</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(33,this)" href="#" tppabs="https://www.ybren.com/home/category_son/199/from/WAP-BDS-PZ">真丝上衣</a>
+									<a name="cla" onclick="selectCommodityList(33,this)" href="#" tppabs="https://www.ybren.com/home/category_son/199/from/WAP-BDS-PZ">真丝上衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(34,this)" href="#" tppabs="https://www.ybren.com/home/category_son/200/from/WAP-BDS-PZ">真丝外套</a>
+									<a name="cla" onclick="selectCommodityList(34,this)" href="#" tppabs="https://www.ybren.com/home/category_son/200/from/WAP-BDS-PZ">真丝外套</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(35,this)" href="#" tppabs="https://www.ybren.com/home/category_son/201/from/WAP-BDS-PZ">真丝女裤</a>
+									<a name="cla" onclick="selectCommodityList(35,this)" href="#" tppabs="https://www.ybren.com/home/category_son/201/from/WAP-BDS-PZ">真丝女裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(36,this)" href="#" tppabs="https://www.ybren.com/home/category_son/211/from/WAP-BDS-PZ">真丝套装</a>
+									<a name="cla" onclick="selectCommodityList(36,this)" href="#" tppabs="https://www.ybren.com/home/category_son/211/from/WAP-BDS-PZ">真丝套装</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>衬衫</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(37,this)" href="#" tppabs="https://www.ybren.com/home/category_son/169/from/WAP-BDS-PZ">长袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(37,this)" href="#" tppabs="https://www.ybren.com/home/category_son/169/from/WAP-BDS-PZ">长袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(38,this)" href="#" tppabs="https://www.ybren.com/home/category_son/170/from/WAP-BDS-PZ">短袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(38,this)" href="#" tppabs="https://www.ybren.com/home/category_son/170/from/WAP-BDS-PZ">短袖衬衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>裤装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(39,this)" href="#" tppabs="https://www.ybren.com/home/category_son/171/from/WAP-BDS-PZ">西裤</a>
+									<a name="cla" onclick="selectCommodityList(39,this)" href="#" tppabs="https://www.ybren.com/home/category_son/171/from/WAP-BDS-PZ">西裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(40,this)" href="#" tppabs="https://www.ybren.com/home/category_son/172/from/WAP-BDS-PZ">牛仔裤</a>
+									<a name="cla" onclick="selectCommodityList(40,this)" href="#" tppabs="https://www.ybren.com/home/category_son/172/from/WAP-BDS-PZ">牛仔裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(41,this)" href="#" tppabs="https://www.ybren.com/home/category_son/210/from/WAP-BDS-PZ">连衣裙</a>
+									<a name="cla" onclick="selectCommodityList(41,this)" href="#" tppabs="https://www.ybren.com/home/category_son/210/from/WAP-BDS-PZ">连衣裙</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>针织</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(42,this)" href="#" tppabs="https://www.ybren.com/home/category_son/205/from/WAP-BDS-PZ">羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(42,this)" href="#" tppabs="https://www.ybren.com/home/category_son/205/from/WAP-BDS-PZ">羊绒衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>外套</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(43,this)" href="#" tppabs="https://www.ybren.com/home/category_son/168/from/WAP-BDS-PZ">大衣</a>
+									<a name="cla" onclick="selectCommodityList(43,this)" href="#" tppabs="https://www.ybren.com/home/category_son/168/from/WAP-BDS-PZ">大衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(44,this)" href="#" tppabs="https://www.ybren.com/home/category_son/209/from/WAP-BDS-PZ">风衣</a>
+									<a name="cla" onclick="selectCommodityList(44,this)" href="#" tppabs="https://www.ybren.com/home/category_son/209/from/WAP-BDS-PZ">风衣</a>
 								</li>
 							</ul>
 						</li>

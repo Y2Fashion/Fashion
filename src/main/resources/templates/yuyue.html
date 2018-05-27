@@ -183,6 +183,25 @@
         var l = W/2-250;
         window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
     }
+    $(function () {
+        $("#pull").hover(function () {
+            $.ajax({
+                url:"/pull",
+                dataType:"json",
+                success:function (data) {
+                    $("#pull ul").children().filter("li").remove();
+                    for(var i=0;i<data.length;i++){
+                        var pull='<li>'+
+                            '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                            '</li>';
+                        $.each($("#pull ul"),function(i,t){
+                            $(t).html(pull+$(t).html());
+                        })
+                    }
+                }
+            })
+        })
+    })
     $(function() {
         $('.r3').hover(function(){
             $('.wx_code').show();

@@ -4,7 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.ThirdTypeDao">
     <!--查询三级列表-->
+    <select id="selectThirdTypeList" resultType="ThirdType">
+        SELECT * FROM thirdtype WHERE sId=#{sId};
+    </select>
     <select id="selectThirdType" resultType="ThirdType">
-        SELECT * FROM thirdtype WHERE sId=#{id};
+        SELECT * FROM thirdtype WHERE tId=#{tId};
     </select>
 </mapper>

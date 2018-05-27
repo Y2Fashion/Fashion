@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ThirdTypeDao {
 
-    List<ThirdType> selectThirdType(@RequestParam("id") Object id);
+    List<ThirdType> selectThirdTypeList(@RequestParam("sId") Object sId);
+    ThirdType selectThirdType(@RequestParam("tId") Object tId);
 }

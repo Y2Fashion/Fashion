@@ -41,12 +41,15 @@ public class CommodityController {
             Commodity commodity = new Commodity();
             commodity.setType(typeId);
             commodityList = biz.findType(commodity);
+            for (Commodity c :commodityList) {
+                c.setLining(liNingBiz.getLiNingById(c.getlId()));
+            }
             redisUtil.lPush(key, commodityList);
         }
-        for (Commodity c :commodityList) {
-            c.setLining(liNingBiz.getLiNingById(c.getlId()));
-        }
-        model.addAttribute(commodityList);
+
+        model.addAttribute("commodityList",commodityList);
+        model.addAttribute("CName",thirdTypeBiz.getThirdType(typeId).getThirdType());
+        model.addAttribute("typeId",typeId);
         return "WAP-BDS-PZ";
     }
     @RequestMapping("/ajaxCommodityList")
@@ -104,15 +107,28 @@ public class CommodityController {
         return "index";
     }
 
+    @RequestMapping("getCommodityListBySType")
+    public String getCommodityListBySType(Model model,String SecondTypeId){
+        model.addAttribute("commodityList",biz.getCommoditys(SecondTypeId));
+        return "WAP-BDS-PZ";
+    };
+
     //衣服详细页面
     @RequestMapping("/selectCommodity")
     public String goToXiangXi(Model model,Integer id) {
         Commodity commodity=biz.findId(id);
         Lining lining=liNingBiz.getLiNingById(commodity.getlId());
         List<Lining> LiNingList=liNingBiz.getLiNingList();
+        List<Commodity> commodity1=biz.getCommoditys(commodity.getType());
+        List<Commodity> commoditys=new ArrayList<Commodity>();
+        commoditys.add(commodity1.get(0));
+        commoditys.add(commodity1.get(1));
+        commoditys.add(commodity1.get(2));
+        commoditys.add(commodity1.get(3));
         model.addAttribute("lining",lining);
         model.addAttribute("commodity",commodity);
         model.addAttribute("LiNingList",LiNingList);
+        model.addAttribute("commoditys",commoditys);
         return "WAP-BDS-PZ-132";
     }
 }
