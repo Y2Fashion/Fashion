@@ -1,5 +1,6 @@
 package com.accp.control;
 
+import com.accp.biz.FigureBiz;
 import com.accp.biz.NewsBiz;
 import com.accp.entity.News;
 import com.accp.util.Pager;
@@ -11,6 +12,10 @@ import javax.annotation.Resource;
 
 @Controller
 public class otherController {
+
+    @Resource
+    private FigureBiz figureBiz;
+
     @Resource
     private NewsBiz biz;
    //大事记网页

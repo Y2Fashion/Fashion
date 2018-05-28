@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            服装管理-修改服装信息
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
+        <link rel="stylesheet" href="../css/backstage/commodity_add.css">
+
+    </head>
+    <body>
+        <div class="x-body">
+            <form action="" method="post">
+                <!--隐藏服装Id编号-->
+                <input type="hidden" value="${id}" name="id"/>
+                <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="p_td">服装名称:</td>
+                        <td class="q_td">
+                            <input type="text" name='uname' class="u_t" value="衣服名称(长度为5-12位)"/>
+                        </td>
+                        <td style="background: url('../image/backstage/shuji4.jpg');background-size:100% 100%;"
+                            colspan="2" rowspan="4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p_td">服装状态:</td>
+                        <td class="q_td">
+                            <select class="u_t">
+                                <option value="新品" >新品</option>
+                                <option value="奢品">奢品</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p_td">服装类型:</td>
+                        <td class="q_td">
+                            <select class="u_t">
+                                <option value="1" >男士西装</option>
+                                <option value="2">女士西装</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p_td"  style="line-height:2.9em">修改图片:</td>
+                        <td class="q_td r_td" >
+                            <input type="file" name="file"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p_td">原价格:</td>
+                        <td class="q_td">
+                            <input type="text" name='uname' class="u_t" value="9527"/>
+                        </td>
+                        <td class="p_td">会员价:</td>
+                        <td class="q_td">
+                            <input type="text" class="u_t" value="4325.00" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input class="u_t" style="width: 100%" type="submit" value="修改"/>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+        <script src="../lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="../js/backstage/x-layui.js" charset="utf-8">
+        </script>
+    </body>
+
+</html>

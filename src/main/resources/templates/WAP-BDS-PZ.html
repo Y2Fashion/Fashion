@@ -63,6 +63,9 @@
 		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://www.ybren.com/Public/js/jquery.1.7.2.min.js"></script>
 		<script>
 			$(function(){
+
+
+
 				$('.fli span').click(function(){
 					if(!$(this).parent().hasClass('li_act')){
 						$('.fli').removeClass('li_act');
@@ -73,6 +76,24 @@
 						$(this).parent().find('.sul').hide();
 						$(this).parent().removeClass('li_act');
 					}
+                })
+
+                $("#pull").hover(function () {
+                    $.ajax({
+                        url:"/pull",
+                        dataType:"json",
+                        success:function (data) {
+                            $("#pull ul").children().filter("li").remove();
+                            for(var i=data.length-1;i>=0;i--){
+                                var pull='<li>'+
+                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '</li>';
+                                $.each($("#pull ul"),function(i,t){
+                                    $(t).html(pull+$(t).html());
+                                })
+                            }
+                        }
+                    })
                 })
 
 			});
@@ -87,24 +108,24 @@
 					 dataType:"json",
                     success: function(data) {
                         $(".list").children().filter("li").remove();
-                        for(var i=0,l=data.length;i<l;i++){
-                                var htm='<li>'+
-                                    		'<a href="/selectCommodity?id='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
-											'<img th:src="/static/image/'+data[i].photoPath+'" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt="" >'+
-                                			'<div class="desc">'+
-											'<p class="p_title">'+
-                                			'<span class="name">'+data[i].commodityName+'</span>'+
-                                			'<span class="coup">'+data[i].state+'</span>'+
-                                			'</p>'+
-                                			'<p class="p_desc" th:text="${commodity.liNingId}">100%羊毛</p>'+
-                                			'<p class="p_num" ><font color="#222222">￥：'+data[i].vipPrice+'</font></p>'+
-								 			'</div>'+
-                            	 			'</a>'+
-										'</li>';
-								$.each($(".list"),function(i,t){
-									$(t).html(htm+$(t).html())
-								})
-                            }
+                        for(var i=0;i<data.length;i++){
+                            var htm='<li>'+
+                                '<a href="/selectCommodity?typeId='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
+                                '<img src="/static/image/'+data[i].photoPath+'" alt="暂无样品" >'+
+                                '<div class="desc">'+
+                                '<p class="p_title">'+
+                                '<span class="name">'+data[i].commodityName+'</span>'+
+                                '<span class="coup">'+data[i].state+'</span>'+
+                                '</p>'+
+                                '<p class="p_desc"">'+data[i].lining.ingredient+'</p>'+
+                                '<p class="p_num" ><font color="#222222">￥'+data[i].vipPrice+'</font></p>'+
+                                '</div>'+
+                                '</a>'+
+                                '</li>';
+                            $.each($(".list"),function(i,t){
+                                $(t).html(htm+$(t).html())
+                            })
+                        }
                     }
                 });
             }
@@ -146,9 +167,10 @@ var _hmt = _hmt || [];
 		</div>
 		<div class="nav">
 			<ul class="son">
-				<li><a href="index.html" tppabs="https://www.ybren.com/?from=WAP-BDS-PZ">首页</a></li>
-				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
-
+				<li><a href="index.html">首页</a></li>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+					<ul>
+					</ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
 					<ul>
@@ -167,7 +189,7 @@ var _hmt = _hmt || [];
 						<li><a href="/company" tppabs="https://www.ybren.com/index.php/Home/Index/company/from/WAP-BDS-PZ">关于衣邦人</a></li>
 						<!-- <li><a href="/index.php/Home/Index/ggxx/from/WAP-BDS-PZ">高管信息</a></li> -->
 						<!-- <li><a href="/index.php/Home/Index/bigEvent/from/WAP-BDS-PZ">大事记</a></li> -->
-						<li><a href="media.html" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
+						<li><a href="/media" tppabs="https://www.ybren.com/index.php/Home/Index/media/from/WAP-BDS-PZ">新闻动态</a></li>
 						<li><a href="/business" tppabs="https://www.ybren.com/index.php/Home/Index/business/from/WAP-BDS-PZ">商务合作</a></li>
 						<li><a href="/contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact/from/WAP-BDS-PZ">联系我们</a></li>
 					</ul>
@@ -185,6 +207,33 @@ var _hmt = _hmt || [];
                         window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
                     }
 			$(function() {
+                $('.fli').removeClass("li_act");
+                $(".fli").find('.sul').hide();
+                $(".sul li a").css({color: "black"});
+                var id = 1;
+                var CName = $("#CName").val();
+                var typeId = $("#typeId").val();
+                if(typeId<=23){
+                    for(var i=0;i<28;i++){
+                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
+                            var ths=$("a[name='cla']:hidden").eq(i);
+                            $(ths).parent().parent().show();
+                            $(ths).parent().parent().parent().addClass("li_act");
+                            $(ths).css({color: "red"});
+                        }
+					}
+				}else{
+                    for(var i=28;i<45;i++){
+                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
+                            var ths=$("a[name='cla']:hidden").eq(i);
+                            $(ths).parent().parent().show();
+                            $(ths).parent().parent().parent().addClass("li_act");
+                            $(ths).css({color: "red"});
+                        }
+                    }
+				}
+
+
 				$('.r3').hover(function(){
 					$('.wx_code').show();
 				},function(){
@@ -233,49 +282,39 @@ var _hmt = _hmt || [];
 <!--头部-->
 			
 		<div class="content">
-			<!-- <div class="left">
-				<ul>
-					<li style="background: #8E0202;height: 40px;font-size: 16px;color: #FFFFFF;line-height: 40px;text-align: center;">男士系列</li>
-                                        
-                                            
-
-					<li style="background: #8E0202;height: 40px;font-size: 16px;color: #FFFFFF;line-height: 40px;text-align: center;">女士系列</li>
-                                        
-                                            
-
-				</ul>
-			</div> -->
-			
 			<div class="left">
 				<ul class="ful">
 					<li class="li_title">男士系列</li>
 					<li class="li_act fli">
+						<input id="CName" type="hidden" th:value="${CName}">
+						<input id="typeId" type="hidden" th:value="${typeId}">
 							<span>西装</span>
 							<ul class="sul">
 								<li class="cur">
-									<a onclick="selectCommodityList(1,this)" tppabs="https://www.ybren.com/home/category_son/149/from/WAP-BDS-PZ">单西</a>
+									<a name="cla" onclick="selectCommodityList(1,this)" tppabs="https://www.ybren.com/home/category_son/149/from/WAP-BDS-PZ">单西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(2,this)" tppabs="https://www.ybren.com/home/category_son/139/from/WAP-BDS-PZ">礼服</a>
+									<a name="cla" onclick="selectCommodityList(2,this)" tppabs="https://www.ybren.com/home/category_son/139/from/WAP-BDS-PZ">礼服</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(3,this)" tppabs="https://www.ybren.com/home/category_son/150/from/WAP-BDS-PZ">套西</a>
+									<a name="cla" onclick="selectCommodityList(3,this)" tppabs="https://www.ybren.com/home/category_son/150/from/WAP-BDS-PZ">套西</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(4,this)" tppabs="https://www.ybren.com/home/category_son/151/from/WAP-BDS-PZ">西装马甲</a>
+									<a name="cla" onclick="selectCommodityList(4,this)" tppabs="https://www.ybren.com/home/category_son/151/from/WAP-BDS-PZ">西装马甲</a>
 								</li>
 								<li >
-									<a onclick="selectCommodityList(5,this)" tppabs="https://www.ybren.com/home/category_son/186/from/WAP-BDS-PZ">商旅系列</a>
+									<a name="cla" onclick="selectCommodityList(5,this)" tppabs="https://www.ybren.com/home/category_son/186/from/WAP-BDS-PZ">商旅系列</a>
 								</li>
 							</ul>
-						</li><li class=" fli">
+						</li>
+					<li class=" fli">
 							<span>T恤</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(6,this)" tppabs="https://www.ybren.com/home/category_son/188/from/WAP-BDS-PZ">T恤</a>
+									<a name="cla" onclick="selectCommodityList(6,this)" tppabs="https://www.ybren.com/home/category_son/188/from/WAP-BDS-PZ">T恤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(7,this)" tppabs="https://www.ybren.com/home/category_son/164/from/WAP-BDS-PZ">羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(7,this)" tppabs="https://www.ybren.com/home/category_son/164/from/WAP-BDS-PZ">羊绒衫</a>
 								</li>
 							</ul>
 						</li>
@@ -283,32 +322,32 @@ var _hmt = _hmt || [];
 							<span>衬衫</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(8,this)" tppabs="https://www.ybren.com/home/category_son/157/from/WAP-BDS-PZ">长袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(8,this)" tppabs="https://www.ybren.com/home/category_son/157/from/WAP-BDS-PZ">长袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(9,this)" tppabs="https://www.ybren.com/home/category_son/158/from/WAP-BDS-PZ">短袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(9,this)" tppabs="https://www.ybren.com/home/category_son/158/from/WAP-BDS-PZ">短袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(10,this)" tppabs="https://www.ybren.com/home/category_son/194/from/WAP-BDS-PZ">DP衬衫</a>
+									<a name="cla" onclick="selectCommodityList(10,this)" tppabs="https://www.ybren.com/home/category_son/194/from/WAP-BDS-PZ">DP衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(11,this)" tppabs="https://www.ybren.com/home/category_son/187/from/WAP-BDS-PZ">印花衬衫</a>
+									<a name="cla" onclick="selectCommodityList(11,this)" tppabs="https://www.ybren.com/home/category_son/187/from/WAP-BDS-PZ">印花衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(12,this)" tppabs="https://www.ybren.com/home/category_son/159/from/WAP-BDS-PZ">磨毛衬衫</a>
+									<a name="cla" onclick="selectCommodityList(12,this)" tppabs="https://www.ybren.com/home/category_son/159/from/WAP-BDS-PZ">磨毛衬衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>裤装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(13,this)" tppabs="https://www.ybren.com/home/category_son/160/from/WAP-BDS-PZ">休闲裤</a>
+									<a name="cla" onclick="selectCommodityList(13,this)" tppabs="https://www.ybren.com/home/category_son/160/from/WAP-BDS-PZ">休闲裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(14,this)" tppabs="https://www.ybren.com/home/category_son/161/from/WAP-BDS-PZ">西裤</a>
+									<a name="cla" onclick="selectCommodityList(14,this)" tppabs="https://www.ybren.com/home/category_son/161/from/WAP-BDS-PZ">西裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(15,this)" tppabs="https://www.ybren.com/home/category_son/162/from/WAP-BDS-PZ">牛仔裤</a>
+									<a name="cla" onclick="selectCommodityList(15,this)" tppabs="https://www.ybren.com/home/category_son/162/from/WAP-BDS-PZ">牛仔裤</a>
 								</li>
 							</ul>
 						</li>
@@ -316,16 +355,16 @@ var _hmt = _hmt || [];
 							<span>新中式</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(16,this)" tppabs="https://www.ybren.com/home/category_son/216/from/WAP-BDS-PZ">立领衬衫</a>
+									<a name="cla" onclick="selectCommodityList(16,this)" tppabs="https://www.ybren.com/home/category_son/216/from/WAP-BDS-PZ">立领衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(17,this)" tppabs="https://www.ybren.com/home/category_son/213/from/WAP-BDS-PZ">中山装</a>
+									<a name="cla" onclick="selectCommodityList(17,this)" tppabs="https://www.ybren.com/home/category_son/213/from/WAP-BDS-PZ">中山装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(18,this)" tppabs="https://www.ybren.com/home/category_son/214/from/WAP-BDS-PZ">中式便装</a>
+									<a name="cla" onclick="selectCommodityList(18,this)" tppabs="https://www.ybren.com/home/category_son/214/from/WAP-BDS-PZ">中式便装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(19,this)" tppabs="https://www.ybren.com/home/category_son/215/from/WAP-BDS-PZ">中式礼服</a>
+									<a name="cla" onclick="selectCommodityList(19,this)" tppabs="https://www.ybren.com/home/category_son/215/from/WAP-BDS-PZ">中式礼服</a>
 								</li>
 							</ul>
 						</li>
@@ -333,16 +372,16 @@ var _hmt = _hmt || [];
 							<span>外套</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(20,this)" tppabs="https://www.ybren.com/home/category_son/152/from/WAP-BDS-PZ">大衣</a>
+									<a name="cla" onclick="selectCommodityList(20,this)" tppabs="https://www.ybren.com/home/category_son/152/from/WAP-BDS-PZ">大衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(21,this)" tppabs="https://www.ybren.com/home/category_son/202/from/WAP-BDS-PZ">风衣</a>
+									<a name="cla" onclick="selectCommodityList(21,this)" tppabs="https://www.ybren.com/home/category_son/202/from/WAP-BDS-PZ">风衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(22,this)" tppabs="https://www.ybren.com/home/category_son/153/from/WAP-BDS-PZ">夹克</a>
+									<a name="cla" onclick="selectCommodityList(22,this)" tppabs="https://www.ybren.com/home/category_son/153/from/WAP-BDS-PZ">夹克</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(23,this)" tppabs="https://www.ybren.com/home/category_son/155/from/WAP-BDS-PZ">皮衣</a>
+									<a name="cla" onclick="selectCommodityList(23,this)" tppabs="https://www.ybren.com/home/category_son/155/from/WAP-BDS-PZ">皮衣</a>
 								</li>
 							</ul>
 						</li>
@@ -350,16 +389,16 @@ var _hmt = _hmt || [];
 							<span>童装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(24,this)" href="#" tppabs="https://www.ybren.com/home/category_son/206/from/WAP-BDS-PZ">儿童羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(24,this)" href="#" tppabs="https://www.ybren.com/home/category_son/206/from/WAP-BDS-PZ">儿童羊绒衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(25,this)" href="#" tppabs="https://www.ybren.com/home/category_son/196/from/WAP-BDS-PZ">儿童正装</a>
+									<a name="cla" onclick="selectCommodityList(25,this)" href="#" tppabs="https://www.ybren.com/home/category_son/196/from/WAP-BDS-PZ">儿童正装</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(26,this)" href="#" tppabs="https://www.ybren.com/home/category_son/197/from/WAP-BDS-PZ">儿童衬衫</a>
+									<a name="cla" onclick="selectCommodityList(26,this)" href="#" tppabs="https://www.ybren.com/home/category_son/197/from/WAP-BDS-PZ">儿童衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(27,this)" href="#" tppabs="https://www.ybren.com/home/category_son/208/from/WAP-BDS-PZ">儿童大衣</a>
+									<a name="cla" onclick="selectCommodityList(27,this)" href="#" tppabs="https://www.ybren.com/home/category_son/208/from/WAP-BDS-PZ">儿童大衣</a>
 								</li>
 							</ul>
 						</li>    
@@ -369,75 +408,75 @@ var _hmt = _hmt || [];
 							<span>西装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(28,this)" href="#" tppabs="https://www.ybren.com/home/category_son/165/from/WAP-BDS-PZ">单西</a>
+									<a name="cla" onclick="selectCommodityList(28,this)" href="#" tppabs="https://www.ybren.com/home/category_son/165/from/WAP-BDS-PZ">单西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(29,this)" href="#" tppabs="https://www.ybren.com/home/category_son/166/from/WAP-BDS-PZ">西裙</a>
+									<a name="cla" onclick="selectCommodityList(29,this)" href="#" tppabs="https://www.ybren.com/home/category_son/166/from/WAP-BDS-PZ">西裙</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(30,this)" href="#" tppabs="https://www.ybren.com/home/category_son/167/from/WAP-BDS-PZ">套西</a>
+									<a name="cla" onclick="selectCommodityList(30,this)" href="#" tppabs="https://www.ybren.com/home/category_son/167/from/WAP-BDS-PZ">套西</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(31,this)" href="#" tppabs="https://www.ybren.com/home/category_son/207/from/WAP-BDS-PZ">马甲</a>
+									<a name="cla" onclick="selectCommodityList(31,this)" href="#" tppabs="https://www.ybren.com/home/category_son/207/from/WAP-BDS-PZ">马甲</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>真丝</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(32,this)" href="#" tppabs="https://www.ybren.com/home/category_son/193/from/WAP-BDS-PZ">真丝连衣裙</a>
+									<a name="cla" onclick="selectCommodityList(32,this)" href="#" tppabs="https://www.ybren.com/home/category_son/193/from/WAP-BDS-PZ">真丝连衣裙</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(33,this)" href="#" tppabs="https://www.ybren.com/home/category_son/199/from/WAP-BDS-PZ">真丝上衣</a>
+									<a name="cla" onclick="selectCommodityList(33,this)" href="#" tppabs="https://www.ybren.com/home/category_son/199/from/WAP-BDS-PZ">真丝上衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(34,this)" href="#" tppabs="https://www.ybren.com/home/category_son/200/from/WAP-BDS-PZ">真丝外套</a>
+									<a name="cla" onclick="selectCommodityList(34,this)" href="#" tppabs="https://www.ybren.com/home/category_son/200/from/WAP-BDS-PZ">真丝外套</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(35,this)" href="#" tppabs="https://www.ybren.com/home/category_son/201/from/WAP-BDS-PZ">真丝女裤</a>
+									<a name="cla" onclick="selectCommodityList(35,this)" href="#" tppabs="https://www.ybren.com/home/category_son/201/from/WAP-BDS-PZ">真丝女裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(36,this)" href="#" tppabs="https://www.ybren.com/home/category_son/211/from/WAP-BDS-PZ">真丝套装</a>
+									<a name="cla" onclick="selectCommodityList(36,this)" href="#" tppabs="https://www.ybren.com/home/category_son/211/from/WAP-BDS-PZ">真丝套装</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>衬衫</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(37,this)" href="#" tppabs="https://www.ybren.com/home/category_son/169/from/WAP-BDS-PZ">长袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(37,this)" href="#" tppabs="https://www.ybren.com/home/category_son/169/from/WAP-BDS-PZ">长袖衬衫</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(38,this)" href="#" tppabs="https://www.ybren.com/home/category_son/170/from/WAP-BDS-PZ">短袖衬衫</a>
+									<a name="cla" onclick="selectCommodityList(38,this)" href="#" tppabs="https://www.ybren.com/home/category_son/170/from/WAP-BDS-PZ">短袖衬衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>裤装</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(39,this)" href="#" tppabs="https://www.ybren.com/home/category_son/171/from/WAP-BDS-PZ">西裤</a>
+									<a name="cla" onclick="selectCommodityList(39,this)" href="#" tppabs="https://www.ybren.com/home/category_son/171/from/WAP-BDS-PZ">西裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(40,this)" href="#" tppabs="https://www.ybren.com/home/category_son/172/from/WAP-BDS-PZ">牛仔裤</a>
+									<a name="cla" onclick="selectCommodityList(40,this)" href="#" tppabs="https://www.ybren.com/home/category_son/172/from/WAP-BDS-PZ">牛仔裤</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(41,this)" href="#" tppabs="https://www.ybren.com/home/category_son/210/from/WAP-BDS-PZ">连衣裙</a>
+									<a name="cla" onclick="selectCommodityList(41,this)" href="#" tppabs="https://www.ybren.com/home/category_son/210/from/WAP-BDS-PZ">连衣裙</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>针织</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(42,this)" href="#" tppabs="https://www.ybren.com/home/category_son/205/from/WAP-BDS-PZ">羊绒衫</a>
+									<a name="cla" onclick="selectCommodityList(42,this)" href="#" tppabs="https://www.ybren.com/home/category_son/205/from/WAP-BDS-PZ">羊绒衫</a>
 								</li>
 							</ul>
 						</li><li class=" fli">
 							<span>外套</span>
 							<ul class="sul">
 								<li>
-									<a onclick="selectCommodityList(43,this)" href="#" tppabs="https://www.ybren.com/home/category_son/168/from/WAP-BDS-PZ">大衣</a>
+									<a name="cla" onclick="selectCommodityList(43,this)" href="#" tppabs="https://www.ybren.com/home/category_son/168/from/WAP-BDS-PZ">大衣</a>
 								</li>
 								<li>
-									<a onclick="selectCommodityList(44,this)" href="#" tppabs="https://www.ybren.com/home/category_son/209/from/WAP-BDS-PZ">风衣</a>
+									<a name="cla" onclick="selectCommodityList(44,this)" href="#" tppabs="https://www.ybren.com/home/category_son/209/from/WAP-BDS-PZ">风衣</a>
 								</li>
 							</ul>
 						</li>
@@ -471,949 +510,11 @@ var _hmt = _hmt || [];
 								<span class="name" th:text="${commodity.commodityName}"></span>
 								<span class="coup"th:text="${commodity.state}"></span>
 							</p>
-							<p class="p_desc" th:text="${commodity.liNingId}">100%羊毛</p>
-							<p class="p_num"><font color="#222222" th:text="${'￥：'+commodity.originalPrice}">￥4653.00</font></p>
+							<p class="p_desc" th:text="${commodity.lining.ingredient}">100%羊毛</p>
+							<p class="p_num"><font color="#222222" th:text="${'￥:'+commodity.originalPrice}"></font></p>
 						</div>
 					</a>
 				</li>
-                             <!--<li>
-                                    <a target="_blank" href="WAP-BDS-PZ-132.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0b71b196a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">儒雅灰色方格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-133.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1301/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0bb3cbd25.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0bb3cbd25.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色方格全羊毛经典商务西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口Stylbiella品牌 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="javascript:if(confirm('https://www.ybren.com/home/itemdetail/YS1303/from/WAP-BDS-PZ  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/itemdetail/YS1303/from/WAP-BDS-PZ'" tppabs="https://www.ybren.com/home/itemdetail/YS1303/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0bf494b92.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0bf494b92.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">米白色全羊毛双排扣商务西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="javascript:if(confirm('https://www.ybren.com/home/itemdetail/YS1304/from/WAP-BDS-PZ  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/itemdetail/YS1304/from/WAP-BDS-PZ'" tppabs="https://www.ybren.com/home/itemdetail/YS1304/from/WAP-BDS-PZ">
-										<img src="5a9e0c3e726e5.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0c3e726e5.jpg" alt="" >										
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色人字纹全羊毛商务西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口Stylbiella品牌 100%羊毛 </p>
-                                    		<p class="p_num"><font color="#222222">￥4266.00</font>&lt;!&ndash;<s>吊牌价：8532.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-136.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1305/from/WAP-BDS-PZ">
-										<img src="5a9e0c7d64acc.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0c7d64acc.jpg" alt="" >										
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青色方格全羊毛时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口Stylbiella品牌 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4186.00</font>&lt;!&ndash;<s>吊牌价：8372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-137.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1306/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0cbe8b4cf.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0cbe8b4cf.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青色方格全羊毛商务西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口Stylbiella品牌 100%羊毛 </p>
-                                    		<p class="p_num"><font color="#222222">￥4266.00</font>&lt;!&ndash;<s>吊牌价：8532.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-138.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1307/from/WAP-BDS-PZ">
-										<img src="/static/image/5aceaf310fb07.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-04-12/5aceaf310fb07.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝灰格纹色丝毛麻时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 38%羊毛31%麻31%桑蚕丝</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-139.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1308/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0d38db165.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0d38db165.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色人字纹丝毛麻经典商务西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 38%羊毛31%桑蚕丝31%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4703.00</font>&lt;!&ndash;<s>吊牌价：9406.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-140.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1312/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0ea9c4a03.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ea9c4a03.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色方格丝毛麻时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 38%羊毛31%桑蚕丝31%亚麻 </p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-141.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1315/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9dfba4e1115.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9dfba4e1115.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口Stylbiella品牌 50%羊毛30%桑蚕丝20%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-142.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1314/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0ee6ac59c.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ee6ac59c.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色格纹丝毛麻时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 38%羊毛31%桑蚕丝31%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-143.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1310/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0ddec6265.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ddec6265.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青色方格亚麻休闲时尚西装</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 100%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4503.00</font>&lt;!&ndash;<s>吊牌价：9006.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-144.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1311/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0e1ed1ad1.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0e1ed1ad1.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色毛麻时尚休闲西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella品牌 40%羊毛60%麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-145.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1280/from/WAP-BDS-PZ">
-										<img src="/static/image/5a700f9d34018.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-30/5a700f9d34018.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">绿色毛麻时尚精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 40%羊毛60%麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-146.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1263/from/WAP-BDS-PZ">
-										<img src="/static/image/5a781b502cc0c.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-02-05/5a781b502cc0c.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色全羊毛时尚经典精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 100%羊毛 280g</p>
-                                    		<p class="p_num"><font color="#222222">￥3986.00</font>&lt;!&ndash;<s>吊牌价：7972.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-147.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1430/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa8984114860.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-14/5aa8984114860.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色西服款时尚休闲便西</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 92%锦纶8%氨纶</p>
-                                    		<p class="p_num"><font color="#222222">￥3180.00</font>&lt;!&ndash;<s>吊牌价：6360.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-148.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1453/from/WAP-BDS-PZ">
-										<img src="/static/image/5ab367d5bab26.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-22/5ab367d5bab26.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">紫色肌理纹平驳头时尚单西</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口ZIGNONE品牌47%羊毛 39%棉 14%锦纶</p>
-                                    		<p class="p_num"><font color="#222222">￥3320.00</font>&lt;!&ndash;<s>吊牌价：6640.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-149.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1454/from/WAP-BDS-PZ">
-										<img src="/static/image/5ab3677e280b4.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-22/5ab3677e280b4.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色肌理纹平驳头时尚单西</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口ZIGNONE品牌21%羊毛48%麻31%棉 </p>
-                                    		<p class="p_num"><font color="#222222">￥3186.00</font>&lt;!&ndash;<s>吊牌价：6372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-150.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1452/from/WAP-BDS-PZ">
-										<img src="/static/image/5ab082149ea69.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-20/5ab082149ea69.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝白格纹平驳头时尚单西</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口ZIGNONE品牌   49%羊毛 50%棉 1%莱卡</p>
-                                    		<p class="p_num"><font color="#222222">￥3186.00</font>&lt;!&ndash;<s>吊牌价：6372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-151.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1277/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655a0b58471.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655a0b58471.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">红色格纹全麻精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口 Stylbiella 100%麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4186.00</font>&lt;!&ndash;<s>吊牌价：8372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-152.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1275/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655b9d50860.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655b9d50860.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">棕色格纹毛麻精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 40%羊毛60%麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-153.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1274/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655c8aeb0cd.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655c8aeb0cd.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色格纹毛麻精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 58%羊毛42%麻</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-154.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1273/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655d686f59c.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655d686f59c.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色时尚大格丝毛麻精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口 Stylbiella 38%羊毛31%麻31%桑蚕丝</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-155.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1272/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655dc27b76e.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655dc27b76e.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色大格纹丝毛麻精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 75%羊毛10%麻15%桑蚕丝 </p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-156.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1271/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655e0115431.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655e0115431.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">黑色丝毛麻格纹精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 38%羊毛31%麻31%桑蚕丝</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-157.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1269/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655e3f8b3b6.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655e3f8b3b6.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青明暗格纹全羊毛精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-158.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1267/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655e8ace734.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655e8ace734.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">紫色格纹全羊毛精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口 Stylbiella 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-159.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1268/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655ec7ce699.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655ec7ce699.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">绿色格纹全羊毛精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口 Stylbiella 100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4386.00</font>&lt;!&ndash;<s>吊牌价：8772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-160.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1266/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655f098c358.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655f098c358.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色全羊毛时尚精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口 Stylbiella 100%羊毛 </p>
-                                    		<p class="p_num"><font color="#222222">￥4186.00</font>&lt;!&ndash;<s>吊牌价：8372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-161.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1265/from/WAP-BDS-PZ">
-										<img src="/static/image/5a655f46cec73.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655f46cec73.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青全羊毛千鸟格图案精品西服</span>
-				                        		<span class="coup">新品</span>                         	
-				                        	</p>
-				                        	<p class="p_desc"> 意大利进口 Stylbiella 100%羊毛 </p>
-                                    		<p class="p_num"><font color="#222222">￥4186.00</font>&lt;!&ndash;<s>吊牌价：8372.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-162.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0545/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0948db070b.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0948db070b.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色雅致大格纹男士商务单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  120S</p>
-                                    		<p class="p_num"><font color="#222222">￥3386.00</font>&lt;!&ndash;<s>吊牌价：6772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-163.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0548/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa094c976a67.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa094c976a67.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色小纹理男士户外休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  120S</p>
-                                    		<p class="p_num"><font color="#222222">￥3386.00</font>&lt;!&ndash;<s>吊牌价：6772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-164.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0556/from/WAP-BDS-PZ">
-										<img src="/static/image/5a409980dcc3e.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a409980dcc3e.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色简约大气格纹商务单西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥2453.00</font>&lt;!&ndash;<s>吊牌价：4906.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-165.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0562/from/WAP-BDS-PZ">
-										<img src="/static/image/5a40ab3cc50be.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40ab3cc50be.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色小格纹理男士商务时尚单西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">85%羊毛15%马海毛</p>
-                                    		<p class="p_num"><font color="#222222">￥2493.00</font>&lt;!&ndash;<s>吊牌价：4986.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-166.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0564/from/WAP-BDS-PZ">
-										<img src="/static/image/5a40b6ede1d39.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40b6ede1d39.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色儒雅格纹男士商务经典单西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">42%羊毛53%苎麻5%桑蚕丝</p>
-                                    		<p class="p_num"><font color="#222222">￥2453.00</font>&lt;!&ndash;<s>吊牌价：4906.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-167.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0596/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0950fe6e53.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0950fe6e53.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色大方格男士商务单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  85%羊毛10%桑蚕丝%5%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-168.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0598/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0954a86dec.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0954a86dec.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺男士户外休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  75%羊毛15%桑蚕丝10%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-169.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0599/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09590a1d25.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09590a1d25.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺男士休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  85%羊毛10%桑蚕丝%5%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-170.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0600/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0966fce40d.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0966fce40d.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺男士时尚休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  50%羊毛30%桑蚕丝20%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-171.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0601/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa096bf97384.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa096bf97384.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">绿色轻薄舒适男士方格户外单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  35%羊毛35%棉20%桑蚕丝10%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-172.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0602/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa096f78a28e.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa096f78a28e.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">粉色丝毛麻混纺男士户外休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  50%羊毛30%桑蚕丝20%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-173.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0603/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0989b82a54.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0989b82a54.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺男士户外休闲感单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  50%羊毛30%桑蚕丝20%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-174.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0604/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa098d6c494e.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa098d6c494e.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺轻薄感男士户外单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  65%羊毛20%桑蚕丝15%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-175.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0452/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0945202bf8.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0945202bf8.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色格纹男士商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  100S</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-176.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0447/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09406a9226.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09406a9226.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">红色尊贵男士全羊毛商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  100S</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-177.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0443/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09382f406d.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09382f406d.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色精致千鸟格纹理男士商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  100S</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-178.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0442/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0932a3e6af.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0932a3e6af.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色科技感格纹男士商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  100S</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-179.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0375/from/WAP-BDS-PZ">
-										<img src="/static/image/5a3b4fb605ed7.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-21/5a3b4fb605ed7.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色领拼色男士商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Cerruti 1881面料  95%羊毛5%羊绒</p>
-                                    		<p class="p_num"><font color="#222222">￥5586.00</font>&lt;!&ndash;<s>吊牌价：11172.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-180.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0374/from/WAP-BDS-PZ">
-										<img src="/static/image/5a3b58fb34c76.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-21/5a3b58fb34c76.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">紫色尊贵格纹男士商务单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Cerruti 1881面料  83%羊毛14%棉纶3%涤纶</p>
-                                    		<p class="p_num"><font color="#222222">￥6253.00</font>&lt;!&ndash;<s>吊牌价：12506.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-181.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0250/from/WAP-BDS-PZ">
-										<img src="/static/image/5a4c4fee142cd.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-03/5a4c4fee142cd.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色暗格格纹男士时尚单西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">92%麻8%真丝</p>
-                                    		<p class="p_num"><font color="#222222">￥3053.00</font>&lt;!&ndash;<s>吊牌价：6106.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-182.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0440/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0929a250ba.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0929a250ba.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色儒雅格纹男士商务厚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  100S</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-183.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0665/from/WAP-BDS-PZ">
-										<img src="/static/image/5a40c11dc5cdf.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40c11dc5cdf.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色轻薄透气男士修身休闲便西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">56%羊毛44%亚麻 </p>
-                                    		<p class="p_num"><font color="#222222">￥2680.00</font>&lt;!&ndash;<s>吊牌价：5360.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-184.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0666/from/WAP-BDS-PZ">
-										<img src="/static/image/5a40c90b497cb.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40c90b497cb.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">暗红色轻薄舒适男士休闲便西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">56%羊毛44%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥2680.00</font>&lt;!&ndash;<s>吊牌价：5360.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-185.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0667/from/WAP-BDS-PZ">
-										<img src="/static/image/5a40d15ee70e4.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40d15ee70e4.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色蛹蛋白纤维男士都市休闲便西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">32%羊毛21%涤纶23.5%莫代尔23.5%蛹蛋白纤维</p>
-                                    		<p class="p_num"><font color="#222222">￥2980.00</font>&lt;!&ndash;<s>吊牌价：5960.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-186.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0605/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09ac97813b.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09ac97813b.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色全羊毛男士休闲贴袋款单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  </p>
-                                    		<p class="p_num"><font color="#222222">￥3120.00</font>&lt;!&ndash;<s>吊牌价：6240.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-187.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0608/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09b085c79d.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09b085c79d.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色丝毛麻混纺格纹男士户外休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  85%羊毛10%桑蚕丝5%亚麻</p>
-                                    		<p class="p_num"><font color="#222222">￥3786.00</font>&lt;!&ndash;<s>吊牌价：7572.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-188.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0610/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa09b5139602.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa09b5139602.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">红色经典大气格纹商务单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  120S</p>
-                                    		<p class="p_num"><font color="#222222">￥3386.00</font>&lt;!&ndash;<s>吊牌价：6772.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-189.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1006/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9d3553194d2.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9d3553194d2.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">个性绿流行色全羊毛时尚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料 110S 270g</p>
-                                    		<p class="p_num"><font color="#222222">￥3986.00</font>&lt;!&ndash;<s>吊牌价：7972.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-190.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1007/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9d35f7ddb18.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9d35f7ddb18.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">亮黄流行色个性弧形驳头眼时尚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料 110S 270g</p>
-                                    		<p class="p_num"><font color="#222222">￥3320.00</font>&lt;!&ndash;<s>吊牌价：6640.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-191.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1035/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e03bd76d7f.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e03bd76d7f.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色全羊毛修身经典法兰绒时尚单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料</p>
-                                    		<p class="p_num"><font color="#222222">￥4066.00</font>&lt;!&ndash;<s>吊牌价：8132.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="javascript:if(confirm('https://www.ybren.com/home/itemdetail/YS1036/from/WAP-BDS-PZ  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/itemdetail/YS1036/from/WAP-BDS-PZ'" tppabs="https://www.ybren.com/home/itemdetail/YS1036/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9d3653468e1.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9d3653468e1.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色大格纹双排扣商务经典法兰绒单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-193.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1040/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9d41bd5adab.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9d41bd5adab.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青色红条纹商务时尚修身经典法兰绒单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料</p>
-                                    		<p class="p_num"><font color="#222222">￥4733.00</font>&lt;!&ndash;<s>吊牌价：9466.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-194.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1042/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e08a7832ef.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e08a7832ef.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">绿色商务时尚修身经典法兰绒单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  100%羊毛面料</p>
-                                    		<p class="p_num"><font color="#222222">￥3986.00</font>&lt;!&ndash;<s>吊牌价：7972.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-195.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1043/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e08ecb206f.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e08ecb206f.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">红色商务时尚修身经典法兰绒单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella 100%羊毛面料</p>
-                                    		<p class="p_num"><font color="#222222">￥4266.00</font>&lt;!&ndash;<s>吊牌价：8532.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-196.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1044/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e092e6c773.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e092e6c773.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色方格羊绒混纺商务时尚法兰绒单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Stylbiella  90%羊毛10%羊绒面料</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-197.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1048/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e096ce4839.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e096ce4839.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色方格全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-57.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1049/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e09a9190bf.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e09a9190bf.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色跳跃方格全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-198.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1050/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e09e353047.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e09e353047.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色耀眼大格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-199.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1051/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0a2642581.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0a2642581.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色隐秘感格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-200.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1054/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0af408f9a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0af408f9a.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色跳跃格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-201.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1052/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0a647ed8b.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0a647ed8b.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">深沉灰色格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4466.00</font>&lt;!&ndash;<s>吊牌价：8932.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-202.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1055/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0b371d604.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b371d604.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">藏青色粉格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-203.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1053/from/WAP-BDS-PZ">
-										<img src="/static/image/5a9e0ab147d0a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ab147d0a.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色红格纹全羊毛商务经典男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛</p>
-                                    		<p class="p_num"><font color="#222222">￥4653.00</font>&lt;!&ndash;<s>吊牌价：9306.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-204.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0352/from/WAP-BDS-PZ">
-										<img src="/static/image/5a4ca74fee7e3.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-03/5a4ca74fee7e3.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色条纹轻商务男士休闲便西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">53%羊毛22%涤纶22%氯化聚乙烯3%聚氨酯</p>
-                                    		<p class="p_num"><font color="#222222">￥2453.00</font>&lt;!&ndash;<s>吊牌价：4906.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-205.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0350/from/WAP-BDS-PZ">
-										<img src="/static/image/5aa0923540e51.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0923540e51.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">灰色儒雅高纱支男士商务单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口VBC面料  100%羊毛  150S</p>
-                                    		<p class="p_num"><font color="#222222">￥4920.00</font>&lt;!&ndash;<s>吊牌价：9840.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-206.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0348/from/WAP-BDS-PZ">
-										<img src="/static/image/5a4cbbd3ab5b0.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-03/5a4cbbd3ab5b0.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色青果领男士时尚休闲单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Cerruti 1881面料  48%羊毛37%马海毛15%真丝</p>
-                                    		<p class="p_num"><font color="#222222">￥6253.00</font>&lt;!&ndash;<s>吊牌价：12506.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-207.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0217/from/WAP-BDS-PZ">
-										<img src="/static/image/5a4c717324ace.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-03/5a4c717324ace.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">天蓝色清凉感男士休闲单西</span>
-				                        		                         	
-				                        	</p>
-				                        	<p class="p_desc">100%羊毛   SUPER120S</p>
-                                    		<p class="p_num"><font color="#222222">￥2320.00</font>&lt;!&ndash;<s>吊牌价：4640.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li><li>
-                                    <a target="_blank" href="WAP-BDS-PZ-208.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0200/from/WAP-BDS-PZ">
-										<img src="/static/image/5a4c9bc99e529.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-03/5a4c9bc99e529.jpg" alt="" >
-										<div class="desc">
-				                        	<p class="p_title">
-				                        		<span class="name">蓝色格子休闲感男士单西</span>
-				                        		<span class="coup">奢牌</span>                         	
-				                        	</p>
-				                        	<p class="p_desc">意大利进口Cerruti 1881面料  85%羊毛15%真丝</p>
-                                    		<p class="p_num"><font color="#222222">￥6266.00</font>&lt;!&ndash;<s>吊牌价：12532.00</s>&ndash;&gt;</p>
-				                        </div>
-									</a>
-								</li>-->
-
 			</ul>
 		</div>
                 <div class="foot">

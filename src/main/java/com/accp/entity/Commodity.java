@@ -1,6 +1,8 @@
 package com.accp.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 商品表
@@ -16,14 +18,41 @@ public class Commodity implements Serializable {
     private String photoPath;//商品图片路径
     private String state;//状态
     private Integer type;//类型
-    private Integer liNingId;//材质Id
+    private String lId;//材质Id
+    private Integer hits;//点击量
+    private Lining lining=new Lining();
+    private List<Picture> pictures=new ArrayList<Picture>();
 
-    public Integer getLiNingId() {
-        return liNingId;
+    public List<Picture> getPictures() {
+        return pictures;
     }
 
-    public void setLiNingId(Integer liNingId) {
-        this.liNingId = liNingId;
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    public Lining getLining() {
+        return lining;
+    }
+
+    public void setLining(Lining lining) {
+        this.lining = lining;
+    }
+
+    public Integer getHits() {
+        return hits;
+    }
+
+    public void setHits(Integer hits) {
+        this.hits = hits;
+    }
+
+    public String getlId() {
+        return lId;
+    }
+
+    public void setlId(String lId) {
+        this.lId = lId;
     }
 
     public Integer getId() {

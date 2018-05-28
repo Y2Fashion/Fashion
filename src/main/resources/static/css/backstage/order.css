@@ -1,0 +1,40 @@
+table,tr,td{
+    padding: 0;margin: 0;
+}
+/*order页面的样式*/
+.order_td_address{
+    width:150px;height:30px;display: block;
+    /*下面是设置文本超出部分用省略号代替*/
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.order_td_remarks{
+    width:250px;height:30px;display: block;
+    /*下面是设置文本超出部分用省略号代替*/
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/*order_get.html*/
+.table_get{
+    width: 80%;
+    margin: 0 10%;
+}
+.get_td{
+    width:80px;
+}
+.get_textarea{
+    resize:none;text-indent:2em;border: 0px transparent;
+    resize:none;overflow:hidden;
+    margin: 10px;
+}
+/*
+  <textarea  rows="1" cols="30" readonly
+                style="resize:none;overflow:hidden;border: 0px transparent;
+                opacity:1;">
+                </textarea>
+                */
+

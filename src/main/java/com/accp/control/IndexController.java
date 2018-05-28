@@ -4,11 +4,12 @@ import com.accp.biz.FirstTypeBiz;
 import com.accp.biz.SecondTypeBiz;
 import com.accp.entity.FirstType;
 import com.accp.entity.SecondType;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.accp.util.RedisUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -28,34 +29,36 @@ public class IndexController {
 	private  FirstTypeBiz firstBiz;
 
     @Resource
+	private RedisUtil redisUtil;
+
+    @Resource
     private SecondTypeBiz secondBiz;
 
-	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public ModelAndView index(Model model) {
-		List<FirstType> first=firstBiz.getList();//得到一级表的全部信息
-		List<SecondType> second=secondBiz.getList();//得到二级表的全部信息
-		List<SecondType> sss=new ArrayList<SecondType>();
-		for (SecondType li:second) {//index页面的产品
-			for (FirstType li2:first) {
-				if(li.getfId()==li2.getfId()){
-					String type=li2.getFirstType()+li.getSecondType();
-					li.setSecondType(type);
-					sss.add(li);
-					break;
+	@RequestMapping("/pull")
+	@ResponseBody
+	public List<SecondType> pull() {
+		List<FirstType> first=null;
+		List<SecondType> second=null;
+		List<SecondType> sss = new ArrayList<SecondType>();
+		if(redisUtil.exists("pull")){
+			sss=(List<SecondType>)redisUtil.lRange("pull",0,redisUtil.length("pull")).get(0);
+		}else {
+			first = firstBiz.getList();//得到一级表的全部信息
+			second = secondBiz.getList();//得到二级表的全部信息
+			sss = new ArrayList<SecondType>();
+			for (SecondType li : second) {//index页面的产品
+				for (FirstType li2 : first) {
+					if (li.getfId() == li2.getfId()) {
+						String type = li2.getFirstType() + li.getSecondType();
+						li.setSecondType(type);
+						sss.add(li);
+						break;
+					}
 				}
 			}
+			redisUtil.lPush("pull",sss);
 		}
-		model.addAttribute("secondType", sss);
-		//修改了
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
-	}
-	@RequestMapping(value = "/bigEvent",method = RequestMethod.GET)
-	public ModelAndView bigEvent(){
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("bigEvent");
-		return mav;
+		return sss;
 	}
 
 	@RequestMapping(value = "/make",method = RequestMethod.GET)

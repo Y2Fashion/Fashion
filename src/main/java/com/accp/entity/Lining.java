@@ -10,16 +10,25 @@ import java.io.Serializable;
 public class Lining implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Integer lId;//面料Id
+    private String lId;//面料Id
     private String ingredient;//面料成分
     private String color;//面料颜色
     private String type;//花型
+    private String imagePath;//图片地址
 
-    public Integer getlId() {
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getlId() {
         return lId;
     }
 
-    public void setlId(Integer lId) {
+    public void setlId(String lId) {
         this.lId = lId;
     }
 

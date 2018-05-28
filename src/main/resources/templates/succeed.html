@@ -36,6 +36,27 @@
 	</head>
 	<body>
 		<script>
+
+            $(function () {
+                $("#pull").hover(function () {
+                    $.ajax({
+                        url:"/pull",
+                        dataType:"json",
+                        success:function (data) {
+                            $("#pull ul").children().filter("li").remove();
+                            for(var i=0;i<data.length;i++){
+                                var pull='<li>'+
+                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                                    '</li>';
+                                $.each($("#pull ul"),function(i,t){
+                                    $(t).html(pull+$(t).html());
+                                })
+                            }
+                        }
+                    })
+                })
+            })
+
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -71,9 +92,8 @@ var _hmt = _hmt || [];
 		<div class="nav">
 			<ul class="son">
 				<li><a href="index.html" tppabs="https://www.ybren.com/">首页</a></li>
-				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
 					<ul>
-						<li ><a href="137.htm" tppabs="https://www.ybren.com/home/category/137">男士西装</a></li><li ><a href="143.htm" tppabs="https://www.ybren.com/home/category/143">男士T恤</a></li><li ><a href="140.htm" tppabs="https://www.ybren.com/home/category/140">男士衬衫</a></li><li ><a href="142.htm" tppabs="https://www.ybren.com/home/category/142">男士裤装</a></li><li ><a href="212.htm" tppabs="https://www.ybren.com/home/category/212">男士新中式</a></li><li ><a href="141.htm" tppabs="https://www.ybren.com/home/category/141">男士外套</a></li><li ><a href="195.htm" tppabs="https://www.ybren.com/home/category/195">男士童装</a></li><li ><a href="145.htm" tppabs="https://www.ybren.com/home/category/145">女士西装</a></li><li ><a href="191.htm" tppabs="https://www.ybren.com/home/category/191">女士真丝</a></li><li ><a href="146.htm" tppabs="https://www.ybren.com/home/category/146">女士衬衫</a></li><li ><a href="javascript:if(confirm('https://www.ybren.com/home/category/148  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/category/148'" tppabs="https://www.ybren.com/home/category/148">女士裤装</a></li><li ><a href="204.htm" tppabs="https://www.ybren.com/home/category/204">女士针织</a></li><li ><a href="147.htm" tppabs="https://www.ybren.com/home/category/147">女士外套</a></li><li ><a href="218.htm" tppabs="https://www.ybren.com/home/category/218">配饰</a></li>		
 					</ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
@@ -164,14 +184,14 @@ var _hmt = _hmt || [];
 		
 		<div class="content">			
 			<ul class="item">
-                            
-                            <li>
-                                        <a href="succeed_detail2.html-fashion_people_id=6.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail2.html?fashion_people_id=6">
-						<span><b>律师大Ｖ的冒险精神</b><br>星韵律师事务所主任 吴清旺</span>
-						<span class="s1">吴清旺，星韵事务所现任主任、民商法博士，是新浪微博的大Ｖ，他经手的许多案子都成为了教科书级别的案例。星韵事务所是司法部首......【查看详情】</span>
-						<img src="/static/image/571860609259e.jpg" tppabs="https://appstatic.ybren.com/Uploads/FashionPeoples/2016-04-21/571860609259e.jpg">
-					</a>                                              
-				</li><li>
+				<li th:each="figure:${figureList}">
+					<a th:href="@{${figure.ipPath}}" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail2.html?fashion_people_id=6">
+					<span><b th:text="${figure.title}">律师大Ｖ的冒险精神</b><br th:text="${figure.NAME}">星韵律师事务所主任 吴清旺</span>
+					<span class="s1" th:text="${figure.content}">吴清旺，星韵事务所现任主任、民商法博士，是新浪微博的大Ｖ，他经手的许多案子都成为了教科书级别的案例。星韵事务所是司法部首......【查看详情】</span>
+					<img th:src="@{'/static/image/'+${figure.imagePath}}" tppabs="https://appstatic.ybren.com/Uploads/FashionPeoples/2016-04-21/571860609259e.jpg">
+					</a>
+				</li>
+                            <!--<li>
                                         <a href="succeed_detail2.html-fashion_people_id=5.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail2.html?fashion_people_id=5">
 						<span><b>玩得酷 靠得住</b><br>米趣科技创始人兼CEO 毛靖翔</span>
 						<span class="s1">生于1988年却已经是市值超20亿的网络公司创始人，国家“5050计划”最年轻成员，2014年最年轻的“新锐浙商”……年......【查看详情】</span>
@@ -204,28 +224,28 @@ var _hmt = _hmt || [];
 				</li>  
                            	 <li>
 					<a href="succeed_detail.html-sid=1.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail.html?sid=1">
-						<span><b>做生命轨迹的领航员</b><br>浙江诺辉健康科技有限公司CEO&nbsp;朱叶青</span>
+						<span><b>做生命轨迹的领航员</b><br>浙江诺辉健康科技有限公司CEO　朱叶青</span>
 						<span class="s1">“我或许不能改变世界，但我要改变一些人的生命轨迹。”想象不到吧，这样看似出自燃系少年漫的热血台词，竟然是一位......【查看详情】</span>
 						<img src="/static/image/cgrs01.jpg" tppabs="https://ossstatic.ybren.com/PC/img/cgrs01.jpg">
 					</a>
 				</li>
 				<li>
 					<a href="succeed_detail.html-sid=2.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail.html?sid=2">
-						<span><b>让缤纷色彩渲染生命</b><br>联创1213设计总监&画家&nbsp;徐岩</span>
+						<span><b>让缤纷色彩渲染生命</b><br>联创1213设计总监&画家  徐岩</span>
 						<span class="s1">“想象中的画家：波浪卷发、人字拖、一手颜料盘一手画笔，不把一身行头拾掇得跟人体行为艺术似的都不好意思出来见人......【查看详情】</span>
 						<img src="/static/image/cgrs02.jpg" tppabs="https://ossstatic.ybren.com/PC/img/cgrs02.jpg">
 					</a>
 				</li>
 				<li>
 					<a href="succeed_detail.html-sid=3.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail.html?sid=3">
-						<span><b>您定制的成功已经在赶来的路上</b><br>衣邦人创始人兼CEO&nbsp;方琴</span>
+						<span><b>您定制的成功已经在赶来的路上</b><br>衣邦人创始人兼CEO  方琴</span>
 						<span class="s1">浙大毕业的高材生，老师拿来给学生做榜样的校友圈名人；两次成功创业，却都毅然决然地从零开始、奔赴新的创业方向；7天敲定......【查看详情】</span>
 						<img src="/static/image/cgrs03.jpg" tppabs="https://ossstatic.ybren.com/PC/img/cgrs03.jpg">
 					</a>
 				</li>
 				<li>
 					<a href="succeed_detail.html-sid=4.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed_detail.html?sid=4">
-						<span><b>想出名，想发光想，<br>想走向人生巅峰？来做环保吧！</b><br>国内唯一一家5A级公益组织绿色浙江创始人&nbsp;忻皓</span>
+						<span><b>想出名，想发光想，<br>想走向人生巅峰？来做环保吧！</b><br>国内唯一一家5A级公益组织绿色浙江创始人  忻皓</span>
 						<span class="s1">小鲜肉和老腊肉之争，风生水起，90后小鲜肉宁泽涛，走哪都是国民男神，引得“宁太太”阵阵尖叫，同样是跟水打交道，我们的男猪脚......【查看详情】</span>
 						<img src="/static/image/cgrs04.jpg" tppabs="https://ossstatic.ybren.com/PC/img/cgrs04.jpg">
 					</a>
@@ -243,7 +263,7 @@ var _hmt = _hmt || [];
 						<span class="s1">“颜值爆表”成为网络高频词汇，单身汪看着高颜值cp,鼻血横流，恨不能将女主揽入怀中，高颜值，从不缺少eye candy们，而今天......【查看详情】</span>
 						<img src="/static/image/cgrs06.jpg" tppabs="https://ossstatic.ybren.com/PC/img/cgrs06.jpg">
 					</a>
-				</li>			
+				</li>		-->
 			</ul>			
 		</div>
                 <div class="foot">
@@ -254,24 +274,24 @@ var _hmt = _hmt || [];
 				<div class="fsec">					
 					<ul class="fsec1" style="margin-left: 150px;">
 						<li style="padding-bottom: 5px;padding-left: 0;"><a class="ftitle" target="_blank" href="javascript:void(0)">关于我们</a></li>
-						<li><a target="_blank" href="company.html" tppabs="https://www.ybren.com/index.php/Home/Index/company">公司简介</a></li>
-						<li><a target="_blank" href="brandCooper.html" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper">合作品牌</a></li>
-						<li><a target="_blank" href="media.html" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
-						<li><a target="_blank" href="business.html" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
+						<li><a target="_blank" href="company" tppabs="https://www.ybren.com/index.php/Home/Index/company">公司简介</a></li>
+						<li><a target="_blank" href="brandCooper" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper">合作品牌</a></li>
+						<li><a target="_blank" href="media" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
+						<li><a target="_blank" href="business" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
 					</ul>
 					<ul class="fsec1">
 						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
 
 						<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric">面料品牌</a></li> -->
-                        <li><a target="_blank" href="maintenance.html" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
-                        <li><a target="_blank" href="service.html" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
-						<li><a target="_blank" href="Daka.html" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
+                        <li><a target="_blank" href="maintenance" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
+                        <li><a target="_blank" href="service" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
+						<li><a target="_blank" href="Daka" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
 					</ul>					
 					<ul class="fsec1">
 						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">联系我们</a></li>
-						<li><a target="_blank" href="contact.html#zhanting" tppabs="https://www.ybren.com/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
-						<li><a target="_blank" href="yuyue.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/10703/from/GW">预约量体</a></li>
-						<li><a target="_blank" href="succeed.html" tppabs="https://www.ybren.com/index.php/Home/Index/succeed">风尚人物</a></li>
+						<li><a target="_blank" href="contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
+						<li><a target="_blank" href="yuyue" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/10703/from/GW">预约量体</a></li>
+						<li><a target="_blank" href="succeed" tppabs="https://www.ybren.com/index.php/Home/Index/succeed">风尚人物</a></li>
 						<!-- <li><a target="_blank" href="/index.php/Home/Activity/YbrenerReg">衣邦客</a></li>								 -->
 					</ul>
 					<ul class="fsec1">
