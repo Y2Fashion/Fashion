@@ -16,7 +16,7 @@ public class News implements Serializable {
     private Date createDate;//创建日期
     private String type;//新闻类型
     private String nPath;//新闻图片路径
-
+    private String ntv;//网络
     public Integer getId() {
         return id;
     }
@@ -63,5 +63,13 @@ public class News implements Serializable {
 
     public void setnPath(String nPath) {
         this.nPath = nPath;
+    }
+
+    public String getNtv() {
+        return ntv;
+    }
+
+    public void setNtv(String ntv) {
+        this.ntv = ntv;
     }
 }
