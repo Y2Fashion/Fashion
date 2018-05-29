@@ -1,6 +1,7 @@
 package com.accp.control;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +43,8 @@ public class Admin {
      * @return
      */
     @RequestMapping("/order")
-    public String loGin_order(){
+    public String loGin_order(Model model){
+        model.addAttribute("typeId","1");
         return "/backstage/order";
     }
 
@@ -60,6 +62,7 @@ public class Admin {
      */
     @RequestMapping("/order_get")
     public String order_get(){
+        System.out.println("aaa");
         return "backstage/order_get";
     }
     /**
@@ -96,6 +99,15 @@ public class Admin {
     @RequestMapping("/commodity_get")
     public String commodity_get(){
         return "backstage/commodity_get";
+    }
+
+    /**
+     * 查看产品关联图片
+     * @return
+     */
+    @RequestMapping("/commodity_show")
+    public String commodity_show(){
+        return "backstage/commodity_show";
     }
 
     /**
