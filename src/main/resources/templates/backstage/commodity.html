@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,9 +13,9 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="../css/backstage/pag.css" media="all">
-        <link rel="stylesheet" href="../css/backstage/commodity.css">
+        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+        <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
+        <link rel="stylesheet" href="/static/css/backstage/commodity.css">
     </head>
     <body>
         <div class="x-nav">
@@ -51,9 +52,9 @@
             </form>
             <div class="tools">
     <ul class="toolbar">
-      <li><span><img src="../image/backstage/t03.png" /></span>批量删除</li>
-      <li onclick="user_management_add('添加服装','commodity_add.html','600','400')"><span>
-          <img src="../image/backstage/t01.png" /></span>添加</li>
+      <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
+      <li onclick="user_management_add('添加服装','commodity_add','600','400')"><span>
+          <img src="/static/image/backstage/t01.png" /></span>添加</li>
     </ul>
     <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
   </div>
@@ -109,12 +110,12 @@
                     </td>
                     <td class="td-manage">
                         <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                           onclick="user_management_edit('查看服装详情','commodity_get','4','','450')"
                            class="ml-5" style="text-decoration:none">
                             <i class="layui-icon">&#xe615;</i>
                         </a>
                         <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                           onclick="user_management_password('修改服装详情','commodity_upd','10001','900','360')"
                            href="javascript:;" title="修改">
                             <i class="layui-icon">&#xe642;</i>
                         </a>
@@ -475,10 +476,10 @@
 <br />
 <br />
 <br />
-        <script src="../lib/layui/layui.js" charset="utf-8"></script>
-        <script src="../js/backstage/x-layui.js" charset="utf-8"></script>
-<script src="../js/backstage/jquery2.js" charset="utf-8"></script>
-<script src="../js/backstage/js.js" charset="utf-8"></script>
+        <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+        <script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
+        <script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+        <script src="/static/js/backstage/js.js" charset="utf-8"></script>
         <script>
             layui.use(['laydate','element','laypage','layer'], function(){
                 $ = layui.jquery;//jquery

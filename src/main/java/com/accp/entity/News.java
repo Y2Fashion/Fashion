@@ -1,7 +1,7 @@
 package com.accp.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 新闻表
