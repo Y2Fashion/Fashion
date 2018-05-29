@@ -81,11 +81,6 @@ public class otherController {
     public String goToYuYue(){
         return "yuyue";
     }
-    // 新闻动态
-    @RequestMapping("/media")
-    public String goToMedia(){
-        return "media";
-    }
 
 
 

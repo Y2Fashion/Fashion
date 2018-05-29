@@ -5,7 +5,9 @@ import com.accp.entity.Commodity;
 import com.accp.entity.Lining;
 import com.accp.entity.SecondType;
 import com.accp.entity.ThirdType;
+import com.accp.util.Iputil;
 import com.accp.util.RedisUtil;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,7 +72,10 @@ public class CommodityController {
 
     // 首页
     @RequestMapping("/index")
-    public String goToIndex(Model model){
+    public String goToIndex(Model model, HttpServletRequest request){
+
+        String IP=Iputil.getIpAddr(request);
+
         List<Commodity> xiZhuangHitsList=null;
         List<Commodity> chenSanHitsList=null;
         List<Commodity> kuZhuangHitsList=null;

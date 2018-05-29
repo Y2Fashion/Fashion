@@ -1,7 +1,7 @@
 package com.accp.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 新闻表
@@ -16,6 +16,24 @@ public class News implements Serializable {
     private Date createDate;//创建日期
     private String type;//新闻类型
     private String nPath;//新闻图片路径
+    private String ntv;//新闻出处
+    private String htmlPath;//网页地址
+
+    public String getHtmlPath() {
+        return htmlPath;
+    }
+
+    public void setHtmlPath(String htmlPath) {
+        this.htmlPath = htmlPath;
+    }
+
+    public String getNtv() {
+        return ntv;
+    }
+
+    public void setNtv(String ntv) {
+        this.ntv = ntv;
+    }
 
     public Integer getId() {
         return id;
