@@ -74,6 +74,7 @@ public class Admin {
         return "backstage/order_upd";
     }
 
+
     /**
      * 进入产品管理页面
      * @return
@@ -117,5 +118,14 @@ public class Admin {
     @RequestMapping("/commodity_upd")
     public String commodity_upd(){
         return "backstage/commodity_upd";
+    }
+
+    /**
+     * 进入修改产品关联图片
+     * @return
+     */
+    @RequestMapping("/commodity_updImg")
+    public String commodity_updImg(){
+        return "backstage/commodity_updImg";
     }
 }
