@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.CooperationDao">
+    <insert id="insertCooperation" parameterType="Cooperation">
+        insert into cooperation(QiYeName,NAME,CreateDate,Phone,QiYeAddress,zhiWu,FaRen,Email,YeWuFanWei,CanPingLei,
+                                                CanNeng,JiaGongXS,CanPingFengGe,PingPaiHeZuo,ZhongRenShu,CheJIanRenShu,BanFangRen,
+                                                ZaiChuangRenShu,DaTangRenShu,HouDaoRenShu,ChangMianJi,ChenShu,ZaiChuangMianJi,
+                                                CheJianMianJi,HouZhenMianJi,ShuSheMianJi,YaoQiu)
+                                                values(#{QiYeName},#{NAME},#{CreateDate},#{Phone},#{QiYeAddress},#{zhiWu},#{FaRen},#{Email},#{YeWuFanWei},#{CanPingLei},
+                                                #{CanNeng},#{JiaGongXS},#{CanPingFengGe},#{PingPaiHeZuo},#{ZhongRenShu},#{CheJIanRenShu},#{BanFangRen},
+                                                #{ZaiChuangRenShu},#{DaTangRenShu},#{HouDaoRenShu},#{ChangMianJi},#{ChenShu},#{ZaiChuangMianJi},
+                                                #{CheJianMianJi},#{HouZhenMianJi},#{ShuSheMianJi},#{YaoQiu})
+    </insert>
+</mapper>

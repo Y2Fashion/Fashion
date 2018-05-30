@@ -3,14 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.CommodityDao">
+
     <!--分类查询-->
     <select id="findType" parameterType="Commodity" resultType="Commodity" >
         SELECT * FROM commodity WHERE TYPE=#{type};
     </select>
+
     <!--查询单个商品-->
     <select id="findId" resultType="Commodity" parameterType="Integer">
         SELECT * FROM commodity WHERE id=#{id};
     </select>
+
     <!--添加点击量-->
     <select id="UpdateHits" parameterType="Commodity">
         update Commodity
@@ -26,6 +29,7 @@
         </set>
         where id=#{id}
     </select>
+
     <select id="selectCommodityList" resultType="Commodity">
         select * from Commodity where type in
         <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
@@ -33,4 +37,32 @@
         </foreach>
         order by hits desc limit 0,8;
     </select>
+
+    <!--<select id="" resultType="Commodity" >
+        SELECT * FROM commodity c INNER JOIN thirdtype t ON c.`TYPE`=t.tid
+    INNER JOIN secondtype s ON t.sid=s.sid
+    INNER JOIN firsttype f ON s.fid = f.fid
+    <where>
+
+
+    </where>
+    WHERE f.firstType='男士'
+
+    </select>-->
+
+    <select id="commodityList" resultType="Commodity">
+          SELECT * FROM commodity
+          <where>
+              <if test="type != null ">and type=#{type}</if>
+          </where>
+           ORDER BY hits DESC LIMIT #{pageNo},8;
+    </select>
+
+    <select id="commodityCount" resultType="Integer">
+      SELECT COUNT(1) FROM commodity
+      <where>
+          <if test="type != null "> and type=#{type}</if>
+      </where>
+    </select>
+
 </mapper>

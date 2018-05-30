@@ -9,6 +9,13 @@
 		<meta name="Keywords" content="">
 		<meta name="Description" content="12月26日，浙江电视台6频道与51信用卡联合主办的“2017中国(杭州)创新经济人物颁奖盛典”在浙">
 		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
+		<meta http-equiv="mobile-agent" content="format=html5; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=xhtml; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=wml; url=https://m.ybren.com/" />
+		<link rel="shortcut icon" type="image/x-icon" href="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/PC/web/favicon.ico"  media="screen" >
+		<script src="/static/js/swiper.min.js" tppabs="https://ossstatic.ybren.com/PC/js/swiper.min.js"></script>
+		<link rel="stylesheet" href="/static/css/swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css">
+		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>
 		<style type="text/css">
 			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			ul,ol,li{list-style:none; vertical-align: top;}
@@ -38,7 +45,27 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-86988233-1', 'auto');
 ga('send', 'pageview');
-
+$(function () {
+    $("#pull").hover(function () {
+        if($("#pull ul>li").length<1) {
+            $.ajax({
+                url: "/pull",
+                dataType: "json",
+                success: function (data) {
+                    $("#pull ul").children().filter("li").remove();
+                    for (var i = 0; i < data.length; i++) {
+                        var pull = '<li>' +
+                            '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
+                            '</li>';
+                        $.each($("#pull ul"), function (i, t) {
+                            $(t).html(pull + $(t).html());
+                        })
+                    }
+                }
+            })
+        }
+    })
+})
 </script>
 <!--<div style="display:none">-->
 <script>
@@ -66,10 +93,8 @@ var _hmt = _hmt || [];
 		<div class="nav">
 			<ul class="son">
 				<li><a href="index.htm" tppabs="https://www.ybren.com/">首页</a></li>
-				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
-					<ul>
-						<li ><a href="137.htm" tppabs="https://www.ybren.com/home/category/137">男士西装</a></li><li ><a href="143.htm" tppabs="https://www.ybren.com/home/category/143">男士T恤</a></li><li ><a href="140.htm" tppabs="https://www.ybren.com/home/category/140">男士衬衫</a></li><li ><a href="142.htm" tppabs="https://www.ybren.com/home/category/142">男士裤装</a></li><li ><a href="212.htm" tppabs="https://www.ybren.com/home/category/212">男士新中式</a></li><li ><a href="141.htm" tppabs="https://www.ybren.com/home/category/141">男士外套</a></li><li ><a href="195.htm" tppabs="https://www.ybren.com/home/category/195">男士童装</a></li><li ><a href="145.htm" tppabs="https://www.ybren.com/home/category/145">女士西装</a></li><li ><a href="191.htm" tppabs="https://www.ybren.com/home/category/191">女士真丝</a></li><li ><a href="146.htm" tppabs="https://www.ybren.com/home/category/146">女士衬衫</a></li><li ><a href="javascript:if(confirm('https://www.ybren.com/home/category/148  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/category/148'" tppabs="https://www.ybren.com/home/category/148">女士裤装</a></li><li ><a href="204.htm" tppabs="https://www.ybren.com/home/category/204">女士针织</a></li><li ><a href="147.htm" tppabs="https://www.ybren.com/home/category/147">女士外套</a></li><li ><a href="218.htm" tppabs="https://www.ybren.com/home/category/218">配饰</a></li>		
-					</ul>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+					<ul></ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
 					<ul>

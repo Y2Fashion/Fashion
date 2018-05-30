@@ -1,16 +1,37 @@
 package com.accp.control;
 
+import com.accp.biz.CommodityBiz;
+import com.accp.biz.FirstTypeBiz;
+import com.accp.biz.SecondTypeBiz;
+import com.accp.biz.ThirdTypeBiz;
+import com.accp.entity.FirstType;
+import com.accp.entity.SecondType;
+import com.accp.entity.ThirdType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /***
  * 该控制类用于实验，具体请自己创建
  */
 @Controller
 public class Admin {
+    @Resource
+    private FirstTypeBiz firstTypeBiz;
+
+    @Resource
+    private SecondTypeBiz secondTypeBiz;
+
+    @Resource
+    private ThirdTypeBiz thirdTypeBiz;
+
+    @Resource
+    private CommodityBiz commodityBiz;
     //实验后台页面
     @RequestMapping("/login")
     public String loGin(){
@@ -80,7 +101,15 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity")
-    public String commodity(){
+    public String commodity(Model model,Integer type,Integer pageNo){
+        FirstType firstType = new FirstType();
+        firstType.setfId(0);
+        firstType.setFirstType("请选择");
+        firstTypeBiz.getList().add(firstType);
+        model.addAttribute("firstTypeList",firstTypeBiz.getList());
+        model.addAttribute("secondTypeList",secondTypeBiz.getList());
+        model.addAttribute("thirdTypeList",thirdTypeBiz.getThirdTypeList(null));
+        model.addAttribute("page",commodityBiz.commodityList(type,pageNo));
         return "backstage/commodity";
     }
 
@@ -89,7 +118,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity_add")
-    public String commodity_add(){
+    public String commodity_add(Model model){
         return "backstage/commodity_add";
     }
 

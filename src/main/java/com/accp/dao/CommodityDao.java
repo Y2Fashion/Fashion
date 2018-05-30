@@ -32,4 +32,8 @@ public interface CommodityDao {
      * */
     public List<Commodity> selectCommodityList(Integer[] thirdTypeArry);
 
+    public List<Commodity> commodityList(@Param("type") Integer type,@Param("pageNo") Integer pageNo);
+
+    public Integer commodityCount(@Param("type") Integer type);
+
 }

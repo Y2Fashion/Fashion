@@ -1,473 +1,145 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>
-            产品管理
-            <!--   User_management.html修改而来-->
-        </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
-        <link rel="stylesheet" href="/static/css/backstage/commodity.css">
-    </head>
-    <body>
-        <div class="x-nav">
+<head>
+    <meta charset="utf-8">
+    <title>
+        产品管理
+        <!--   User_management.html修改而来-->
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity.css">
+</head>
+<body>
+<div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
               <a><cite>产品管理</cite></a>
             </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
-        </div>
-        <div class="x-body">
-            <form action="" style="width:85%">
-                <label>一级分类:</label>
-                <select class="" name="cars">
-                    <option value="volvo">请选择</option>
-                    <option value="saab">男</option>
-                    <option value="fiat">女</option>
-                    <option value="audi">配饰</option>
-                </select>
-                <label>二级分类</label>
-                <select name="name">
-                    <option value="volvo">请选择</option>
-                    <option value="saab">男</option>
-                    <option value="fiat">女</option>
-                    <option value="audi">配饰</option>
-                </select>
-                <label>三级分类</label>
-                <select name="cars">
-                    <option value="volvo">请选择</option>
-                    <option value="saab">男</option>
-                    <option value="fiat">女</option>
-                    <option value="audi">配饰</option>
-                </select>
-                <input type="submit" style="width:50px" value="搜索"/>
-            </form>
-            <div class="tools">
-    <ul class="toolbar">
-      <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
-      <li onclick="user_management_add('添加服装','commodity_add','880','435')"><span>
-          <img src="/static/image/backstage/t01.png" /></span>添加</li>
-    </ul>
-    <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
-  </div>
-            <table class="tablelist">
-                <thead>
-                <tr>
-                    <th>
-                        <input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
-                    </th>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        产品名称
-                    </th>
-                    <th>
-                        原价格
-                    </th>
-                    <th>
-                        会员价
-                    </th>
-                    <th>
-                        商品类型
-                    </th>
-                    <th>
-                        点击量
-                    </th>
-                    <th>
-                        操作
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        1
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get','4','','430')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd','10001','900','420')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon"
+                                                                        style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <form action="commodity" style="width:85%" method="post">
+        <label>一级分类:</label>
+        <select class="sssss" name="cars" onchange="xxx(this)">
+            <option class="firstClick" th:value="${firstType.fId}" th:each="firstType:${firstTypeList}"
+                    th:text="${firstType.firstType}">请选择
+            </option>
+        </select>
+        <label>二级分类</label>
+        <select name="name">
+            <option th:each="secondTypt:${secondTypeList}" th:value="${secondTypt.sId}"
+                    th:text="${secondTypt.secondType}">请选择
+            </option>
+        </select>
+        <label>三级分类</label>
+        <select name="type">
+            <option value="volvo">请选择</option>
+            <option value="saab" th:each="thirdType:${thirdTypeList}" th:text="${thirdType.thirdType}"
+                    th:value="${thirdType.tId}">男
+            </option>
+        </select>
+        <input type="submit" style="width:50px" value="搜索"/>
+    </form>
+    <div class="tools">
+        <ul class="toolbar">
+            <li><span><img src="/static/image/backstage/t03.png"/></span>批量删除</li>
+            <li onclick="user_management_add('添加服装','commodity_add','600','435')"><span>
+          <img src="/static/image/backstage/t01.png"/></span>添加
+            </li>
+        </ul>
+        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+    </div>
+    <table class="tablelist">
+        <thead>
+        <tr>
+            <th>
+                <input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                产品名称
+            </th>
+            <th>
+                原价格
+            </th>
+            <th>
+                会员价
+            </th>
+            <th>
+                商品类型
+            </th>
+            <th>
+                点击量
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="commodity:${page.datas}">
+            <td>
+                <input type="checkbox" value="1" name="selected">
+            </td>
+            <td th:text="${commodity.id}">
+                1
+            </td>
+            <td th:text="${commodity.commodityName}">求大神</td>
+            <td th:text="${commodity.originalPrice}">
+                123456
+            </td>
+            <td th:text="${commodity.vipPrice}">
+                用户
+            </td>
+            <td th:text="${commodity.type}">
+                男
+            </td>
+            <td th:text="${commodity.hits}">
+                2015-07-13 13:13:32
+            </td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看服装详情','commodity_get','4','','430')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改服装详情','commodity_upd','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
 
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        2
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        3
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        4
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        6
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        7
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        8
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        9
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="selected">
-                    </td>
-                    <td>
-                        10
-                    </td>
-                    <td>求大神</td>
-                    <td>
-                        123456
-                    </td>
-                    <td>
-                        用户
-                    </td>
-                    <td>
-                        男
-                    </td>
-                    <td>
-                        2015-07-13 13:13:32
-                    </td>
-                    <td class="td-manage">
-                        <a title="查看" href="javascript:;"
-                           onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                           class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe615;</i>
-                        </a>
-                        <a style="text-decoration:none"
-                           onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                           href="javascript:;" title="修改">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                           style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="page" v-show="show">
-                <a href="">首页</a>
-                <a href="">上一页</a>
-                <a href="">下一页</a>
-                <a href="">末页</a>
-                &nbsp;&nbsp;
-                &nbsp;&nbsp;第n页/共n页&nbsp;&nbsp;共n条记录
+
+        </tbody>
+    </table>
+    <div class="page" v-show="show">
+
+
+        <a href="commodity?pageNo=1">首页</a>
+        <a th:if="${page.pageNo} &gt '1' " th:href="@{'commodity?pageNo='+${page.pageNo-1}}">上一页</a>
+        <a th:if="${page.pageNo} < ${page.totalPage}" th:href="@{'commodity?pageNo='+${page.pageNo+1}}">下一页</a>
+
+        <a th:href="@{'commodity?pageNo='+${page.totalPage}}">末页</a>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;第<span th:text="${page.pageNo}"></span>页/共<span th:text="${page.totalPage}"></span>页&nbsp;&nbsp;共<span th:text="${page.totalRows}"></span>条记录
                 <span class="jumppoint">跳转到：</span> <span class="jumpinp">
                 <input type="text">
              </span> <span class="jump gobtn">GO</span>
