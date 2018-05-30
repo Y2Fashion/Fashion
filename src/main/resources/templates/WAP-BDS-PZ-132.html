@@ -53,21 +53,23 @@
 			$(function(){
 
                 $("#pull").hover(function () {
-                    $.ajax({
-                        url:"/pull",
-                        dataType:"json",
-                        success:function (data) {
-                            $("#pull ul").children().filter("li").remove();
-                            for(var i=0;i<data.length;i++){
-                                var pull='<li>'+
-                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
-                                    '</li>';
-                                $.each($("#pull ul"),function(i,t){
-                                    $(t).html(pull+$(t).html());
-                                });
+                    if($("#pull ul>li").length<1) {
+                        $.ajax({
+                            url: "/pull",
+                            dataType: "json",
+                            success: function (data) {
+                                $("#pull ul").children().filter("li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    var pull = '<li>' +
+                                        '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
+                                        '</li>';
+                                    $.each($("#pull ul"), function (i, t) {
+                                        $(t).html(pull + $(t).html());
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 })
 
 				$(".li_simg").click(function(){
@@ -159,6 +161,18 @@ var _hmt = _hmt || [];
 		</div>
 
  <script type="text/javascript">
+
+     window.onbeforeunload = function(){
+        $(function () {
+            var cId=$("[name='cId']").val();
+			$.ajax({
+				type:'post',
+				url:'monitor',
+				data:{"cId":cId}
+			})
+        })
+     }
+
                     function kefu(){
                         var H = $(window).height();
                         var W = $(window).width();
@@ -226,6 +240,7 @@ var _hmt = _hmt || [];
 					<div class="tips">
 						<div class="ftit">
 							<div class="t_title">
+								<input type="hidden" name="cId" th:value="${commodity.id}">
 								<span class="coup" th:text="${commodity.state}"></span><h2 th:text="${commodity.commodityName}"></h2>
 								<p class="p_desc" th:text="${commodity.lining.ingredient}"></p>
 								<p></p>
@@ -234,25 +249,15 @@ var _hmt = _hmt || [];
 								<p class="money"><span>会员价：<font color="#D00F12" th:text="'￥'+${commodity.vipPrice}">暂无报价</font></span></p>
 							</div>
 						</div>
-						<ul class="small_img">
+						<ul class="small_img" style="height: 160px;">
 							<li class="li_simg" _src="5a9e0b71b196a16.jpg">
 								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
 							</li>
 							<li class="li_simg" _src="5a9e0b71b196a.jpg" th:each="picture:${commodity.pictures}">
 								<img th:src="'/static/image/'+${picture.path}" alt=""/>
 							</li>
-							<li class="li_simg" _src="5a9e0b71b196a.jpg">
-								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
-							</li>
-							<li class="li_simg" _src="5a9e0b71b196a.jpg">
-								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
-							</li>
-							<li class="li_simg" _src="5a9e0b71b196a.jpg">
-								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
-							</li>
-							<li class="li_simg" _src="5a9e0b71b196a.jpg">
-								<img th:src="'/static/image/'+${commodity.photoPath}" alt=""/>
-							</li>
+
+
 						</ul>
 						<div class="chbox">
 							<span class="chbox_type act" type="t1">默认面料</span>
@@ -353,7 +358,7 @@ var _hmt = _hmt || [];
 						<div class="swiper-slide">
 							<ul>
 								<li th:each="commodityss:${commoditys}">
-									<a href="itemDetail.html-erp_item_id=YS1274&from=WAP-BDS-PZ.htm" >
+									<a th:href="@{'selectCommodity?id='+${commodityss.id}}" >
 										<img th:src="@{'/static/image/'+${commodityss.photoPath}}" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-01-22/5a655c8aeb0cd.jpg" alt="" >
 										<span><font color="#FA5F29" th:text="'会员价￥'+${commodityss.vipPrice}">会员价￥4386.00</font><br th:text="${commodityss.vipPrice}"/>灰色格纹毛麻精品西服</span>
 									</a>
