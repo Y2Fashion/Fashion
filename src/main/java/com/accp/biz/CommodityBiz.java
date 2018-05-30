@@ -26,7 +26,7 @@ public interface CommodityBiz {
     /*
     * 按热度和二级类型查询
     * */
-    public List<Commodity> getCommoditys(Integer secondTypeId);
+    public List<Commodity> getCommoditys(Object secondTypeId);
 
     /*
     * 按热度和三级类型查询

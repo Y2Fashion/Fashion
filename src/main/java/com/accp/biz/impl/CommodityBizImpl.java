@@ -54,7 +54,7 @@ public class CommodityBizImpl implements CommodityBiz {
     }
 
     @Override
-    public List<Commodity> getCommoditys(Integer secondTypeId) {
+    public List<Commodity> getCommoditys(Object secondTypeId) {
         List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeList(secondTypeId);
         Integer[] thirdTypeArry=new Integer[thirdTypes.size()];
         int i=0;
