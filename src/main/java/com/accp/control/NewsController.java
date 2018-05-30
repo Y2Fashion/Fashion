@@ -1,6 +1,7 @@
 package com.accp.control;
 
 import com.accp.biz.NewsBiz;
+import com.accp.biz.impl.NewsBizImpl;
 import com.accp.entity.News;
 import com.accp.util.RedisUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class NewsController {
 
     @Resource
-    private NewsBiz newsBiz;
+    private NewsBizImpl newsBiz;
     @Resource
     private RedisUtil redisUtil;
 

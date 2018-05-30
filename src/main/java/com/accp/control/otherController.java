@@ -82,6 +82,108 @@ public class otherController {
         return "yuyue";
     }
 
+    @RequestMapping("/succeed_detail21")
+    public String succeed_detail21(){
+        return "succeed_detail.html-sid=1";
+    }
 
+    @RequestMapping("/succeed_detail22")
+    public String succeed_detail22(){
+        return "succeed_detail.html-sid=2";
+    }
 
+    @RequestMapping("/succeed_detail23")
+    public String succeed_detail23(){
+        return "succeed_detail.html-sid=3";
+    }
+
+    @RequestMapping("/succeed_detail24")
+    public String succeed_detail24(){
+        return "succeed_detail.html-sid=4";
+    }
+
+    @RequestMapping("/succeed_detail25")
+    public String succeed_detail25(){
+        return "succeed_detail.html-sid=5";
+    }
+
+    @RequestMapping("/succeed_detail26")
+    public String succeed_detail26(){
+        return "succeed_detail.html-sid=6";
+    }
+
+    @RequestMapping("/succeed_detail1")
+    public String succeed_detail1(){
+        return "succeed_detail2.html-fashion_people_id=1";
+    }
+
+    @RequestMapping("/succeed_detail2")
+    public String succeed_detail2(){
+        return "succeed_detail2.html-fashion_people_id=2";
+    }
+
+    @RequestMapping("/succeed_detai3")
+    public String succeed_detail3(){
+        return "succeed_detail2.html-fashion_people_id=3";
+    }
+
+    @RequestMapping("/succeed_detail4")
+    public String succeed_detail4(){
+        return "succeed_detail2.html-fashion_people_id=4";
+    }
+
+    @RequestMapping("/succeed_detail5")
+    public String succeed_detail5(){
+        return "succeed_detail2.html-fashion_people_id=5";
+    }
+
+    @RequestMapping("/succeed_detail6")
+    public String succeed_detail6(){
+        return "succeed_detail2.html-fashion_people_id=6";
+    }
+
+    @RequestMapping("/media_detail171")
+    public String media_detail171(){
+        return "media_detail.html-article_id=171";
+    }
+
+    @RequestMapping("/media_detail172")
+    public String media_detail172(){
+        return "media_detail.html-article_id=172";
+    }
+
+    @RequestMapping("/media_detail173")
+    public String media_detail173(){
+        return "media_detail.html-article_id=173";
+    }
+
+    @RequestMapping("/media_detail174")
+    public String media_detail174(){
+        return "media_detail.html-article_id=174";
+    }
+
+    @RequestMapping("/media_detail175")
+    public String media_detail175(){
+        return "media_detail.html-article_id=175";
+    }
+
+    @RequestMapping("/media_detail176")
+    public String media_detail176(){
+        return "media_detail.html-article_id=176";
+    }
+
+    @RequestMapping("/media_detail177")
+    public String media_detail177(){
+        return "media_detail.html-article_id=177";
+    }
+
+    @RequestMapping("/media_detail178")
+    public String media_detail178(){
+        return "media_detail.html-article_id=178";
+    }
+
+    @RequestMapping("/SupplierReg")
+    public String SupplierReg(){
+        return "SupplierReg";
+    }
 }
