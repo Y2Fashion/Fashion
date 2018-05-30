@@ -34,12 +34,39 @@
                     <td>100000</td>
                 </tr>
                 <tr>
+                    <td>衣服材质:</td>
+                    <td>SaaS大V书上的撒打算</td>
+                </tr>
+                <tr>
                     <td>服装类型:</td>
                     <td>还能拿死阿斯顿</td>
                 </tr>
                 <tr>
                     <td>服装状态:</td>
                     <td>新品</td>
+                    <td>关联图片1:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
+                </tr>
+                <tr>
+                    <td>关联图片2:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
+                    <td>关联图片3:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
                 </tr>
                 <tr>
                     <td>出厂价格:</td>
@@ -58,9 +85,11 @@
                 $ = layui.jquery;
               var form = layui.form()
               ,layer = layui.layer;
-              
-              
             });
+            /*图片-查看*/
+            function user_management_show(title,url,id,w,h){
+                x_admin_show(title,url,w,h);
+            }
         </script>
     </body>
 
