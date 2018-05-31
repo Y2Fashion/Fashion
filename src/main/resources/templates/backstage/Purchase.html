@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        布料管理
+        布料进货管理
         <!--   User_management.html修改而来-->
     </title>
     <meta name="renderer" content="webkit">
@@ -16,44 +16,46 @@
     <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
     <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
     <link rel="stylesheet" href="/static/css/backstage/commodity.css">
+    <link rel="stylesheet" href="/static/css/backstage/order.css">
 </head>
 <body>
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>布料管理</cite></a>
+              <a><cite>进货管理</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <form action="" style="width:85%">
-        <label>布料成分:</label>
+        <label>供应商:</label>
         <select class="" name="cars">
             <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+            <option value="预约">1</option>
+            <option value="已上门量体">2</option>
+            <option value="加工成品中">3</option>
+            <option value="移交成功">4</option>
         </select>
-        <label>布料颜色:</label>
-        <select name="name">
+        <label>布料编号:</label>
+        <select class="" name="cars">
             <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+            <option value="预约">1</option>
+            <option value="已上门量体">2</option>
+            <option value="加工成品中">3</option>
+            <option value="移交成功">4</option>
         </select>
-        <label>布料花型:</label>
-        <select name="cars">
+        <label>交货状态:</label>
+        <select class="" name="cars">
             <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+            <option value="预约">未交货</option>
+            <option value="已上门量体">已交货</option>
         </select>
         <input type="submit" style="width:50px" value="搜索"/>
     </form>
     <div class="tools">
         <ul class="toolbar">
             <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
-            <li onclick="user_management_add('添加服装','lining_add','600','420')"><span>
+            <li onclick="user_management_password('添加进货','Purchase_add','10001','900','340')"><span>
           <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
         <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
@@ -62,25 +64,34 @@
         <thead>
         <tr>
             <th>
-                <input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
-            </th>
+            <input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
+        </th>
             <th>
                 ID
             </th>
             <th>
-                布料成分
+                供应商
             </th>
             <th>
-                布料颜色
+                布料编号
             </th>
             <th>
-                布料花型
+                进货价格
             </th>
             <th>
-                布料库存
+                进货数量
             </th>
             <th>
-                存放地址
+                下单时间
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                交货时间
+            </th>
+            <th>
+                采购人员
             </th>
             <th>
                 操作
@@ -89,33 +100,24 @@
         </thead>
         <tbody>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                1
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                B区22号3层
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>1</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看布料详情','lining_get','4','','360')"
+                   onclick="user_management_edit('查看订单详情','Purchase_get','4','','270')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改布料详情','lining_upd','10001','900','380')"
+                   onclick="user_management_password('修改订单','Purchase_upd','10001','900','350')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -126,33 +128,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                2
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>2</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看布料详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改布料详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -163,33 +156,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                3
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>3</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -200,33 +184,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                4
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-               1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>4</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -237,33 +212,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                5
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-              1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>5</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -274,33 +240,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                6
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-               1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>6</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -311,33 +268,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                7
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>7</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -348,107 +296,24 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                8
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-               1
-            </td>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>8</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                9
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                10
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>

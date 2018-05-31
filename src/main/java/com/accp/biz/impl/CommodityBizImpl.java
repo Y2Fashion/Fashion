@@ -16,9 +16,8 @@ import java.util.List;
 
 @Service
 public class CommodityBizImpl implements CommodityBiz {
-
-    @Autowired
-    private CommodityDao dao;
+    @Resource
+    private CommodityDao commodityDao;
 
     @Resource
     private ThirdTypeBiz thirdTypeBiz;
@@ -34,13 +33,13 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public List<Commodity> findType(Commodity commodity) {
-        return dao.findType(commodity);
+        return commodityDao.findType(commodity);
     }
 
     @Override
     public Commodity findId(Integer id) {
         addHits(id);
-        Commodity commodity=dao.findId(id);
+        Commodity commodity=commodityDao.findId(id);
         commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
         commodity.setPictures(pictureBiz.getPictureList(id));
         return commodity;
@@ -48,9 +47,9 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public void addHits(Object comId) {
-        Commodity commodity=dao.findId((Integer)comId);
+        Commodity commodity=commodityDao.findId((Integer)comId);
         commodity.setHits(commodity.getHits()+1);
-        dao.UpdateHits(commodity);
+        commodityDao.UpdateHits(commodity);
     }
 
     @Override
@@ -64,13 +63,13 @@ public class CommodityBizImpl implements CommodityBiz {
                 i++;
             }
         }
-        return dao.selectCommodityList(thirdTypeArry);
+        return commodityDao.selectCommodityList(thirdTypeArry);
     }
 
     @Override
     public List<Commodity> getCommoditys(int dandu) {
         Integer[] integers=new Integer[]{dandu};
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
     }
 
     @Override
@@ -96,7 +95,7 @@ public class CommodityBizImpl implements CommodityBiz {
                 a++;
             }
         }
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
     }
 
     @Override
@@ -106,9 +105,9 @@ public class CommodityBizImpl implements CommodityBiz {
         }
         Pager<Commodity> pager = new Pager<>();
         pager.setPageNo(pageNo);
-        pager.setTotalRows(dao.commodityCount(type));
+        pager.setTotalRows(commodityDao.commodityCount(type));
         pager.setTotalPage((pager.getTotalRows()+8-1)/8);
-        pager.setDatas(dao.commodityList(type,pageNo-1));
+        pager.setDatas(commodityDao.commodityList(type,pageNo-1));
         return pager;
     }
 }

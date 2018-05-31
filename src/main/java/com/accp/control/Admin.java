@@ -65,6 +65,7 @@ public class Admin {
      */
     @RequestMapping("/order")
     public String loGin_order(Model model){
+
         model.addAttribute("typeId","1");
         return "/backstage/order";
     }
@@ -156,5 +157,134 @@ public class Admin {
     @RequestMapping("/commodity_updImg")
     public String commodity_updImg(){
         return "backstage/commodity_updImg";
+    }
+
+
+    /**
+     * 进入布料库存
+     */
+    @RequestMapping("/lining")
+    public String lining(){
+        return "backstage/lining";
+    }
+
+    /**
+     * 进入布料库存--添加
+     */
+    @RequestMapping("/lining_add")
+    public String lining_add(){
+        return "backstage/lining_add";
+    }
+
+    /**
+     * 进入布料库存--查看
+     */
+    @RequestMapping("/lining_get")
+    public String lining_get(){
+        return "backstage/lining_get";
+    }
+
+    /**
+     * 进入布料库存--修改
+     */
+    @RequestMapping("/lining_upd")
+    public String lining_upd(){
+        return "backstage/lining_upd";
+    }
+
+    /**
+     * 进入布料使用情况
+     */
+    @RequestMapping("/Use")
+    public String use(){
+        return "backstage/Use";
+    }
+
+    /**
+     * 添加布料使用情况
+     */
+    @RequestMapping("/Use_add")
+    public String use_add(){
+        return "backstage/Use_add";
+    }
+
+    /**
+     *布料进货
+     */
+    @RequestMapping("/Purchase")
+    public String purchase(){
+        return "backstage/Purchase";
+    }
+
+    /**
+     * 添加布料进货
+     */
+    @RequestMapping("/Purchase_add")
+    public String purchase_add(){
+        return "backstage/Purchase_add";
+    }
+
+    /**
+     * 查看布料进货订单
+     */
+    @RequestMapping("/Purchase_get")
+    public String purchase_get(){
+        return "backstage/Purchase_get";
+    }
+
+    /**
+     * 修改布料进货订单
+     */
+    @RequestMapping("/Purchase_upd")
+    public String purchase_upd(){
+        return "backstage/Purchase_upd";
+    }
+
+    /**
+     * 供应商渠道
+     */
+    @RequestMapping("/Channel")
+    public String channel(){
+        return "backstage/Channel";
+    }
+
+    /**
+     * 添加供应商渠道
+     */
+    @RequestMapping("/Channel_add")
+    public String channel_upd(){
+        return "backstage/Channel_add";
+    }
+
+    /**
+     *供应商
+     */
+    @RequestMapping("/Supplier")
+    public String supplier(){
+        return "backstage/Supplier";
+    }
+
+    /**
+     * 添加供应商
+     */
+    @RequestMapping("/Supplier_add")
+    public String supplier_add(){
+        return "backstage/Supplier_add";
+    }
+
+    /**
+     * 查看供应商
+     */
+    @RequestMapping("/Supplier_get")
+    public String supplier_get(){
+        return "backstage/Supplier_get";
+    }
+
+    /**
+     * 修改供应商
+     */
+    @RequestMapping("/Supplier_upd")
+    public String supplier_upd(){
+        return "backstage/Supplier_upd";
     }
 }
