@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,30 +21,30 @@
     <table class="table_get" border="1px black;">
         <tr>
             <td class="get_td">订单编号:</td>
-            <td>1</td>
+            <td th:text="${order.orderId}">1</td>
             <td class="get_td">客户名称:</td>
-            <td>某某某</td>
+            <td th:text="${order.clienteleName}">某某某</td>
         </tr>
         <tr>
             <td class="get_td">联系电话:</td>
-            <td>132456498</td>
+            <td th:text="${order.clientelePhone}">132456498</td>
             <td class="get_td">订单状态:</td>
-            <td>加工成品中</td>
+            <td th:text="${order.status}">加工成品中</td>
         </tr>
         <tr>
             <td class="get_td">送货地址:</td>
-            <td colspan="3">100000</td>
+            <td colspan="3" th:text="${order.clienteleAddress}">100000</td>
         </tr>
         <tr>
             <td class="get_td">量体日期:</td>
-            <td>2017-5-12 12:00:00</td>
+            <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd')}">2017-5-12 12:00:00</td>
             <td class="get_td">送货日期:</td>
-            <td>2017-5-28 12:00:00</td>
+            <td th:text="${#dates.format(order.deliveryTime,'yyyy-MM-dd')}">2017-5-28 12:00:00</td>
         </tr>
         <tr>
             <td rowspan="5" class="get_td">备注:</td>
             <td colspan="3" rowspan="5">
-            <textarea  rows="5" cols="70" readonly class="get_textarea">
+            <textarea  rows="5" cols="70" readonly class="get_textarea" th:text="${order.comment}">
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 我发您的三地飞鸟撒UI得分你丢萨芬你史蒂夫暖色调击飞蛋u9sadufnasd卜sdfssgdsgsdgfsdgfsdfgsdzvcgfdgsgewgwdgffdsgsdgsdfgsfg
                 </textarea>

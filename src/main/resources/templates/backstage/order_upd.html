@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 
 <head>
@@ -12,74 +13,122 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-    <link rel="stylesheet" href="../css/backstage/commodity_add.css">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
 
 </head>
 <body>
 <div class="x-body">
+  <!--  <form th:action="/update" th:object="${order}" th:method="post" method="post">-->
     <form action="" method="post">
         <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="p_td">订单Id编号:</td>
-                <td class="q_td"> 1</td>
+                <td class="q_td"  id="orderId" th:text="${order.orderId}"></td>
+                <input type="hidden" th:value="${order.orderId}" name="orderId">
                 <td class="p_td">客户名称:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="衣服名称(长度为5-12位)"/>
+                    <input type="text" id="clienteleName" name="clienteleName" class="u_t"  th:value="${order.clienteleName}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">联系电话:</td>
-                <td class="q_td"> <input type="text" name='uname' class="u_t" value="12345678901"/></td>
+                <td class="q_td"> <input type="text" id="clientelePhone" name="clientelePhone" class="u_t"   th:value="${order.clientelePhone}"/></td>
                 <td class="p_td">订单状态:</td>
                 <td class="q_td">
-                    <select class="u_t">
+                    <select class="u_t" id="status" name="status">
                         <option value="volvo">请选择</option>
-                        <option value="预约">预约</option>
-                        <option value="已上门量体">已上门量体</option>
-                        <option value="加工成品中">加工成品中</option>
-                        <option value="移交成功">交货成功</option>
+                        <span th:if="${order.status=='预约'}">
+                            <option value="预约" selected>预约</option>
+                             <option value="已上门量体">已上门量体</option>
+                             <option value="加工成品中">加工成品中</option>
+                              <option value="交货成功">交货成功</option>
+                        </span>
+                        <span th:if="${order.status=='已上门量体'}">
+                           <option value="预约">预约</option>
+                             <option value="已上门量体" selected>已上门量体</option>
+                             <option value="加工成品中">加工成品中</option>
+                              <option value="交货成功">交货成功</option>
+                        </span>
+                        <span th:if="${order.status=='加工成品中'}">
+                            <option value="预约">预约</option>
+                             <option value="已上门量体">已上门量体</option>
+                             <option value="加工成品中" selected>加工成品中</option>
+                              <option value="交货成功">交货成功</option>
+                        </span>
+                        <span th:if="${order.status=='交货成功'}">
+                            <option value="预约">预约</option>
+                             <option value="已上门量体">已上门量体</option>
+                             <option value="加工成品中">加工成品中</option>
+                              <option value="交货成功" selected>交货成功</option>
+                        </span>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">送货地址:</td>
                 <td class="q_td" colspan="3">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" id="clienteleAddress" name="clienteleAddress" class="u_t" th:value="${order.clienteleAddress}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td"  style="line-height:2.9em">量体日期:</td>
                 <td class="q_td">
-                    <input type="date" name='uname' class="u_t" value="2017-06-01"/>
+                    <input type="date" id="createTime" name="createTime" class="u_t" th:value="${#dates.format(order.createTime,'yyyy-MM-dd')}"/>
                 </td>
                 <td class="p_td"  style="line-height:2.9em">送货日期:</td>
-                <td class="q_td">
-                    <input type="date" name='uname' class="u_t" value="2017-06-01"/>
+                <td class="q_td" >
+                    <input type="date" class="u_t" id="deliveryTime" name="deliveryTime" th:value="${#dates.format(order.deliveryTime,'yyyy-MM-dd')}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">备注:</td>
                 <td class="q_td" colspan="3">
-                    <textarea name="txt" clos=",50" rows="5" warp="virtual"  rows="5" cols="80"
-                    style="resize:none;overflow:hidden;border: 0px transparent;">
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-我发您的三地飞鸟撒UI得分你丢萨芬你史蒂夫暖色调击飞蛋u9sadufnasd卜sdfssgdsgsdgfsdgfsdfgsdzvcgfdgsgewgwdgffdsgsdgsdfgsfg
-                    </textarea>
+                    <textarea id="comment" name="comment" rows="5" warp="virtual" cols="80"
+                              style="resize:none;overflow:hidden;border: 0px transparent;"th:text="${order.comment}"></textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input class="u_t" style="width: 100%" type="submit" value="修改"/>
+                    <input class="u_t" style="width: 100%" type="submit" value="修改" id="aa"/>
                 </td>
             </tr>
         </table>
-
     </form>
 </div>
-<script src="../lib/layui/layui.js" charset="utf-8">
+<script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
-<script src="../js/backstage/x-layui.js" charset="utf-8">
+<script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        $("#aa").click(function () {
+            var deliveryTime=$("#deliveryTime").val();
+            var createTime=$("#createTime").val();
+            var orderId=$("#orderId").text();
+            var clienteleName=$("#clienteleName").val();
+            var clientelePhone=$("#clientelePhone").val();
+            var status=$("#status").val();
+            var clienteleAddress=$("#clienteleAddress").val();
+            var comment=$("#comment").val();
+            x_admin_close();
+            $.ajax({
+                url:"/order_upd",
+                type:"post",
+                dataType: 'text',
+                data:{"id":orderId,"crea":createTime,"del":deliveryTime,
+                    "name":clienteleName,"phone":clientelePhone,
+                "sta":status,"address":clienteleAddress,"com":comment},
+                success:function () {
+location.replace(location.href)
+
+                }
+            })
+
+        })
+
+    })
 </script>
 </body>
 </html>

@@ -184,7 +184,10 @@ var _hmt = _hmt || [];
 					$('.app_code').hide();
 				});
 				$(".year a").click(function () {
-                    $(this).addClass("act").siblings().removeClass("act");
+                   var type=$(this).text();
+                   var pageNo=$("#pageNo").text();
+                   //alert(pageNo);
+
                 })
 
 			});
@@ -220,7 +223,7 @@ var _hmt = _hmt || [];
 			</ul>
 			<div class="page"><a href="javascript:void(0);" style="margin-right: 5px;">
 				<img src="/static/image/left.jpg" tppabs="https://ossstatic.ybren.com/PC/detailimg/left.jpg"></a>
-				<a style="margin:0 10px" href="###">第1页</a><a href="media.html-page=2&cateid=63.htm" tppabs="https://www.ybren.com/index.php/Home/index/media.html?page=2&cateid=63">
+				<a style="margin:0 10px" href="###">第<span th:text="${page.pageNo}" id="pageNo"></span>页</a><a href="media.html-page=2&cateid=63.htm" tppabs="https://www.ybren.com/index.php/Home/index/media.html?page=2&cateid=63">
 					<img src="/static/image/right.jpg" tppabs="https://ossstatic.ybren.com/PC/detailimg/right.jpg"></a></div>
 		</div>
 		  <div class="foot">

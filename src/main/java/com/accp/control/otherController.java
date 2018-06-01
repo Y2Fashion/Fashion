@@ -2,11 +2,14 @@ package com.accp.control;
 
 import com.accp.biz.FigureBiz;
 import com.accp.biz.NewsBiz;
+import com.accp.biz.OrderBiz;
 import com.accp.entity.News;
+import com.accp.entity.Order;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -15,7 +18,8 @@ public class otherController {
 
     @Resource
     private FigureBiz figureBiz;
-
+    @Resource
+    private OrderBiz orderBiz;
     @Resource
     private NewsBiz biz;
    //大事记网页
@@ -85,8 +89,21 @@ public class otherController {
      * @return
      */
     @RequestMapping("/yuyue")
-    public String yuyue(){
+    public String yuyue(Model model,String status){
+        int num=orderBiz.findCount(status);
+        model.addAttribute("num",num);
         return "yuyue";
+    }
+    @RequestMapping("/AddOrder")
+    @ResponseBody
+    public String AddOrder(String name,String phone,String address,String com){
+        Order order=new Order();
+        order.setClienteleAddress(address);
+        order.setClienteleName(name);
+        order.setClientelePhone(phone);
+        order.setComment(com);
+        orderBiz.Add(order);
+        return null;
     }
     /**
      * 新闻动态
