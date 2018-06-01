@@ -4,17 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.NewsDao">
     <!--新闻动态-->
-    <select id="findNew" resultType="News">
-        SELECT * FROM news
-        WHERE TYPE=#{type}
-        order by createDate desc LIMIT #{pageNo},#{pageSize} ;
-    </select>
-    <!--分类查询条数-->
-    <select id="findCout" resultType="int">
-        SELECT COUNT(*) FROM news
-        WHERE TYPE=#{type};
-    </select>
-    <select id="findType" resultType="News">
-        SELECT TYPE FROM News GROUP BY type
+    <select id="selectNews" resultType="News">
+        SELECT * FROM news WHERE TYPE=#{type};
     </select>
 </mapper>

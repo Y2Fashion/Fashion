@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,8 +13,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="../css/backstage/commodity_add.css">
+        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+        <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
     </head>
     
     <body>
@@ -22,16 +23,31 @@
             <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
                 <tr>
                     <td class="p_td">服装名称:</td>
-                    <td>
+                    <td colspan="3">
                         <input type="text" name='uname' class="u_t" placeholder="衣服名称(长度为5-12位)"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="p_td">服装状态:</td>
-                    <td>
+                    <td colspan="3">
                         <select class="u_t">
                             <option value="新品" >新品</option>
                             <option value="奢品">奢品</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p_td">衣服材质:</td>
+                    <td colspan="3">
+                        <input type="text" name='uname' class="u_t"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p_td">服装类型:</td>
+                    <td colspan="3">
+                        <select class="u_t">
+                            <option value="1" >男士西装</option>
+                            <option value="2">女士西装</option>
                         </select>
                     </td>
                 </tr>
@@ -40,20 +56,9 @@
                     <td>
                         <input type="text" name='uname' class="u_t"/>
                     </td>
-                </tr>
-                <tr>
                     <td class="p_td">会员价:</td>
                     <td>
                         <input type="text" class="u_t" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">服装类型:</td>
-                    <td>
-                        <select class="u_t">
-                            <option value="1" >男士西装</option>
-                            <option value="2">女士西装</option>
-                        </select>
                     </td>
                 </tr>
                 <tr height="41px">
@@ -61,18 +66,32 @@
                     <td >
                         <input type="file" class="r_td"/>
                     </td>
+                    <td class="p_td">关联图片1:</td>
+                    <td >
+                        <input type="file" class="r_td"/>
+                    </td>
+                </tr>
+                <tr height="41px">
+                    <td class="p_td">关联图片2:</td>
+                    <td >
+                        <input type="file" class="r_td"/>
+                    </td>
+                    <td class="p_td">关联图片3:</td>
+                    <td >
+                        <input type="file" class="r_td"/>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="4">
                         <input class="u_t" style="width: 100%" type="submit" value="添加"/>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
-    <script src="../lib/layui/layui.js" charset="utf-8">
+    <script src="/static/lib/layui/layui.js" charset="utf-8">
     </script>
-    <script src="../js/backstage/x-layui.js" charset="utf-8">
+    <script src="/static/js/backstage/x-layui.js" charset="utf-8">
     </script>
     </body>
 

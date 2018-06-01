@@ -13,24 +13,9 @@ import java.util.List;
 public class NewBizImpl implements NewsBiz {
     @Resource
     private NewsDao dao;
-    @Override
-    public Pager<News> findNew(String type, Integer pageNo, Integer pageSize) {
-
-        if(null==pageNo){
-            pageNo=1;
-        }
-        Pager<News> pager=new Pager<News>();
-        pager.setPageNo(pageNo);
-        pager.setPageSize(pageSize);
-        pager.setDatas(dao.findNew(type,pageNo-1,pageSize));
-        pager.setTotalPage(dao.findCout(type)/pageSize);
-        pager.setTotalRows(dao.findCout(type));
-        //System.out.println(pageNo+"\t"+dao.findCout(type)+"\t"+pageSize);
-        return pager;
-    }
 
     @Override
-    public List<News> findType() {
-        return dao.findType();
+    public List<News> getNews(String type) {
+        return dao.selectNews(type);
     }
 }

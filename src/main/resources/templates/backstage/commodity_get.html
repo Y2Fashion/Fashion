@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,8 +13,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="../css/backstage/commodity_get.css">
+        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+        <link rel="stylesheet" href="/static/css/backstage/commodity_get.css">
     </head>
     <body>
         <div class="x-body">
@@ -21,7 +22,7 @@
                 <tr>
                     <td>服装编号:</td>
                     <td>1</td>
-                    <td style="background: url('../image/backstage/shuji4.jpg');background-size:100% 100%;" colspan="2" rowspan="5">
+                    <td style="background: url('/static/image/backstage/shuji4.jpg');background-size:100% 100%;" colspan="2" rowspan="5">
                     </td>
                 </tr>
                 <tr>
@@ -33,12 +34,39 @@
                     <td>100000</td>
                 </tr>
                 <tr>
+                    <td>衣服材质:</td>
+                    <td>SaaS大V书上的撒打算</td>
+                </tr>
+                <tr>
                     <td>服装类型:</td>
                     <td>还能拿死阿斯顿</td>
                 </tr>
                 <tr>
                     <td>服装状态:</td>
                     <td>新品</td>
+                    <td>关联图片1:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
+                </tr>
+                <tr>
+                    <td>关联图片2:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
+                    <td>关联图片3:</td>
+                    <td>
+                        <u style="cursor:pointer"
+                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                            关联图片2:
+                        </u>
+                    </td>
                 </tr>
                 <tr>
                     <td>出厂价格:</td>
@@ -48,18 +76,20 @@
                 </tr>
             </table>
         </div>
-        <script src="../lib/layui/layui.js" charset="utf-8">
+        <script src="/static/lib/layui/layui.js" charset="utf-8">
         </script>
-        <script src="../js/backstage/x-layui.js" charset="utf-8">
+        <script src="/static/js/backstage/x-layui.js" charset="utf-8">
         </script>
         <script>
             layui.use(['form','layer'], function(){
                 $ = layui.jquery;
               var form = layui.form()
               ,layer = layui.layer;
-              
-              
             });
+            /*图片-查看*/
+            function user_management_show(title,url,id,w,h){
+                x_admin_show(title,url,w,h);
+            }
         </script>
     </body>
 

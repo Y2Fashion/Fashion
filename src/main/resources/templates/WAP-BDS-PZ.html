@@ -63,9 +63,6 @@
 		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://www.ybren.com/Public/js/jquery.1.7.2.min.js"></script>
 		<script>
 			$(function(){
-
-
-
 				$('.fli span').click(function(){
 					if(!$(this).parent().hasClass('li_act')){
 						$('.fli').removeClass('li_act');
@@ -79,21 +76,23 @@
                 })
 
                 $("#pull").hover(function () {
-                    $.ajax({
-                        url:"/pull",
-                        dataType:"json",
-                        success:function (data) {
-                            $("#pull ul").children().filter("li").remove();
-                            for(var i=data.length-1;i>=0;i--){
-                                var pull='<li>'+
-                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
-                                    '</li>';
-                                $.each($("#pull ul"),function(i,t){
-                                    $(t).html(pull+$(t).html());
-                                })
+                    if($("#pull ul>li").length<1) {
+                        $.ajax({
+                            url: "/pull",
+                            dataType: "json",
+                            success: function (data) {
+                                $("#pull ul").children().filter("li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    var pull = '<li>' +
+                                        '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
+                                        '</li>';
+                                    $.each($("#pull ul"), function (i, t) {
+                                        $(t).html(pull + $(t).html());
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 })
 
 			});
@@ -110,7 +109,7 @@
                         $(".list").children().filter("li").remove();
                         for(var i=0;i<data.length;i++){
                             var htm='<li>'+
-                                '<a href="/selectCommodity?typeId='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
+                                '<a href="/selectCommodity?id='+data[i].id+'" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">'+
                                 '<img src="/static/image/'+data[i].photoPath+'" alt="暂无样品" >'+
                                 '<div class="desc">'+
                                 '<p class="p_title">'+
@@ -167,7 +166,7 @@ var _hmt = _hmt || [];
 		</div>
 		<div class="nav">
 			<ul class="son">
-				<li><a href="index.html">首页</a></li>
+				<li><a href="/index">首页</a></li>
 				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
 					<ul>
 					</ul>
@@ -214,18 +213,18 @@ var _hmt = _hmt || [];
                 var CName = $("#CName").val();
                 var typeId = $("#typeId").val();
                 if(typeId<=23){
-                    for(var i=0;i<28;i++){
-                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
-                            var ths=$("a[name='cla']:hidden").eq(i);
+                    for(var i=0;i<27;i++){
+                        if ($("a:hidden").eq(i).text() === CName) {
+                            var ths=$("a:hidden").eq(i);
                             $(ths).parent().parent().show();
                             $(ths).parent().parent().parent().addClass("li_act");
                             $(ths).css({color: "red"});
                         }
 					}
-				}else{
-                    for(var i=28;i<45;i++){
-                        if ($("a[name='cla']:hidden").eq(i).text() === CName) {
-                            var ths=$("a[name='cla']:hidden").eq(i);
+				}else if(typeId>23){
+                    for(var i=27;i<45;i++){
+                        if ($("a:hidden").eq(i).text() === CName) {
+                            var ths=$("a:hidden").eq(i);
                             $(ths).parent().parent().show();
                             $(ths).parent().parent().parent().addClass("li_act");
                             $(ths).css({color: "red"});

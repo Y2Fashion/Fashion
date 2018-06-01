@@ -183,24 +183,24 @@
         var l = W/2-250;
         window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
     }
-    $(function () {
-        $("#pull").hover(function () {
+    $("#pull").hover(function () {
+        if($("#pull ul>li").length<1) {
             $.ajax({
-                url:"/pull",
-                dataType:"json",
-                success:function (data) {
+                url: "/pull",
+                dataType: "json",
+                success: function (data) {
                     $("#pull ul").children().filter("li").remove();
-                    for(var i=0;i<data.length;i++){
-                        var pull='<li>'+
-                            '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                    for (var i = 0; i < data.length; i++) {
+                        var pull = '<li>' +
+                            '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
                             '</li>';
-                        $.each($("#pull ul"),function(i,t){
-                            $(t).html(pull+$(t).html());
+                        $.each($("#pull ul"), function (i, t) {
+                            $(t).html(pull + $(t).html());
                         })
                     }
                 }
             })
-        })
+        }
     })
     $(function() {
         $('.r3').hover(function(){
@@ -429,25 +429,25 @@
 		<div class="fsec">
 			<ul class="fsec1" style="margin-left: 150px;">
 				<li style="padding-bottom: 5px;padding-left: 0;"><a class="ftitle" target="_blank" href="javascript:void(0)">关于我们</a></li>
-				<li><a target="_blank" href="company-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/company?from=WAP-BDS-PZ">公司简介</a></li>
-				<li><a target="_blank" href="brandCooper-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper?from=WAP-BDS-PZ">合作品牌</a></li>
-				<li><a target="_blank" href="media-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/media?from=WAP-BDS-PZ">新闻动态</a></li>
-				<li><a target="_blank" href="business-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/business?from=WAP-BDS-PZ">商务合作</a></li>
+				<li><a target="_blank" href="company" tppabs="https://www.ybren.com/index.php/Home/Index/company">公司简介</a></li>
+				<li><a target="_blank" href="brandCooper" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper">合作品牌</a></li>
+				<li><a target="_blank" href="media" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
+				<li><a target="_blank" href="business" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
 			</ul>
 			<ul class="fsec1">
 				<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
 
-				<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric?from=WAP-BDS-PZ">面料品牌</a></li> -->
-				<li><a target="_blank" href="maintenance-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance?from=WAP-BDS-PZ">保养手册</a></li>
-				<li><a target="_blank" href="service-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/service?from=WAP-BDS-PZ">售后服务</a></li>
-				<li><a target="_blank" href="WAP-BDS-PZ-33.htm" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka/from/WAP-BDS-PZ">大咖定制秀</a></li>
+				<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric">面料品牌</a></li> -->
+				<li><a target="_blank" href="maintenance" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
+				<li><a target="_blank" href="service" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
+				<li><a target="_blank" href="Daka" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
 			</ul>
 			<ul class="fsec1">
 				<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">联系我们</a></li>
-				<li><a target="_blank" href="contact.html#zhanting" tppabs="https://www.ybren.com/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
-				<li><a target="_blank" href="WAP-BDS-PZ-106.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/10703/from/WAP-BDS-PZ">预约量体</a></li>
-				<li><a target="_blank" href="WAP-BDS-PZ-107.htm" tppabs="https://www.ybren.com/index.php/Home/Index/succeed/from/WAP-BDS-PZ">风尚人物</a></li>
-				<!-- <li><a target="_blank" href="/index.php/Home/Activity/YbrenerReg/from/WAP-BDS-PZ">衣邦客</a></li>								 -->
+				<li><a target="_blank" href="contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
+				<li><a target="_blank" href="yuyue" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/10703/from/GW">预约量体</a></li>
+				<li><a target="_blank" href="succeed" tppabs="https://www.ybren.com/index.php/Home/Index/succeed">风尚人物</a></li>
+				<!-- <li><a target="_blank" href="/index.php/Home/Activity/YbrenerReg">衣邦客</a></li>								 -->
 			</ul>
 			<ul class="fsec1">
 				<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">预约热线</a></li>

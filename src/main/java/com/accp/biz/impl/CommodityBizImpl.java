@@ -6,6 +6,8 @@ import com.accp.dao.ThirdTypeDao;
 import com.accp.entity.Commodity;
 import com.accp.entity.SecondType;
 import com.accp.entity.ThirdType;
+import com.accp.util.Pager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +17,7 @@ import java.util.List;
 @Service
 public class CommodityBizImpl implements CommodityBiz {
     @Resource
-    private CommodityDao dao;
+    private CommodityDao commodityDao;
 
     @Resource
     private ThirdTypeBiz thirdTypeBiz;
@@ -31,13 +33,13 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public List<Commodity> findType(Commodity commodity) {
-        return dao.findType(commodity);
+        return commodityDao.findType(commodity);
     }
 
     @Override
     public Commodity findId(Integer id) {
         addHits(id);
-        Commodity commodity=dao.findId(id);
+        Commodity commodity=commodityDao.findId(id);
         commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
         commodity.setPictures(pictureBiz.getPictureList(id));
         return commodity;
@@ -45,13 +47,13 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public void addHits(Object comId) {
-        Commodity commodity=dao.findId((Integer)comId);
+        Commodity commodity=commodityDao.findId((Integer)comId);
         commodity.setHits(commodity.getHits()+1);
-        dao.UpdateHits(commodity);
+        commodityDao.UpdateHits(commodity);
     }
 
     @Override
-    public List<Commodity> getCommoditys(String secondTypeId) {
+    public List<Commodity> getCommoditys(Object secondTypeId) {
         List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeList(secondTypeId);
         Integer[] thirdTypeArry=new Integer[thirdTypes.size()];
         int i=0;
@@ -61,13 +63,13 @@ public class CommodityBizImpl implements CommodityBiz {
                 i++;
             }
         }
-        return dao.selectCommodityList(thirdTypeArry);
+        return commodityDao.selectCommodityList(thirdTypeArry);
     }
 
     @Override
     public List<Commodity> getCommoditys(int dandu) {
         Integer[] integers=new Integer[]{dandu};
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
     }
 
     @Override
@@ -93,6 +95,19 @@ public class CommodityBizImpl implements CommodityBiz {
                 a++;
             }
         }
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
+    }
+
+    @Override
+    public Pager<Commodity> commodityList(Integer type, Integer pageNo) {
+        if(null == pageNo){
+            pageNo=1;
+        }
+        Pager<Commodity> pager = new Pager<>();
+        pager.setPageNo(pageNo);
+        pager.setTotalRows(commodityDao.commodityCount(type));
+        pager.setTotalPage((pager.getTotalRows()+8-1)/8);
+        pager.setDatas(commodityDao.commodityList(type,pageNo-1));
+        return pager;
     }
 }

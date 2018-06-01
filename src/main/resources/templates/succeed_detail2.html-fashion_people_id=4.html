@@ -9,6 +9,13 @@
 		<meta name="Keywords" content="衣邦人，方琴，朱叶青，徐岩，忻皓，陈锋，姜媛媛。">
 		<meta name="Description" content="百位成功人士的选择衣邦人高端服装定制，讲述属于他们成功故事背后的轨迹。">
 		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
+		<meta http-equiv="mobile-agent" content="format=html5; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=xhtml; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=wml; url=https://m.ybren.com/" />
+		<link rel="shortcut icon" type="image/x-icon" href="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/PC/web/favicon.ico"  media="screen" >
+		<script src="/static/js/swiper.min.js" tppabs="https://ossstatic.ybren.com/PC/js/swiper.min.js"></script>
+		<link rel="stylesheet" href="/static/css/swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css">
+		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>
 		<style type="text/css">
 			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			ul,ol,li{list-style:none; vertical-align: top;}
@@ -36,21 +43,23 @@
 
             $(function () {
                 $("#pull").hover(function () {
-                    $.ajax({
-                        url:"/pull",
-                        dataType:"json",
-                        success:function (data) {
-                            $("#pull ul").children().filter("li").remove();
-                            for(var i=0;i<data.length;i++){
-                                var pull='<li>'+
-                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
-                                    '</li>';
-                                $.each($("#pull ul"),function(i,t){
-                                    $(t).html(pull+$(t).html());
-                                })
+                    if($("#pull ul>li").length<1) {
+                        $.ajax({
+                            url: "/pull",
+                            dataType: "json",
+                            success: function (data) {
+                                $("#pull ul").children().filter("li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    var pull = '<li>' +
+                                        '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
+                                        '</li>';
+                                    $.each($("#pull ul"), function (i, t) {
+                                        $(t).html(pull + $(t).html());
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 })
             })
 

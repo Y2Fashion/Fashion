@@ -5,7 +5,9 @@ import com.accp.entity.Commodity;
 import com.accp.entity.Lining;
 import com.accp.entity.SecondType;
 import com.accp.entity.ThirdType;
+import com.accp.util.Iputil;
 import com.accp.util.RedisUtil;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -70,7 +76,10 @@ public class CommodityController {
 
     // 首页
     @RequestMapping("/index")
-    public String goToIndex(Model model){
+    public String goToIndex(Model model, HttpServletRequest request){
+
+        String IP=Iputil.getIpAddr(request);
+
         List<Commodity> xiZhuangHitsList=null;
         List<Commodity> chenSanHitsList=null;
         List<Commodity> kuZhuangHitsList=null;
@@ -115,7 +124,10 @@ public class CommodityController {
 
     //衣服详细页面
     @RequestMapping("/selectCommodity")
-    public String goToXiangXi(Model model,Integer id) {
+    public String goToXiangXi(Model model,Integer id,HttpServletRequest request) {
+        Date time=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        request.getSession().setAttribute(id.toString(),df.format(time));
         Commodity commodity=biz.findId(id);
         Lining lining=liNingBiz.getLiNingById(commodity.getlId());
         List<Lining> LiNingList=liNingBiz.getLiNingList();
@@ -130,5 +142,24 @@ public class CommodityController {
         model.addAttribute("LiNingList",LiNingList);
         model.addAttribute("commoditys",commoditys);
         return "WAP-BDS-PZ-132";
+    }
+
+    @RequestMapping("monitor")
+    @ResponseBody
+    private void monitor(String cId,HttpServletRequest request){
+        DateFormat dfsf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date orderTime=new Date();
+       // Date lookTime=new Date();
+        Date enterTime=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            enterTime=dfsf.parse((String) request.getSession().getAttribute("cId"));
+            orderTime=dfsf.parse(df.format(orderTime));
+
+        }catch (Exception e){
+
+        }
+        long lookTime=enterTime.getTime()-orderTime.getTime();
+        long time=lookTime/1000;
     }
 }

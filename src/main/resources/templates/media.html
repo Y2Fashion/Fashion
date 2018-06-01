@@ -9,6 +9,13 @@
 		<meta name="Keywords" content="衣邦人，杭州贝嘟科技，服装定制，方琴，服装新闻，服装新闻网。">
 		<meta name="Description" content="衣邦人服装定制品牌，为您提供企业动态，服装行业最新资讯，透过意式的多面性与国际性，结合意式文化的经典元素以及现代人的生活方式，更多新闻资讯在中国衣邦人品牌。">
 		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
+		<meta http-equiv="mobile-agent" content="format=html5; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=xhtml; url=https://m.ybren.com/" />
+		<meta http-equiv="mobile-agent" content="format=wml; url=https://m.ybren.com/" />
+		<link rel="shortcut icon" type="image/x-icon" href="//appybrencdn.oss-cn-hangzhou.aliyuncs.com/PC/web/favicon.ico"  media="screen" >
+		<script src="/static/js/swiper.min.js" tppabs="https://ossstatic.ybren.com/PC/js/swiper.min.js"></script>
+		<link rel="stylesheet" href="/static/css/swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css">
+		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>
 		<style type="text/css">
 			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			ul,ol,li{list-style:none; vertical-align: top;}
@@ -44,23 +51,88 @@
 	<body>
 		<script>
 
+			function getNewsByType(i) {
+                $(".year").children().filter("a").removeClass("act");
+                $(i).addClass("act");
+                var newsType = $(".act").html();
+                $.ajax({
+                    url: "/getNewsByType",
+                    dataType: "json",
+                    data: {"newsType": newsType},
+                    success: function (data) {
+                        console.log(data);
+                        eachData(data);
+                        $("[name='pageNo']").text(1);
+                    }
+                })
+            }
+
+            function getNews(i){
+                var judge=$(i).attr("_name");
+                var pageNo=parseInt($("[name='pageNo']").html());
+                var newsType=$(".act").html();
+                var pageCount=parseInt($("[name='pageCount']").val());
+                alert(pageCount)
+                if(judge==="next"){
+                    if(pageNo<pageCount){
+                        pageNo+=1;
+					}
+				}else{
+                    if(pageNo>1){
+                        pageNo=pageNo-1;
+                    }
+				}
+				$.ajax({
+					type:'post',
+					url:'/getNews',
+					data:{'pageNo':pageNo,'newsType':newsType},
+					dataType:'json',
+					success:function (data) {
+					    eachData(data);
+						$("[name='pageNo']").html(pageNo);
+                    }
+				})
+            }
+
+            function eachData(data){
+                $("#news").children().filter("li").remove();
+                for(var i=data.length-1;i>=0;i--){
+                    var data1=new Date(data[i].createDate)
+					var da=data1.getFullYear()+'-'+(data1.getMonth()+1 < 10 ? '0'+(data1.getMonth()+1) : data1.getMonth()+1) + '-'+data1.getDate();
+                    var htm='<li>'+
+                        '<a href="'+data[i].htmlPath+'" >'+
+                        '<img src="/static/image/'+data[i].nPath+'" >'+
+                        '<p class="title"><i class="it">'+data[i].title+'</i>'+
+                        '<i>[摘要]&nbsp;'+data[i].content+'</i>'+
+                        '<i class="time">'+da+'&nbsp;&nbsp;'+data[i].ntv+' </i>'+
+                        '</p>'+
+                        '</a>'+
+                        '</li>'
+                    $.each($("#news"),function(i,t){
+                        $(t).html(htm+$(t).html());
+                    })
+                }
+			}
+
             $(function () {
                 $("#pull").hover(function () {
-                    $.ajax({
-                        url:"/pull",
-                        dataType:"json",
-                        success:function (data) {
-                            $("#pull ul").children().filter("li").remove();
-                            for(var i=0;i<data.length;i++){
-                                var pull='<li>'+
-                                    '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
-                                    '</li>';
-                                $.each($("#pull ul"),function(i,t){
-                                    $(t).html(pull+$(t).html());
-                                })
+                    if($("#pull ul>li").length<1) {
+                        $.ajax({
+                            url: "/pull",
+                            dataType: "json",
+                            success: function (data) {
+                                $("#pull ul").children().filter("li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    var pull = '<li>' +
+                                        '<a href="getCommodityListBySType?SecondTypeId=' + data[i].sId + '">' + data[i].secondType + '</a>' +
+                                        '</li>';
+                                    $.each($("#pull ul"), function (i, t) {
+                                        $(t).html(pull + $(t).html());
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 })
             })
 
@@ -99,9 +171,8 @@ var _hmt = _hmt || [];
 		<div class="nav">
 			<ul class="son">
 				<li><a href="index" tppabs="https://www.ybren.com/">首页</a></li>
-				<li class="son_li"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
 					<ul>
-						<li ><a href="137.htm" tppabs="https://www.ybren.com/home/category/137">男士西装</a></li><li ><a href="143.htm" tppabs="https://www.ybren.com/home/category/143">男士T恤</a></li><li ><a href="140.htm" tppabs="https://www.ybren.com/home/category/140">男士衬衫</a></li><li ><a href="142.htm" tppabs="https://www.ybren.com/home/category/142">男士裤装</a></li><li ><a href="212.htm" tppabs="https://www.ybren.com/home/category/212">男士新中式</a></li><li ><a href="141.htm" tppabs="https://www.ybren.com/home/category/141">男士外套</a></li><li ><a href="195.htm" tppabs="https://www.ybren.com/home/category/195">男士童装</a></li><li ><a href="145.htm" tppabs="https://www.ybren.com/home/category/145">女士西装</a></li><li ><a href="191.htm" tppabs="https://www.ybren.com/home/category/191">女士真丝</a></li><li ><a href="146.htm" tppabs="https://www.ybren.com/home/category/146">女士衬衫</a></li><li ><a href="javascript:if(confirm('https://www.ybren.com/home/category/148  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ������, �����������, ����Ŀ����ֹͣ��  \n\n�����ڷ������ϴ���?'))window.location='https://www.ybren.com/home/category/148'" tppabs="https://www.ybren.com/home/category/148">女士裤装</a></li><li ><a href="204.htm" tppabs="https://www.ybren.com/home/category/204">女士针织</a></li><li ><a href="147.htm" tppabs="https://www.ybren.com/home/category/147">女士外套</a></li><li ><a href="218.htm" tppabs="https://www.ybren.com/home/category/218">配饰</a></li>		
 					</ul>
 				</li>
 				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
@@ -150,9 +221,7 @@ var _hmt = _hmt || [];
 				},function(){
 					$('.app_code').hide();
 				});
-
 			});
-
 		</script>
 
 	<div class="right_sevice">
@@ -183,16 +252,7 @@ var _hmt = _hmt || [];
 				},function(){
 					$('.app_code').hide();
 				});
-				$(".year a").click(function () {
-                   var type=$(this).text();
-                   var pageNo=$("#pageNo").text();
-                   //alert(pageNo);
-
-                })
-
 			});
-
-
 		</script>	
 
 <!--头部-->		
@@ -202,33 +262,36 @@ var _hmt = _hmt || [];
 		</div>
 		
 		<div class="content">
-                    <div class="year" >
+                    <div class="year">
+                        <a class="act"  href="javascript:void(0);" onclick="getNewsByType(this)" tppabs="https://www.ybren.com/index.php/Home/Index/media.html?cateid=63">公司动态</a>|
+						<a   href="javascript:void(0);" onclick="getNewsByType(this)" tppabs="https://www.ybren.com/index.php/Home/Index/media.html?cateid=64">媒体焦点</a>|
+						<a   href="javascript:void(0);" onclick="getNewsByType(this)" tppabs="https://www.ybren.com/index.php/Home/Index/media.html?cateid=96">行业资讯</a>|                    </div>
+			<ul class="item" id="news">
+				<li th:each="news:${news1}">
+					<a th:href="@{${news.htmlPath}}">
+						<img th:src="@{'static/image/'+${news.nPath}}" tppabs="https://appstatic.ybren.com/Uploads/Articles/2018-01-04/5a4de8ff01f64.jpg">
+						<p class="title"><i class="it" th:text="${news.title}">衣邦人微信粉丝破200万 互联网营销引领高端定制业</i>
+							<i th:text="${'[摘要]&nbsp;'+news.content}">当所有人刚刚经历“喜迎2018，齐晒18岁月”的喜庆时刻，新年第一个工作日，高端互联网定制平台衣邦人宣布：1月2日，微信粉丝突破200万。</i>
+							<i class="time" th:text="${#dates.format(news.createDate,'yyyy-MM-dd')+'&nbsp;&nbsp;'+news.ntv}">2018-01-04 </i>
+						</p>
 
-                        <a class="act" href="media?type=公司动态">公司动态</a>|
-						<a href="media?type=媒体焦点">媒体焦点</a>|
-						<a href="media?type=行业资讯">行业资讯</a>|
-					</div>
-			<ul class="item">
-						<li th:each="News:${page.datas}">
-							<a href="#">
-								<img th:src="@{'/static/image/'+${News.nPath}}">
-								<p class="title"><i class="it" th:text="${News.title}"></i>
-									<i>[摘要]&nbsp;<span th:text="${News.content}"></span></i>
-									<i class="time"><span  th:text="${#dates.format(News.createDate,'yyyy-MM-dd')}"></span>&nbsp;&nbsp; <span th:text="${News.getNtv()}"></span></i>
-								</p>
-
-							</a>
-						</li>
-
+					</a>
+				</li>
 			</ul>
-			<div class="page"><a href="javascript:void(0);" style="margin-right: 5px;">
-				<img src="/static/image/left.jpg" tppabs="https://ossstatic.ybren.com/PC/detailimg/left.jpg"></a>
-				<a style="margin:0 10px" href="###">第<span th:text="${page.pageNo}" id="pageNo"></span>页</a><a href="media.html-page=2&cateid=63.htm" tppabs="https://www.ybren.com/index.php/Home/index/media.html?page=2&cateid=63">
-					<img src="/static/image/right.jpg" tppabs="https://ossstatic.ybren.com/PC/detailimg/right.jpg"></a></div>
+			<div class="page">
+				<input type="hidden" name="pageCount" th:value="${pageCount}">
+				<a href="javascript:void(0);"  style="margin-right: 5px;">
+					<img src="/static/image/left.jpg" onclick="getNews(this)" _name="prev" />
+				</a>
+				<a style="margin:0 10px" name="pageNo" href="javascript:void(0);">1</a>
+				<a href="javascript:void(0);">
+					<img src="/static/image/right.jpg" _name="next" onclick="getNews(this)" >
+				</a>
+			</div>
 		</div>
 		  <div class="foot">
 			<div class="foot_logo">
-				<img src="/static/image/foot01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/foot01.jpg" alt="" />
+				<img src="/static/image/foot01.jpg" alt="" />
 			</div>
 			<div class="fmidd">
 				<div class="fsec">					
@@ -241,8 +304,6 @@ var _hmt = _hmt || [];
 					</ul>
 					<ul class="fsec1">
 						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
-
-						<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric">面料品牌</a></li> -->
                         <li><a target="_blank" href="maintenance" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
                         <li><a target="_blank" href="service" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
 						<li><a target="_blank" href="Daka" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
@@ -258,8 +319,6 @@ var _hmt = _hmt || [];
 						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">预约热线</a></li>
 						<li>400-673-8899</li>
 						<li>(北京时间9：00-21：30)</li>
-						<!-- <li>24小时客服在线</li> -->
-
 					</ul>
 					<div class="code">
 						<p><img src="/static/image/code01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/code01.png"></p>

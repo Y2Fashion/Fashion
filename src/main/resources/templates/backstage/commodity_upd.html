@@ -1,6 +1,6 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
-    
     <head>
         <meta charset="utf-8">
         <title>
@@ -12,8 +12,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="../css/backstage/commodity_add.css">
+        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+        <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
 
     </head>
     <body>
@@ -27,7 +27,7 @@
                         <td class="q_td">
                             <input type="text" name='uname' class="u_t" value="衣服名称(长度为5-12位)"/>
                         </td>
-                        <td style="background: url('../image/backstage/shuji4.jpg');background-size:100% 100%;"
+                        <td style="background: url('/static/image/backstage/shuji4.jpg');background-size:100% 100%;"
                             colspan="2" rowspan="4">
                         </td>
                     </tr>
@@ -41,6 +41,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="p_td">衣服材质:</td>
+                        <td class="q_td">
+                            <input type="text" name='uname' class="u_t" value="9527"/>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td class="p_td">服装类型:</td>
                         <td class="q_td">
                             <select class="u_t">
@@ -53,6 +60,29 @@
                         <td class="p_td"  style="line-height:2.9em">修改图片:</td>
                         <td class="q_td r_td" >
                             <input type="file" name="file"/>
+                        </td>
+                        <td class="p_td" >关联图片1:</td>
+                        <td class="q_td r_td" >
+                            <u style="cursor:pointer"
+                               onclick="user_management_show('关联图片1:','commodity_updImg','10001','360','340')">
+                                关联图片2:
+                            </u>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p_td" height="41px">关联图片1:</td>
+                        <td class="q_td r_td" >
+                            <u style="cursor:pointer"
+                               onclick="user_management_show('关联图片2:','commodity_updImg','10001','360','340')">
+                                关联图片2:
+                            </u>
+                        </td>
+                        <td class="p_td">关联图片1:</td>
+                        <td class="q_td r_td" >
+                            <u style="cursor:pointer"
+                               onclick="user_management_show('关联图片3:','commodity_updImg','10001','360','340')">
+                                关联图片2:
+                            </u>
                         </td>
                     </tr>
                     <tr>
@@ -72,11 +102,24 @@
                     </tr>
                 </table>
 
+
             </form>
         </div>
-        <script src="../lib/layui/layui.js" charset="utf-8">
+        <script src="/static/lib/layui/layui.js" charset="utf-8">
         </script>
-        <script src="../js/backstage/x-layui.js" charset="utf-8">
+        <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+        </script>
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+                var form = layui.form()
+                    ,layer = layui.layer;
+            });
+
+            /*图片-查看*/
+            function user_management_show(title,url,id,w,h){
+                x_admin_show(title,url,w,h);
+            }
         </script>
     </body>
 

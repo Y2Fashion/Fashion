@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <meta charset="utf-8">
     <title>
-        供应商管理
+        布料管理
         <!--   User_management.html修改而来-->
     </title>
     <meta name="renderer" content="webkit">
@@ -12,15 +13,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-    <link rel="stylesheet" href="../css/backstage/pag.css" media="all">
-    <link rel="stylesheet" href="../css/backstage/commodity.css">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity.css">
 </head>
 <body>
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>产品管理</cite></a>
+              <a><cite>布料管理</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
@@ -51,9 +52,9 @@
     </form>
     <div class="tools">
         <ul class="toolbar">
-            <li><span><img src="../image/backstage/t03.png" /></span>批量删除</li>
-            <li onclick="user_management_add('添加服装','commodity_add.html','600','400')"><span>
-          <img src="../image/backstage/t01.png" /></span>添加</li>
+            <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
+            <li onclick="user_management_add('添加服装','lining_add','600','420')"><span>
+          <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
         <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
     </div>
@@ -79,7 +80,7 @@
                 布料库存
             </th>
             <th>
-                供应商编号
+                存放地址
             </th>
             <th>
                 操作
@@ -105,16 +106,16 @@
                 男
             </td>
             <td>
-                1
+                B区22号3层
             </td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看布料详情','lining_get.html','4','','250')"
+                   onclick="user_management_edit('查看布料详情','lining_get','4','','360')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改布料详情','lining_upd','10001','900','380')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -146,12 +147,12 @@
             </td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
+                   onclick="user_management_edit('查看布料详情','commodity_get.html','4','','450')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
+                   onclick="user_management_password('修改布料详情','commodity_upd.html','10001','900','360')"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -474,10 +475,10 @@
 <br />
 <br />
 <br />
-<script src="../lib/layui/layui.js" charset="utf-8"></script>
-<script src="../js/backstage/x-layui.js" charset="utf-8"></script>
-<script src="../js/backstage/jquery2.js" charset="utf-8"></script>
-<script src="../js/backstage/js.js" charset="utf-8"></script>
+<script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script src="/static/js/backstage/js.js" charset="utf-8"></script>
 <script>
     layui.use(['laydate','element','laypage','layer'], function(){
         $ = layui.jquery;//jquery
