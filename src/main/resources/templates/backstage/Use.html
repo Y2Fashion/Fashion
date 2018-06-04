@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        布料管理
+        布料使用管理
         <!--   User_management.html修改而来-->
     </title>
     <meta name="renderer" content="webkit">
@@ -21,39 +21,33 @@
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>布料管理</cite></a>
+              <a><cite>产品管理</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <form action="" style="width:85%">
-        <label>布料成分:</label>
+        <label>布料编号:</label>
         <select class="" name="cars">
             <option value="volvo">请选择</option>
             <option value="saab">男</option>
             <option value="fiat">女</option>
             <option value="audi">配饰</option>
         </select>
-        <label>布料颜色:</label>
+        <label>布料用途:</label>
         <select name="name">
-            <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
-        </select>
-        <label>布料花型:</label>
-        <select name="cars">
-            <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+            <option value="volvo">所有一级与三级的整合</option>
+            <option value="saab">男西装</option>
+            <option value="fiat">女西装</option>
+            <option value="audi">男西裤</option>
+            <option value="audi">女西裤</option>
         </select>
         <input type="submit" style="width:50px" value="搜索"/>
     </form>
     <div class="tools">
         <ul class="toolbar">
             <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
-            <li onclick="user_management_add('添加服装','lining_add','600','420')"><span>
+            <li onclick="user_management_add('添加布料使用','Use_add','600','390')"><span>
           <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
         <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
@@ -68,19 +62,22 @@
                 ID
             </th>
             <th>
-                布料成分
+                布料编号
             </th>
             <th>
-                布料颜色
+                订单编号
             </th>
             <th>
-                布料花型
+                使用日期
             </th>
             <th>
-                布料库存
+                使用长度
             </th>
             <th>
-                存放地址
+                用途
+            </th>
+            <th>
+                使用人
             </th>
             <th>
                 操作
@@ -108,17 +105,10 @@
             <td>
                 B区22号3层
             </td>
+            <td>
+                B区22号3层
+            </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看布料详情','lining_get','4','','360')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改布料详情','lining_upd','10001','900','380')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -143,19 +133,12 @@
                 男
             </td>
             <td>
+                B区22号3层
+            </td>
+            <td>
                 1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看布料详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改布料详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -180,19 +163,12 @@
                 男
             </td>
             <td>
+                B区22号3层
+            </td>
+            <td>
                 1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -217,19 +193,12 @@
                 男
             </td>
             <td>
-               1
+                B区22号3层
+            </td>
+            <td>
+                1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -254,19 +223,12 @@
                 男
             </td>
             <td>
-              1
+                B区22号3层
+            </td>
+            <td>
+                1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -291,19 +253,12 @@
                 男
             </td>
             <td>
-               1
+                B区22号3层
+            </td>
+            <td>
+                1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -328,19 +283,12 @@
                 男
             </td>
             <td>
+                B区22号3层
+            </td>
+            <td>
                 1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -365,19 +313,12 @@
                 男
             </td>
             <td>
-               1
+                B区22号3层
+            </td>
+            <td>
+                1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -402,19 +343,12 @@
                 男
             </td>
             <td>
+                B区22号3层
+            </td>
+            <td>
                 1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -439,19 +373,12 @@
                 男
             </td>
             <td>
+                B区22号3层
+            </td>
+            <td>
                 1
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get.html','4','','450')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd.html','10001','900','360')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
                 <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
@@ -492,14 +419,14 @@
     function user_management_add(title,url,w,h){
         x_admin_show(title,url,w,h);
     }
-    // 商品-查看
-    function user_management_edit (title,url,id,w,h) {
-        x_admin_show(title,url,w,h);
-    }
-    /*商品-修改*/
-    function user_management_password(title,url,id,w,h){
-        x_admin_show(title,url,w,h);
-    }
+//    // 商品-查看
+//    function user_management_edit (title,url,id,w,h) {
+//        x_admin_show(title,url,w,h);
+//    }
+//    /*商品-修改*/
+//    function user_management_password(title,url,id,w,h){
+//        x_admin_show(title,url,w,h);
+//    }
 
     $('.tablelist tbody tr:odd').addClass('odd');
 </script>

@@ -83,6 +83,7 @@
         </thead>
         <tbody>
         <tr>
+            <input type="hidden"  th:value="${typeId}" id="typeId">
             <td><input type="checkbox" value="1" name="selected"></td>
             <td>1</td>
             <td>求大神</td>
@@ -408,8 +409,9 @@
     }
     // 商品-查看
     function user_management_edit (title,url,id,w,h) {
-        alert(url);
-        x_admin_show(title,url,w,h);
+        var aa = $("#typeId").val();
+        var urls=url+"?id="+aa;
+        x_admin_show(title,urls,w,h);
     }
     /*商品-添加*/
     function user_management_password(title,url,id,w,h){

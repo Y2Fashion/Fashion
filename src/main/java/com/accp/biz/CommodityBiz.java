@@ -3,7 +3,7 @@ package com.accp.biz;
 import com.accp.entity.AccessingData;
 import com.accp.entity.Commodity;
 import com.accp.entity.ThirdType;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.accp.util.Pager;
 
 import java.util.List;
 
@@ -48,5 +48,7 @@ public interface CommodityBiz {
     * 按多个id查询
     * */
     List<Commodity> getCommListByXQArray(List<AccessingData> accessingData);
+
+    public Pager<Commodity> commodityList(Integer type,Integer pageNo);
 
 }

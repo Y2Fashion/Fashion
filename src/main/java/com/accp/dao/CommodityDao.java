@@ -22,7 +22,6 @@ public interface CommodityDao {
      */
     public Commodity findId(@ProbeParam("id") Integer id);
 
-
     /*
      * 添加点击量
      * */
@@ -37,5 +36,9 @@ public interface CommodityDao {
      * 按用户IP查询
      * */
     public List<Commodity> selectCommodityListByIP(Integer[] IDArray);
+
+    public List<Commodity> commodityList(@Param("type") Integer type,@Param("pageNo") Integer pageNo);
+
+    public Integer commodityCount(@Param("type") Integer type);
 
 }
