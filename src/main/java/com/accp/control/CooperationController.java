@@ -29,7 +29,7 @@ public class CooperationController {
 
     @RequestMapping("/addCooperation")
     @ResponseBody
-    private Map addCooperation(@RequestParam String QiYeName,String NAME,String CreateDate,String Phone,String QiYeAddress,
+    private Map addCooperation(String QiYeName,String NAME,String CreateDate,String Phone,String QiYeAddress,
                                 String zhiWu,String FaRen, String Email,String YeWuFanWei,String CanPingLei,
                                 String CanNeng, String JiaGongXS,String CanPingFengGe,String PingPaiHeZuo,
                                String ZhongRenShu,String CheJIanRenShu,String BanFangRen,String ZaiChuangRenShu,

@@ -1,7 +1,9 @@
 package com.accp.biz;
 
+import com.accp.entity.AccessingData;
 import com.accp.entity.Commodity;
 import com.accp.entity.ThirdType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -36,5 +38,15 @@ public interface CommodityBiz {
     * 按热度和1级分类查询
     * */
     public List<Commodity> getCommoditys(boolean bool);
+
+    /*
+    * 按多个三级ID查询
+    * */
+    List<Commodity> getCommodityListByArray(List<AccessingData> intList);
+
+    /*
+    * 按多个id查询
+    * */
+    List<Commodity> getCommListByXQArray(List<AccessingData> accessingData);
 
 }

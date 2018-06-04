@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 	<head>
@@ -20,7 +20,43 @@
 		<script src="//ossstatic.ybren.com/PC/js/video.min.js"></script> -->
 		<link href="/static/css/index20180208.css" tppabs="https://ossstatic.ybren.com/PC/css/index20180208.css" rel="stylesheet" >
 		<script type="text/javascript" src="/static/js/jquery.cityselect.new.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.cityselect.new.js"></script>
-        <script>
+		<link href="/static/css/common.css" tppabs="https://www.ybren.com/Public/css/common.css" rel="stylesheet"/>
+		<style type="text/css">
+			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
+			ul,ol,li{list-style:none; vertical-align: top;}
+			img{border:0}
+			a{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+			body{
+				margin: 0;
+				padding: 0;
+				background-color: #eff3f5;
+				overflow-x: hidden;
+				font-family:"Microsoft YaHei",微软雅黑,sans-serif;
+				color: #222222;
+			}
+			.nav{border-bottom: 1px solid #515151;}
+			.content{width: 1185px;margin:0 auto;padding:45px 0 90px;overflow: hidden;}
+
+
+			#Idiv .list{overflow: hidden; float: left;width: 1017px;}
+			#Idiv .list li{float: left;overflow: hidden;width: 244px;margin-bottom: 10px;margin-right: 8px;}
+			#Idiv .list li:nth-child(4n){margin-right: 0;}
+			#Idiv .list li img{width: 244px;height: 244px;float: left;margin-bottom:4px;margin: 0 auto}
+			#Idiv .list p {text-align: justify;line-height: 1.6em;padding: 10px 5px;}
+			#Idiv .list li .desc {float: left;width: 100%;background: #ffffff;padding: 0px 10px;box-sizing: border-box;}
+			#Idiv .list .desc .p_title {color: #222222;margin-bottom: 5px;}
+			#Idiv .list .desc p {overflow: hidden;padding: 0;}
+			#Idiv .list .desc .p_title span {font-size: 10px;height: 18px;line-height: 18px;box-sizing: border-box;float: left;
+				overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+			}
+			#Idiv .list .desc .p_title .name {width: 80%;}
+			#Idiv .list .desc .p_title .coup {width: 20%;font-size: 8px;border: 1px solid #e60039;border-radius: 2px;color: #e60039;padding: 0px 4px;height: 16px;line-height: 14px;text-align: center;
+			}
+			#Idiv .list .desc .p_desc {color: #005bac;font-size: 10px;margin-bottom: 9px;text-align: left;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+			#Idiv .list .desc font {font-weight: bold;font-size: 14px;color: #262626;float: left;margin-right: 5px;}
+
+		</style>
+		<script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -29,12 +65,102 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-86988233-1', 'auto');
 ga('send', 'pageview');
 
-</script>	
-        <style type="text/css">
+</script>
+		<script langue="javascript">
+			/*
+			* 弹框事件
+			* */
+            function show()
+            {
+                var listSize=$("[name='listSize']").val();
+                console.log(listSize);
+                var Idiv=document.getElementById("Idiv");
+                Idiv.style.width=250*listSize+"px";
+                Idiv.style.display="block";
+                //以下部分要将弹出层居中显示
+                Idiv.style.left=(document.documentElement.clientWidth-Idiv.clientWidth)/2+document.documentElement.scrollLeft+"px";
+                //alert(document.body.scrollTop)
+                var aa_scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                Idiv.style.top=(document.documentElement.clientHeight-Idiv.clientHeight)/2+aa_scrollTop+"px";
+                //此处出现问题，弹出层左右居中，但是高度却不居中，显示在上部分，导致一                      //部分不可见,于是暂时在下面添加margin-top
+
+
+                //以下部分使整个页面至灰不可点击
+                var procbg = document.createElement("div");  //首先创建一个div
+                procbg.setAttribute("id","mybg");            //定义该div的id
+                procbg.style.background ="#000000";
+                procbg.style.width ="100%";
+                procbg.style.height ="100%";
+                procbg.style.position ="fixed";
+                procbg.style.top ="0";
+                procbg.style.left ="0";
+                procbg.style.zIndex ="500";
+                procbg.style.opacity ="0.6";
+                procbg.style.filter ="Alpha(opacity=70)";
+                //取消滚动条
+                document.body.appendChild(procbg);
+                document.body.style.overflow ="auto";
+                //Idiv.css({'transform':'translateY(+300px)'})
+            }
+            function closeDiv()   //关闭弹出层
+            {
+
+                var Idiv=document.getElementById("Idiv");
+                var mybg = document.getElementById("mybg");
+                document.body.removeChild(mybg);
+                Idiv.style.display="none";
+                document.body.style.overflow ="auto";//恢复页面滚动条
+                //document.getElementById("mybg").style.display="none";
+            }
+
+		</script>
+		<!--弹窗样式-->
+		<style type="text/css">
+			*
+			{
+				padding:0px;
+				margin:0px;
+			}
+			#Idiv
+			{
+				height:380px;
+				position:absolute;
+				z-index:1000;
+				border:2px solid #ffffff;
+				background:#ffffff;
+				padding: 15px;
+				border-radius: 10px;
+				border: 3px solid ;
+				border-color: #ed7c49;
+
+			}
+		</style>
+		<style type="text/css">
 			.chinese_to_english{position: absolute;top:67px;right:0px;color: #FFFFFF;}
 		</style>
 	</head>
 	<body>
+	<input type="hidden" name="interestList" th:value="${bool}">
+	<input type="hidden" name="listSize" th:value="${listSize}">
+	<div id="Idiv" style="display:none;" >
+		<a href="javascript:void(0)" onclick="closeDiv()" style="font-size: 16px; float: right;"><img style="width: 25px;height: 25px" src="/static/image/timg.jpg"></a>
+		<ul class="list">
+			<li style="display: inline;" th:each="commodity:${interestList}">
+				<h4 style="color: rgba(30,36,255,0.76);margin-bottom:15px;text-align: center">降价啦！直降100</h4>
+				<a th:href="@{'selectCommodity?id='+${commodity.id}}" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">
+					<img th:src="@{'/static/image/'+${commodity.photoPath}}" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt="" >
+					<div class="desc">
+						<p class="p_title">
+							<span class="name" th:text="${commodity.commodityName}"></span>
+							<span class="coup"th:text="${commodity.state}"></span>
+						</p>
+						<p class="p_desc" th:text="${commodity.lining.ingredient}">100%羊毛</p>
+						<p class="p_num"><font style="color: red;font-size: 16px;" color="#222222" th:text="${'￥:'+commodity.originalPrice}"></font><s style="font-size: 15px" th:text="${'吊牌价：'+commodity.vipPrice}">吊牌价：9840.00</s></p>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
 		<div class="shadow"></div>
 		<div class="div_video"></div>		
 		<div class="xf_nav" id="headPull">
@@ -43,8 +169,14 @@ ga('send', 'pageview');
 		</div>
 		<script type="text/javascript">
 			$(function() {
+                var intersertList=$("[name='interestList']").val();
+                console.log(intersertList);
+                if(sessionStorage.getItem("one")==null && intersertList==1){
+                    show();
+                    sessionStorage.setItem("one",1);
+                }
 
-			    $("#pull").hover(function () {
+                $("#pull").hover(function () {
 			        if($("#pull ul>li").length<1){
                         $.ajax({
                             url:"/pull",
@@ -131,13 +263,6 @@ ga('send', 'pageview');
 								<a href="/selectCommodityList?typeId=14" tppabs="https://www.ybren.com/home/category_son/162">牛仔裤</a>
 							</p>
 						</li>
-						<!-- 			<li>
-                                        <p class="lt">时尚T恤</p>
-                                        <p class="lc">
-                                                                        <a href="/home/category_son/188">男士T恤</a>
-                                                                        <a href="/home/category_son/190">女士T恤</a>
-                                                                    </p>
-                                    </li> -->
 						<li>
 							<p class="lt">男士外套</p>
 							<p class="lc">
@@ -239,13 +364,24 @@ ga('send', 'pageview');
 		<div class="banner">
 			<div class="swiper-container">
 		          <div class="swiper-wrapper">
-		        	<div class="swiper-slide"><a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2017-09-25/59c8763eba671.jpg) no-repeat center;" target="_blank" href="194.htm" tppabs="https://www.ybren.com/home/category_son/194"></a></div><div class="swiper-slide"><a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-03-13/5aa73a7cb9d63.jpg) no-repeat center;" target="_blank" href="214.htm" tppabs="https://www.ybren.com/home/category_son/214"></a></div><div class="swiper-slide"><a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-01-02/5a4b290d34545.jpg) no-repeat center;" target="_blank" ></a></div><div class="swiper-slide"><a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-03-13/5aa73ab62865c.jpg) no-repeat center;" target="_blank" href="160.htm" tppabs="https://www.ybren.com/home/category_son/160"></a></div>	
+		        	<div class="swiper-slide">
+						<a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2017-09-25/59c8763eba671.jpg) no-repeat center;" target="_blank" href="/selectCommodityList?typeId=10" tppabs="https://www.ybren.com/home/category_son/194"></a>
+					</div>
+					  <div class="swiper-slide">
+						  <a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-03-13/5aa73a7cb9d63.jpg) no-repeat center;" target="_blank" href="/selectCommodityList?typeId=17" tppabs="https://www.ybren.com/home/category_son/214"></a>
+					  </div>
+					  <div class="swiper-slide">
+						  <a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-01-02/5a4b290d34545.jpg) no-repeat center;" target="_blank" ></a>
+					  </div>
+					  <div class="swiper-slide">
+						  <a  style="background: url(//appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Banners/2018-03-13/5aa73ab62865c.jpg) no-repeat center;" target="_blank" href="/selectCommodityList?typeId=12" tppabs="https://www.ybren.com/home/category_son/160"></a>
+					  </div>
 		        </div>
 		        <!-- Add Pagination -->
 		        <div class="swiper-pagination"></div>
 			</div>
 		</div>
-	
+
 		<div class="vide_mark vide_zsdz " >
 		    <div class="vide_content_div">
 		        <div class="vide_content">
@@ -253,9 +389,8 @@ ga('send', 'pageview');
 		            <div class="vide_play">
 		                <div class="vide-play">
 		                    <div class="video">
-
 								<video class="video" width="880" height="540" controls=""  >
-	                    		<source src="ybren0316.mp4" tppabs="https://ybren.com/Public/video/ybren0316.mp4" type="video/mp4"></source>
+	                    		<source src="//ossstatic.ybren.com/PC/video/pc_index.mp4" tppabs="https://ybren.com/Public/video/ybren0316.mp4" type="video/mp4"></source>
 	                    		<!--<object><embed class="vid" tppabs="https://www.ybren.com/vid" width="880" height="540" src="ybren0316.mp4" tppabs="https://ybren.com/Public/video/ybren0316.mp4" type="application/x-shockwave-flash" allowfullscreen="true" autostart="true" allowscriptaccess="always" autostart=false></embed></object>-->
 		                    	</video>
 		                    </div>
@@ -292,338 +427,159 @@ ga('send', 'pageview');
 			<div class="dimg">
 				<img src="/static/image/index01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/index01.jpg">
 			</div>
-			
+
 			<div class="list">
+				<div class="l_top"  th:if="${not #lists.isEmpty(thirdTypeList)}">
+					<img src="/static/image/fl01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl01.jpg">
+					<ul class="title_list">
+						<li class="tl_one">猜你喜欢</li>
+						<li class="tl_br"></li>
+						<li class="tl_two" th:each="third:${thirdTypeList}">
+							<a th:href="@{'/selectCommodityList?typeId='+third.tId}" th:text="${third.thirdType}">长袖衬衫</a></li>
+					</ul>
+				</div>
+				<div class="l_bot">
+					<ul>
+						<li th:each="commodity:${commodityListXQ}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
+						</li>
+					</ul>
+				</div>
 				<div class="l_top">
 					<img src="/static/image/fl01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl01.jpg">
 					<ul class="title_list">
 						<li class="tl_one">男士衬衫</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="157.htm" tppabs="https://www.ybren.com/home/category_son/157">长袖衬衫</a></li>
-						<li class="tl_two"><a href="194.htm" tppabs="https://www.ybren.com/home/category_son/194">DP衬衫</a></li>
-						<li class="tl_two"><a href="159.htm" tppabs="https://www.ybren.com/home/category_son/159">磨毛衬衫</a></li>
-						<li class="tl_more"><a href="140.htm" tppabs="https://www.ybren.com/home/category/140">点击查看更多>></a></li>
+						<li class="tl_two"><a href="/selectCommodityList?typeId=5" tppabs="https://www.ybren.com/home/category_son/157">长袖衬衫</a></li>
+						<li class="tl_two"><a href="/selectCommodityList?typeId=6" tppabs="https://www.ybren.com/home/category_son/194">DP衬衫</a></li>
+						<li class="tl_two"><a href="/selectCommodityList?typeId=7" tppabs="https://www.ybren.com/home/category_son/159">磨毛衬衫</a></li>
+						<li class="tl_more"><a href="/selectCommodityList?typeId=8" tppabs="https://www.ybren.com/home/category/140">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS0445.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0445"><img src="/static/image/shirt01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
-							<a class="lishow" href="YS0445.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0445">RMB:1280</a>
-						</li>
-						<li>
-							<a href="YS0982.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0982"><img src="/static/image/shirt02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt02.jpg"></a>
-							<a class="lishow" href="YS0982.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0982">RMB:1680</a>
-						</li>
-						<li>
-							<a href="YS1046.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1046"><img src="/static/image/shirt03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt03.jpg"></a>
-							<a class="lishow" href="YS1046.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1046">RMB:1380</a>
-						</li>
-						<li>
-							<a href="YS1057.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1057"><img src="/static/image/shirt04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt04.jpg"></a>
-							<a class="lishow" href="YS1057.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1057">RMB:898</a>
-						</li>
-						<li>
-							<a href="YS1177.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1177"><img src="/static/image/shirt05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt05.jpg"></a>
-							<a class="lishow" href="YS1177.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1177">RMB:1480</a>
-						</li>
-						<li>
-							<a href="YS1058.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1058"><img src="/static/image/shirt06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt06.jpg"></a>
-							<a class="lishow" href="YS1058.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1058">RMB:898</a>
-						</li>
-						<li>
-							<a href="YS0795.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0795"><img src="/static/image/shirt07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt07.jpg"></a>
-							<a class="lishow" href="YS0795.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0795">RMB:498</a>
-						</li>
-						<li>
-							<a href="YS1063.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1063"><img src="/static/image/shirt08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt08.jpg"></a>
-							<a class="lishow" href="YS1063.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1063">RMB:998</a>
+						<li th:each="commodity:${chenSanHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
 					</ul>
 				</div>
-			</div>	
+			</div>
 			<div class="list">
 				<div class="l_top">
 					<img src="/static/image/fl02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl02.jpg">
 					<ul class="title_list">
 						<li class="tl_one">男士西装</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="149.htm" tppabs="https://www.ybren.com/home/category_son/149">单西</a></li>
-						<li class="tl_two"><a href="150.htm" tppabs="https://www.ybren.com/home/category_son/150">套西</a></li>
-						<li class="tl_two"><a href="139.htm" tppabs="https://www.ybren.com/home/category_son/139">礼服</a></li>
-						<li class="tl_two"><a href="151.htm" tppabs="https://www.ybren.com/home/category_son/151">马甲</a></li>
-						<li class="tl_more"><a href="149.htm" tppabs="https://www.ybren.com/home/category_son/149">点击查看更多>></a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=1" tppabs="https://www.ybren.com/home/category_son/149">单西</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=2" tppabs="https://www.ybren.com/home/category_son/150">套西</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=3" tppabs="https://www.ybren.com/home/category_son/139">礼服</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=4" tppabs="https://www.ybren.com/home/category_son/151">马甲</a></li>
+						<li class="tl_more"><a href="selectCommodityList?typeId=5" tppabs="https://www.ybren.com/home/category_son/149">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS1010.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1010"><img src="/static/image/xz01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz01.jpg"></a>
-							<a class="lishow" href="YS1010.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1010">RMB:5680</a>
+						<li th:each="commodity:${xiZhuangHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
-						<li>
-							<a href="YS0925.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0925"><img src="/static/image/xz02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz02.jpg"></a>
-							<a class="lishow" href="YS0925.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0925">RMB:8999</a>
-						</li>
-						<li>
-							<a href="YS1011.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1011"><img src="/static/image/xz03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz03.jpg"></a>
-							<a class="lishow" href="YS1011.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1011">RMB:5680</a>
-						</li>
-						<li>
-							<a href="YS0536.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0536"><img src="/static/image/xz04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz04.jpg"></a>
-							<a class="lishow" href="YS0536.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0536">RMB:5680</a>
-						</li>
-						<li>
-							<a href="YS1049.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1049"><img src="/static/image/xz05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz05.jpg"></a>
-							<a class="lishow" href="YS1049.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1049">RMB:4186</a>
-						</li>
-						<li>
-							<a href="YS1089.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1089"><img src="/static/image/xz06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz06.jpg"></a>
-							<a class="lishow" href="YS1089.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1089">RMB:2980</a>
-						</li>
-						<li>
-							<a href="YS1077.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1077"><img src="/static/image/xz07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz07.jpg"></a>
-							<a class="lishow" href="YS1077.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1077">RMB:3580</a>
-						</li>
-						<li>
-							<a href="YS1094.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1094"><img src="/static/image/xz08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/xz08.jpg"></a>
-							<a class="lishow" href="YS1094.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1094">RMB:4680</a>
-						</li>
+
 					</ul>
 				</div>
-			</div>	
+			</div>
 			<div class="list">
 				<div class="l_top">
 					<img src="/static/image/fl03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl03.jpg">
 					<ul class="title_list">
 						<li class="tl_one">男士外套</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="152.htm" tppabs="https://www.ybren.com/home/category_son/152">大衣</a></li>
-						<li class="tl_two"><a href="202.htm" tppabs="https://www.ybren.com/home/category_son/202">风衣</a></li>						
-						<li class="tl_two"><a href="153.htm" tppabs="https://www.ybren.com/home/category_son/153">夹克</a></li>
-						<li class="tl_two"><a href="154.htm" tppabs="https://www.ybren.com/home/category_son/154">羽绒服</a></li>
-						<li class="tl_two"><a href="155.htm" tppabs="https://www.ybren.com/home/category_son/155">皮衣</a></li>
-						<li class="tl_two"><a href="203.htm" tppabs="https://www.ybren.com/home/category_son/203">便装</a></li>
-						<li class="tl_more"><a href="141.htm" tppabs="https://www.ybren.com/home/category/141">点击查看更多>></a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=14" tppabs="https://www.ybren.com/home/category_son/152">大衣</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=15" tppabs="https://www.ybren.com/home/category_son/202">风衣</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=16" tppabs="https://www.ybren.com/home/category_son/153">夹克</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=17" tppabs="https://www.ybren.com/home/category_son/154">羽绒服</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=18" tppabs="https://www.ybren.com/home/category_son/155">皮衣</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=19" tppabs="https://www.ybren.com/home/category_son/203">便装</a></li>
+						<li class="tl_more"><a href="selectCommodityList?typeId=20" tppabs="https://www.ybren.com/home/category/141">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS1064.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1064"><img src="/static/image/wt01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt01.jpg"></a>
-							<a class="lishow" href="YS1064.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1064">RMB:2980</a>
+						<li th:each="commodity:${waiTaoHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
-						<li>
-							<a href="YS1187.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1187"><img src="/static/image/wt02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt02.jpg"></a>
-							<a class="lishow" href="YS1187.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1187">RMB:7380</a>
-						</li>
-						<li>
-							<a href="YS1080.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1080"><img src="/static/image/wt03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt03.jpg"></a>
-							<a class="lishow" href="YS1080.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1080">RMB:4130</a>
-						</li>
-						<li>
-							<a href="YS1065.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1065"><img src="/static/image/wt04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt04.jpg"></a>
-							<a class="lishow" href="YS1065.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1065">RMB:3680</a>
-						</li>
-						<li>
-							<a href="YS1070.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1070"><img src="/static/image/wt05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt05.jpg"></a>
-							<a class="lishow" href="YS1070.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1070">RMB:2880</a>
-						</li>
-						<li>
-							<a href="YS1090.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1090"><img src="/static/image/wt06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt06.jpg"></a>
-							<a class="lishow" href="YS1090.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1090">RMB:2380</a>
-						</li>
-						<li>
-							<a href="YS1110.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1110"><img src="/static/image/wt07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt07.jpg"></a>
-							<a class="lishow" href="YS1110.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1110">RMB:5380</a>
-						</li>
-						<li>
-							<a href="YS1083.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1083"><img src="/static/image/wt08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/wt08.jpg"></a>
-							<a class="lishow" href="YS1083.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1083">RMB:3280</a>
-						</li>
+
 					</ul>
 				</div>
-			</div>	
+			</div>
 			<div class="list">
 				<div class="l_top">
 					<img src="/static/image/fl04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl04.jpg">
 					<ul class="title_list">
 						<li class="tl_one">男士裤装</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="161.htm" tppabs="https://www.ybren.com/home/category_son/161">西裤</a></li>
-						<li class="tl_two"><a href="160.htm" tppabs="https://www.ybren.com/home/category_son/160">休闲裤</a></li>
-						<li class="tl_more"><a href="161.htm" tppabs="https://www.ybren.com/home/category_son/161">点击查看更多>></a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=21" tppabs="https://www.ybren.com/home/category_son/161">西裤</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=22" tppabs="https://www.ybren.com/home/category_son/160">休闲裤</a></li>
+						<li class="tl_more"><a href="selectCommodityList?typeId=23" tppabs="https://www.ybren.com/home/category_son/161">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS0821.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0821"><img src="/static/image/kz01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz01.jpg"></a>
-							<a class="lishow" href="YS0821.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0821">RMB:498</a>
+						<li th:each="commodity:${kuZhuangHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
-						<li>
-							<a href="YS0997.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0997"><img src="/static/image/kz02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz02.jpg"></a>
-							<a class="lishow" href="YS0997.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0997">RMB:598</a>
-						</li>
-						<li>
-							<a href="YS0998.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0998"><img src="/static/image/kz03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz03.jpg"></a>
-							<a class="lishow" href="YS0998.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0998">RMB:893</a>
-						</li>
-						<li>
-							<a href="YS1100.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1100"><img src="/static/image/kz04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz04.jpg"></a>
-							<a class="lishow" href="YS1100.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1100">RMB:1480</a>
-						</li>
-						<li>
-							<a href="YS0176.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0176"><img src="/static/image/kz05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz05.jpg"></a>
-							<a class="lishow" href="YS0176.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0176">RMB:993</a>
-						</li>
-						<li>
-							<a href="YS1105.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1105"><img src="/static/image/kz06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz06.jpg"></a>
-							<a class="lishow" href="YS1105.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1105">RMB:1380</a>
-						</li>
-						<li>
-							<a href="YS1030.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1030"><img src="/static/image/kz07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz07.jpg"></a>
-							<a class="lishow" href="YS1030.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1030">RMB:1893</a>
-						</li>
-						<li>
-							<a href="YS1045.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1045"><img src="/static/image/kz08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/kz08.jpg"></a>
-							<a class="lishow" href="YS1045.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1045">RMB:1993</a>
-						</li>
+
 					</ul>
 				</div>
-			</div>				
+			</div>
 			<div class="list">
 				<div class="l_top">
 					<img src="/static/image/fl05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl05.jpg">
 					<ul class="title_list">
 						<li class="tl_one">牛仔裤系列</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="162.htm" tppabs="https://www.ybren.com/home/category_son/162">男士牛仔裤</a></li>
-						<li class="tl_two"><a href="172.htm" tppabs="https://www.ybren.com/home/category_son/172">女士牛仔裤</a></li>
-						<li class="tl_more"><a href="162.htm" tppabs="https://www.ybren.com/home/category_son/162">点击查看更多>></a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=24" tppabs="https://www.ybren.com/home/category_son/162">男士牛仔裤</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=25" tppabs="https://www.ybren.com/home/category_son/172">女士牛仔裤</a></li>
+						<li class="tl_more"><a href="selectCommodityList?typeId=26" tppabs="https://www.ybren.com/home/category_son/162">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS0978.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0978"><img src="/static/image/nzk01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk01.jpg"></a>
-							<a class="lishow" href="YS0978.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0978">RMB:1299</a>
+						<li th:each="commodity:${niuZaiKuHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
-						<li>
-							<a href="YS1004.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1004"><img src="/static/image/nzk02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk02.jpg"></a>
-							<a class="lishow" href="YS1004.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1004">RMB:998</a>
-						</li>
-						<li>
-							<a href="YS0980.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0980"><img src="/static/image/nzk03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk03.jpg"></a>
-							<a class="lishow" href="YS0980.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0980">RMB:1299</a>
-						</li>
-						<li>
-							<a href="YS0979.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0979"><img src="/static/image/nzk04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk04.jpg"></a>
-							<a class="lishow" href="YS0979.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0979">RMB:1299</a>
-						</li>
-						<li>
-							<a href="YS0814.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0814"><img src="/static/image/nzk05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk05.jpg"></a>
-							<a class="lishow" href="YS0814.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0814">RMB:698</a>
-						</li>
-						<li>
-							<a href="YS0815.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0815"><img src="/static/image/nzk06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk06.jpg"></a>
-							<a class="lishow" href="YS0815.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0815">RMB:698</a>
-						</li>
-						<li>
-							<a href="YS0295.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0295"><img src="/static/image/nzk07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk07.jpg"></a>
-							<a class="lishow" href="YS0295.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0295">RMB:898</a>
-						</li>
-						<li>
-							<a href="YS0298.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0298"><img src="/static/image/nzk08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/nzk08.jpg"></a>
-							<a class="lishow" href="YS0298.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0298">RMB:898</a>
-						</li>
+
 					</ul>
 				</div>
-			</div>	
+			</div>
 			<div class="list">
 				<div class="l_top">
 					<img src="/static/image/fl06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl06.jpg">
 					<ul class="title_list">
 						<li class="tl_one">女士系列</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="169.htm" tppabs="https://www.ybren.com/home/category_son/169">衬衫</a></li>
-						<li class="tl_two"><a href="165.htm" tppabs="https://www.ybren.com/home/category_son/165">单西</a></li>
-						<li class="tl_two"><a href="166.htm" tppabs="https://www.ybren.com/home/category_son/166">西裙</a></li>
-						<li class="tl_two"><a href="167.htm" tppabs="https://www.ybren.com/home/category_son/167">套西</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=27" tppabs="https://www.ybren.com/home/category_son/169">衬衫</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=28" tppabs="https://www.ybren.com/home/category_son/165">单西</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=29" tppabs="https://www.ybren.com/home/category_son/166">西裙</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=30" tppabs="https://www.ybren.com/home/category_son/167">套西</a></li>
 						<!-- <li class="tl_two"><a href="/home/category_son/193">真丝女装</a></li> -->
 						<li class="tl_more"><a href="165.htm" tppabs="https://www.ybren.com/home/category_son/165">点击查看更多>></a></li>
 					</ul>
 				</div>
 				<div class="l_bot">
 					<ul>
-						<li>
-							<a href="YS0950.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0950"><img src="/static/image/ns01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns01.jpg"></a>
-							<a class="lishow" href="YS0950.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0950">RMB:1986</a>
+						<li th:each="commodity:${nvShiHitsList}">
+							<a th:href="@{'/selectCommodity?id='+${commodity.id}}"><img th:src="@{'/static/image/'+${commodity.photoPath}}" alt="暂无样品" tppabs="https://ossstatic.ybren.com/PC/web/index/shirt01.jpg"></a>
+							<a class="lishow" th:href="@{'/selectCommodity?id='+${commodity.id}}" th:text="${'RMB:'+commodity.vipPrice}"></a>
 						</li>
-						<li>
-							<a href="YS0948.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0948"><img src="/static/image/ns02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns02.jpg"></a>
-							<a class="lishow" href="YS0948.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0948">RMB:4180</a>
-						</li>
-						<li>
-							<a href="YS0939.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0939"><img src="/static/image/ns03.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns03.jpg"></a>
-							<a class="lishow" href="YS0939.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0939">RMB:3180</a>
-						</li>
-						<li>
-							<a href="YS0940.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0940"><img src="/static/image/ns04.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns04.jpg"></a>
-							<a class="lishow" href="YS0940.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0940">RMB:2980</a>
-						</li>
-						<li>
-							<a href="YS0937.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0937"><img src="/static/image/ns05.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns05.jpg"></a>
-							<a class="lishow" href="YS0937.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0937">RMB:2120</a>
-						</li>
-						<li>
-							<a href="YS0929.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0929"><img src="/static/image/ns06.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns06.jpg"></a>
-							<a class="lishow" href="YS0929.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0929">RMB:498</a>
-						</li>
-						<li>
-							<a href="YS0953.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0953"><img src="/static/image/ns07.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns07.jpg"></a>
-							<a class="lishow" href="YS0953.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0953">RMB:498</a>
-						</li>
-						<li>
-							<a href="YS0720.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0720"><img src="/static/image/ns08.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns08.jpg"></a>
-							<a class="lishow" href="YS0720.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0720">RMB:3098</a>
-						</li>
-						<li>
-							<a href="YS0954.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0954"><img src="/static/image/ns09.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns09.jpg"></a>
-							<a class="lishow" href="YS0954.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0954">RMB:795</a>
-						</li>
-						<li>
-							<a href="YS0956.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0956"><img src="/static/image/ns10.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns10.jpg"></a>
-							<a class="lishow" href="YS0956.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0956">RMB:795</a>
-						</li>
-						<li>
-							<a href="YS0955.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0955"><img src="/static/image/ns11.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns11.jpg"></a>
-							<a class="lishow" href="YS0955.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0955">RMB:670</a>
-						</li>
-						<li>
-							<a href="YS0957.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0957"><img src="/static/image/ns12.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns12.jpg"></a>
-							<a class="lishow" href="YS0957.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0957">RMB:1060</a>
-						</li>
-						<li>
-							<a href="YS0941.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0941"><img src="/static/image/ns13.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns13.jpg"></a>
-							<a class="lishow" href="YS0941.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0941">RMB:993</a>
-						</li>
-						<li>
-							<a href="YS0935.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0935"><img src="/static/image/ns14.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns14.jpg"></a>
-							<a class="lishow" href="YS0935.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0935">RMB:2880</a>
-						</li>
-						<li>
-							<a href="YS0932.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0932"><img src="/static/image/ns15.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns15.jpg"></a>
-							<a class="lishow" href="YS0932.htm" tppabs="https://www.ybren.com/home/itemdetail/YS0932">RMB:2880</a>
-						</li>
-						<li>
-							<a href="YS1194.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1194"><img src="/static/image/ns16.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/ns16.jpg"></a>
-							<a class="lishow" href="YS1194.htm" tppabs="https://www.ybren.com/home/itemdetail/YS1194">RMB:3280</a>
-						</li>
-						
+
 					</ul>
 				</div>
-			</div>	
+			</div>
 			<div class="dimg">
 				<img src="/static/image/index02.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/index02.jpg">
 			</div>

@@ -10,4 +10,10 @@
     <select id="selectThirdType" resultType="ThirdType">
         SELECT * FROM thirdtype WHERE tId=#{tId};
     </select>
+    <select id="selectThirdTypeByArray" resultType="ThirdType">
+        SELECT * FROM thirdtype WHERE tId in
+        <foreach collection="array" item="typeIdList" open="(" separator="," close=")">
+            #{typeIdList}
+        </foreach>
+    </select>
 </mapper>

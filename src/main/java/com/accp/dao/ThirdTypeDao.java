@@ -9,4 +9,5 @@ public interface ThirdTypeDao {
 
     List<ThirdType> selectThirdTypeList(@RequestParam("sId") Object sId);
     ThirdType selectThirdType(@RequestParam("tId") Object tId);
+    List<ThirdType> selectThirdTypeByArray(@RequestParam("typeIdList")Integer[] typeIdList);
 }

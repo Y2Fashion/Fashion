@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.AccessingDataDao">
+    <!--查询访问记录-->
+    <select id="selectAccessingDataList" resultType="AccessingData">
+        select * from accessingdata
+        <where>
+            <if test="id!=null and id!=''">and id=#{id}</if>
+            <if test="ip!=null and ip!=''">and IP=#{ip}</if>
+            <if test="cId!=null and cId!=''">and cid=#{cId}</if>
+            <if test="lookTime!=null and lookTime!=''">and looktime=#{lookTime}</if>
+            <if test="lookCount!=null and lookCount!=''">and lookcount=#{lookCount}</if>
+            <if test="typeID!=null and typeID!=''">and typeID=#{typeID}</if>
+        </where>
+    </select>
+
+    <!--查询访问记录-->
+    <select id="selectADBootByCID" resultType="AccessingData">
+        select * from accessingdata where IP=#{ip} and cId=#{cId}
+
+    </select>
+
+    <!--查询访问记录-->
+    <select id="selectADBootByTID" resultType="AccessingData">
+        select * from accessingdata where IP=#{ip} and typeID=#{typeID}
+
+    </select>
+
+    <select id="selectADListByCID" resultType="AccessingData">
+        select * from accessingdata where IP=#{ip} and cId>0 order by lookCount limit 0,8;
+    </select>
+    <!--查询访问记录-->
+    <select id="selectADListByTID" resultType="AccessingData">
+        select * from accessingdata where IP=#{ip} and typeID>0 order by lookCount limit 0,8;
+    </select>
+
+    <!--插入访问记录-->
+    <insert id="insertAccessingData" parameterType="AccessingData">
+        insert into accessingdata(IP,cId,lookTime,lookCount,typeID) values(#{ip},#{cId},#{lookTime},#{lookCount},#{typeID})
+    </insert>
+    <!--修改访问记录-->
+    <update id="updataAccessingData" parameterType="AccessingData">
+        update accessingdata
+        <set>
+            <if test="ip!=null and ip!=''">IP=#{ip},</if>
+            <if test="cId!=null and cId!=''">cId=#{cId},</if>
+            <if test="lookTime!=null and lookTime!=''">lookTime=#{lookTime},</if>
+            <if test="lookCount!=null and lookCount!=''">lookCount=#{lookCount},</if>
+            <if test="typeID!=null and typeID!=''">typeID=#{typeID},</if>
+        </set>
+        <where>
+            <if test="ip!=null and ip!=''">and IP=#{ip}</if>
+            <if test="cId!=null and cId!=''">and cid=#{cId}</if>
+            <if test="typeID!=null and typeID!=''">and typeID=#{typeID}</if>
+        </where>
+    </update>
+</mapper>

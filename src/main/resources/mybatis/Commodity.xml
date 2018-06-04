@@ -12,7 +12,7 @@
         SELECT * FROM commodity WHERE id=#{id};
     </select>
     <!--添加点击量-->
-    <select id="UpdateHits" parameterType="Commodity">
+    <update id="UpdateHits" parameterType="Commodity">
         update Commodity
         <set>
             <if test="commodityName!=null and commodityName!=''">commodityName=#{commodityName},</if>
@@ -25,11 +25,18 @@
             <if test="hits!=null and hits!=''">hits=#{hits},</if>
         </set>
         where id=#{id}
-    </select>
+    </update>
     <select id="selectCommodityList" resultType="Commodity">
         select * from Commodity where type in
         <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
           #{thirdTypeArry}
+        </foreach>
+        order by hits desc limit 0,8;
+    </select>
+    <select id="selectCommodityListByIP" resultType="Commodity">
+        select * from Commodity where id in
+        <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
+            #{thirdTypeArry}
         </foreach>
         order by hits desc limit 0,8;
     </select>

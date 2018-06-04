@@ -22,6 +22,7 @@ public interface CommodityDao {
      */
     public Commodity findId(@ProbeParam("id") Integer id);
 
+
     /*
      * 添加点击量
      * */
@@ -31,5 +32,10 @@ public interface CommodityDao {
      * 按热度与二级类型查询
      * */
     public List<Commodity> selectCommodityList(Integer[] thirdTypeArry);
+
+    /*
+     * 按用户IP查询
+     * */
+    public List<Commodity> selectCommodityListByIP(Integer[] IDArray);
 
 }

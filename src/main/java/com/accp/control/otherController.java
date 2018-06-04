@@ -1,17 +1,88 @@
 package com.accp.control;
 
 import com.accp.biz.FigureBiz;
+import com.accp.biz.OrderBiz;
+import com.accp.entity.AccessingData;
+import com.accp.util.Iputil;
+import com.accp.util.RedisUtil;
+import com.accp.util.Storage;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class otherController {
 
     @Resource
     private FigureBiz figureBiz;
+    @Resource
+    private RedisUtil redisUtil;
+    @Resource
+    private OrderBiz orderBiz;
+
+    /*
+    * 当用户退出详细页面时 触发ajax跳入此方法获取退出时间 并计算出浏览此商品时间
+    * */
+    @RequestMapping("monitor")
+    @ResponseBody
+    private void monitor(String cId,HttpServletRequest request){
+        DateFormat dfsf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date orderTime=new Date();
+        // Date lookTime=new Date();
+        Date enterTime=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            enterTime=dfsf.parse((String) request.getSession().getAttribute(cId));
+            orderTime=dfsf.parse(df.format(orderTime));
+        }catch (Exception e){
+
+        }
+        long lookTime=orderTime.getTime()-enterTime.getTime();
+        long time=lookTime/1000;
+        String IP="";
+        if(redisUtil.exists("userIP")){
+            IP=(String) redisUtil.lRange("userIP",0,redisUtil.length("userIP")).get(0);
+        }else{
+            IP=(String)Iputil.getIpAddr(request);
+            redisUtil.lPush("userIP",IP);
+        }
+        if(Storage.accessingData.size()>0){
+            List<AccessingData> accessingDatas=new ArrayList<AccessingData>();
+            //accessingDatas=(List<AccessingData>) redisUtil.lRange(IP,0,redisUtil.length(IP)).get(0);
+            accessingDatas=Storage.accessingData;
+            int a=0;
+            for (int i=0;i<accessingDatas.size();i++) {
+                if(accessingDatas.get(i).getcId()!=null&&accessingDatas.get(i).getcId().toString().equals(cId)){
+                    accessingDatas.get(i).setLookCount(accessingDatas.get(i).getLookCount()+1);
+                    if(accessingDatas.get(i).getLookTime()<time||accessingDatas.get(i).getLookTime()==0){
+                        accessingDatas.get(i).setLookTime((int)time);
+                    }
+                    a++;
+                }
+            }
+            if(a==0){
+                accessingDatas.add(new AccessingData(IP,Integer.parseInt(cId),(int)time,1,0));
+            }
+            /*redisUtil.remove(IP);
+            redisUtil.lPush(IP,accessingDatas);*/
+            Storage.accessingData=accessingDatas;
+        }else{
+            List<AccessingData> accessingData=new ArrayList<>();
+            accessingData.add(new AccessingData(IP,Integer.parseInt(cId),(int)time,1,0));
+            //redisUtil.lPush(IP, accessingData);
+            Storage.accessingData=accessingData;
+        }
+
+    }
 
    //大事记网页
     @RequestMapping("/bigEvent")
@@ -78,7 +149,8 @@ public class otherController {
 
     // 预约页面
     @RequestMapping("/yuyue")
-    public String goToYuYue(){
+    public String goToYuYue(Model model){
+        model.addAttribute("count",orderBiz.getOrderCount());
         return "yuyue";
     }
 
