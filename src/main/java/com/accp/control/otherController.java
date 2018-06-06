@@ -107,23 +107,6 @@ public class otherController {
         orderBiz.Add(order);
         return null;
     }
-    /**
-     * 新闻动态
-     * @return
-     */
-    @RequestMapping("/media")
-    public String media(Model model,String type,Integer pageNo){
-        if(type==null){
-            type="公司动态";
-        }
-       // Pager<News> pager=biz.findNew(type,pageNo,6);
-        model.addAttribute("page",biz.findNew(type,pageNo,6));
-      /*  for(News n:pager.getDatas()){
-            System.out.println(n.getTitle());
-        }*/
-      model.addAttribute("typeList",biz.findType());
-        return "media";
-    }
 
     @RequestMapping("/succeed_detail21")
     public String succeed_detail21(){

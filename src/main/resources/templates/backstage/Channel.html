@@ -26,37 +26,32 @@
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <form action="" style="width:85%">
+    <form action="Channel" style="width:85%">
         <label>布料成分:</label>
-        <select class="" name="cars">
-            <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+        <select class=""  name="cmId">
+            <option value="0">请选择</option>
+            <option th:each="c:${components}" th:value="${c.id}" th:text="${c.com}"></option>
+
         </select>
         <label>布料颜色:</label>
-        <select name="name">
-            <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+        <select name="clId">
+            <option value="0">请选择</option>
+            <option th:each="cl:${colours}" th:value="${cl.id}" th:text="${cl.col}"></option>
         </select>
         <label>布料花型:</label>
-        <select name="cars">
-            <option value="volvo">请选择</option>
-            <option value="saab">男</option>
-            <option value="fiat">女</option>
-            <option value="audi">配饰</option>
+        <select  name="fId">
+            <option value="0">请选择</option>
+            <option th:each="f:${flower}" th:value="${f.id}" th:text="${f.pattern}"></option>
         </select>
-        <input type="submit" style="width:50px" value="搜索"/>
+        <input type="submit" style="width:50px" value="搜索" id="sub"/>
     </form>
     <div class="tools">
         <ul class="toolbar">
-            <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
+            <li id="dels"><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
             <li onclick="user_management_add('添加布料使用','Channel_add','600','350')"><span>
           <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
-        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+        <span class="x-right" style="line-height:25px">共有数据：<span th:text="${pager.totalRows}"></span> 条</span></xblock>
     </div>
     <table class="tablelist">
         <thead>
@@ -87,289 +82,44 @@
             </th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
+        <tbody id="cheks">
+        <tr th:each="page:${pager.datas}">
             <td>
-                <input type="checkbox" value="1" name="selected">
+                <input type="checkbox" th:value="${page.id}" name="selected">
             </td>
-            <td>
-                1
+            <td th:text="${page.id}" class="id">
             </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                B区22号3层
-            </td>
+            <td th:text="${page.com}" name="com"></td>
+            <td th:text="${page.col}" name="col"></td>
+            <td th:text="${page.pattern}" name="pattern"></td>
+            <td th:text="${page.price}"></td>
+            <td th:text="${page.sId}"></td>
             <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                <a title="删除" href="javascript:;" class="del"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                2
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                3
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                4
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                5
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                6
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                7
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                8
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                9
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="selected">
-            </td>
-            <td>
-                10
-            </td>
-            <td>求大神</td>
-            <td>
-                123456
-            </td>
-            <td>
-                用户
-            </td>
-            <td>
-                男
-            </td>
-            <td>
-                1
-            </td>
-            <td class="td-manage">
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
+
         </tbody>
     </table>
     <div class="page" v-show="show">
-        <a href="">首页</a>
-        <a href="">上一页</a>
-        <a href="">下一页</a>
-        <a href="">末页</a>
+        <a th:href="@{Channel(pageNo=1)}" id="one" >首页</a>
+        <span th:if="${pager.pageNo gt 1}">
+            <a th:href="@{Channel(pageNo=${pager.pageNo}-1)}" id="two" >上一页</a>
+        </span>
+        <span th:if="${pager.pageNo lt pager.totalPage}">
+            <a th:href="@{Channel(pageNo=${pager.pageNo}+1)}" id="thr">下一页</a>
+        </span>
+
+        <a th:href="@{Channel(pageNo=${pager.totalPage})}" id="four" >末页</a>
         &nbsp;&nbsp;
-        &nbsp;&nbsp;第n页/共n页&nbsp;&nbsp;共n条记录
+        &nbsp;&nbsp;第<span th:text="${pager.pageNo}"></span> 页/共<span th:text="${pager.totalPage}"></span> 页
+        &nbsp;&nbsp;共<span th:text="${pager.totalRows}"></span> 条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text">
-             </span> <span class="jump gobtn">GO</span>
+                <input type="text" id="num">
+             </span> <span class="jump gobtn" id="Go">GO</span>
     </div>
 </div>
 <br />
@@ -392,6 +142,51 @@
     function user_management_add(title,url,w,h){
         x_admin_show(title,url,w,h);
     }
+
+    /*页面跳转*/
+    $("#Go").click(function () {
+        var num=$("#num").val();
+        var url="Channel"+"?pageNo="+num;
+        window.location.href=url;
+
+    })
+    /* 单个删除*/
+    $(".del").click(function () {
+        var id=$(this).parent().siblings(".id").text();
+        //alert(id);
+        $.ajax({
+            url:"delChannel",
+            data:{"id":id},
+            type:"post",
+            success:function () {
+                location.reload(true);
+            }
+        })
+    })
+    /*批量删除*/
+    $("#dels").click(function () {
+        var requirement  = [];
+        var i=0;
+        $("#cheks :checkbox").each(function(){ //遍历table里的全部checkbox
+            // alert($(this).val());
+            if($(this).is(':checked')) {
+                i++;
+                //alert(i);
+                requirement[i] = $(this).val();
+                //alert(requirement[i]);
+            }
+        });
+        $.ajax({
+            url:"delChannels",
+            data:{"arr":requirement},
+            type:"post",
+            success:function () {
+                location.reload(true);
+            }
+        })
+
+    })
+
     $('.tablelist tbody tr:odd').addClass('odd');
 </script>
 </body>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.SupplierDao">
+    <!--查询所有并分页-->
+    <select id="findAll" resultType="Supplier">
+        SELECT * FROM supplier LIMIT #{pageNo},#{pageSize}
+    </select>
+    <!--查询总条数-->
+    <select id="findCout" resultType="int">
+        SELECT COUNT(*) FROM supplier;
+    </select>
+    <!--查询单个-->
+    <select id="findById" resultType="Supplier">
+        SELECT * FROM supplier WHERE ID=#{ID}
+    </select>
+    <!--增加-->
+    <insert id="Add" parameterType="Supplier">
+          INSERT INTO supplier(QiYeName,Phone,QiYeAddress,FaRen,YaoQiu,businessName,
+          qualityName,businessphone,qualityphone,company,`level`)
+          VALUES(#{QiYeName},#{Phone},#{QiYeAddress},#{FaRen},#{YaoQiu},#{businessName},
+          #{qualityName},#{businessphone},#{qualityphone},#{company},#{level})
+    </insert>
+    <!--修改-->
+    <update id="Update" parameterType="Supplier">
+        UPDATE  supplier
+        <set>
+            <if test="QiYeName!=null and QiYeName!=''">QiYeName=#{QiYeName},</if>
+            <if test="Phone!=null and Phone!=''">Phone=#{Phone},</if>
+            <if test="QiYeAddress!=null and QiYeAddress!=''"> QiYeAddress=#{QiYeAddress},</if>
+            <if test="FaRen!=null and FaRen!=''">FaRen=#{FaRen},</if>
+            <if test="YaoQiu!=null and YaoQiu!=''">YaoQiu=#{YaoQiu},</if>
+            <if test="businessName!=null and businessName!=''">businessName=#{businessName},</if>
+            <if test="businessphone!=null and businessphone!=''">businessphone=#{businessphone},</if>
+            <if test="qualityName!=null and qualityName!=''">qualityName=#{qualityName},</if>
+            <if test="qualityphone!=null and qualityphone!=''"> qualityphone=#{qualityphone},</if>
+            <if test="company!=null and company!=''">company=#{company},</if>
+            <if test="level!=null and level!=''">`level`=#{level},</if>
+        </set>
+        where ID=#{ID}
+
+    </update>
+    <!--删除-->
+    <delete id="Del" parameterType="int">
+        DELETE FROM supplier WHERE ID=#{ID}
+    </delete>
+    <!--查询所有并分页-->
+    <select id="findSupplier" resultType="Supplier">
+        SELECT * FROM supplier
+    </select>
+</mapper>

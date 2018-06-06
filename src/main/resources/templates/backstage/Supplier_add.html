@@ -18,66 +18,66 @@
 </head>
 <body>
 <div class="x-body">
-    <form action="" method="post">
+    <form action="Supplier_add" method="post">
         <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="p_td">供应商名:</td>
-                <td class="q_td"><input type="text" name='uname' class="u_t"/></td>
+                <td class="q_td"><input type="text" name='QiYeName' class="u_t"/></td>
                 <td class="p_td">公司电话:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='Phone' class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">所在地址:</td>
-                <td class="q_td"><input type="text" name='uname' class="u_t" /></td>
+                <td class="q_td"><input type="text" name='QiYeAddress' class="u_t" /></td>
                 <td class="p_td">法人:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" />
+                    <input type="text" name='FaRen' class="u_t" />
                 </td>
             </tr>
             <tr>
                 <td class="p_td">业务联系人:</td>
-                <td class="q_td"><input type="text" name='uname' class="u_t"/></td>
+                <td class="q_td"><input type="text" name='businessName' class="u_t"/></td>
                 <td class="p_td">联系电话:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='businessphone' class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">质量联系人:</td>
-                <td class="q_td"><input type="text" name='uname' class="u_t"/></td>
+                <td class="q_td"><input type="text" name='qualityName' class="u_t"/></td>
                 <td class="p_td">联系电话:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='qualityphone' class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td"  style="line-height:2.9em">公司性质:</td>
                 <td class="q_td">
-                    <select class="u_t">
-                        <option value="volvo">请选择</option>
-                        <option value="预约">私营企业</option>
-                        <option value="已上门量体">合资企业</option>
-                        <option value="加工成品中">外资企业</option>
+                    <select class="u_t" name="company">
+                        <option value="请选择">请选择</option>
+                        <option value="私营企业">私营企业</option>
+                        <option value="合资企业">合资企业</option>
+                        <option value="外资企业">外资企业</option>
                     </select>
                 </td>
                 <td class="p_td"  style="line-height:2.9em">合作级别:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='level' class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">备注:</td>
                 <td class="q_td" colspan="3">
-                    <textarea name="txt" warp="virtual"  rows="5" cols="80"
+                    <textarea name="YaoQiu" warp="virtual"  rows="5" cols="80"
                               style="resize:none;overflow:hidden;border: 0px transparent;">
                     </textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input class="u_t" style="width: 100%" type="submit" value="添加"/>
+                    <input class="u_t" style="width: 100%" type="submit" value="添加" id="add"/>
                 </td>
             </tr>
         </table>
@@ -86,6 +86,61 @@
 <script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
 <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+
+        $("#add").click(function () {
+ /*           var Phone=$("[name=Phone]").val();
+            if(Phone==null||Phone==''){
+                alert("企业电话不能为空");
+                return;
+            }
+            var QiYeAddress=$("[name=QiYeAddress]").val();
+            if(QiYeAddress==null||QiYeAddress==''){
+                alert("企业地址不能为空");
+                return;
+            }
+            var FaRen=$("[name=FaRen]").val();
+            if(FaRen==null||FaRen==''){
+                alert("企业法人不能为空");
+                return;
+            }
+            var businessName=$("[name=businessName]").val();
+            if(businessName==null||businessName==''){
+                alert("业务联系人不能为空");
+                return;
+            }
+            var businessphone=$("[name=businessphone]").val();
+            if(businessphone==null||businessphone==''){
+                alert("业务联系人电话不能为空");
+                return;
+            }
+            var qualityName=$("[name=qualityName]").val();
+            if(qualityName==null||qualityName==''){
+                alert("质量联系人不能为空");
+                return;
+            }
+            var qualityphone=$("[name=qualityphone]").val();
+            if(qualityphone==null||qualityphone==''){
+                alert("质量联系人电话不能为空");
+                return;
+            }
+            var company=$("[name=company]").val();
+            if(company==null||company=='请选择'||company==''){
+                alert("请选择企业性质");
+                return;
+            }
+            var level=$("[name=level]").val();
+            if(level==null||level==''){
+                alert("合作级别不能为空");
+                return;
+            }*/
+            x_admin_close();
+
+        })
+    })
 </script>
 </body>
 </html>

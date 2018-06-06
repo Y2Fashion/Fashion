@@ -82,7 +82,7 @@
         <tr th:each="pa:${pages.datas}">
             <input type="hidden" name="orderId" th:value="${pa.orderId}"/>
             <td><input type="checkbox" th:value="${pa.orderId}" name="selected"  class="cheks"></td>
-            <td th:text="${pa.orderId}" id="oid"></td>
+            <td th:text="${pa.orderId}" class="oid"></td>
             <td th:text="${pa.clienteleName}"></td>
             <td th:text="${pa.clientelePhone}">123456</td>
             <td class="order_td_address" th:text="${pa.clienteleAddress}">深圳市龙华区龙华大道某某小区512号</td>
@@ -94,16 +94,18 @@
             </td>
             <td class="td-manage">
                 <a title="查看" href="javascript:void(0);"
-                   onclick="user_management_edit('查看订单详情','order_get','','350')"
+
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
+                    <!--onclick="user_management_edit('查看订单详情','order_get','','350')"-->
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','900','400')"
+                   class="update"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
+                    <!--onclick="user_management_password('修改订单','order_upd.html','900','400')"-->
                 </a>
-                <a title="删除" href="javascript:;" id="del"
+                <a title="删除" href="javascript:;" class="del"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
@@ -151,17 +153,18 @@
         x_admin_show(title,url,w,h);
     }
     // 商品-查看
-    function user_management_edit (title,url,w,h) {
-        var id=$('[name="orderId"]').val();
-        var urls=url+'?id='+id;
-        x_admin_show(title,urls,w,h);
-    }
+    $(".ml-5").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
+        var urls='order_get?id='+id;
+        x_admin_show('查看订单详情',urls,'','350');
+    })
     /*商品-修改*/
-    function user_management_password(title,url,w,h){
-        var id=$('[name="orderId"]').val();
-        var urls=url+'?id='+id;
-        x_admin_show(title,urls,w,h);
-    }
+    $(".update").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
+        var urls='order_upd?id='+id;
+        x_admin_show('修改订单',urls,'900','400');
+    })
+
 
     /*按状态查询*/
     $("#sub").click(function () {
@@ -206,21 +209,23 @@
 
     /*页面跳转*/
     $("#Go").click(function () {
+        var s=$("#st").text();
         var num=$("#num").val();
-        var url="order"+"?pageNo="+num;
+        var url="order"+"?cars="+s;
+        url=url+"&pageNo="+num;
         window.location.href=url;
 
     })
     /* 单个删除*/
-    $("#del").click(function () {
-        var id=$("#oid").text();
+    $(".del").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
         //alert(id);
         $.ajax({
             url:"del",
             data:{"orderId":id},
             type:"post",
             success:function () {
-
+                location.reload(true);
             }
         })
     })
@@ -242,7 +247,7 @@
             data:{"arr":requirement},
             type:"post",
             success:function () {
-                //window.location.href="order";
+                location.reload(true);
             }
         })
 

@@ -145,37 +145,6 @@ public class Admin {
     }
 
 
-    /**
-     * 进入布料库存
-     */
-    @RequestMapping("/lining")
-    public String lining(){
-        return "backstage/lining";
-    }
-
-    /**
-     * 进入布料库存--添加
-     */
-    @RequestMapping("/lining_add")
-    public String lining_add(){
-        return "backstage/lining_add";
-    }
-
-    /**
-     * 进入布料库存--查看
-     */
-    @RequestMapping("/lining_get")
-    public String lining_get(){
-        return "backstage/lining_get";
-    }
-
-    /**
-     * 进入布料库存--修改
-     */
-    @RequestMapping("/lining_upd")
-    public String lining_upd(){
-        return "backstage/lining_upd";
-    }
 
     /**
      * 进入布料使用情况
@@ -232,28 +201,28 @@ public class Admin {
      */
     @RequestMapping(value = "/order_upd",method=RequestMethod.POST)
     public String update(Model model,Integer id,String crea,String del,
-    String name,String phone,String sta,String address,String com){
-        Order order=new Order();
+    String name,String phone,String sta,String address,String com) {
+        Order order = new Order();
         order.setComment(com);
         order.setClientelePhone(phone);
         order.setClienteleName(name);
         order.setClienteleAddress(address);
-        Date c=null;
-        Date d=null;
-        try{
-            c=java.sql.Date.valueOf(crea);
-            d=java.sql.Date.valueOf(del);
+        Date c = null;
+        Date d = null;
+        try {
+            c = java.sql.Date.valueOf(crea);
+            d = java.sql.Date.valueOf(del);
             order.setCreateTime(c);
             order.setDeliveryTime(d);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
         }
         order.setOrderId(id);
         order.setStatus(sta);
-       int num= orderBiz.Update(order);
-       return  "redirect:/order";
+        int num = orderBiz.Update(order);
+        return "redirect:/order";
 
-
+    }
     /**
      * 添加布料使用情况
      */
@@ -294,54 +263,10 @@ public class Admin {
         return "backstage/Purchase_upd";
     }
 
-    /**
-     * 供应商渠道
-     */
-    @RequestMapping("/Channel")
-    public String channel(){
-        return "backstage/Channel";
-    }
 
-    /**
-     * 添加供应商渠道
-     */
-    @RequestMapping("/Channel_add")
-    public String channel_upd(){
-        return "backstage/Channel_add";
-    }
 
-    /**
-     *供应商
-     */
-    @RequestMapping("/Supplier")
-    public String supplier(){
-        return "backstage/Supplier";
-    }
 
-    /**
-     * 添加供应商
-     */
-    @RequestMapping("/Supplier_add")
-    public String supplier_add(){
-        return "backstage/Supplier_add";
-    }
 
-    /**
-     * 查看供应商
-     */
-    @RequestMapping("/Supplier_get")
-    public String supplier_get(){
-        return "backstage/Supplier_get";
-    }
-
-    /**
-     * 修改供应商
-     */
-    @RequestMapping("/Supplier_upd")
-    public String supplier_upd(){
-        return "backstage/Supplier_upd";
-    }
-    }
 
     /**
      * 跳增加页面

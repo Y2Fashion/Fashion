@@ -23,68 +23,80 @@
             <tr>
                 <td class="p_td">供应商编号:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="" readonly/></td>
+                    <input type="text" name='ID' class="u_t" th:value="${Coop.ID}" readonly/></td>
                 <td class="p_td">供应商名:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="衣服名称(长度为5-12位)"/>
+                    <input type="text" name='QiYeName' class="u_t" th:value="${Coop.qiYeName}"/>
+                    <input type="hidden" name='Phone' class="u_t" th:value="${Coop.phone}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">所在地址:</td>
-                <td class="q_td"><input type="text" name='uname' class="u_t" value="12345678901"/></td>
+                <td class="q_td"><input type="text" name='QiYeAddress' class="u_t"  th:value="${Coop.qiYeAddress}"/></td>
                 <td class="p_td">法人:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="12345678901"/>
+                    <input type="text" name='FaRen' class="u_t"  th:value="${Coop.faRen}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">业务联系人:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" name='businessName' class="u_t"  th:value="${Coop.businessName}"/>
                 </td>
                 <td class="p_td">联系电话:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" name='businessphone' class="u_t"  th:value="${Coop.businessphone}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">质量联系人:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" name='qualityName' class="u_t"  th:value="${Coop.qualityName}"/>
                 </td>
                 <td class="p_td">联系电话:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" name='qualityphone' class="u_t"  th:value="${Coop.qualityphone}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">公司性质:</td>
                 <td class="q_td">
-                    <select class="u_t">
-                        <option value="volvo">请选择</option>
-                        <option value="预约">私营企业</option>
-                        <option value="已上门量体">合资企业</option>
-                        <option value="加工成品中">外资企业</option>
+                    <select class="u_t" name="company">
+                        <span th:if="${Coop.company=='私营企业'}">
+                            <option value="请选择">请选择</option>
+                            <option value="私营企业" selected="selected">私营企业</option>
+                            <option value="合资企业">合资企业</option>
+                            <option value="外资企业">外资企业</option>
+                        </span>
+                        <span th:if="${Coop.company=='合资企业'}">
+                            <option value="请选择">请选择</option>
+                            <option value="私营企业">私营企业</option>
+                            <option value="合资企业" selected="selected">合资企业</option>
+                            <option value="外资企业">外资企业</option>
+                        </span>
+                        <span th:if="${Coop.company=='外资企业'}">
+                            <option value="请选择">请选择</option>
+                            <option value="私营企业">私营企业</option>
+                            <option value="合资企业">合资企业</option>
+                            <option value="外资企业" selected="selected">外资企业</option>
+                        </span>
                     </select>
                 </td>
                 <td class="p_td">合作级别:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="A"/>
+                    <input type="text" name='level' class="u_t"  th:value="${Coop.level}"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">备注:</td>
                 <td class="q_td" colspan="3">
-                    <textarea name="txt" warp="virtual"  rows="5" cols="80"
-                              style="resize:none;overflow:hidden;border: 0px transparent;">
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-我发您的三地飞鸟撒UI得分你丢萨芬你史蒂夫暖色调击飞蛋u9sadufnasd卜sdfssgdsgsdgfsdgfsdfgsdzvcgfdgsgewgwdgffdsgsdgsdfgsfg
-                    </textarea>
+                    <textarea name="YaoQiu" warp="virtual"  rows="5" cols="80"
+                              style="resize:none;overflow:hidden;border: 0px transparent;" th:text="${Coop.yaoQiu}"></textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input class="u_t" style="width: 100%" type="submit" value="修改"/>
+                    <input class="u_t" style="width: 100%" type="submit" value="修改" id="up"/>
                 </td>
             </tr>
         </table>
@@ -93,6 +105,20 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 <script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
 <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        $("#up").click(function () {
+            var level=$("[name=level]").val();
+            if(level=='请选择'){
+                alert("请选择企业性质");
+                return;
+            }
+            x_admin_close();
+
+        })
+    })
 </script>
 </body>
 </html>

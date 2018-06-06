@@ -33,7 +33,6 @@ public class Cooperation implements Serializable {
     private Integer HouZhenMianJi;// 后整面积
     private Integer ShuSheMianJi;//  宿舍面积
     private String YaoQiu;//  要求
-
     public Cooperation() {
     }
 
