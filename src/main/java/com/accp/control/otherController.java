@@ -149,7 +149,11 @@ public class otherController {
 
     // 预约页面
     @RequestMapping("/yuyue")
-    public String goToYuYue(Model model){
+    public String goToYuYue(Model model,Integer cId,Integer tId){
+        if(cId!=null&&tId!=null){
+            model.addAttribute("cId",cId);
+            model.addAttribute("tId",tId);
+        }
         model.addAttribute("count",orderBiz.getOrderCount());
         return "yuyue";
     }

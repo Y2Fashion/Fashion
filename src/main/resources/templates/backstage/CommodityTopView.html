@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="/static/js/backstage/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/bootstrap.js"></script>
+    <link type="text/css" href="/static/css/backstage/bootstrap.css">
+</head>
+<body>
+<input type="hidden" name="dataName" th:value="${dataName}">
+<input type="hidden" name="datas" th:value="${datas}">
+<div id="chartmain" style="width:110%; height: 620px;margin: auto auto;"></div>
+<script type="text/javascript">
+    //指定图标的配置和数据
+    $(function () {
+        var dataName=$("[name='dataName']").val();
+        var datas=$("[name='datas']").val();
+        var jsonName=eval(dataName);
+        var jsonDatas=eval(datas);
+        var option = {
+            title:{
+                text:'                                                                                                      销量前十'
+            },
+            toolbox: {
+                show : true,
+                x:'800',
+                feature : {
+                    dataView : {show: false, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            tooltip:{},
+            legend: {
+            },
+            grid:{
+                y2:140
+            },
+            xAxis: [{
+                type: 'value',
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            yAxis: [{
+                type: 'category',
+                data: jsonName,
+                splitLine: {show: false},
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                offset: 10,
+                nameTextStyle: {
+                    fontSize: 15
+                },
+                axisLabel:{
+                    interval:0,//横轴信息全部显示
+                    rotate:-30,//-30度角倾斜显示
+                }
+            }],
+            series:[{
+                name:'销售数量/件',
+                type:'bar',
+                data:jsonDatas
+            }]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chartmain'));
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    })
+
+</script>
+</body>
+</html>

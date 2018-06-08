@@ -27,6 +27,7 @@ public class CooperationController {
     @Resource
     private CooperationBiz cooperationBiz;
 
+    //添加供应商
     @RequestMapping("/addCooperation")
     @ResponseBody
     private Map addCooperation(String QiYeName,String NAME,String CreateDate,String Phone,String QiYeAddress,

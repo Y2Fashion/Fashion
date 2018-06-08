@@ -3,6 +3,7 @@ package com.accp.biz;
 import com.accp.entity.AccessingData;
 import com.accp.entity.Commodity;
 import com.accp.entity.ThirdType;
+import com.accp.entity.UserOrder;
 import com.accp.util.Pager;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public interface CommodityBiz {
     /*
     * 按热度和二级类型查询
     * */
-    public List<Commodity> getCommoditys(String secondTypeId);
+    public List<Commodity> getCommoditys(Object secondTypeId);
 
     /*
     * 按热度和三级类型查询
@@ -49,6 +50,19 @@ public interface CommodityBiz {
     * */
     List<Commodity> getCommListByXQArray(List<AccessingData> accessingData);
 
+    /*
+    * 分页查询
+    * */
     public Pager<Commodity> commodityList(Integer type,Integer pageNo);
+
+    /*
+    * 按id查询商品
+    * */
+    public Commodity getCommodityById(Integer id);
+
+    /*
+    *查询各个类型所有商品的热度
+    * */
+    public List<Commodity> getHitsGroupType();
 
 }

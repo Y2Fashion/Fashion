@@ -41,18 +41,6 @@
         order by hits desc limit 0,8;
     </select>
 
-    <!--<select id="" resultType="Commodity" >
-        SELECT * FROM commodity c INNER JOIN thirdtype t ON c.`TYPE`=t.tid
-    INNER JOIN secondtype s ON t.sid=s.sid
-    INNER JOIN firsttype f ON s.fid = f.fid
-    <where>
-
-
-    </where>
-    WHERE f.firstType='男士'
-
-    </select>-->
-
     <select id="commodityList" resultType="Commodity">
           SELECT * FROM commodity
           <where>
@@ -67,5 +55,12 @@
           <if test="type != null "> and type=#{type}</if>
       </where>
     </select>
-
+<!--按id查询商品-->
+    <select id="selectCommodityById" resultType="Commodity" parameterType="Integer">
+        select * from Commodity where ID=#{id}
+    </select>
+    <!--查询各个类型的总热度-->
+    <select id="selectHitsGroupType" resultType="Commodity">
+        SELECT TYPE,SUM(hits) AS hits FROM Commodity GROUP BY TYPE ORDER BY SUM(hits)DESC
+    </select>
 </mapper>

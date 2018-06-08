@@ -51,6 +51,7 @@
 	<body>
 		<script>
 
+			//ajax查询方法
 			function getNewsByType(i) {
                 $(".year").children().filter("a").removeClass("act");
                 $(i).addClass("act");
@@ -67,12 +68,12 @@
                 })
             }
 
+            //分页查询
             function getNews(i){
                 var judge=$(i).attr("_name");
                 var pageNo=parseInt($("[name='pageNo']").html());
                 var newsType=$(".act").html();
                 var pageCount=parseInt($("[name='pageCount']").val());
-                alert(pageCount)
                 if(judge==="next"){
                     if(pageNo<pageCount){
                         pageNo+=1;
@@ -94,6 +95,7 @@
 				})
             }
 
+            //循环动态添加
             function eachData(data){
                 $("#news").children().filter("li").remove();
                 for(var i=data.length-1;i>=0;i--){
@@ -190,8 +192,6 @@ var _hmt = _hmt || [];
 				<li class="son_li"><a href="javascript:void(0);" class="click">企业相关</a>
 					<ul>
 						<li><a href="company" tppabs="https://www.ybren.com/index.php/Home/Index/company">关于衣邦人</a></li>
-						<!-- <li><a href="/index.php/Home/Index/ggxx">高管信息</a></li> -->
-						<!-- <li><a href="/index.php/Home/Index/bigEvent">大事记</a></li> -->
 						<li><a href="media" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
 						<li><a href="business" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
 						<li><a href="contact" tppabs="https://www.ybren.com/index.php/Home/Index/contact">联系我们</a></li>
@@ -274,7 +274,6 @@ var _hmt = _hmt || [];
 							<i th:text="${'[摘要]&nbsp;'+news.content}">当所有人刚刚经历“喜迎2018，齐晒18岁月”的喜庆时刻，新年第一个工作日，高端互联网定制平台衣邦人宣布：1月2日，微信粉丝突破200万。</i>
 							<i class="time" th:text="${#dates.format(news.createDate,'yyyy-MM-dd')+'&nbsp;&nbsp;'+news.ntv}">2018-01-04 </i>
 						</p>
-
 					</a>
 				</li>
 			</ul>

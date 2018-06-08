@@ -3,11 +3,9 @@ package com.accp.biz.impl;
 import com.accp.biz.*;
 import com.accp.dao.CommodityDao;
 import com.accp.dao.ThirdTypeDao;
-import com.accp.entity.AccessingData;
-import com.accp.entity.Commodity;
-import com.accp.entity.SecondType;
-import com.accp.entity.ThirdType;
+import com.accp.entity.*;
 import com.accp.util.Pager;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +37,7 @@ public class CommodityBizImpl implements CommodityBiz {
     }
 
 
-    //查询详细信息
+    //用户查看商品时查询的详细信息
     @Override
     public Commodity findId(Integer id) {
         addHits(id);
@@ -137,7 +135,7 @@ public class CommodityBizImpl implements CommodityBiz {
         for (int i=0;i<typeIDList.size();i++) {
             typeIdList[i]=typeIDList.get(i).getcId();
         }
-        List<Commodity> commodityList2=dao.selectCommodityListByIP(typeIdList);
+        List<Commodity> commodityList2=commodityDao.selectCommodityListByIP(typeIdList);
         return commodityList2;
     }
 
@@ -162,6 +160,21 @@ public class CommodityBizImpl implements CommodityBiz {
                 }
             }
         }
-        return dao.selectCommodityListByIP(cIdList);
+        return commodityDao.selectCommodityListByIP(cIdList);
     }
+
+    @Override
+    public Commodity getCommodityById(Integer id) {
+        return commodityDao.selectCommodityById(id);
+    }
+
+    /*
+    * 查询各个类型所有商品的热度
+    * */
+    @Override
+    public List<Commodity> getHitsGroupType() {
+        return commodityDao.selectHitsGroupType();
+    }
+
+
 }

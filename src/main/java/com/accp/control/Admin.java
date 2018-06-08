@@ -1,20 +1,15 @@
 package com.accp.control;
 
-import com.accp.biz.CommodityBiz;
-import com.accp.biz.FirstTypeBiz;
-import com.accp.biz.SecondTypeBiz;
-import com.accp.biz.ThirdTypeBiz;
-import com.accp.entity.FirstType;
-import com.accp.entity.SecondType;
-import com.accp.entity.ThirdType;
+import com.accp.biz.*;
+import com.accp.entity.*;
+import com.accp.util.RedisUtil;
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
 
 /***
  * 该控制类用于实验，具体请自己创建
@@ -24,6 +19,7 @@ public class Admin {
     @Resource
     private FirstTypeBiz firstTypeBiz;
 
+
     @Resource
     private SecondTypeBiz secondTypeBiz;
 
@@ -32,6 +28,13 @@ public class Admin {
 
     @Resource
     private CommodityBiz commodityBiz;
+
+    @Resource
+    private UserOrderBiz userOrderBiz;
+
+    @Resource
+    private RedisUtil redisUtil;
+
     //实验后台页面
     @RequestMapping("/login")
     public String loGin(){
@@ -287,4 +290,154 @@ public class Admin {
     public String supplier_upd(){
         return "backstage/Supplier_upd";
     }
+
+    /*
+    * 柱形算图
+    * */
+    @RequestMapping("/CommodityTopView")
+    public String goZView(Model model){
+
+        List<String>dataName=new ArrayList<String>();
+        List<Integer> datas=new ArrayList<Integer>();
+        JSON dataNameJ=null;
+        JSON datasJ=null;
+        redisUtil.remove("dataNameJ");
+        if(redisUtil.exists("dataNameJ")){
+            dataNameJ=(JSON)redisUtil.lRange("dataNameJ",0,redisUtil.length("dataNameJ")).get(0);
+            datasJ=(JSON)redisUtil.lRange("datasJ",0,redisUtil.length("datasJ")).get(0);
+        }else{
+            List<UserOrder> UserOrders=userOrderBiz.getCommdityTop10();
+            if(UserOrders.size()>0){
+                for (int i=UserOrders.size()-1;i>=0;i--) {
+                    UserOrders.get(i).setCommodity(commodityBiz.getCommodityById(UserOrders.get(i).getCommodityId()));
+                    dataName.add(UserOrders.get(i).getCommodity().getCommodityName());
+                    datas.add(UserOrders.get(i).getCountCID());
+                }
+                dataNameJ=(JSON)JSON.toJSON(dataName);
+                datasJ=(JSON)JSON.toJSON(datas);
+            }
+            redisUtil.lPush("dataNameJ",dataNameJ);
+            redisUtil.lPush("datasJ",datasJ);
+        }
+        model.addAttribute("dataName",dataNameJ);
+        model.addAttribute("datas",datasJ);
+        return "backstage/CommodityTopView";
+    }
+
+    @RequestMapping("/ThreeTypeView")
+    public String goThreeTypeView(Model model){
+
+        List<String> typeName=new ArrayList<String>();
+        List<view> views=new ArrayList<view>();
+        JSON view=null;
+        JSON typeNames=null;
+        if(redisUtil.exists("view")){
+            view=(JSON)redisUtil.lRange("view",0,redisUtil.length("view")).get(0);
+            typeNames=(JSON)redisUtil.lRange("typeNames",0,redisUtil.length("typeNames")).get(0);
+        }else{
+            List<Commodity> commodities=commodityBiz.getHitsGroupType();
+            List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeByCArray(commodities);
+            for (ThirdType t:thirdTypes) {
+                if(t.getsId()<7){
+                    t.setThirdType("男式"+t.getThirdType());
+                }else if(t.getsId()>=8){
+                    t.setThirdType("女式"+t.getThirdType());
+                }
+                typeName.add(t.getThirdType());
+            }
+            for(int i=0;i<commodities.size();i++){
+                views.add(new view(thirdTypes.get(i).getThirdType(),commodities.get(i).getHits()));
+            }
+            view=(JSON)JSON.toJSON(views);
+            typeNames=(JSON)JSON.toJSON(typeName);
+        }
+
+        model.addAttribute("view",view);
+        model.addAttribute("typeName",typeNames);
+        return "backstage/ThreeTypeView";
+    }
+
+    @RequestMapping("/lineView")
+    private String goToLineView(Model model){
+        List<UserOrder> userOrders=new ArrayList<UserOrder>();
+        List<String> dataName=new ArrayList<String>();
+        List<ThirdType> thirdTypes=new ArrayList<ThirdType>();
+        Integer[][] userOrderLists=null;
+        JSON dataNameJ=null;
+        JSON datasJ=null;
+        if(redisUtil.exists("lineDataName")){
+            dataNameJ=(JSON)redisUtil.lRange("lineDataName",0,redisUtil.length("lineDataName")).get(0);
+            datasJ=(JSON)redisUtil.lRange("lineDatas",0,redisUtil.length("lineDatas")).get(0);
+        }else{
+            userOrders=userOrderBiz.getThreeTypes();
+            thirdTypes=thirdTypeBiz.getThirdName(userOrders);
+            userOrderLists=new Integer[userOrders.size()][];
+            for (ThirdType t : thirdTypes) {
+                if(t.getsId()>=8){
+                    dataName.add("女式"+t.getThirdType());
+                }else if(t.getsId()<7){
+                    dataName.add("男式"+t.getThirdType());
+                }
+            }
+            int b=0;
+            for (UserOrder userOrder:userOrders) {
+                List<UserOrder> userOrders1=userOrderBiz.getSaleByMonth(userOrder.getThreeTypeId());
+                Integer[] ints=new Integer[12];
+                for (UserOrder u:userOrders1) {
+                    for(int j=1;j<=12;j++){
+                        if(u.getTime()==j){
+                            ints[j-1]=u.getCountCID();
+                        }else{
+                            if(ints[j-1]==null){
+                                ints[j-1]=0;
+                            }
+                        }
+                    }
+                }
+                userOrderLists[b]=ints;
+                b++;
+            }
+            dataNameJ=(JSON)JSON.toJSON(dataName);
+            datasJ=(JSON)JSON.toJSON(userOrderLists);
+            redisUtil.lPush("lineDataName",dataNameJ);
+            redisUtil.lPush("lineDatas",datasJ);
+        }
+
+        model.addAttribute("dataName",dataNameJ);
+        model.addAttribute("datas",datasJ);
+        return "backstage/lineView";
+    }
+
+    @RequestMapping("BazaarView")
+    public String goVazaarView(Model model){
+        List<UserOrder> userOrders=new ArrayList<UserOrder>();
+        List<String> dataName=new ArrayList<String>();
+        Integer[] datas=null;
+        JSON dataNameJ=null;
+        JSON datasJ=null;
+        redisUtil.remove("BazaarDataName");
+        redisUtil.remove("BazaarDatas");
+        if(redisUtil.exists("BazaarDataName")){
+            dataNameJ=(JSON)redisUtil.lRange("BazaarDataName",0,redisUtil.length("BazaarDataName")).get(0);
+            datasJ=(JSON)redisUtil.lRange("BazaarDatas",0,redisUtil.length("BazaarDatas")).get(0);
+        }else{
+            userOrders=userOrderBiz.getSaleByAddress();
+            datas=new Integer[userOrders.size()];
+            int i=0;
+            for (UserOrder u:userOrders) {
+                datas[i]=u.getCountCID();
+                dataName.add(u.getAddress());
+                i++;
+            }
+            dataNameJ=(JSON)JSON.toJSON(dataName);
+            datasJ=(JSON)JSON.toJSON(datas);
+            redisUtil.lPush("BazaarDataName",dataNameJ);
+            redisUtil.lPush("BazaarDatas",datasJ);
+        }
+        model.addAttribute("dataName",dataNameJ);
+        model.addAttribute("datas",datasJ);
+        return "backstage/BazaarView";
+    }
+
+
 }

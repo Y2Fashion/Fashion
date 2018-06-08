@@ -4,7 +4,9 @@ import com.accp.biz.AccessingDataBiz;
 import com.accp.biz.ThirdTypeBiz;
 import com.accp.dao.ThirdTypeDao;
 import com.accp.entity.AccessingData;
+import com.accp.entity.Commodity;
 import com.accp.entity.ThirdType;
+import com.accp.entity.UserOrder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,5 +35,25 @@ public class ThirdTypeBizImpl implements ThirdTypeBiz {
         }
         List<ThirdType> thirdTypeList2=thirdTypeDao.selectThirdTypeByArray(typeIdList);
         return thirdTypeList2;
+    }
+
+    @Override
+    public List<ThirdType> getThirdTypeByCArray(List<Commodity> commodities) {
+        Integer[] typeIdList=new Integer[commodities.size()];
+        for (int i=0;i<commodities.size();i++) {
+            typeIdList[i]=commodities.get(i).getType();
+        }
+        List<ThirdType> thirdTypeList2=thirdTypeDao.selectThirdTypeByArray(typeIdList);
+        return thirdTypeList2;
+    }
+    @Override
+    public List<ThirdType> getThirdName(List<UserOrder> userOrders) {
+        Integer[] thirdArray=new Integer[userOrders.size()];
+        int i=0;
+        for (UserOrder userOrder:userOrders) {
+            thirdArray[i]=userOrder.getThreeTypeId();
+            i++;
+        }
+        return thirdTypeDao.selectThirdTypeByArray(thirdArray);
     }
 }

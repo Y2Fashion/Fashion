@@ -1,6 +1,7 @@
 package com.accp.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * 订单表
@@ -14,6 +15,43 @@ public class Order implements Serializable {
     private String  clientelePhone;//客户电话
     private String  clienteleAddress;//客户地址
     private String  comment;//备注
+    private String status;//状态
+    private Date createTime;//预约时间
+    private Date deliveryTime;//交货时间
+    private Commodity commodity =new Commodity();//产品类
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
 
     public Integer getOrderId() {
         return orderId;

@@ -37,14 +37,13 @@ public class CommodityController {
     @Resource
     private AccessingDataBiz accessingDataBiz;
 
-
+    //按三极分类类型查询商品
     @RequestMapping("/selectCommodityList")
     public String findType(HttpServletRequest request,Model model,Integer typeId) {
-
+        //添加用户记录
         String IP=Iputil.getIpAddr(request);
         if(Storage.accessingData.size()>0){
             List<AccessingData> accessingDatas=Storage.accessingData;
-            //accessingDatas=(List<AccessingData>) redisUtil.lRange(IP,0,redisUtil.length(IP)).get(0);
             int a=0;
             for (int i=0;i<accessingDatas.size();i++) {
                if(accessingDatas.get(i).getTypeID()!=null&&accessingDatas.get(i).getTypeID().toString().equals(typeId.toString())){
@@ -56,20 +55,13 @@ public class CommodityController {
                 accessingDatas.add(new AccessingData(IP,0,0,1,typeId));
             }
             Storage.accessingData=accessingDatas;
-            /*redisUtil.remove(IP);
-            //redisUtil.lPush(IP,accessingDatas);
-            List<ThirdType> thirdTypes=new ArrayList<ThirdType>();
-            thirdTypes.add(new ThirdType(1,"a",1));
-            redisUtil.lPush(IP,thirdTypes);
-            thirdTypes=(List<ThirdType>) redisUtil.lRange(IP,0,redisUtil.length(IP)).get(0);
-            thirdTypes.get(0).gettId();*/
         }else{
             List<AccessingData> accessingData=new ArrayList<AccessingData>();
             accessingData.add(new AccessingData(IP,0,0,1,typeId));
-            //redisUtil.lPush(IP,accessingData);
             Storage.accessingData=accessingData;
         }
 
+        //查询商品
         List<Commodity> commodityList = new ArrayList<Commodity>();
         String key = typeId + "产品";
         if (redisUtil.exists(key)) {
@@ -89,10 +81,13 @@ public class CommodityController {
         model.addAttribute("typeId",typeId);
         return "WAP-BDS-PZ";
     }
+
+    //ajax按三极分类类型查询商品
     @RequestMapping("/ajaxCommodityList")
     @ResponseBody
     public List<Commodity> ajaxCommodityList(HttpServletRequest request,Integer typeId){
 
+        //添加用户操作记录
         String IP=Iputil.getIpAddr(request);
         if(Storage.accessingData.size()>0){
             List<AccessingData> accessingDatas= new ArrayList<AccessingData>();
@@ -107,14 +102,12 @@ public class CommodityController {
             if(a==0){
                 accessingDatas.add(new AccessingData(IP,0,0,1,typeId));
             }
-            /*redisUtil.remove(IP);
-            redisUtil.lPush(IP,accessingDatas);*/
+
             Storage.accessingData=accessingDatas;
         }else{
             List<AccessingData> accessingData=new ArrayList<AccessingData>();
             accessingData.add(new AccessingData(IP,0,0,1,typeId));
             Storage.accessingData=accessingData;
-            //redisUtil.lPush(IP, accessingData);
         }
 
         List<Commodity> commodityList=new ArrayList<Commodity>();
@@ -140,11 +133,9 @@ public class CommodityController {
         List<AccessingData> accessingDatas2=new ArrayList<AccessingData>();
         if(accessingDatas!=null){
             Storage.accessingData=accessingDatas;
+            //获取访问者达到要求的商品
             if(redisUtil.exists("interestList")){
                 List<Commodity> commodities=(List<Commodity>)redisUtil.lRange("interestList",0,redisUtil.length("interestList")).get(0);
-                /*for (Commodity c:commodities) {
-                    c.setVipPrice(c.getVipPrice()-100);
-                }*/
                 model.addAttribute("interestList",commodities);
                 model.addAttribute("listSize",commodities.size());
                 model.addAttribute("bool",1);
@@ -153,17 +144,18 @@ public class CommodityController {
                     if(ad.getcId()!=null&&ad.getcId()>0&&(ad.getLookCount()>=3||ad.getLookTime()>=180)){
                         accessingDatas2.add(ad);
                     }
-                }
-                if(accessingDatas2.size()>0){
-                    List<Commodity> commodities=commodityBiz.getCommListByXQArray(accessingDatas2);
-                    for (Commodity c : commodities) {
-                        c.setOriginalPrice(c.getVipPrice()-100);
+                    if(accessingDatas2.size()>0){
+                        List<Commodity> commodities=commodityBiz.getCommListByXQArray(accessingDatas2);
+                        for (Commodity c : commodities) {
+                            c.setOriginalPrice(c.getVipPrice()-100);
+                        }
+                        model.addAttribute("interestList",commodities);
+                        redisUtil.lPush("interestList",commodities);
+                        model.addAttribute("bool",1);
                     }
-                    model.addAttribute("interestList",commodities);
-                    redisUtil.lPush("interestList",commodities);
-                    model.addAttribute("bool",1);
                 }
             }
+            //获取用户的历史访问记录
             List<AccessingData> accessingDataTID=accessingDataBiz.getAccessingDataListBool(IP,true);
             List<AccessingData> accessingDataCID=accessingDataBiz.getAccessingDataListBool(IP,false);
             if(accessingDataTID!=null){
@@ -176,6 +168,8 @@ public class CommodityController {
             }
         }
         redisUtil.lPush("userIP", IP);
+
+        //获取各类型商品 按热度查询
         List<Commodity> xiZhuangHitsList=null;
         List<Commodity> chenSanHitsList=null;
         List<Commodity> kuZhuangHitsList=null;
@@ -212,6 +206,7 @@ public class CommodityController {
         return "index";
     }
 
+    //按二级分类查询以热度排序
     @RequestMapping("getCommodityListBySType")
     public String getCommodityListBySType(Model model,String SecondTypeId){
         model.addAttribute("commodityList",biz.getCommoditys(SecondTypeId));

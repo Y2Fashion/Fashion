@@ -9,8 +9,7 @@ public class AccessingData implements Serializable {
     private Integer cId;//  商品ID
     private Integer lookTime;//  浏览时间/分钟
     private Integer lookCount;//  浏览次数
-    private Integer typeID;
-
+    private Integer typeID;//类型ID
 
     public AccessingData() {
     }
