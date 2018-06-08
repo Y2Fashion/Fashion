@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.ChannelDao">
+    <!--按条件分页查询-->
+    <select id="findChannel" resultType="Channel">
+        SELECT c.id,cm.Com,cl.col,f.pattern,c.price,c.sId  FROM Channel c
+        INNER JOIN Component cm ON c.cmId=cm.id
+        INNER JOIN colour cl ON c.clId=cl.id
+        INNER JOIN Flower f ON c.clId=f.id
+          <where>
+              <if test="cmId!=null and cmId!=''"> and  cmId=#{cmId}</if>
+              <if test="clId!=null and clId!=''"> and  clId=#{clId}</if>
+              <if test="fId!=null and fId!=''"> and  fId=#{fId}</if>
+          </where>
+          LIMIT #{pageNo},#{pageSize};
+    </select>
+    <!--查询条数-->
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*) FROM Channel
+        <where>
+            <if test="cmId!=null and cmId!=''">and  cmId=#{cmId}</if>
+            <if test="clId!=null and clId!=''">and  clId=#{clId}</if>
+            <if test="fId!=null and fId!=''">and  fId=#{fId}</if>
+        </where>;
+    </select>
+    <!--增加-->
+    <insert id="Add" parameterType="Channel">
+        INSERT INTO Channel(cmId,clId,fId,price,sId)
+        VALUES(#{cmId},#{clId},#{fId},#{price},#{sId})
+    </insert>
+    <delete id="del" parameterType="int">
+        DELETE FROM channel WHERE id=#{id}
+    </delete>
+</mapper>

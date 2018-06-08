@@ -14,6 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
     <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
+
 </head>
 <body>
 <div class="x-body">
@@ -42,32 +43,29 @@
             <tr>
                 <td class="p_td">送货地址:</td>
                 <td class="q_td" colspan="3">
-                    <input type="text" name='uname' class="u_t" value="某某市某某县某某区某某街"/>
+                    <input type="text" id="clienteleAddress" class="u_t" value="深圳福田"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td"  style="line-height:2.9em">量体日期:</td>
                 <td class="q_td">
-                    <input type="date" name='uname' class="u_t"/>
+                    <input type="date"  id="createTime" class="u_t"/>
                 </td>
                 <td class="p_td"  style="line-height:2.9em">送货日期:</td>
                 <td class="q_td">
-                    <input type="date" name='uname' class="u_t"/>
+                    <input type="date" id="deliveryTime" class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">备注:</td>
                 <td class="q_td" colspan="3">
-                    <textarea name="txt" arp="virtual"  rows="5" cols="80"
-                              style="resize:none;overflow:hidden;border: 0px transparent;">
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-我发您的三地飞鸟撒UI得分你丢萨芬你史蒂夫暖色调击飞蛋u9sadufnasd卜sdfssgdsgsdgfsdgfsdfgsdzvcgfdgsgewgwdgffdsgsdgsdfgsfg
-                    </textarea>
+                    <textarea id="comment" warp="virtual"  rows="5" cols="80"
+                              style="resize:none;overflow:hidden;border: 0px transparent;"> </textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input class="u_t" style="width: 100%" type="submit" value="添加"/>
+                    <input class="u_t" style="width: 100%" type="submit" value="添加" id="aa"/>
                 </td>
             </tr>
         </table>
@@ -76,6 +74,33 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 <script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
 <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        $("#aa").click(function () {
+            var deliveryTime=$("#deliveryTime").val();
+            var createTime=$("#createTime").val();
+            var clienteleName=$("#clienteleName").val();
+            var clientelePhone=$("#clientelePhone").val();
+            var status=$("#status").val();
+            var clienteleAddress=$("#clienteleAddress").val();
+            var comment=$("#comment").val();
+            x_admin_close();
+            $.ajax({
+                url:"/order_add",
+                type:"post",
+                dataType: 'text',
+                data:{"crea":createTime,"del":deliveryTime,
+                    "name":clienteleName,"phone":clientelePhone,
+                    "sta":status,"address":clienteleAddress,"com":comment},
+                success:function () {
+                }
+            })
+
+        })
+
+    })
 </script>
 </body>
 </html>

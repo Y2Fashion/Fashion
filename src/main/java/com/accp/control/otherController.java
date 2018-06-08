@@ -7,6 +7,11 @@ import com.accp.util.Iputil;
 import com.accp.util.RedisUtil;
 import com.accp.util.Storage;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import com.accp.biz.NewsBiz;
+import com.accp.biz.OrderBiz;
+import com.accp.entity.News;
+import com.accp.entity.Order;
+import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,6 +88,10 @@ public class otherController {
         }
 
     }
+    @Resource
+    private OrderBiz orderBiz;
+    @Resource
+    private NewsBiz biz;
 
    //大事记网页
     @RequestMapping("/bigEvent")
@@ -147,7 +156,10 @@ public class otherController {
         return "userAgreement";
     }
 
-    // 预约页面
+    /**
+     * 预约量体
+     * @return
+     */
     @RequestMapping("/yuyue")
     public String goToYuYue(Model model,Integer cId,Integer tId){
         if(cId!=null&&tId!=null){
@@ -155,7 +167,21 @@ public class otherController {
             model.addAttribute("tId",tId);
         }
         model.addAttribute("count",orderBiz.getOrderCount());
+    public String yuyue(Model model,String status){
+        int num=orderBiz.findCount(status);
+        model.addAttribute("num",num);
         return "yuyue";
+    }
+    @RequestMapping("/AddOrder")
+    @ResponseBody
+    public String AddOrder(String name,String phone,String address,String com){
+        Order order=new Order();
+        order.setClienteleAddress(address);
+        order.setClienteleName(name);
+        order.setClientelePhone(phone);
+        order.setComment(com);
+        orderBiz.Add(order);
+        return null;
     }
 
     @RequestMapping("/succeed_detail21")

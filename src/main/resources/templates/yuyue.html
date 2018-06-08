@@ -342,7 +342,11 @@
         }
 
         // 转圈等待
-        $.post( "yuyuesave.html"/*tpa=https://www.ybren.com/index.php/Home/Index/yuyuesave.html*/,{"name":name,"sex":sex,"height":height,"weight":weight,"tel":tel,"category":category,"appDateTime":ddate,"address":address,"note":note,"prov":prov,"city":city,"dist":dist,"from":from,"keywords":keywords,"plan":plan,"idea":idea,"subtype":1,"spread_code":spread_code},function(data) {
+        $.post( "yuyuesave.html"/*tpa=https://www.ybren.com/index.php/Home/Index/yuyuesave.html*/,
+			{"name":name,"sex":sex,"height":height,"weight":weight,"tel":tel,"category":category,
+				"appDateTime":ddate,"address":address,"note":note,"prov":prov,"city":city,
+				"dist":dist,"from":from,"keywords":keywords,"plan":plan,"idea":idea,"subtype":1,"spread_code":spread_code},
+			function(data) {
 
             if(data['status'] == '1'){
                 alert(data['message']);
@@ -354,6 +358,22 @@
                 alert(data['message']);
             }
         },'json');
+	var address=prov+city+dist;
+        //alert(prov);
+	//alert(address);
+
+		$.ajax({
+			url:"/AddOrder",
+			dataType:"json",
+			data:{"name":name,"phone":tel,"address":address,"com":note},
+			type:"post",
+			success:function (data) {
+				alert("预约成功");
+                window.location.href="/yuyue";
+            }
+		})
+
+
     }
 </script>
 

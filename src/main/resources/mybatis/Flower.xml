@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.FlowerDao">
+    <!--查询花型-->
+    <select id="findFlower" resultType="Flower">
+    SELECT * FROM Flower
+    </select>
+    <select id="findFId" resultType="Flower">
+        SELECT * FROM Flower
+        <where>
+            <if test="pattern!=null and pattern!=''">pattern=#{pattern}</if>
+        </where> ;
+    </select>
+    <!--查询成分-->
+    <select id="findComponent" resultType="Component">
+    SELECT * FROM component
+    </select>
+    <select id="findCmId" resultType="Component">
+        SELECT * FROM component
+        <where>
+            <if test="com!=null and com!=''">com=#{com}</if>
+        </where>;
+    </select>
+    <!--查询颜色-->
+    <select id="findColour" resultType="Colour">
+    SELECT * FROM colour
+    </select>
+    <select id="findClId" resultType="Colour">
+        SELECT * FROM colour
+        <where>
+            <if test="col!=null and col!=''">col=#{col}</if>
+        </where> ;
+    </select>
+</mapper>

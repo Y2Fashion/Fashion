@@ -29,11 +29,11 @@
 <div class="x-body">
     <div class="tools">
         <ul class="toolbar">
-            <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
-            <li onclick="user_management_password('添加供应商','Supplier_add','10001','900','430')"><span>
+            <li id="dels"><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
+            <li onclick="user_management_password('添加供应商','Supplier_add','900','430')"><span>
           <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
-        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+        <span class="x-right" style="line-height:25px">共有数据：<span th:text="${pager.totalRows}"></span>条</span></xblock>
     </div>
     <table class="tablelist">
         <thead>
@@ -70,309 +70,54 @@
             </th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>1</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
+        <tbody id="cheks">
+        <tr th:if="${not #lists.isEmpty(pager.datas)}" th:each="page:${pager.datas}">
+            <td><input type="checkbox" th:value="${page.ID}" name="id"></td>
+            <td th:text="${page.ID}" class="oid"></td>
+            <td th:text="${page.qiYeName}"></td>
+            <td th:text="${page.phone}"></td>
+            <td class="order_td_address" th:text="${page.qiYeAddress}"></td>
+            <td th:text="${page.faRen}"></td>
+            <td th:text="${page.businessName}"></td>
+            <td th:text="${page.qualityName}"></td>
+            <td class="order_td_remarks" th:text="${page.yaoQiu}">
                 男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
             </td>
             <td class="td-manage">
                 <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看供应商详情','Supplier_get','4','','380')"
+
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
                 <a style="text-decoration:none"
-                   onclick="user_management_password('修改供应商详情','Supplier_upd','10001','900','430')"
+                   class="update"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                <a title="删除" href="javascript:;" class="del"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>2</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>3</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>4</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>5</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>6</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>7</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>8</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>9</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>10</td>
-            <td>求大神</td>
-            <td>123456</td>
-            <td class="order_td_address">深圳市龙华区龙华大道某某小区512号</td>
-            <td>2018-05-12 12:00:00</td>
-            <td>预约</td>
-            <td>2018-06-13 13:13:32</td>
-            <td class="order_td_remarks">
-                男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
-            </td>
-            <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe615;</i>
-                </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
-                   href="javascript:;" title="修改">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
+
         </tbody>
     </table>
     <div class="page" v-show="show">
-        <a href="">首页</a>
-        <a href="">上一页</a>
-        <a href="">下一页</a>
-        <a href="">末页</a>
+        <a th:href="@{Supplier(pageNo=1)}">首页</a>
+        <span th:if="${pager.pageNo gt 1}">
+            <a th:href="@{Supplier(pageNo=${pager.pageNo}-1)}" id="two" >上一页</a>
+        </span>
+        <span th:if="${pager.pageNo lt pager.totalPage}">
+            <a th:href="@{Supplier(pageNo=${pager.pageNo}+1)}" id="thr">下一页</a>
+        </span>
+        <a th:href="@{Supplier(pageNo=${pager.totalPage})}">末页</a>
         &nbsp;&nbsp;
-        &nbsp;&nbsp;第n页/共n页&nbsp;&nbsp;共n条记录
+        &nbsp;&nbsp;第<span th:text="${pager.pageNo}"></span>页/共<span th:text="${pager.totalPage}"></span>页
+        &nbsp;&nbsp;共<span th:text="${pager.totalRows}"></span>条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text">
-             </span> <span class="jump gobtn">GO</span>
+                <input type="text" id="num">
+             </span> <span class="jump gobtn" id="Go">GO</span>
     </div>
 </div>
 <br />
@@ -396,14 +141,70 @@
         x_admin_show(title,url,w,h);
     }
     // 商品-查看
-    function user_management_edit (title,url,id,w,h) {
-        x_admin_show(title,url,w,h);
-    }
+    $(".ml-5").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
+        var urls='Supplier_get?id='+id;
+        x_admin_show('查看供应商详情',urls,'','380');
+    })
     /*商品-修改*/
-    function user_management_password(title,url,id,w,h){
-        x_admin_show(title,url,w,h);
+    $(".update").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
+        var urls='Supplier_upd?id='+id;
+        x_admin_show('修改供应商',urls,'900','430');
+    })
+    /*// 商品-查看
+    function user_management_edit (title,url,w,h) {
+        var id=$('[name="id"]').val();
+        var urls=url+'?id='+id;
+        x_admin_show(title,urls,w,h);
     }
+    /!*商品-修改*!/
+    function user_management_password(title,url,w,h){
+        var id=$('[name="id"]').val();
+        var urls=url+'?id='+id;
+        x_admin_show(title,urls,w,h);
+    }*/
+    /*页面跳转*/
+    $("#Go").click(function () {
+        var num=$("#num").val();
+        var url="order"+"?pageNo="+num;
+        window.location.href=url;
 
+    })
+    /* 单个删除*/
+    $(".del").click(function () {
+        var id=$(this).parent().siblings(".oid").text();
+        //alert(id);
+        $.ajax({
+            url:"delSupplier",
+            data:{"id":id},
+            type:"post",
+            success:function () {
+                location.reload(true);
+            }
+        })
+    })
+    /*批量删除*/
+    $("#dels").click(function () {
+        var requirement  = [];
+        var i=0;
+        $("#cheks :checkbox").each(function(){ //遍历table里的全部checkbox
+            // alert($(this).val());
+            if($(this).is(':checked')) {
+                i++;
+                requirement[i] = $(this).val();
+            }
+        });
+        $.ajax({
+            url:"delsSupplier",
+            data:{"arr":requirement},
+            type:"post",
+            success:function () {
+                location.reload(true);
+
+            }
+        })
+    })
     $('.tablelist tbody tr:odd').addClass('odd');
 </script>
 </body>
