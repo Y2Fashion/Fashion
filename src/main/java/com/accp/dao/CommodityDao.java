@@ -2,7 +2,6 @@ package com.accp.dao;
 
 import com.accp.entity.Commodity;
 import com.accp.entity.ThirdType;
-import com.sun.org.glassfish.external.probe.provider.annotations.ProbeParam;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +19,7 @@ public interface CommodityDao {
      * @param id
      * @return
      */
-    public Commodity findId(@ProbeParam("id") Integer id);
+    public Commodity findId(@Param("id") Integer id);
 
     /*
      * 添加点击量

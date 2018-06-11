@@ -24,9 +24,6 @@ import java.util.List;
 
 @Controller
 public class CommodityController {
-
-    @Resource
-    private  CommodityBiz biz;
     @Resource
     private RedisUtil redisUtil;
     @Resource
@@ -46,7 +43,7 @@ public class CommodityController {
         } else {
             Commodity commodity = new Commodity();
             commodity.setType(typeId);
-            commodityList = biz.findType(commodity);
+            commodityList = commodityBiz.findType(commodity);
             for (Commodity c :commodityList) {
                 c.setLining(liNingBiz.getLiNingById(c.getlId()));
             }
@@ -68,7 +65,7 @@ public class CommodityController {
         }else{
             Commodity commodity=new Commodity();
             commodity.setType(typeId);
-            commodityList=biz.findType(commodity);
+            commodityList=commodityBiz.findType(commodity);
             redisUtil.lPush(key,commodityList);
         }
         return commodityList;
@@ -118,7 +115,7 @@ public class CommodityController {
 
     @RequestMapping("getCommodityListBySType")
     public String getCommodityListBySType(Model model,String SecondTypeId){
-        model.addAttribute("commodityList",biz.getCommoditys(SecondTypeId));
+        model.addAttribute("commodityList",commodityBiz.getCommoditys(SecondTypeId));
         return "WAP-BDS-PZ";
     };
 
@@ -128,10 +125,10 @@ public class CommodityController {
         Date time=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         request.getSession().setAttribute(id.toString(),df.format(time));
-        Commodity commodity=biz.findId(id);
+        Commodity commodity=commodityBiz.findId(id);
         Lining lining=liNingBiz.getLiNingById(commodity.getlId());
         List<Lining> LiNingList=liNingBiz.getLiNingList();
-        List<Commodity> commodity1=biz.getCommoditys(commodity.getType());
+        List<Commodity> commodity1=commodityBiz.getCommoditys(commodity.getType());
         List<Commodity> commoditys=new ArrayList<Commodity>();
         commoditys.add(commodity1.get(0));
         commoditys.add(commodity1.get(1));

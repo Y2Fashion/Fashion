@@ -19,36 +19,50 @@
 
 <body>
 <div class="x-body">
-    <form>
+    <form action="Channel_add" method="post">
         <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="p_td">布料成分:</td>
                 <td >
-                    <input type="text" name='uname' class="u_t" placeholder="(长度为5-12位)"/>
+                    <select class=""  name="cmId">
+                        <option value="0">请选择</option>
+                        <option th:each="c:${components}" th:value="${c.id}" th:text="${c.com}"></option>
+
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">布料颜色:</td>
                 <td>
-                    <input type="text" name='uname' class="u_t"/>
+                    <select name="clId">
+                        <option value="0">请选择</option>
+                        <option th:each="cl:${colours}" th:value="${cl.id}" th:text="${cl.col}"></option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">布料花型:</td>
                 <td>
-                    <input type="text" name='uname' class="u_t"/>
+                    <select  name="fId">
+                        <option value="0">请选择</option>
+                        <option th:each="f:${flower}" th:value="${f.id}" th:text="${f.pattern}"></option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">进货价格:</td>
                 <td>
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='price' class="u_t"/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">供应商:</td>
-                <td>
-                    <input type="text" name='uname' class="u_t"/>
+                <td class="q_td">
+                    <select class="u_t" name="sId">
+                        <option value="0">请选择</option>
+                        <option th:each="s:${suppliers}" th:value="${s.ID}" th:text="${s.qiYeName}"></option>
+
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -62,6 +76,17 @@
 <script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
 <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+
+        $("#add").click(function () {
+
+            x_admin_close();
+
+        })
+    })
 </script>
 </body>
 </html>

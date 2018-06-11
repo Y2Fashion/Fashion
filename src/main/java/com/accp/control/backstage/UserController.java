@@ -120,6 +120,13 @@ public class UserController {
         return "/backstage/user_management_password";
     }
 
+    /**
+     * 判断旧密码是否正确
+     * @param model
+     * @param pwd
+     * @param session
+     * @return
+     */
     @RequestMapping("pwd_pwd")
     @ResponseBody
     public String pwd_Pwd(Model model,String pwd , HttpSession session){
@@ -131,9 +138,16 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改密码提交
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping("upd_pwd")
-    public String upd_Pwd(Model model,User user){
+    public String upd_Pwd(Model model,User user, HttpSession session){
         if(userBiz.upd_User(user)){
+            session.removeAttribute("ppd");//清空密码
             model.addAttribute("add_err","成功");
             model.addAttribute("user_ById",user);
             return "/backstage/user_management_password";

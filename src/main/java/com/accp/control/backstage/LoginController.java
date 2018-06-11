@@ -62,4 +62,14 @@ public class LoginController {
     public String loGin_main(){
         return "/backstage/main";
     }
+
+    /**
+     *退出系统，关闭会话，返回登录页面
+     * @return
+     */
+    @RequestMapping("login_out")
+    public String login_out(HttpSession session){
+        session.invalidate();//关闭会话
+        return "login";
+    }
 }

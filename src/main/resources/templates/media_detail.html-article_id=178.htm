@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset=utf-8"utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta content="no-cache" http-equiv="Pragma">
+		<title>衣邦人微信粉丝破200万 互联网营销引领高端定制业</title>
+		<meta name="Keywords" content="">
+		<meta name="Description" content="当所有人刚刚经历“喜迎2018，齐晒18岁月”的喜庆时刻，新年第一个工作日，高端互联网定制平台衣邦人">
+		<link rel="shortcut icon" href="//ossstatic.ybren.com/PC/img/favicon.ico">
+		<style type="text/css">
+			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
+			ul,ol,li{list-style:none; vertical-align: top;}
+			img{border:0}
+			a{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+			body{
+				margin: 0;
+				padding: 0;
+				background-color: #fff;
+				overflow-x: hidden;	
+				font-family:"Microsoft YaHei",微软雅黑;			
+			}				
+			.content{width: 924px;margin:0 auto;padding: 30px;text-align: justify;}
+			.content p{line-height: 22px;padding: 10px 0;}
+
+		</style>
+		<link href="/static/css/common.css" tppabs="https://www.ybren.com/Public/css/common.css" rel="stylesheet" />
+		<script src="/static/js/jquery.1.7.2.min-1.js" tppabs="https://www.ybren.com/Public/js/jquery.1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-86988233-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!--<div style="display:none">-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "hm.js-9618726c6a17a014651e4fedc8a09130"/*tpa=https://hm.baidu.com/hm.js?9618726c6a17a014651e4fedc8a09130*/;
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+    $("#pull").hover(function () {
+        $.ajax({
+            url:"/pull",
+            dataType:"json",
+            success:function (data) {
+                $("#pull ul").children().filter("li").remove();
+                $("#headPull ul").children().filter("li").remove();
+                var headpull='';
+                for(var i=data.length-1;i>=0;i--){
+                    var pull='<li>'+
+                        '<a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a>'+
+                        '</li>';
+                    headpull='<li><a href="getCommodityListBySType?SecondTypeId='+data[i].sId+'">'+data[i].secondType+'</a></li>';
+                    $.each($("#pull ul"),function(i,t){
+                        $(t).html(pull+$(t).html());
+                    });
+                    $.each($("#headPull ul"),function(i,t){
+                        $(t).html(headpull+$(t).html());
+                    });
+                }
+                headpull='<li><a href="/index">首页</a></li>';
+                $.each($("#headPull ul"),function(i,t){
+                    $(t).html(headpull+$(t).html());
+                })
+            }
+        })
+    })
+})();
+</script>
+</div>
+<!--<style type="text/css">
+	#qiao-wrap{display: none!important;}
+</style>-->
+<style type="text/css">
+	#YSF-BTN-HOLDER{display: none!important;}
+</style>
+<div class="head"><!--头部-->
+			<div class="topbar">		  
+				<img src="/static/image/fourpoint.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fourpoint.jpg" alt="贝嘟科技">
+				<a class="logo" href="index.htm" tppabs="https://www.ybren.com/"><img src="/static/image/logo.png" tppabs="https://ossstatic.ybren.com/PC/web/index/logo.png" alt="贝嘟科技"></a>
+			</div>					
+		</div>
+		<div class="nav">
+			<ul class="son">
+				<li><a href="index.htm" tppabs="https://www.ybren.com/">首页</a></li>
+				<li class="son_li" id="pull"><a href="javascript:;" class="click">&nbsp;产品&nbsp;</a>
+					<ul></ul>
+				</li>
+				<li class="son_li"><a class="click" href="javascript:void(0);">高端定制</a>
+					<ul>
+						<!-- <li><a href="/index.php/Home/Index/Fabric">国际面料</a></li> -->
+						<li><a href="maintenance.htm" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
+                        <li><a href="Daka.htm" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
+                        <li><a href="brandCooper.htm" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper">合作品牌</a></li>
+                        <li><a href="service.htm" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
+					</ul>
+				</li>
+				<li><a href="yuyue.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue">预约量体</a></li>
+ <!--                <li  ><a  href="/index.php/Home/Activity/YbrenerReg">衣邦客</a></li> -->
+ 				<li><a  href="bigEvent.htm" tppabs="https://www.ybren.com/index.php/Home/Index/bigEvent">大事记</a></li>
+				<li class="son_li"><a href="javascript:void(0);" class="click">企业相关</a>
+					<ul>
+						<li><a href="company.htm" tppabs="https://www.ybren.com/index.php/Home/Index/company">关于衣邦人</a></li>
+						<!-- <li><a href="/index.php/Home/Index/ggxx">高管信息</a></li> -->
+						<!-- <li><a href="/index.php/Home/Index/bigEvent">大事记</a></li> -->
+						<li><a href="media.htm" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
+						<li><a href="business.htm" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
+						<li><a href="contact.htm" tppabs="https://www.ybren.com/index.php/Home/Index/contact">联系我们</a></li>
+					</ul>
+				</li>
+				<div style="clear: both;"></div>
+			</ul>		  
+		</div>
+
+ <script type="text/javascript">
+                    function kefu(){
+                        var H = $(window).height();
+                        var W = $(window).width();
+                        var t = H/2-250;
+                        var l = W/2-250;
+                        window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
+                    }
+			$(function() {
+				$('.r3').hover(function(){
+					$('.wx_code').show();
+				},function(){
+					$('.wx_code').hide();
+				});
+				
+				$('.r4').hover(function(){
+					$('.app_code').show();
+				},function(){
+					$('.app_code').hide();
+				});
+			});
+		</script>
+
+	<div class="right_sevice">
+			<a onclick="kefu()" class="r1">在线客服</a>			
+			<a class="r3" href="###">官方微信</a>
+			<a class="r4" href="###">APP下载</a>
+			<a class="r2" href="pc-media-3.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/frompage/pc-media"></a>
+			<img class="wx_code" src="/static/image/WeixinHover_01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/WeixinHover_01.png"/>
+			<img class="app_code" src="/static/image/AppHover_01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/AppHover_01.png"/>
+		</div>
+		<script type="text/javascript">
+		 	function kefu(){
+                        var H = $(window).height();
+                        var W = $(window).width();
+                        var t = H/2-250;
+                        var l = W/2-250;
+                        window.open("http://bdkj.udesk.cn/im_client?group_id=25423","","top="+t+",left="+l+",width=500,height=500");
+                    }
+			$(function() {
+				$('.r3').hover(function(){
+					$('.wx_code').show();
+				},function(){
+					$('.wx_code').hide();
+				});
+				
+				$('.r4').hover(function(){
+					$('.app_code').show();
+				},function(){
+					$('.app_code').hide();
+				});
+			});
+		</script>	
+
+<!--头部-->
+
+		<div class="banner">
+			<img class="banimg" src="/static/image/banner_media.jpg" tppabs="https://ossstatic.ybren.com/PC/img/banner_media.jpg">
+		</div>
+		<div class="content">
+			<p>当所有人刚刚经历“喜迎2018，齐晒18岁月”的喜庆时刻，新年第一个工作日，高端互联网定制平台衣邦人宣布：1月2日，微信粉丝突破200万，自衣邦人微信公众号2015年4月上线，第一个100万粉丝，用了两年多时间，而第二个100万粉丝，只用了短短两个多月。而粉丝的高速增长同期带来的是2017年12月营收超6000万元，继续保持行业遥遥领先。所有信息都表明：第二个三年，衣邦人进入高速发展期。</p><p>衣邦人首创“互联网+上门量体+工业4.0”模式，对高端服装定制行业是创新革命性体验，互联网基因带来不同于其他定制服装企业的裂变之路。衣邦人关注互联网与用户体验，围绕用户需求打造服务链与产品链。互联网营销将决胜未来，200万粉丝的关注，给衣邦人带来的不仅仅是关注度的提升、预约与销量的增长，这也将是衣邦人的核心竞争力又一个关键强势节点。</p><p>在2017年8月，中国服装协会研究机构-中服时尚研究院曾经发布过《中国服装定制品牌官微影响力排行榜》，衣邦人以708.4分位列榜首。影响力排行版从各定制平台/品牌官微的栏目内容质量及关注数出发，结合发布频率、阅读数、点赞数、最高阅读数等相关数据，综合评分得来。衣邦人在排行榜上评分远远高于其他平台与品牌，所以此次微信粉丝额高速增长，也正是作为行业榜首所展现出在多方面厚积薄发的实力。</p><p>企业实力体现在多方面，团队建设日趋完善、服务能力继续提升、产品质量精益求精，背后是衣邦人600多小伙伴在过去三年齐心努力，更重要的是用户的高度认可，新用户、复购、转介绍都成为12月营收突破6000万元的关键，35万的预约用户，与传统定制覆盖数千人的规模，已经超越了很多人的想象。</p><p>衣邦人创始人兼CEO方琴表示：2018年必然会是更加精彩的一年，衣邦人承用户所爱，必将用心之至，为更多国内中高端用户提供互联网上门量体服务，用更好的体验与产品来回报支持衣邦人一步步走过来的新老客户们。每一个看起来巨大挑战的目标，都必将是我们要去超越的过往；每一个遥不可及的梦想，都会成为我们不断向前的动力，唯爱与信任不可辜负。</p><p>衣邦人还透露，现阶段的目标在于国内定制市场的千亿蓝海，以最快的速度获得更多用户的认可与信任，围绕用户需求打造产品研发与供应链优势，在2017年9月完成B轮5000万元融资以后，衣邦人就重点提升研发与全球供应链资源，几个月后这种优势就能在用户端体现，服务与产品是定制行业永远不变的真理。2018年，衣邦人还将开启新一轮融资，整合全球资源，服务海内外高端用户。</p><p><br/></p>		</div>
+<div class="foot">
+			<div class="foot_logo">
+				<img src="/static/image/foot01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/foot01.jpg" alt="" />
+			</div>
+			<div class="fmidd">
+				<div class="fsec">					
+					<ul class="fsec1" style="margin-left: 150px;">
+						<li style="padding-bottom: 5px;padding-left: 0;"><a class="ftitle" target="_blank" href="javascript:void(0)">关于我们</a></li>
+						<li><a target="_blank" href="company.htm" tppabs="https://www.ybren.com/index.php/Home/Index/company">公司简介</a></li>
+						<li><a target="_blank" href="brandCooper.htm" tppabs="https://www.ybren.com/index.php/Home/Index/brandCooper">合作品牌</a></li>
+						<li><a target="_blank" href="media.htm" tppabs="https://www.ybren.com/index.php/Home/Index/media">新闻动态</a></li>
+						<li><a target="_blank" href="business.htm" tppabs="https://www.ybren.com/index.php/Home/Index/business">商务合作</a></li>
+					</ul>
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
+
+						<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric">面料品牌</a></li> -->
+                        <li><a target="_blank" href="maintenance.htm" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
+                        <li><a target="_blank" href="service.htm" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
+						<li><a target="_blank" href="Daka.htm" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>
+					</ul>					
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">联系我们</a></li>
+						<li><a target="_blank" href="contact.htm#zhanting" tppabs="https://www.ybren.com/index.php/Home/Index/contact#zhanting">展厅地址</a></li>
+						<li><a target="_blank" href="GW.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue/10703/from/GW">预约量体</a></li>
+						<li><a target="_blank" href="succeed.htm" tppabs="https://www.ybren.com/index.php/Home/Index/succeed">风尚人物</a></li>
+						<!-- <li><a target="_blank" href="/index.php/Home/Activity/YbrenerReg">衣邦客</a></li>								 -->
+					</ul>
+					<ul class="fsec1">
+						<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">预约热线</a></li>
+						<li>400-673-8899</li>
+						<li>(北京时间9：00-21：30)</li>
+						<!-- <li>24小时客服在线</li> -->
+
+					</ul>
+					<div class="code">
+						<p><img src="/static/image/code01.png" tppabs="https://ossstatic.ybren.com/PC/web/index/code01.png"></p>
+						<p class="pt">衣邦人公众微信号</p>
+					</div>
+					<div class="code">
+						<p><img src="/static/image/code02.png" tppabs="https://ossstatic.ybren.com/PC/web/index/code02.png"></p>
+						<p class="pt">衣邦人APP客户端</p>
+					</div>
+				</div>
+			</div>
+			<div class="foot_logo_2" >
+				衣邦人，率先将互联网，专业着装顾问上门量体，和工业4.0技术引入量身定制行业的服装定制平台。客户可以免费预约衣邦人的专业着装顾问，上门量体采集身材数据，<br>并提供专业着装建议。提供西装定做，西服定制，女士正装，职业装，商务正装定制，西装，衬衫定制等服装定制服务。
+								<div style="width:300px;margin:0 auto; padding:20px 0;">
+					<a target="_blank" href="javascript:if(confirm('http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802000773  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ����һ�����·���ⲿ������Ϊ������ʼ��ַ�ĵ�ַ��  \n\n�����ڷ������ϴ���?'))window.location='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802000773'" tppabs="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802000773" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/static/image/beian.png" tppabs="https://ossstatic.ybren.com/PC/web/index/beian.png" style="float:left;width: 20px;height: 20px;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33011802000773号</p></a>
+				</div>
+			</div>
+			<div class="infomation"><p class="p1">Copyright&copy;2015-2018 ybren.com,&nbsp;&nbsp;All Rights Reserved.</p><p class="p2">版权所有:杭州贝嘟科技有限公司&nbsp;&nbsp;&nbsp;浙ICP备15008318号</p></div>
+</div>
+
+<style type="text/css">		
+    #cnzz_stat_icon_1255644252{display: none;}
+    #cnzz_stat_icon_1257829290{display: none;}
+</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255644252'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1255644252%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257829290'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257829290%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+	</body>
+
+</html>

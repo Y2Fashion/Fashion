@@ -17,12 +17,12 @@
 </head>
 <body>
 <div class="x-body">
-    <form action="" method="post">
+    <form action="lining_upd" method="post">
         <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="p_td">布料编号:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" value="1" readonly/>
+                    <input type="text" name='id' class="u_t" th:value="${stock.id}" readonly/>
                 </td>
                 <td style="background: url('/static/image/backstage/shuji4.jpg');background-size:100% 100%;"
                     colspan="2" rowspan="5">
@@ -31,40 +31,43 @@
             <tr>
                 <td class="p_td">布料成分::</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" placeholder="(长度为5-12位)" readonly/>
+
+                    <input type="text" name='com' class="u_t" th:value="${stock.com}" placeholder="(长度为5-12位)" readonly/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">布料颜色:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" readonly/>
+
+                    <input type="text" name='col' class="u_t" th:value="${stock.col}" readonly/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">布料花型:</td>
                 <td class="q_td">
-                    <input type="text" name='uname' class="u_t" readonly/>
+
+                    <input type="text" name='pattern' class="u_t" th:value="${stock.pattern}" readonly/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td" >进货价格:</td>
                 <td class="q_td" >
-                    <input type="text" name='uname' class="u_t" readonly/>
+                    <input type="text" name='price' class="u_t" th:value="${stock.price}" readonly/>
                 </td>
             </tr>
             <tr>
                 <td class="p_td">存放地址:</td>
                 <td class="q_td" >
-                    <input type="text" name='uname' class="u_t"/>
+                    <input type="text" name='adress' class="u_t" th:value="${stock.adress}"/>
                 </td>
                 <td class="p_td">布料库存:</td>
                 <td class="q_td">
-                    <input type="text" class="u_t" value="4325.00" readonly/>
+                    <input type="text" name="number" class="u_t" th:value="${stock.number}" />
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input class="u_t" style="width: 100%" type="submit" value="修改"/>
+                    <input class="u_t" style="width: 100%" type="submit" value="修改" id="up"/>
                 </td>
             </tr>
         </table>
@@ -74,6 +77,15 @@
 <script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
 <script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        $("#up").click(function () {
+            x_admin_close();
+
+        })
+    })
 </script>
 </body>
 

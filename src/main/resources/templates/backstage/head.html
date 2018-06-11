@@ -16,14 +16,12 @@
 			<img class="headLogo" src="/static/image/backstage/banner2.png"/>
 		</div>
 		<div class="headR">
-	    <a href="../login.html" target="_parent">【退出】</a>
+	    <a href="login_out"  target="_parent">【退出】</a>
 		</div>
 	</div>
     <div class="user">
 		<!-- /*@thymesVar id="user_role" type="package.Object" */ -->
 		<span th:text="${user_role.userRole+':'+user_role.userName}"></span>
-    </div> 
-    
+    </div>
 </body>
-
 </html>
