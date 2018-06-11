@@ -8,9 +8,7 @@
 <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/backstage/public.js"></script>
 <script type="text/javascript" src="/static/js/backstage/external.js"></script>
-
 </head>
-
 <body>
 	<!-- 头部 -->
 	<div class="head">
@@ -22,7 +20,8 @@
 		</div>
 	</div>
     <div class="user">
-    <span>admin</span>
+		<!-- /*@thymesVar id="user_role" type="package.Object" */ -->
+		<span th:text="${user_role.userRole+':'+user_role.userName}"></span>
     </div> 
     
 </body>

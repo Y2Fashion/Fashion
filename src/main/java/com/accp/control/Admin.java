@@ -32,32 +32,7 @@ public class Admin {
 
     @Resource
     private CommodityBiz commodityBiz;
-    //实验后台页面
-    @RequestMapping("/login")
-    public String loGin(){
-        return "login";
-    }
 
-    /*进入后台主页面 /login_go  /head   /left   /main*/
-    @RequestMapping("/login_go")
-    public String loGin_go(){
-        return "/backstage/indexs";
-    }
-
-    @RequestMapping("/head")
-    public String loGin_head(){
-        return "/backstage/head";
-    }
-
-    @RequestMapping("/left")
-    public String loGin_left(){
-        return "/backstage/left";
-    }
-
-    @RequestMapping("/main")
-    public String loGin_main(){
-        return "/backstage/main";
-    }
 
     /**
      * 订单管理页面
