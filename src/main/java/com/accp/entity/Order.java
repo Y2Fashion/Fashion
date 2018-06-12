@@ -8,7 +8,6 @@ import java.util.Date;
  *
  */
 public class Order implements Serializable {
-
     private static final long serialVersionUID = 1L;
     private Integer orderId;//订单id
     private String  clienteleName;//客户名

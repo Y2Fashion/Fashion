@@ -176,24 +176,24 @@ public class Admin {
     @RequestMapping(value = "/order_upd",method=RequestMethod.POST)
     public String update(Model model,Integer id,String crea,String del,
     String name,String phone,String sta,String address,String com) {
-        Order order = new Order();
-        order.setComment(com);
-        order.setClientelePhone(phone);
-        order.setClienteleName(name);
-        order.setClienteleAddress(address);
-        Date c = null;
-        Date d = null;
-        try {
-            c = java.sql.Date.valueOf(crea);
-            d = java.sql.Date.valueOf(del);
-            order.setCreateTime(c);
-            order.setDeliveryTime(d);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        order.setOrderId(id);
-        order.setStatus(sta);
-        int num = orderBiz.Update(order);
+//        Order order = new Order();
+//        order.setComment(com);
+//        order.setClientelePhone(phone);
+//        order.setClienteleName(name);
+//        order.setClienteleAddress(address);
+//        Date c = null;
+//        Date d = null;
+//        try {
+//            c = java.sql.Date.valueOf(crea);
+//            d = java.sql.Date.valueOf(del);
+//            order.setCreateTime(c);
+//            order.setDeliveryTime(d);
+//        } catch (Exception e) {
+//            e.getMessage();
+//        }
+//        order.setOrderId(id);
+//        order.setStatus(sta);
+//        int num = orderBiz.Update(order);
         return "redirect:/order";
 
     }
@@ -262,25 +262,25 @@ public class Admin {
     @RequestMapping(value = "/order_add",method=RequestMethod.POST)
     public String orderadd(Model model,String crea,String del,
                          String name,String phone,String sta,String address,String com){
-        Order order=new Order();
-        order.setComment(com);
-        order.setClientelePhone(phone);
-        order.setClienteleName(name);
-        order.setClienteleAddress(address);
-        Date c=null;
-        Date d=null;
-        try{
-            c=java.sql.Date.valueOf(crea);
-            d=java.sql.Date.valueOf(del);
-
-        }catch (Exception e){
-            e.getMessage();
-        }
-        order.setCreateTime(c);
-        order.setDeliveryTime(d);
-
-        order.setStatus(sta);
-        int num= orderBiz.Add(order);
+//        Order order=new Order();
+//        order.setComment(com);
+//        order.setClientelePhone(phone);
+//        order.setClienteleName(name);
+//        order.setClienteleAddress(address);
+//        Date c=null;
+//        Date d=null;
+//        try{
+//            c=java.sql.Date.valueOf(crea);
+//            d=java.sql.Date.valueOf(del);
+//
+//        }catch (Exception e){
+//            e.getMessage();
+//        }
+//        order.setCreateTime(c);
+//        order.setDeliveryTime(d);
+//
+//        order.setStatus(sta);
+//        int num= orderBiz.Add(order);
         return  "redirect:/order";
 
 

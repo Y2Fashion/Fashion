@@ -29,7 +29,6 @@ public class LoginController {
 //    https://blog.csdn.net/sunshine_han/article/details/78951834
 
 
-
     /*进入后台主页面 /login_go  /head   /left   /main*/
     @RequestMapping("/login_go")
     public String loGin_go(Model model, String username, String pwd , HttpSession session){
@@ -64,7 +63,7 @@ public class LoginController {
     }
 
     /**
-     *退出系统，关闭会话，返回登录页面
+     * 退出系统,关闭会话,返回登录页面
      * @return
      */
     @RequestMapping("login_out")
