@@ -13,9 +13,10 @@ public interface OrderDao {
 
     /**
      * 查询预订总数
+     * id 时间段(1:以后 ,2:今天  ,3:以前)
      * @return
      */
-    public int findCount(@Param("status")String status);
+    public int findCount(@Param("status")String status,@Param("id") int id);
 
     /**
      * 预约
@@ -50,4 +51,13 @@ public interface OrderDao {
      * @return
      */
     public int Del(@Param("orderId")Integer orderId);
+
+    /***
+     * 根据时间段查询所有订单
+     * @param id 时间段(1:以后 ,2:今天  ,3:以前)
+     * @param num 起始位置
+     * @param sum 每页条数
+     * @return
+     */
+    List<Order> findTime(@Param("id") int id,@Param("num") int num,@Param("sum") int sum);
 }

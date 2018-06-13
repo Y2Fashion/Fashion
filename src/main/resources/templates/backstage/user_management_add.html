@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            用户管理-添加
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+        <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+        <script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div th:if="${add_err !=null}">
+            <script>
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            </script>
+        </div>
+        <div class="x-body">
+            <form class="layui-form" action="user_add" method="post">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>用户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text"  name="userName" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>必填
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_pass" name="userPwd" class="layui-input" onblur="login_pwd(this)">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        6到16个字符
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>确认密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_repass" name="userPwds" class="layui-input" onblur="login_pwd(this)">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>用户角色</label>
+                    <div class="layui-input-inline">
+                        <select name="userRole" >
+                            <option value="业务员">业务员</option>
+                            <option value="加工师傅">加工师傅</option>
+                            <option value="仓库管理员">仓库管理员</option>
+                            <option value="财务">财务</option>
+                            <option value="管理员">管理员</option>
+                            <option value="超级管理员">超级管理员</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>性别
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="userSex" >
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--https://blog.csdn.net/ajlgl/article/details/72514974-->
+                <!--http://www.layui.com/doc/element/form.html-->
+                <!--http://fly.layui.com/jie/8623/-->
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn">
+                        增加
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script language="JavaScript" src="/static/js/backstage/jquery2.js"></script>
+        <script language="javascript" src="/static/js/backstage/md5.js"></script>
+        <script>
+            layui.use('form', function(){
+                var form = layui.form();
+                form.render();
+            });
+
+            function login_pwd(pwd){
+                var aa=pwd.value;
+                if(aa.trim().length<32){
+                    var aa=$.md5(aa);
+                }
+                pwd.value=aa;
+            }
+        </script>
+    </body>
+
+</html>

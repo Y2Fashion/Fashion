@@ -8,9 +8,7 @@
 <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/backstage/public.js"></script>
 <script type="text/javascript" src="/static/js/backstage/external.js"></script>
-
 </head>
-
 <body>
 	<!-- 头部 -->
 	<div class="head">
@@ -18,13 +16,12 @@
 			<h1 class="headLogo" style="color: #292713;font-size: 24px;margin: 35px 25%">衣邦人平台管理系统</h1>
 		</div>
 		<div class="headR">
-	    <a href="../login.html" target="_parent">【退出】</a>
+	    <a href="login_out"  target="_parent">【退出】</a>
 		</div>
 	</div>
     <div class="user">
-    <span>admin</span>
-    </div> 
-    
+		<!-- /*@thymesVar id="user_role" type="package.Object" */ -->
+		<span th:text="${user_role.userRole+':'+user_role.userName}"></span>
+    </div>
 </body>
-
 </html>

@@ -41,6 +41,16 @@ public interface OrderBiz {
      * @return
      */
     public int Del(Integer orderId);
+
+
+    /***
+     * 根据时间段查询所有订单
+     * @param id 时间段(1:以后 ,2:今天  ,3:以前)
+     * @param num 起始位置
+     * @param sum 每页条数
+     * @return
+     */
+    Pager<Order> findTime(int id,int num,int sum);
     int getOrderCount();
 
 }
