@@ -5,13 +5,13 @@ import com.accp.biz.FirstTypeBiz;
 import com.accp.biz.SecondTypeBiz;
 import com.accp.biz.ThirdTypeBiz;
 import com.accp.entity.FirstType;
-import com.accp.entity.SecondType;
+
 import com.accp.entity.ThirdType;
 import com.accp.biz.OrderBiz;
 import com.accp.biz.StatusBiz;
 import com.accp.entity.Order;
 import com.accp.util.Pager;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import com.accp.biz.*;
 import com.accp.entity.*;
 import com.accp.util.RedisUtil;
@@ -22,28 +22,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import java.util.List;
 
 /***
  * 该控制类用于实验，具体请自己创建
  */
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
+
 
 @Controller
 public class Admin {
     @Resource
     private FirstTypeBiz firstTypeBiz;
-
 
     @Resource
     private SecondTypeBiz secondTypeBiz;
@@ -91,42 +85,6 @@ public class Admin {
         return "/backstage/main";
     }
 
-    /**
-     * 订单管理页面
-     * @return
-     */
-    @RequestMapping("/order")
-    public String loGin_order(Model model){
-
-        model.addAttribute("typeId","1");
-        return "/backstage/order";
-    }
-
-    /**
-     * 进入添加订单页面
-     * @return
-     */
-    @RequestMapping("/order_add")
-    public String order_add(){
-        return "backstage/order_add";
-    }
-    /**
-     * 进入查询订单页面
-     * @return
-     */
-    @RequestMapping("/order_get")
-    public String order_get(){
-        System.out.println("aaa");
-        return "backstage/order_get";
-    }
-    /**
-     * 进入订单修改页面
-     * @return
-     */
-    @RequestMapping("/order_upd")
-    public String order_upd(){
-        return "backstage/order_upd";
-    }
 
 
     /**
@@ -439,8 +397,10 @@ public class Admin {
             List<UserOrder> UserOrders=userOrderBiz.getCommdityTop10();
             if(UserOrders.size()>0){
                 for (int i=UserOrders.size()-1;i>=0;i--) {
+                    Commodity c=commodityBiz.getCommodityById(UserOrders.get(i).getCommodityId());
                     UserOrders.get(i).setCommodity(commodityBiz.getCommodityById(UserOrders.get(i).getCommodityId()));
-                    dataName.add(UserOrders.get(i).getCommodity().getCommodityName());
+                    String name=UserOrders.get(i).getCommodity().getCommodityName();
+                    dataName.add(name);
                     datas.add(UserOrders.get(i).getCountCID());
                 }
                 dataNameJ=(JSON)JSON.toJSON(dataName);
@@ -568,6 +528,5 @@ public class Admin {
         model.addAttribute("datas",datasJ);
         return "backstage/BazaarView";
     }
-
 
 }

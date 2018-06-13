@@ -5,6 +5,8 @@ import com.accp.entity.*;
 import com.accp.util.Iputil;
 import com.accp.util.RedisUtil;
 import com.accp.util.Storage;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,7 @@ import javax.annotation.Resource;
 import javax.xml.crypto.Data;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CommodityController {
@@ -127,6 +126,9 @@ public class CommodityController {
     @RequestMapping("/index")
     public String goToIndex(Model model, HttpServletRequest request){
 
+
+
+
         /*获取访问者IP*/
         String IP=Iputil.getIpAddr(request);
         List<AccessingData> accessingDatas=accessingDataBiz.getAccessingDataList(IP);
@@ -197,6 +199,7 @@ public class CommodityController {
             redisUtil.lPush("niuZaiKuHitsList",niuZaiKuHitsList);
             redisUtil.lPush("nvShiHitsList",nvShiHitsList);
         }
+
         model.addAttribute("xiZhuangHitsList",xiZhuangHitsList);
         model.addAttribute("chenSanHitsList",chenSanHitsList);
         model.addAttribute("kuZhuangHitsList",kuZhuangHitsList);

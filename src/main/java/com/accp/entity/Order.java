@@ -20,6 +20,7 @@ public class Order implements Serializable {
     private Date deliveryTime;//交货时间
     private Commodity commodity =new Commodity();//产品类
 
+
     public Commodity getCommodity() {
         return commodity;
     }
@@ -27,34 +28,6 @@ public class Order implements Serializable {
     public void setCommodity(Commodity commodity) {
         this.commodity = commodity;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-
-    private Date createTime;//量体时间
-    private String status;//订单状态
-    private Date deliveryTime;//交货时间
 
     public Integer getOrderId() {
         return orderId;

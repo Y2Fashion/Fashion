@@ -49,6 +49,6 @@
         DELETE FROM `order` WHERE orderId=#{orderId}
     </delete>
     <select id="selectOrderCount" resultType="Integer">
-        select count(*) from `Order` where state='已付款';
+        select count(*) from `Order` where status='交货成功';
     </select>
 </mapper>

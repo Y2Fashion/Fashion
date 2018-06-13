@@ -33,7 +33,8 @@ public class otherController {
     private RedisUtil redisUtil;
     @Resource
     private OrderBiz orderBiz;
-
+    @Resource
+    private NewsBiz biz;
     /*
     * 当用户退出详细页面时 触发ajax跳入此方法获取退出时间 并计算出浏览此商品时间
     * */
@@ -88,10 +89,7 @@ public class otherController {
         }
 
     }
-    @Resource
-    private OrderBiz orderBiz;
-    @Resource
-    private NewsBiz biz;
+
 
    //大事记网页
     @RequestMapping("/bigEvent")
@@ -161,13 +159,12 @@ public class otherController {
      * @return
      */
     @RequestMapping("/yuyue")
-    public String goToYuYue(Model model,Integer cId,Integer tId){
-        if(cId!=null&&tId!=null){
-            model.addAttribute("cId",cId);
-            model.addAttribute("tId",tId);
+    public String goToYuYue(Model model,Integer cId,Integer tId,String status) {
+        if (cId != null && tId != null) {
+            model.addAttribute("cId", cId);
+            model.addAttribute("tId", tId);
         }
-        model.addAttribute("count",orderBiz.getOrderCount());
-    public String yuyue(Model model,String status){
+        model.addAttribute("count", orderBiz.getOrderCount());
         int num=orderBiz.findCount(status);
         model.addAttribute("num",num);
         return "yuyue";

@@ -129,24 +129,27 @@ ga('send', 'pageview');
 				border:2px solid #ffffff;
 				background:#ffffff;
 				padding: 15px;
-				border-radius: 10px;
-				border: 3px solid ;
-				border-color: #ed7c49;
-
+				border-radius: 15px;
+				border: 5px solid #57564e;
+				box-shadow: 0px 0px 20px #06c;
+				background-color: #222222;
+				background-image: url("/static/image/jingguang.jpg");
+				background-repeat: no-repeat;
+				background-size: cover;
 			}
 		</style>
 		<style type="text/css">
 			.chinese_to_english{position: absolute;top:67px;right:0px;color: #FFFFFF;}
 		</style>
 	</head>
-	<body>
+	<body id="body">
 	<input type="hidden" name="interestList" th:value="${bool}">
 	<input type="hidden" name="listSize" th:value="${listSize}">
 	<div id="Idiv" style="display:none;" >
 		<a href="javascript:void(0)" onclick="closeDiv()" style="font-size: 16px; float: right;"><img style="width: 25px;height: 25px" src="/static/image/timg.jpg"></a>
 		<ul class="list">
 			<li style="display: inline;" th:each="commodity:${interestList}">
-				<h4 style="color: rgba(30,36,255,0.76);margin-bottom:15px;text-align: center">降价啦！直降100</h4>
+				<h4 style="color: rgb(255,23,21);margin-bottom:15px;text-align: center">降价啦！直降100</h4>
 				<a th:href="@{'selectCommodity?id='+${commodity.id}}" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">
 					<img th:src="@{'/static/image/'+${commodity.photoPath}}" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt="" >
 					<div class="desc">
@@ -173,6 +176,7 @@ ga('send', 'pageview');
                 console.log(intersertList);
                 if(sessionStorage.getItem("one")==null && intersertList==1){
                     show();
+                    var boy=$("#body");
                     sessionStorage.setItem("one",1);
                 }
 
@@ -430,7 +434,7 @@ ga('send', 'pageview');
 
 			<div class="list">
 				<div class="l_top"  th:if="${not #lists.isEmpty(thirdTypeList)}">
-					<img src="/static/image/fl01.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl01.jpg">
+					<img src="/static/image/love.jpeg" tppabs="https://ossstatic.ybren.com/PC/web/index/fl01.jpg">
 					<ul class="title_list">
 						<li class="tl_one">猜你喜欢</li>
 						<li class="tl_br"></li>
@@ -541,8 +545,8 @@ ga('send', 'pageview');
 					<ul class="title_list">
 						<li class="tl_one">牛仔裤系列</li>
 						<li class="tl_br"></li>
-						<li class="tl_two"><a href="selectCommodityList?typeId=24" tppabs="https://www.ybren.com/home/category_son/162">男士牛仔裤</a></li>
-						<li class="tl_two"><a href="selectCommodityList?typeId=25" tppabs="https://www.ybren.com/home/category_son/172">女士牛仔裤</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=24" tppabs="https://www.ybren.com/home/category_son/162">男式牛仔裤</a></li>
+						<li class="tl_two"><a href="selectCommodityList?typeId=25" tppabs="https://www.ybren.com/home/category_son/172">女式牛仔裤</a></li>
 						<li class="tl_more"><a href="selectCommodityList?typeId=26" tppabs="https://www.ybren.com/home/category_son/162">点击查看更多>></a></li>
 					</ul>
 				</div>
