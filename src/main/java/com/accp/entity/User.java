@@ -29,6 +29,7 @@ public class User {
     private String userSex; //性别
     private Date userTime; //创建日期
     private String userState; //用户状态(已启用,已停用)
+    private String name;//用户姓名
 
     public int getId() {
         return id;
@@ -84,5 +85,13 @@ public class User {
 
     public void setUserState(String userState) {
         this.userState = userState;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

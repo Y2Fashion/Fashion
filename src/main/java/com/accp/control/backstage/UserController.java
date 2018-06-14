@@ -24,13 +24,19 @@ public class UserController {
      * 因为是刚进入，是查询全部
      */
     @RequestMapping("user")
-    public String user_list(Model model){
-//        User user=new User("管理员","", Date.valueOf("2018-03-29"),"");
-        Pager<User> list=userBiz.list(new User(),1);
+    public String user_list(Model model,HttpSession session){
+        User user=(User)session.getAttribute("user_role");
+        Pager<User> list=null;
+        if(user.getUserRole().equals("超级管理员")||user.getUserRole().equals("管理员")){
+            list=userBiz.list(new User(),1);
+        }else{
+            list=userBiz.list(user);
+        }
         model.addAttribute("role","");
         model.addAttribute("sex","");
         model.addAttribute("state","");
         model.addAttribute("pager",list);
+        model.addAttribute("user_role",user);
         return "/backstage/user";
     }
 
@@ -44,7 +50,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_pager")
-    public String user_pager(Model model,String role,String sex,String state,Integer num){
+    public String user_pager(Model model,String role,String sex,String state,Integer num,HttpSession session){
+        User users=(User)session.getAttribute("user_role");
         User user=new User();
         user.setUserRole(role);
         user.setUserSex(sex);
@@ -54,6 +61,7 @@ public class UserController {
         model.addAttribute("sex",sex);
         model.addAttribute("state",state);
         model.addAttribute("pager",list);
+        model.addAttribute("user_role",users);
         return "/backstage/user";
     }
 

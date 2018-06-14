@@ -76,8 +76,8 @@
     <!-- 添加新用户  -->
     <insert id="insert" parameterType="User">
         insert into User
-            (userName,userPwd,userRole,userSex,userTime,userState)
-                values(#{userName},#{userPwd},#{userRole},#{userSex},#{userTime},#{userState})
+            (userName,userPwd,userRole,userSex,userTime,userState,name)
+                values(#{userName},#{userPwd},#{userRole},#{userSex},#{userTime},#{userState},#{name})
 	</insert>
 
     <!--根据ID查询用户信息-->

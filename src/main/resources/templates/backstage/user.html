@@ -29,13 +29,16 @@
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <form action="user_pager" style="width:85%">
+    <form th:if="
+            ${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'}"
+          action="user_pager" style="width:85%">
         <label>用户角色:</label>
         <select name="role">
             <option value="">请选择</option>
             <option value="超级管理员" th:selected="${role=='超级管理员'}">超级管理员</option>
             <option value="管理员" th:selected="${role=='管理员'}">管理员</option>
-            <option value="财务" th:selected="${role=='财务'}">财务</option>
+            <option value="客服" th:selected="${role=='客服'}">客服</option>
             <option value="业务员" th:selected="${role=='业务员'}">业务员</option>
             <option value="仓库管理员" th:selected="${role=='仓库管理员'}">仓库管理员</option>
             <option value="加工师傅" th:selected="${role=='加工师傅'}">加工师傅</option>
@@ -56,7 +59,9 @@
         <input type="submit" style="width:50px" value="搜索"/>
     </form>
     <div class="tools">
-        <ul class="toolbar">
+        <ul th:if="
+            ${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'}" class="toolbar">
             <li id="dels"><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
             <li onclick="user_management_add('添加用户','user_add','600','490')"><span>
                 <img src="/static/image/backstage/t01.png" /></span>添加</li>
@@ -75,8 +80,9 @@
             <th>
                 用户名
             </th>
-           <!-- <th>
-                密码</th>-->
+            <th>
+                员工姓名
+            </th>
             <th>
                 用户角色</th>
             <th>
@@ -99,6 +105,7 @@
             </td>
             <td th:text="${user.id}"></td>
             <td th:text="${user.userName}"></td>
+            <td th:text="${user.name}"></td>
             <td th:text="${user.userRole}"></td>
             <td th:text="${user.userSex}"></td>
             <td th:text="${#dates.format(user.userTime, 'yyyy-MM-dd')}"></td>
@@ -106,14 +113,18 @@
                 <button class="sp" th:text="${user.userState}">已启用</button>
             </td>
             <td class="td-manage">
-                <a style="text-decoration:none" onclick="member_stop(this,'10001')" th:attr="vv=${user.id}" title="停用">
+                <a th:if="${user_role.userRole == '超级管理员'
+                            || user_role.userRole == '管理员'}"
+                        style="text-decoration:none" onclick="member_stop(this,'10001')" th:attr="vv=${user.id}" title="停用">
                     <i class="layui-icon">&#xe601;</i>
                 </a>
                 <a style="text-decoration:none"  onclick="user_management_password(this,'修改密码','user_upd_pwd','10001','600','420')"
                     title="修改密码" th:attr="vv=${user.id}">
                     <i class="layui-icon">&#xe631;</i>
                 </a>
-                <a title="删除" href="javascript:;" onclick="remov(this)" th:attr="vv=${user.id}"
+                <a th:if="${user_role.userRole == '超级管理员'
+                            || user_role.userRole == '管理员'}"
+                        title="删除" href="javascript:;" onclick="remov(this)" th:attr="vv=${user.id}"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
@@ -123,19 +134,35 @@
     </table>
 
     <div class="page" v-show="show">
-        <a th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=1)}">
+        <a th:if="${pager.totalPage >1}"
+           th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=1)}">
             首页</a>
         <a th:if="${pager.pageNo >1}"
-            th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.pageNo-1})}">
+           th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.pageNo-1})}">
             上一页</a>
         <!-- th:href="@{commodity(pageNo=${page.pageNo-1},type=${type})}"-->
         <a th:if="${pager.pageNo} < ${pager.totalPage}"
            th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.pageNo+1})}"
         >下一页</a>
-        <a th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.totalPage})}">末页</a>
+        <a th:if="${pager.totalPage > pager.pageNo}"
+           th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.totalPage})}">末页</a>
         &nbsp;&nbsp;
         &nbsp;&nbsp;第<b th:text="${pager.pageNo}"></b>页/共<b th:text="${pager.totalPage}"></b>页&nbsp;&nbsp;共<b th:text="${pager.totalRows}"></b>条记录
     </div>
+    <!--<div class="page" v-show="show">-->
+        <!--<a th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=1)}">-->
+            <!--首页</a>-->
+        <!--<a th:if="${pager.pageNo >1}"-->
+            <!--th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.pageNo-1})}">-->
+            <!--上一页</a>-->
+        <!--&lt;!&ndash; th:href="@{commodity(pageNo=${page.pageNo-1},type=${type})}"&ndash;&gt;-->
+        <!--<a th:if="${pager.pageNo} < ${pager.totalPage}"-->
+           <!--th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.pageNo+1})}"-->
+        <!--&gt;下一页</a>-->
+        <!--<a th:href="@{user_pager(role=${role},sex=${sex},state=${state},num=${pager.totalPage})}">末页</a>-->
+        <!--&nbsp;&nbsp;-->
+        <!--&nbsp;&nbsp;第<b th:text="${pager.pageNo}"></b>页/共<b th:text="${pager.totalPage}"></b>页&nbsp;&nbsp;共<b th:text="${pager.totalRows}"></b>条记录-->
+    <!--</div>-->
 </div>
 <br />
 <br />

@@ -35,8 +35,6 @@ public class LoginController {
         User user=new User(username,pwd,"已启用");
         User users=userBiz.get(user);
         if(users!=null&&users.getId()>0){
-            users.setUserPwd("");
-//            String tishi=users.getUserRole()+":"+users.getUserName();
             session.setAttribute("user_role",users);
             return "/backstage/indexs";
         }else{
@@ -53,7 +51,9 @@ public class LoginController {
     }
 
     @RequestMapping("/left")
-    public String loGin_left(){
+    public String loGin_left(Model model,HttpSession session){
+        User role=(User)session.getAttribute("user_role");
+        model.addAttribute("user_role",role);
         return "/backstage/left";
     }
 
