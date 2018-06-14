@@ -1,86 +1,177 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>
-            服装管理-添加
-            <!--   user_management_add.html修改而来-->
-        </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
-        <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
-    </head>
-    
-    <body>
-    <div class="x-body">
-        <form>
-            <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td class="p_td">服装名称:</td>
-                    <td>
-                        <input type="text" name='uname' class="u_t" placeholder="衣服名称(长度为5-12位)"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">服装状态:</td>
-                    <td>
-                        <select class="u_t">
-                            <option value="新品" >新品</option>
-                            <option value="奢品">奢品</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">衣服材质:</td>
-                    <td>
-                        <input type="text" name='uname' class="u_t"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">原价格:</td>
-                    <td>
-                        <input type="text" name='uname' class="u_t"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">会员价:</td>
-                    <td>
-                        <input type="text" class="u_t" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p_td">服装类型:</td>
-                    <td>
-                        <select class="u_t">
-                            <option value="1" >男士西装</option>
-                            <option value="2">女士西装</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr height="41px">
-                    <td class="p_td">服装图片:</td>
-                    <td >
-                        <input type="file" class="r_td"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input class="u_t" style="width: 100%" type="submit" value="添加"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <script src="/static/lib/layui/layui.js" charset="utf-8">
-    </script>
-    <script src="/static/js/backstage/x-layui.js" charset="utf-8">
-    </script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>
+        服装管理-添加
+        <!--   user_management_add.html修改而来-->
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity_add.css">
+</head>
+
+<body>
+<div class="x-body">
+    <form method="post"  id="form" enctype="multipart/form-data">
+        <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="p_td">服装名称:</td>
+                <td>
+                    <input type="text" name='commodityName' class="u_t" placeholder="衣服名称(长度为5-12位)"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="p_td">服装状态:</td>
+                <td>
+                    <select class="u_t" name="state">
+                        <option value="新品">新品</option>
+                        <option value="奢品">奢品</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="p_td">衣服材质:</td>
+                <td>
+                    <select  name="lId">
+                        <option th:each="li:${lining}" th:value="${li.lId}" th:text="${li.ingredient}"selected="selected"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="p_td">原价格:</td>
+                <td>
+                    <input type="text" name='originalPrice' class="u_t"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="p_td">会员价:</td>
+                <td>
+                    <input type="text" class="u_t" name="vipPrice"/>
+                </td>
+            </tr>
+            <tr class="p_td">
+                <td class="">服装类型:</td>
+                <td>
+                    <select class="firstType" onchange="showSecondType(this.value)">
+                        <option class="firstClick" th:value="${firstType.fId}" th:each="firstType:${firstTypeList}"
+                                th:text="${firstType.firstType}">请选择
+                        </option>
+                    </select>
+                    <!-- <select class="secondType" onchange="showThirdType(this.value)">
+                         <option value="1">男士</option>
+                         <option value="2">女士</option>
+                     </select>
+                     <select class="thirdType">
+                         <option value="1">男士</option>
+                         <option value="2">女士</option>
+                     </select>-->
+                </td>
+            </tr>
+            <tr height="41px">
+                <td class="p_td">服装图片:</td>
+                <td>
+                    <input type="hidden" name="photoPath" value=""/>
+                    <input type="file" name="fileImg" class="r_td"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="u_t" style="width: 100%" type="submit" onclick="x_admin_close()" value="添加"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script src="/static/lib/layui/layui.js" charset="utf-8">
+</script>
+<script src="/static/js/backstage/x-layui.js" charset="utf-8">
+</script>
+<script src="/static/js/jquery-1.8.3.min.js"></script>
+<script>
+    layui.use(['laydate', 'element', 'laypage', 'layer'], function () {
+        $ = layui.jquery;//jquery
+        lement = layui.element();//面包导航
+        laypage = layui.laypage;//分页
+        layer = layui.layer;//弹出层
+
+    });
+    function showSecondType(firstType) {
+        /*if (0 == firstType) {
+            firstType = null;
+        }*/
+        $(".firstType").nextAll().remove();
+        var htmlText = "<select class='secondType'onchange='showThirdType(this.value)'></select>";
+
+        if (0 != firstType) {
+            $('.p_td').children('td').eq(1).append(htmlText);
+        }
+        $.ajax({
+            url: "/getSecondType",
+            dataType: "json",
+            data: {"firstType": firstType},
+            success: function (data) {
+                console.log(data);
+                $(".secondType").children().filter("option").remove();
+                for (var i = 0; i < data.length; i++) {
+                    var htm = '<option value="' + data[i].sId + '" selected="selected">' + data[i].secondType + '</option>'
+
+                    $.each($(".secondType"), function (i, t) {
+                        $(t).html(htm + $(t).html());
+                    })
+                }
+
+            }
+        })
+    }
+
+    function showThirdType(secondType) {
+        /*if(0==secondType){
+            secondType=null;
+        }*/
+        $(".secondType").nextAll().remove();
+        var htmlText = "<select class='thirdType' name='type'></select>";
+        if (secondType > 0) {
+            $('.p_td').children('td').eq(1).append(htmlText);
+        }
+        $.ajax({
+            url: "/getThirdType",
+            dataType: "json",
+            data: {"secondType": secondType},
+            success: function (data) {
+                $(".thirdType").children().filter("option").remove();
+                for (var i = 0; i < data.length; i++) {
+                    var htm = '<option value="' + data[i].tId + '">' + data[i].thirdType + '</option>'
+                    $.each($(".thirdType"), function (i, t) {
+                        $(t).html(htm + $(t).html());
+                    })
+                }
+            }
+        })
+    }
+    $("#form").submit(function () {
+        var form=$(this).serialize();
+        var data= decodeURIComponent(form,true);
+        $.ajax({
+            url:"/commodity_add",
+            data:data,
+            type:"post",
+            dataType:"text",
+            success:function (data) {
+                if(data=="false"){
+                    layer.alert('修改失败。', {icon: 6});
+                }
+            }
+        })
+    })
+</script>
+</body>
 
 </html>
+

@@ -7,7 +7,6 @@ import com.accp.entity.Commodity;
 import com.accp.entity.SecondType;
 import com.accp.entity.ThirdType;
 import com.accp.util.Pager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +16,7 @@ import java.util.List;
 @Service
 public class CommodityBizImpl implements CommodityBiz {
 
-    @Autowired
+    @Resource
     private CommodityDao dao;
 
     @Resource
@@ -39,7 +38,7 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public Commodity findId(Integer id) {
-        addHits(id);
+//        addHits(id);
         Commodity commodity=dao.findId(id);
         commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
         commodity.setPictures(pictureBiz.getPictureList(id));
@@ -96,19 +95,35 @@ public class CommodityBizImpl implements CommodityBiz {
                 a++;
             }
         }
+
         return dao.selectCommodityList(integers);
     }
 
     @Override
-    public Pager<Commodity> commodityList(Integer type, Integer pageNo) {
+    public Pager<Commodity> commodityList(Integer type,Integer secondType,Integer firstType,Integer pageNo) {
         if(null == pageNo){
             pageNo=1;
         }
         Pager<Commodity> pager = new Pager<>();
         pager.setPageNo(pageNo);
-        pager.setTotalRows(dao.commodityCount(type));
+        pager.setTotalRows(dao.commodityCount(type,secondType,firstType));
         pager.setTotalPage((pager.getTotalRows()+8-1)/8);
-        pager.setDatas(dao.commodityList(type,pageNo-1));
+        pager.setDatas(dao.commodityList(type,secondType,firstType,pageNo-1));
         return pager;
+    }
+
+    @Override
+    public Integer commoditydel(Integer id) {
+        return dao.commoditydel(id);
+    }
+
+    @Override
+    public boolean insertCommodity(Commodity commodity) {
+        return dao.insertCommodity(commodity)>0;
+    }
+
+    @Override
+    public boolean updataCommodity(Commodity commodity) {
+        return dao.updataCommodity(commodity) > 0;
     }
 }

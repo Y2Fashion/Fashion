@@ -8,7 +8,7 @@
 	h		弹出层高度（缺省调默认值）
 */
 function x_admin_show(title,url,w,h){
-    alert(url+"111111111111111111111");
+   /* alert(url+"111111111111111111111");*/
 	if (title == null || title == '') {
 		title=false;
 	};
@@ -19,7 +19,7 @@ function x_admin_show(title,url,w,h){
 		w=800;
 	};
 	if (h == null || h == '') {
-		h=($(window).height() - 50);
+		h=($(window).height()-50);
 	};
 	layer.open({
 		type: 2,

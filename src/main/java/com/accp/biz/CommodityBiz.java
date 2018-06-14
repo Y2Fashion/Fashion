@@ -38,6 +38,24 @@ public interface CommodityBiz {
     * */
     public List<Commodity> getCommoditys(boolean bool);
 
-    public Pager<Commodity> commodityList(Integer type,Integer pageNo);
+
+
+    public Pager<Commodity> commodityList(Integer type,Integer secondType,Integer firstType,Integer pageNo);
+
+    Integer commoditydel(Integer id);
+
+    /**
+     * 添加商品
+     * @param commodity
+     * @return
+     */
+    boolean insertCommodity(Commodity commodity);
+
+    /**
+     * 修改商品
+     * @param commodity
+     * @return
+     */
+    boolean updataCommodity(Commodity commodity);
 
 }

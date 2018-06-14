@@ -13,6 +13,8 @@ public class ThirdType implements Serializable {
     private String thirdType;// 三级类型
     private Integer sId;//二级ID
 
+    private SecondType secondType;
+
     public Integer gettId() {
         return tId;
     }
@@ -36,4 +38,12 @@ public class ThirdType implements Serializable {
     public void setsId(Integer sId) {
         this.sId = sId;
     }
+
+    public SecondType getSecondType() {
+        return secondType;
+    }
+
+    public void setSecondType(SecondType secondType) {
+      this.secondType = secondType;
+  }
 }
