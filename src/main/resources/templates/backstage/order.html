@@ -127,7 +127,7 @@
         &nbsp;&nbsp;
         &nbsp;&nbsp;第<span th:text="${pages.pageNo}" id="pageNo"></span> 页/共<span th:text="${pages.totalPage}" id="total"></span> 页&nbsp;&nbsp;共<span th:text="${pages.totalRows}"></span> 条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text" name="num" th:value="${pages.pageNo}"id="num">
+                <input type="text" name="num" th:value="${pages.pageNo}"id="num"onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
              </span> <span class="jump gobtn" ><input id="Go" type="button" value="GO"></input></span>
     </div>
 </div>

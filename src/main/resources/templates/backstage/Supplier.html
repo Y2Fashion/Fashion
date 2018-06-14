@@ -116,7 +116,7 @@
         &nbsp;&nbsp;第<span th:text="${pager.pageNo}"></span>页/共<span th:text="${pager.totalPage}"></span>页
         &nbsp;&nbsp;共<span th:text="${pager.totalRows}"></span>条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text" id="num">
+                <input type="text" id="num" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
              </span> <span class="jump gobtn" id="Go">GO</span>
     </div>
 </div>

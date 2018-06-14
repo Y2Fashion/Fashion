@@ -75,7 +75,7 @@ ga('send', 'pageview');
                 var listSize=$("[name='listSize']").val();
                 console.log(listSize);
                 var Idiv=document.getElementById("Idiv");
-                Idiv.style.width=260*listSize+"px";
+                Idiv.style.width=265*listSize+"px";
                 Idiv.style.display="block";
                 //以下部分要将弹出层居中显示
                 Idiv.style.left=(document.documentElement.clientWidth-Idiv.clientWidth)/2+document.documentElement.scrollLeft+"px";
@@ -136,6 +136,7 @@ ga('send', 'pageview');
 				background-image: url("/static/image/jingguang.jpg");
 				background-repeat: no-repeat;
 				background-size: cover;
+				padding: auto auto;
 			}
 		</style>
 		<style type="text/css">
@@ -654,16 +655,16 @@ ga('send', 'pageview');
 </style>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255644252'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1255644252%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257829290'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257829290%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>  		
-		<div class="foot_yuyue" style="background-color: #222222">
+		<div class="foot_yuyue" style="background-color: #E2AF1B">
 			<div class="ycont">
 				<form action="" enctype="multipart/form-data" method="post" name="quantity">
 				<ul>				
 					<li>
-						<label class="con-le"  for="name">姓名：</label>
+						<label class="con-le"  style="width: 50px" for="name">姓名：</label>
 						<input type="text" name="name" value="" id="name" placeholder="">
 					</li>								
 					<li>
-						<label for="tel">电话：</label>
+						<label for="tel" style="width: 50px">电话：</label>
 						<input type="tel" name="tel" value="" id="tel" placeholder="">
 					</li>				
 					<li id="city">

@@ -333,7 +333,7 @@
         &nbsp;&nbsp;
         &nbsp;&nbsp;第n页/共n页&nbsp;&nbsp;共n条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text">
+                <input type="text" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
              </span> <span class="jump gobtn">GO</span>
     </div>
 </div>
