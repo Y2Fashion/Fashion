@@ -25,6 +25,9 @@ public class UserController {
      */
     @RequestMapping("user")
     public String user_list(Model model,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         User user=(User)session.getAttribute("user_role");
         Pager<User> list=null;
         if(user.getUserRole().equals("超级管理员")||user.getUserRole().equals("管理员")){
@@ -51,6 +54,9 @@ public class UserController {
      */
     @RequestMapping("user_pager")
     public String user_pager(Model model,String role,String sex,String state,Integer num,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         User users=(User)session.getAttribute("user_role");
         User user=new User();
         user.setUserRole(role);
@@ -72,7 +78,10 @@ public class UserController {
      */
     @RequestMapping("user_dels")
     @ResponseBody
-    public String user_dels(@RequestParam(value = "arr[]") Integer[] arr){
+    public String user_dels(@RequestParam(value = "arr[]") Integer[] arr,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         boolean yesNo=userBiz.removes(arr);
         return "redirect:/user";
     }
@@ -83,7 +92,10 @@ public class UserController {
      */
     @RequestMapping("user_del")
     @ResponseBody
-    public String user_del(Integer id){
+    public String user_del(Integer id,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         boolean yesNo=userBiz.remove(id);
         return "redirect:/user";
     }
@@ -104,7 +116,10 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_add")
-    public String user_add(Model model,User user){
+    public String user_add(Model model,User user,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         if(user.getUserName()==null){
             return "/backstage/user_management_add";
         }else{
@@ -121,6 +136,9 @@ public class UserController {
      */
     @RequestMapping("user_upd_pwd")
     public String user_pwd(Model model,Integer id,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         User user=userBiz.getById(id);
         session.setAttribute("ppd",user.getUserPwd());
         user.setUserPwd("");//密码就不保存在model中一起发送到客服端
@@ -138,6 +156,9 @@ public class UserController {
     @RequestMapping("pwd_pwd")
     @ResponseBody
     public String pwd_Pwd(Model model,String pwd , HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         String ppd=session.getAttribute("ppd").toString();
         if(ppd.equals(pwd)){
             return "true";
@@ -154,6 +175,9 @@ public class UserController {
      */
     @RequestMapping("upd_pwd")
     public String upd_Pwd(Model model,User user, HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         if(userBiz.upd_User(user)){
             session.removeAttribute("ppd");//清空密码
             model.addAttribute("add_err","成功");

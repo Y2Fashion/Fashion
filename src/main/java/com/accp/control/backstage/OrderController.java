@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * 订单表管理
@@ -25,7 +26,10 @@ public class OrderController {
      * @return
      */
     @RequestMapping("main_get")
-    public String mian_Get(Model model,Integer id){
+    public String mian_Get(Model model, Integer id, HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         Pager<Order> pager=orderBiz.findTime(id,1,2);
         model.addAttribute("mainTime_ID",id);
         model.addAttribute("page",pager);
@@ -40,30 +44,13 @@ public class OrderController {
      * @return
      */
     @RequestMapping("main_Get_Pager")
-    public String get_Pager(Model model,Integer id,Integer num){
+    public String get_Pager(Model model,Integer id,Integer num,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         Pager<Order> pager=orderBiz.findTime(id,num,2);
         model.addAttribute("mainTime_ID",id);
         model.addAttribute("page",pager);
         return "/backstage/main_get";
     }
-
-//    /**
-//     * 进入
-//     * @return
-//     */
-//    @RequestMapping("ooo_add")
-//    public String ooo_Add(){
-//        return "/backstage/order_add";
-//    }
-//
-//    /**
-//     * 进入
-//     * @return
-//     */
-//    @RequestMapping("ooo_add_add")
-//    public String ooo_Add_add(Model model,Order order){
-//        Order xx=order;
-//        int num= orderBiz.Add(order);
-//        return "/backstage/order_add";
-//    }
 }
