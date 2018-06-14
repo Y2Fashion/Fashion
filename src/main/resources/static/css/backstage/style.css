@@ -126,7 +126,7 @@ h2 {
 .loginbox {
 	width: 692px;
 	height: 336px;
-	background: url(../../image/backstage/logininfo.png) no-repeat;
+	background: url(../../image/backstage/longinfo.jpg) no-repeat;
 	margin-top: 30px;
 }
 .loginbox ul {
@@ -225,7 +225,7 @@ h2 {
 }
 .topright {
 	height: 88px;
-	background: url(../image/topright.jpg) no-repeat right;
+	background: url(/static/image/backstage/topright.jpg) no-repeat right;
 	float: right;
 }
 .nav {
@@ -248,7 +248,7 @@ h2 {
 	-o-transition: background-color 0.3s linear;
 }
 .nav li a.selected {
-	background: url(../image/navbg.png) no-repeat;
+	background: url(/static/image/backstage/navbg.png) no-repeat;
 }
 .nav li a:hover {
 	display: block;
@@ -278,7 +278,7 @@ h2 {
 	float: left;
 	padding-left: 9px;
 	padding-right: 9px;
-	background: url(../image/line.gif) no-repeat right;
+	background: url(/static/image/backstage/line.gif) no-repeat right;
 }
 .topright ul li:last-child {
 	background: none;
@@ -303,7 +303,7 @@ h2 {
 	float: right;
 	margin-right: 12px;
 	border-radius: 30px;
-	behavior: url(js/pie.htc);
+	behavior: url(/static/js/backstage/pie.htc);
 	white-space: nowrap;
 	position: relative;
 }
@@ -340,7 +340,7 @@ h2 {
 }
 /*left.html*/
 .lefttop {
-	background: url(../image/lefttop.gif) repeat-x;
+	background: url(/static/image/backstage/lefttop.gif) repeat-x;
 	height: 40px;
 	color: #fff;
 	font-size: 14px;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.StockDao">
+    <!--按条件分页查询-->
+    <select id="findStock" resultType="Stock">
+        SELECT c.id,cm.Com,cl.col,f.pattern,c.number,c.adress  FROM stock c
+        INNER JOIN Component cm ON c.cmId=cm.id
+        INNER JOIN colour cl ON c.clId=cl.id
+        INNER JOIN Flower f ON c.clId=f.id
+        <where>
+            <if test="cmId!=null and cmId!=''"> and  cmId=#{cmId}</if>
+            <if test="clId!=null and clId!=''"> and  clId=#{clId}</if>
+            <if test="fId!=null and fId!=''"> and  fId=#{fId}</if>
+        </where>
+        LIMIT #{pageNo},#{pageSize};
+    </select>
+    <!--查询条数-->
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*) FROM stock
+        <where>
+            <if test="cmId!=null and cmId!=''">and  cmId=#{cmId}</if>
+            <if test="clId!=null and clId!=''">and  clId=#{clId}</if>
+            <if test="fId!=null and fId!=''">and  fId=#{fId}</if>
+        </where>;
+    </select>
+    <!--查询单个-->
+    <select id="findId" resultType="Stock">
+         SELECT c.id,cm.Com,cl.col,f.pattern,c.number,c.adress,c.useNum,c.price  FROM stock c
+        INNER JOIN Component cm ON c.cmId=cm.id
+        INNER JOIN colour cl ON c.clId=cl.id
+        INNER JOIN Flower f ON c.clId=f.id
+         WHERE c.id=#{id};
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="int">
+        UPDATE stock
+        <set>
+            <if test="cmId!=null and cmId!=''">cmId=#{amId} ,</if>
+            <if test="clId!=null and clId!=''">clId=#{clId} ,</if>
+            <if test="fId!=null and fId!=''">fId=#{fId} ,</if>
+            <if test="number!=null and number!=''">`number`=#{number} ,</if>
+            <if test="adress!=null and adress!=''">adress=#{adress} ,</if>
+            <if test="price!=null and price!=''">price=#{price} ,</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="del" parameterType="int">
+        DELETE FROM stock WHERE id=#{id}
+    </delete>
+    <!--增加-->
+    <insert id="add" parameterType="Stock">
+        INSERT INTO stock(cmId,clId,fId,`number`,adress,price,path)
+          VALUES(#{cmId},#{clId},#{fId},#{number},#{adress},#{price},#{path})
+    </insert>
+</mapper>

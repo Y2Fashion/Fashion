@@ -46,4 +46,10 @@ public class ThirdType implements Serializable {
     public void setSecondType(SecondType secondType) {
       this.secondType = secondType;
   }
+
+    public ThirdType(Integer tId, String thirdType, Integer sId) {
+        this.tId = tId;
+        this.thirdType = thirdType;
+        this.sId = sId;
+    }
 }

@@ -169,7 +169,7 @@ public class RedisUtil extends RedisConfig{
      * @param key
      * @return
      */
-    public Set<Object> setMembers(String key){
+    public Set<Object> getMembers(String key){
         SetOperations<Object, Object> set = this.redisTemplate().opsForSet();
         return set.members(key);
     }

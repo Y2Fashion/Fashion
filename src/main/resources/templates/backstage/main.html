@@ -9,24 +9,30 @@
 
 <body background="/static/image/backstage/mainbg.jpg">
 		<div class="clearfix" id="contentBox">
-  <div id="first" class="buttonBox">
-    <button style="color:#666; font-size:20px;">未审核人员</button>
+  <div class="buttonBox">
+    <button onclick="xxx(1)" target="main" class="cks" style="color:#666; font-size:20px;">未量体订单</button>
     <div class="border"></div>
     <div class="border"></div>
   </div>
 
-  <div id="first" class="buttonBox">
-    <button style="color:#666; font-size:20px;">今日测试结果</button>
+  <div class="buttonBox">
+    <button onclick="xxx(2)" target="main" class="cks" style="color:#666; font-size:20px;">今日量体订单</button>
     <div class="border"></div>
     <div class="border"></div>
   </div>
 
-<div id="first" class="buttonBox">
-    <button style="color:#666; font-size:20px;">点我测试</button>
+<div class="buttonBox">
+    <button onclick="xxx(3)" target="main" class="cks" style="color:#666; font-size:20px;">已量体订单</button>
     <div class="border"></div>
     <div class="border"></div>
   </div>
 
 </div>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+        <script>
+            function xxx(obj){
+                location.href='main_get?id='+obj;
+            }
+        </script>
 </body>
 </html>

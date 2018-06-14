@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>五分钟上手之柱状图</title>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="/static/js/backstage/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
+</head>
+<body>
+<input type="hidden" name="dataName" th:value="${dataName}">
+<input type="hidden" name="datas" th:value="${datas}">
+<div id="chartmain" style="width:110%; height: 600px;margin: auto auto;"></div>
+<script type="text/javascript">
+    var dataName=$("[name='dataName']").val();
+    var datas=$("[name='datas']").val();
+    var jsonName=eval(dataName);
+    var jsonDatas=eval(datas);
+    var option = {
+        title:{
+            text:'                                                                                      各省份地区订单情况'
+        },
+        tooltip:{},
+        legend:{
+            data:['用户来源']
+        },
+        xAxis:{
+            data:jsonName
+        },
+        grid:{
+            x:80,
+            y:50,
+            x2:260,
+            y2:50,
+            borderWidth:1
+        },
+        yAxis:{
+
+        },
+        series:[{
+            name:'订单量/件',
+            type:'bar',
+            data:jsonDatas
+        }]
+    };
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('chartmain'));
+
+    //使用制定的配置项和数据显示图表
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -46,14 +46,12 @@
     <select id="findType" parameterType="Commodity" resultType="Commodity">
         SELECT * FROM commodity WHERE TYPE=#{type};
     </select>
-
     <!--查询单个商品-->
     <select id="findId" resultType="Commodity" parameterType="Integer">
         SELECT * FROM commodity WHERE id=#{id};
     </select>
-
     <!--添加点击量-->
-    <select id="UpdateHits" parameterType="Commodity">
+    <update id="UpdateHits" parameterType="Commodity">
         update Commodity
         <set>
             <if test="commodityName!=null and commodityName!=''">commodityName=#{commodityName},</if>
@@ -66,7 +64,7 @@
             <if test="hits!=null and hits!=''">hits=#{hits},</if>
         </set>
         where id=#{id}
-    </select>
+    </update>
 
     <!--修改商品信息-->
     <update id="updataCommodity" parameterType="Commodity">
@@ -92,6 +90,21 @@
         order by hits desc limit 0,8;
     </select>
 
+    <select id="selectCommodityListByIP" resultType="Commodity">
+        select * from Commodity where id in
+        <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
+            #{thirdTypeArry}
+        </foreach>
+        order by hits desc limit 0,8;
+    </select>
+
+    <select id="commodityList" resultType="Commodity">
+          SELECT * FROM commodity
+          <where>
+              <if test="type != null ">and type=#{type}</if>
+          </where>
+           ORDER BY hits DESC LIMIT #{pageNo},8;
+    </select>
 
     <select id="commodityCount" resultType="Integer">
         SELECT COUNT(1) FROM commodity c JOIN thirdtype t ON c.TYPE=t.tId JOIN secondtype s ON t.sId=s.sId
@@ -112,4 +125,12 @@
    VALUES (#{commodityName},#{originalPrice},#{vipPrice},#{photoPath},#{state},#{type},#{lId});
     </insert>
 
+<!--按id查询商品-->
+    <select id="selectCommodityById" resultType="Commodity" parameterType="Integer">
+        select * from Commodity where ID=#{id}
+    </select>
+    <!--查询各个类型的总热度-->
+    <select id="selectHitsGroupType" resultType="Commodity">
+        SELECT TYPE,SUM(hits) AS hits FROM Commodity GROUP BY TYPE ORDER BY SUM(hits)DESC
+    </select>
 </mapper>

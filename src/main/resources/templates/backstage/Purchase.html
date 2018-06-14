@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        布料进货管理
+        <!--   User_management.html修改而来-->
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/pag.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity.css">
+    <link rel="stylesheet" href="/static/css/backstage/order.css">
+</head>
+<body>
+<div class="x-nav">
+            <span class="layui-breadcrumb">
+              <a><cite>首页</cite></a>
+              <a><cite>进货管理</cite></a>
+            </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <form action="" style="width:85%">
+        <label>供应商:</label>
+        <select class="" name="cars">
+            <option value="volvo">请选择</option>
+            <option value="预约">1</option>
+            <option value="已上门量体">2</option>
+            <option value="加工成品中">3</option>
+            <option value="移交成功">4</option>
+        </select>
+        <label>布料编号:</label>
+        <select class="" name="cars">
+            <option value="volvo">请选择</option>
+            <option value="预约">1</option>
+            <option value="已上门量体">2</option>
+            <option value="加工成品中">3</option>
+            <option value="移交成功">4</option>
+        </select>
+        <label>交货状态:</label>
+        <select class="" name="cars">
+            <option value="volvo">请选择</option>
+            <option value="预约">未交货</option>
+            <option value="已上门量体">已交货</option>
+        </select>
+        <input type="submit" style="width:50px" value="搜索"/>
+    </form>
+    <div class="tools">
+        <ul class="toolbar">
+            <li><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
+            <li onclick="user_management_password('添加进货','Purchase_add','10001','900','340')"><span>
+          <img src="/static/image/backstage/t01.png" /></span>添加</li>
+        </ul>
+        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+    </div>
+    <table class="tablelist">
+        <thead>
+        <tr>
+            <th>
+            <input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
+        </th>
+            <th>
+                ID
+            </th>
+            <th>
+                供应商
+            </th>
+            <th>
+                布料编号
+            </th>
+            <th>
+                进货价格
+            </th>
+            <th>
+                进货数量
+            </th>
+            <th>
+                下单时间
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                交货时间
+            </th>
+            <th>
+                采购人员
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>1</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','Purchase_get','4','','270')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','Purchase_upd','10001','900','350')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>2</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>3</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>4</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>5</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>6</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>7</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" name="selected"></td>
+            <td>8</td>
+            <td>供应商编号</td>
+            <td>布料库存编号</td>
+            <td>2300/米</td>
+            <td>300/米</td>
+            <td>2018-05-12 12:00:00</td>
+            <td>未交货</td>
+            <td>2018-06-13 13:13:32</td>
+            <td>采购人</td>
+            <td class="td-manage">
+                <a title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看订单详情','order_get.html','4','','350')"
+                   class="ml-5" style="text-decoration:none">
+                    <i class="layui-icon">&#xe615;</i>
+                </a>
+                <a style="text-decoration:none"
+                   onclick="user_management_password('修改订单','order_upd.html','10001','900','400')"
+                   href="javascript:;" title="修改">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                   style="text-decoration:none">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="page" v-show="show">
+        <a href="">首页</a>
+        <a href="">上一页</a>
+        <a href="">下一页</a>
+        <a href="">末页</a>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;第n页/共n页&nbsp;&nbsp;共n条记录
+        <span class="jumppoint">跳转到：</span> <span class="jumpinp">
+                <input type="text" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+             </span> <span class="jump gobtn">GO</span>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script src="/static/js/backstage/js.js" charset="utf-8"></script>
+<script>
+    layui.use(['laydate','element','laypage','layer'], function(){
+        $ = layui.jquery;//jquery
+        lement = layui.element();//面包导航
+        laypage = layui.laypage;//分页
+        layer = layui.layer;//弹出层
+
+    });
+
+    /*商品-添加*/
+    function user_management_add(title,url,w,h){
+        x_admin_show(title,url,w,h);
+    }
+    // 商品-查看
+    function user_management_edit (title,url,id,w,h) {
+        x_admin_show(title,url,w,h);
+    }
+    /*商品-修改*/
+    function user_management_password(title,url,id,w,h){
+        x_admin_show(title,url,w,h);
+    }
+
+    $('.tablelist tbody tr:odd').addClass('odd');
+</script>
+</body>
+</html>

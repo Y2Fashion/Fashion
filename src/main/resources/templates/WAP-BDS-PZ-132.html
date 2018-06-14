@@ -329,7 +329,7 @@ var _hmt = _hmt || [];
 							</div>
 							<div class="t t4"><img src="/static/image/t4.jpg.png" tppabs="https://ossstatic.ybren.com/PC/good_img/t4.jpg" alt=""></div>
 						</div>
-						<a class="yuyue" href="yuyue.html-from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue.html?from=WAP-BDS-PZ">立即预约专业着装顾问免费上门量体</a>
+						<a class="yuyue" th:href="@{'/yuyue?cId='+${commodity.id}+',tId='+${commodity.type}}" tppabs="https://www.ybren.com/index.php/Home/Index/yuyue.html?from=WAP-BDS-PZ">立即预约专业着装顾问免费上门量体</a>
 					</div>
 				</div>
 				<div class="step">
@@ -363,22 +363,6 @@ var _hmt = _hmt || [];
 										<span><font color="#FA5F29" th:text="'会员价￥'+${commodityss.vipPrice}">会员价￥4386.00</font><br th:text="${commodityss.vipPrice}"/>灰色格纹毛麻精品西服</span>
 									</a>
 								</li>
-								<!--<li>
-									<a href="itemDetail.html-erp_item_id=YS1053&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS1053&from=WAP-BDS-PZ">
-										<img src="5a9e0ab147d0a.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0ab147d0a.jpg" alt="" ><span><font color="#FA5F29">会员价￥4653.00</font><br />灰色红格纹全羊毛商务经典男士单西</span>
-									</a>
-								</li>
-								<a href="itemDetail.html-erp_item_id=YS1052&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS1052&from=WAP-BDS-PZ">
-									<img src="5a9e0a647ed8b.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0a647ed8b.jpg" alt="" >
-									<span><font color="#FA5F29">会员价￥4466.00</font><br />深沉灰色格纹全羊毛商务经典男士单西</span>
-								</a>
-								</li>
-								<li>
-									<a href="itemDetail.html-erp_item_id=YS1050&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS1050&from=WAP-BDS-PZ">
-										<img src="5a9e09e353047.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e09e353047.jpg" alt="" >
-										<span><font color="#FA5F29">会员价￥4466.00</font><br />蓝色耀眼大格纹全羊毛商务经典男士单西</span>
-									</a>
-								</li>-->
 						</ul>
 						</div>
 						<div class="swiper-slide">

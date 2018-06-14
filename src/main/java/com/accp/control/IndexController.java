@@ -16,11 +16,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-/***
- *
- * 实验SSM框架整合是否有问题
- * 2018-5-7
- */
 @Controller
 public class IndexController {
 
@@ -34,6 +29,7 @@ public class IndexController {
     @Resource
     private SecondTypeBiz secondBiz;
 
+    //下拉查询
 	@RequestMapping("/pull")
 	@ResponseBody
 	public List<SecondType> pull() {

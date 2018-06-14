@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.OrderDao">
+    <!--查询预订总数   2:今天，1未量体，3:已量体-->
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*) FROM `order`
+        <where>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+            <if test="id == 2">
+                AND DATE(createTime) = DATE(NOW())
+            </if>
+            <if test="id == 1">
+                AND DATE(createTime) >DATE(NOW())
+            </if>
+            <if test="id == 3">
+                AND DATE(createTime)  &lt; DATE(NOW())
+            </if>
+        </where>
+    </select>
+    <!--预约-->
+    <insert id="Add" parameterType="Order">
+        INSERT INTO `order`(clienteleName,clientelePhone,clienteleAddress,`comment`,createTime,`status`,deliveryTime)
+        VALUES(#{clienteleName},#{clientelePhone},#{clienteleAddress},#{comment},#{createTime},#{status},#{deliveryTime});
+    </insert>
+    <!--查询所有-->
+    <select id="findAll" resultType="Order">
+        SELECT * FROM `order`
+        <where>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+        </where>
+        LIMIT #{pageNo},#{pageSize};
+    </select>
+    <!--以ID查询-->
+    <select id="findById" resultType="Order">
+        select * from `order`
+        <where>
+        <if test="orderId!=null and orderId!=''">
+          and orderId=#{orderId}
+        </if>
+        </where>
+    </select>
+    <!--修改-->
+    <update id="Update" parameterType="Order">
+        UPDATE `order`
+         SET clienteleName=#{clienteleName},clientelePhone=#{clientelePhone},clienteleAddress=#{clienteleAddress},
+         `comment`=#{comment},createTime=#{createTime},`status`=#{status},deliveryTime=#{deliveryTime}
+         WHERE orderId= #{orderId}
+    </update>
+    <!--以ID删除-->
+    <delete id="Del" parameterType="int">
+        DELETE FROM `order` WHERE orderId=#{orderId}
+    </delete>
+
+
+    <!--查询所在时间段的订单  今天，未量体，已量体-->
+    <select id="findTime" resultType="Order">
+        SELECT * FROM `order`
+        <where>
+            <if test="id ==2">
+                DATE(createTime) = DATE(NOW())
+            </if>
+            <if test="id ==1">
+                DATE(createTime) >DATE(NOW())
+            </if>
+            <if test="id ==3">
+                DATE(createTime)  &lt; DATE(NOW())
+            </if>
+        </where>
+        ORDER BY createTime
+        LIMIT #{num},#{sum};
+    </select>
+    <select id="selectOrderCount" resultType="Integer">
+        select count(*) from `Order` where status='交货成功';
+    </select>
+</mapper>

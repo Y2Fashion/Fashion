@@ -31,6 +31,15 @@ public interface CommodityDao {
     public List<Commodity> selectCommodityList(Integer[] thirdTypeArry);
 
     public List<Commodity> commodityList(@Param("type") Integer type, @Param("secondType") Integer secondType, @Param("firstType") Integer firstType, @Param("pageNo") Integer pageNo);
+    /*
+     * 按用户IP查询
+     * */
+    public List<Commodity> selectCommodityListByIP(Integer[] IDArray);
+
+    /*
+    * 分页查询
+    * */
+    public List<Commodity> commodityList(@Param("type") Integer type,@Param("pageNo") Integer pageNo);
 
 
     public Integer commodityCount(@Param("type") Integer type, @Param("secondType") Integer secondType, @Param("firstType") Integer firstType);
@@ -52,4 +61,10 @@ public interface CommodityDao {
      */
     Integer updataCommodity(Commodity commodity);
 
+    public Commodity selectCommodityById(@Param("id") Integer id);
+
+    /*
+    * 查询各个类型所有商品的热度
+    * */
+    public List<Commodity> selectHitsGroupType();
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.UserDao">
+
+    <!--登录验证-->
+    <select id="select_get" resultType="User" parameterType="User">
+        SELECT * FROM user
+        <where>
+            <if test="userName !=null and userName!=''">
+               and userName=#{userName}
+            </if>
+            <if test="userPwd !=null">
+                AND userPwd=#{userPwd}
+            </if>
+            <if test="userState !=null">
+                AND userState=#{userState}
+            </if>
+        </where>
+    </select>
+    <!--符合某条件的用户条数-->
+    <select id="select_sum" resultType="Integer">
+        SELECT COUNT(id) FROM user
+        <where>
+            <if test="userRole !=null and userRole!=''">
+              and userRole=#{userRole}
+            </if>
+            <if test="userSex !=null and userSex!=''">
+                AND userSex=#{userSex}
+            </if>
+            <if test="userState !=null and userState!=''">
+                AND userState=#{userState}
+            </if>
+        </where>
+    </select>
+
+    <!--查询符合某条件的所有用户  -->
+    <select id="select" resultType="User">
+        SELECT * FROM user
+        <where>
+        <if test="userRole !=null and userRole!=''">
+           and userRole=#{userRole}
+        </if>
+        <if test="userSex !=null and userSex!=''">
+            AND userSex=#{userSex}
+        </if>
+        <if test="userState !=null and userState!=''">
+            AND userState=#{userState}
+        </if>
+    </where>
+         LIMIT #{num},#{size}
+    </select>
+
+    <!--根据用户ID删除用户 可进行批量删除-->
+    <delete id="remove_user">
+        DELETE FROM user where id in
+        <foreach collection="array" item="user_id" open="(" separator="," close=")">
+            #{user_id}
+        </foreach>
+    </delete>
+
+    <!--修改用户信息-->
+    <update id="update_user">
+        UPDATE user
+        <set>
+            <if test="userName !=null and userName!=''">userName=#{userName},</if>
+            <if test="userPwd !=null and userPwd!=''">userPwd=#{userPwd},</if>
+            <if test="userRole !=null and userRole!=''">userRole=#{userRole},</if>
+            <if test="userSex !=null and userSex!=''">userSex=#{userSex},</if>
+            <if test="userState !=null and userState!=''">userState=#{userState},</if>
+        </set>
+        WHERE id=#{id};
+    </update>
+
+    <!-- 添加新用户  -->
+    <insert id="insert" parameterType="User">
+        insert into User
+            (userName,userPwd,userRole,userSex,userTime,userState,name)
+                values(#{userName},#{userPwd},#{userRole},#{userSex},#{userTime},#{userState},#{name})
+	</insert>
+
+    <!--根据ID查询用户信息-->
+    <select id="select_get_id" resultType="User">
+        SELECT * FROM user where id=#{id};
+    </select>
+
+</mapper>

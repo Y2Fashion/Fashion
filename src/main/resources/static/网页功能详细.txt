@@ -23,3 +23,5 @@ backstage包中的
     indexs.html  是后台主页面
     commodity.html   产品管理页面    add是添加页面，get是查看页面，upd是修改页面
     order.html       订单管理页面   add是添加页面，get是查看页面，upd是修改页面
+
+    启动时如若报错：找不到启动类 cmd进入到项目路径 项目根目录就可以了 运行这指令：mvn clean install

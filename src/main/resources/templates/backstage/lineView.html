@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/static/js/backstage/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
+</head>
+<body>
+<div id="chartmain" style="width:100%; height: 620px;margin: auto auto;"></div>
+<input type="hidden" name="dataName" th:value="${dataName}" >
+<input type="hidden" name="datas" th:value="${datas}" >
+<script>
+    $(function () {
+
+        var legendDate = eval($("[name='dataName']").val());
+        var datas=eval($("[name='datas']").val());
+        //初始化echarts实例
+
+        var series=[];
+        for(var i = 0;i<legendDate.length;i++){
+            series.push({
+                name: legendDate[i],
+                type: 'line',
+                data: datas[i]
+            });
+
+        }
+        var option = {
+            title: {
+                text: '                                                                                            各类型服装销量波动图'
+            },
+            grid:{
+                x:80,
+                y:80,
+                x2:260,
+                y2:50,
+                borderWidth:1
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data: legendDate,
+                selectedMode:'single',
+                top: '50'
+
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    magicType: { show: true, type: ['line', 'bar'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                },
+                right: 80
+            },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                }
+            ],
+            yAxis: [
+                {
+                    name: '销量/件'
+                }
+            ],
+            series:series
+
+        };
+        //使用制定的配置项和数据显示图表
+        var myChart = echarts.init(document.getElementById('chartmain'));
+        myChart.setOption(option);
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="/static/js/backstage/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/backstage/bootstrap.js"></script>
+    <link type="text/css" href="/static/css/backstage/bootstrap.css">
+</head>
+<body>
+<input type="hidden" name="datas" th:value="${view}">
+<input type="hidden" name="datas2" th:value="${typeName}">
+<div id="chartmain" style="width:110%; height: 620px;margin: auto auto;"></div>
+<script type="text/javascript">
+    //指定图标的配置和数据
+    $(function () {
+        var datas=$("[name='datas']").val();
+        var datas2=$("[name='datas2']").val();
+        var jsondata=eval(datas);
+        var typeName=eval(datas2);
+        var option = {
+            toolbox: {
+                feature: {
+                    dataView : {show: false, readOnly: false},
+                    saveAsImage: {}// 工具，提供几个按钮，例如动态图表转换，数据视图，保存为图片等
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"//模板变量有 {a}、{b}、{c}、{d}，分别表示系列名，数据名，数据值，百分比。
+            },
+            //图例
+            title:{
+                text:'                                                                                                                    各类型服装销售占比'
+            },
+            legend: {
+                //图例垂直排列
+                orient: 'vertical',
+                x: 'left',
+                //data中的名字要与series-data中的列名对应，方可点击操控
+                data:typeName
+            },
+
+            series: [
+                {
+                    name:'销量百分比',
+                    type:'pie',
+                    avoidLabelOverlap: false,
+                    //标签
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'outer',
+                            formatter: '{d}%',//模板变量有 {a}、{b}、{c}、{d}，分别表示系列名，数据名，数据值，百分比。{d}数据会根据value值计算百分比
+
+                            textStyle : {
+                                align : 'center',
+                                baseline : 'middle',
+                                fontFamily : '微软雅黑',
+                                fontSize : 18,
+                                fontWeight : 'bolder'
+                            }
+                        },
+                    },
+                    data:jsondata
+                }
+            ]
+    };
+
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chartmain'));
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    })
+
+</script>
+</body>
+</html>

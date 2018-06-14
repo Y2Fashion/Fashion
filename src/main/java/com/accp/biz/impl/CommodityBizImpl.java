@@ -3,21 +3,22 @@ package com.accp.biz.impl;
 import com.accp.biz.*;
 import com.accp.dao.CommodityDao;
 import com.accp.dao.ThirdTypeDao;
-import com.accp.entity.Commodity;
-import com.accp.entity.SecondType;
-import com.accp.entity.ThirdType;
+import com.accp.entity.*;
 import com.accp.util.Pager;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class CommodityBizImpl implements CommodityBiz {
 
     @Resource
-    private CommodityDao dao;
+    private CommodityDao commodityDao;
 
     @Resource
     private ThirdTypeBiz thirdTypeBiz;
@@ -33,25 +34,33 @@ public class CommodityBizImpl implements CommodityBiz {
 
     @Override
     public List<Commodity> findType(Commodity commodity) {
-        return dao.findType(commodity);
+        return commodityDao.findType(commodity);
     }
 
+
+    //用户查看商品时查询的详细信息
     @Override
     public Commodity findId(Integer id) {
-//        addHits(id);
-        Commodity commodity=dao.findId(id);
+        addHits(id);
+        Commodity commodity=commodityDao.findId(id);
         commodity.setLining(liNingBiz.getLiNingById(commodity.getlId()));
         commodity.setPictures(pictureBiz.getPictureList(id));
         return commodity;
     }
 
+    /*
+    * 添加热度
+    * */
     @Override
     public void addHits(Object comId) {
-        Commodity commodity=dao.findId((Integer)comId);
+        Commodity commodity=commodityDao.findId((Integer)comId);
         commodity.setHits(commodity.getHits()+1);
-        dao.UpdateHits(commodity);
+        commodityDao.UpdateHits(commodity);
     }
 
+    /*
+    * 按二级分类查询
+    * */
     @Override
     public List<Commodity> getCommoditys(Object secondTypeId) {
         List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeList(secondTypeId);
@@ -63,15 +72,21 @@ public class CommodityBizImpl implements CommodityBiz {
                 i++;
             }
         }
-        return dao.selectCommodityList(thirdTypeArry);
+        return commodityDao.selectCommodityList(thirdTypeArry);
     }
 
+    /*
+    * 按单个id查询
+    * */
     @Override
     public List<Commodity> getCommoditys(int dandu) {
         Integer[] integers=new Integer[]{dandu};
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
     }
 
+    /*
+    * 按1级分类查询
+    * */
     @Override
     public List<Commodity> getCommoditys(boolean bool) {
         List<ThirdType> thirdTypes=null;
@@ -95,8 +110,7 @@ public class CommodityBizImpl implements CommodityBiz {
                 a++;
             }
         }
-
-        return dao.selectCommodityList(integers);
+        return commodityDao.selectCommodityList(integers);
     }
 
     @Override
@@ -106,24 +120,77 @@ public class CommodityBizImpl implements CommodityBiz {
         }
         Pager<Commodity> pager = new Pager<>();
         pager.setPageNo(pageNo);
-        pager.setTotalRows(dao.commodityCount(type,secondType,firstType));
+        pager.setTotalRows(commodityDao.commodityCount(type,secondType,firstType));
         pager.setTotalPage((pager.getTotalRows()+8-1)/8);
-        pager.setDatas(dao.commodityList(type,secondType,firstType,pageNo-1));
+        pager.setDatas(commodityDao.commodityList(type,secondType,firstType,pageNo-1));
         return pager;
     }
 
     @Override
     public Integer commoditydel(Integer id) {
-        return dao.commoditydel(id);
+        return commodityDao.commoditydel(id);
     }
 
     @Override
     public boolean insertCommodity(Commodity commodity) {
-        return dao.insertCommodity(commodity)>0;
+        return commodityDao.insertCommodity(commodity)>0;
     }
 
     @Override
     public boolean updataCommodity(Commodity commodity) {
-        return dao.updataCommodity(commodity) > 0;
+        return commodityDao.updataCommodity(commodity) > 0;
     }
+
+    /*
+    * 根据用户访问记录查询
+    * */
+    @Override
+    public List<Commodity> getCommodityListByArray(List<AccessingData> typeIDList) {
+        System.out.println(typeIDList);
+        Integer[] typeIdList=new Integer[typeIDList.size()];
+        for (int i=0;i<typeIDList.size();i++) {
+            typeIdList[i]=typeIDList.get(i).getcId();
+        }
+        List<Commodity> commodityList2=commodityDao.selectCommodityListByIP(typeIdList);
+        return commodityList2;
+    }
+
+    /*
+    * 按多个用户兴趣id查询
+    * */
+    @Override
+    public List<Commodity> getCommListByXQArray(List<AccessingData> accessingData) {
+        Integer[] cIdList=new Integer[accessingData.size()];
+
+        for (int i=0;i<accessingData.size();i++) {
+            cIdList[i]=accessingData.get(i).getcId();
+        }
+        if(accessingData.size()>1){
+            for(int a=0;a<accessingData.size()-1;a++){
+                for(int b=a;b<accessingData.size()-a-1;a++){
+                    if(accessingData.get(b).getLookCount()<accessingData.get(b+1).getLookCount()){
+                        int num=cIdList[b];
+                        cIdList[b]=cIdList[b+1];
+                        cIdList[b+1]=num;
+                    }
+                }
+            }
+        }
+        return commodityDao.selectCommodityListByIP(cIdList);
+    }
+
+    @Override
+    public Commodity getCommodityById(Integer id) {
+        return commodityDao.selectCommodityById(id);
+    }
+
+    /*
+    * 查询各个类型所有商品的热度
+    * */
+    @Override
+    public List<Commodity> getHitsGroupType() {
+        return commodityDao.selectHitsGroupType();
+    }
+
+
 }

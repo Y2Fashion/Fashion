@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <meta charset="utf-8">
@@ -12,50 +13,49 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="../css/backstage/x-admin.css" media="all">
-    <link rel="stylesheet" href="../css/backstage/order.css">
+    <link rel="stylesheet" href="/static/css/backstage/x-admin.css" media="all">
+    <link rel="stylesheet" href="/static/css/backstage/commodity_get.css">
 </head>
 <body>
 <div class="x-body">
-    <table class="table_get" border="1px black;">
+    <table border="1px black;">
         <tr>
-            <td class="get_td">布料编号:</td>
-            <td>1</td>
-            <td class="get_td">布料成分:</td>
-            <td>某某某</td>
+            <td>布料编号:</td>
+            <td th:text="${stock.id}">1</td>
+            <td style="background: url('/static/image/backstage/shuji4.jpg');background-size:100% 100%;" colspan="2" rowspan="4">
+            </td>
         </tr>
         <tr>
-            <td class="get_td">布料颜色:</td>
-            <td>132456498</td>
-            <td class="get_td">布料花型:</td>
-            <td>加工成品中</td>
+            <td>布料成分:</td>
+            <td th:text="${stock.com}"></td>
         </tr>
         <tr>
-            <td class="get_td">进货价格:</td>
-            <td>100000</td>
-            <td class="get_td">使用次数:</td>
-            <td>100000</td>
+            <td>布料颜色:</td>
+            <td th:text="${stock.col}"></td>
+        </tr>
+        <!---->
+        <tr>
+            <td>布料花型:</td>
+            <td th:text="${stock.pattern}"></td>
+        </tr>
+        <!---->
+        <tr>
+            <td>进货价格:</td>
+            <td  th:text="${stock.price}"></td>
+            <td>使用次数:</td>
+            <td th:text="${stock.useNum}"></td>
         </tr>
         <tr>
-            <td class="get_td">布料库存:</td>
-            <td>2017-5-12 12:00:00</td>
-            <td class="get_td">供应商编号:</td>
-            <td>2017-5-28 12:00:00</td>
+            <td>布料库存:</td>
+            <td th:text="${stock.number}"></td>
+            <td>存放地址:</td>
+            <td th:text="${stock.adress}"></td>
         </tr>
     </table>
 </div>
-<script src="../lib/layui/layui.js" charset="utf-8">
+<script src="/static/lib/layui/layui.js" charset="utf-8">
 </script>
-<script src="../js/backstage/x-layui.js" charset="utf-8">
-</script>
-<script>
-    layui.use(['form','layer'], function(){
-        $ = layui.jquery;
-        var form = layui.form()
-            ,layer = layui.layer;
-
-
-    });
+<script src="/static/js/backstage/x-layui.js" charset="utf-8">
 </script>
 </body>
 
