@@ -179,6 +179,11 @@ public class CommodityBizImpl implements CommodityBiz {
         return commodityDao.selectCommodityListByIP(cIdList);
     }
 
+   /* @Override
+    public Pager<Commodity> commodityList(Integer type, Integer pageNo) {
+        return null;
+    }
+*/
     @Override
     public Commodity getCommodityById(Integer id) {
         return commodityDao.selectCommodityById(id);

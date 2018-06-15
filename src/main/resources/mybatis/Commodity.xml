@@ -98,13 +98,13 @@
         order by hits desc limit 0,8;
     </select>
 
-    <select id="commodityList" resultType="Commodity">
+    <!--<select id="commodityList" resultType="Commodity">
           SELECT * FROM commodity
           <where>
               <if test="type != null ">and type=#{type}</if>
           </where>
            ORDER BY hits DESC LIMIT #{pageNo},8;
-    </select>
+    </select>-->
 
     <select id="commodityCount" resultType="Integer">
         SELECT COUNT(1) FROM commodity c JOIN thirdtype t ON c.TYPE=t.tId JOIN secondtype s ON t.sId=s.sId

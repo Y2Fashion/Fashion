@@ -69,10 +69,10 @@ public interface CommodityBiz {
     * */
     List<Commodity> getCommListByXQArray(List<AccessingData> accessingData);
 
-    /*
+   /* *//*
     * 分页查询
-    * */
-    public Pager<Commodity> commodityList(Integer type,Integer pageNo);
+    * *//*
+    public Pager<Commodity> commodityList(Integer type,Integer pageNo);*/
 
     /*
     * 按id查询商品

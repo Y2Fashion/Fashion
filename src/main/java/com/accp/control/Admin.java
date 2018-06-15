@@ -69,46 +69,30 @@ public class Admin {
     @Resource
     private PictureBiz pictureBiz;
 
-    //实验后台页面
+    /*//实验后台页面
     @RequestMapping("/login")
     public String loGin() {
         return "login";
     }
-
+*/
     @Resource
     private UserOrderBiz userOrderBiz;
 
     @Resource
     private RedisUtil redisUtil;
-    @RequestMapping("/head")
+    /*@RequestMapping("/head")
     public String loGin_head() {
         return "/backstage/head";
-    }
+    }*/
 
     @Resource
     private StatusBiz statusBiz;
-    @RequestMapping("/left")
-    public String loGin_left() {
-        return "/backstage/left";
-    }
+
 
     @Resource
     private OrderBiz orderBiz;
-    @RequestMapping("/main")
-    public String loGin_main() {
-        return "/backstage/main";
-    }
 
-    /**
-     * 订单管理页面
-     *
-     * @return
-     */
-    @RequestMapping("/order")
-    public String loGin_order(Model model) {
-        model.addAttribute("typeId", "1");
-        return "/backstage/order";
-    }
+
 
     /**
      * 进入添加订单页面
@@ -120,16 +104,6 @@ public class Admin {
         return "backstage/order_add";
     }
 
-    /**
-     * 进入查询订单页面
-     *
-     * @return
-     */
-    @RequestMapping("/order_get")
-    public String order_get() {
-        System.out.println("aaa");
-        return "backstage/order_get";
-    }
 
     /**
      * 进入订单修改页面
@@ -271,7 +245,9 @@ public class Admin {
         Lining lining = liNingBiz.getLiNingById(comm.getlId());
         ThirdType thirdType = thirdTypeBiz.getThirdType(comm.getType());
         model.addAttribute("type", thirdType.getThirdType());
-        model.addAttribute("lining", lining.getIngredient());
+        if(lining !=null){
+            model.addAttribute("lining", lining.getIngredient());
+        }
         model.addAttribute("comm", comm);
         return "backstage/commodity_get";
     }

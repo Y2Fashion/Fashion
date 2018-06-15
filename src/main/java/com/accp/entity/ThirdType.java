@@ -8,6 +8,15 @@ import java.io.Serializable;
 
 public class ThirdType implements Serializable {
 
+    public ThirdType() {
+    }
+
+    public ThirdType(Integer tId, String thirdType, Integer sId) {
+        this.tId = tId;
+        this.thirdType = thirdType;
+        this.sId = sId;
+    }
+
     private static final long serialVersionUID = 1L;
     private Integer tId;//三级id
     private String thirdType;// 三级类型
@@ -47,9 +56,6 @@ public class ThirdType implements Serializable {
       this.secondType = secondType;
   }
 
-    public ThirdType(Integer tId, String thirdType, Integer sId) {
-        this.tId = tId;
-        this.thirdType = thirdType;
-        this.sId = sId;
-    }
+
+
 }

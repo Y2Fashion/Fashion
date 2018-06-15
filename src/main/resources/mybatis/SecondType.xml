@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.SecondTypeDao">
+
     <!--查询二级表全部数据-->
     <select id="selectListById" resultType="SecondType">
         select * from secondtype where fId=#{id};

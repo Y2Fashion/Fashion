@@ -38,9 +38,9 @@ public interface CommodityDao {
 
     /*
     * 分页查询
-    * */
+    * *//*
     public List<Commodity> commodityList(@Param("type") Integer type,@Param("pageNo") Integer pageNo);
-
+*/
 
     public Integer commodityCount(@Param("type") Integer type, @Param("secondType") Integer secondType, @Param("firstType") Integer firstType);
 
