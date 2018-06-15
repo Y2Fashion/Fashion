@@ -74,11 +74,11 @@
             <tr>
                 <td class="p_td"  style="line-height:2.9em">量体日期:</td>
                 <td class="q_td">
-                    <input type="date" id="createTime" name="createTime" class="u_t" th:value="${#dates.format(order.createTime,'yyyy-MM-dd')}"/>
+                    <input type="datetime-local" id="createTime" name="createTime" class="u_t" th:value="${order.createTime}"/>
                 </td>
                 <td class="p_td"  style="line-height:2.9em">送货日期:</td>
                 <td class="q_td" >
-                    <input type="date" class="u_t" id="deliveryTime" name="deliveryTime" th:value="${#dates.format(order.deliveryTime,'yyyy-MM-dd')}"/>
+                    <input type="datetime-local" class="u_t" id="deliveryTime" name="deliveryTime" th:value="${order.deliveryTime}"/>
                 </td>
             </tr>
             <tr>
@@ -112,7 +112,7 @@
             var status=$("#status").val();
             var clienteleAddress=$("#clienteleAddress").val();
             var comment=$("#comment").val();
-            x_admin_close();
+
             $.ajax({
                 url:"/order_upd",
                 type:"post",
@@ -121,11 +121,11 @@
                     "name":clienteleName,"phone":clientelePhone,
                 "sta":status,"address":clienteleAddress,"com":comment},
                 success:function () {
-location.replace(location.href)
 
                 }
             })
-
+            window.parent.location.reload();
+            x_admin_close();
         })
 
     })

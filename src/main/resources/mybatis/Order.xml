@@ -64,8 +64,11 @@
     <select id="findTime" resultType="Order">
         SELECT s.sta STATUS,`order`.*  FROM `order` INNER JOIN `status` AS s ON s.id=`order`.status
         <where>
-            <if test="id!=null and id!=''">
-                and status=#{id}
+            <if test="status!=null and status!='' and status!=2">
+                and status=#{status}
+            </if>
+            <if test="status ==2">
+              and   DATE(createTime) = DATE(NOW())
             </if>
         </where>
         ORDER BY createTime

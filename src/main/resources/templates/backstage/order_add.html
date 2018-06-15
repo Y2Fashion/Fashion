@@ -18,22 +18,22 @@
 </head>
 <body>
 <div class="x-body">
-    <form action="ooo_add_add" method="post">
+    <form action="" method="post">
         <table border="1px black;" class="peo_tab" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="p_td">客户名称:</td>
                 <td class="q_td" colspan="3">
-                    <input type="text" name="clienteleName"  class="u_t"/>
+                    <input type="text" id="clienteleName"  class="u_t"/>
                     <!--name='uname'-->
                 </td>
             </tr>
             <tr>
                 <td class="p_td">联系电话:</td>
                 <!--name='uname'-->
-                <td class="q_td"> <input type="text" name="clientelePhone" class="u_t" /></td>
+                <td class="q_td"> <input type="text" id="clientelePhone" class="u_t" /></td>
                 <td class="p_td">订单状态:</td>
                 <td class="q_td">
-                    <select class="u_t" name="status">
+                    <select class="u_t" id="status">
                         <option value="volvo">请选择</option>
                         <option value="预约">预约</option>
                         <option value="已上门量体">已上门量体</option>
@@ -79,30 +79,32 @@
 </script>
 <script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
 <script>
-       $(function () {
-           $("#aa").click(function () {
-               var deliveryTime=$("#deliveryTime").val();
-               var createTime=$("#createTime").val();
-               var clienteleName=$("#clienteleName").val();
-               var clientelePhone=$("#clientelePhone").val();
-               var status=$("#status").val();
-               var clienteleAddress=$("#clienteleAddress").val();
-               var comment=$("#comment").val();
-               x_admin_close();
-               $.ajax({
-                       url:"/order_add",
-                       type:"post",
-                       dataType: 'text',
-                       data:{"crea":createTime,"del":deliveryTime,
-                       "name":clienteleName,"phone":clientelePhone,
-                       "sta":status,"address":clienteleAddress,"com":comment},
-               success:function () {
-               }
-               })
+    $(function () {
+        $("#aa").click(function () {
+            var deliveryTime=$("#deliveryTime").val();
+            var createTime=$("#createTime").val();
+            var clienteleName=$("#clienteleName").val();
+            var clientelePhone=$("#clientelePhone").val();
+            var status=$("#status").val();
+            var clienteleAddress=$("#clienteleAddress").val();
+            var comment=$("#comment").val();
 
-           })
+            $.ajax({
+                url:"/order_add",
+                type:"post",
+                dataType: 'text',
+                data:{"crea":createTime,"del":deliveryTime,
+                    "name":clienteleName,"phone":clientelePhone,
+                    "sta":status,"address":clienteleAddress,"com":comment},
+                success:function () {
 
-       })
+                }
+            })
+            window.parent.location.reload();
+            x_admin_close();
+        })
+
+    })
 </script>
 </body>
 </html>

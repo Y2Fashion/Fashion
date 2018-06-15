@@ -21,8 +21,28 @@ public class OrderBizImpl implements OrderBiz {
         return orderDao.selectOrderCount();
     }
 
-    @Resource
-    private OrderDao dao;
+    @Override
+    public List<Order> findId() {
+        return orderDao.findId();
+    }
+
+    /***
+     * 根据时间段查询所有订单
+     * @param id 时间段(1:以后 ,2:今天  ,3:以前)
+     * @param num 起始位置
+     * @param sum 每页条数
+     * @return
+     */
+    /*public Pager<Order> findTime(int id,int num,int sum){
+//      datetime-local
+        Pager<Order> pager=new Pager<Order>();
+        pager.setPageNo(num);//当前页数
+        pager.setPageSize(sum);//每页显示的条数
+        pager.setTotalRows(orderDao.findCount("",id));//总条数
+        pager.setTotalPage((pager.getTotalRows()+sum-1)/sum);//总页数
+        pager.setDatas(orderDao.findTime(id,(num-1)*sum,sum));//存放集合
+        return pager;
+    }*/
 
     /***
      * 查询符合条件的订单总数量
@@ -30,13 +50,13 @@ public class OrderBizImpl implements OrderBiz {
      * @return
      */
     @Override
-    public int findCount(String status) {
-        return dao.findCount(status,0);
+    public int findCount(String status,int id) {
+        return orderDao.findCount(status, 0);
     }
 
     @Override
     public int Add(Order order) {
-        return dao.Add(order);
+        return orderDao.Add(order);
     }
 
     @Override
@@ -44,33 +64,33 @@ public class OrderBizImpl implements OrderBiz {
         if(null==pageNo){
             pageNo=1;
         }
-        int num=(dao.findCount(status,0)+pageSize-1)/pageSize;
+        int num=(orderDao.findCount(status,0)+pageSize-1)/pageSize;
         if(pageNo>num){
             pageNo=num;
         }
         Pager<Order> pager=new Pager<Order>();
         pager.setPageNo(pageNo);
         pager.setPageSize(pageSize);
-        pager.setDatas(dao.findAll(status,(pageNo-1)*pageSize,pageSize));
+        pager.setDatas(orderDao.findAll(status,(pageNo-1)*pageSize,pageSize));
         pager.setTotalPage(num);
-        pager.setTotalRows(dao.findCount(status,0));
+        pager.setTotalRows(orderDao.findCount(status,0));
         return pager;
     }
 
     @Override
     public Order findById(Integer orderIyrd) {
-        return dao.findById(orderIyrd);
+        return orderDao.findById(orderIyrd);
     }
 
     @Override
     public int Update(Order order) {
         System.out.println(order.toString());
-        return dao.Update(order);
+        return orderDao.Update(order);
     }
 
     @Override
     public int Del(Integer orderId) {
-        return dao.Del(orderId);
+        return orderDao.Del(orderId);
     }
 
 
@@ -81,14 +101,14 @@ public class OrderBizImpl implements OrderBiz {
      * @param sum 每页条数
      * @return
      */
-    public Pager<Order> findTime(int id,int num,int sum){
+    public Pager<Order> findTime(String id,int num,int sum){
 //      datetime-local
         Pager<Order> pager=new Pager<Order>();
         pager.setPageNo(num);//当前页数
         pager.setPageSize(sum);//每页显示的条数
-        pager.setTotalRows(dao.findCount("",id));//总条数
+        pager.setTotalRows(orderDao.findCount(id,0));//总条数
         pager.setTotalPage((pager.getTotalRows()+sum-1)/sum);//总页数
-        pager.setDatas(dao.findTime(id,(num-1)*sum,sum));//存放集合
+        pager.setDatas(orderDao.findTime(id,(num-1)*sum,sum));//存放集合
         return pager;
     }
 }

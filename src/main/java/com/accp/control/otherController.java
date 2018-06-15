@@ -162,13 +162,13 @@ public class otherController {
      */
     @RequestMapping("/yuyue")
     @GetMapping("/")
-    public String goToYuYue(Model model,Integer cId,Integer tId,String status) {
+    public String goToYuYue(Model model,Integer cId,Integer tId) {
         if (cId != null && tId != null) {
             model.addAttribute("cId", cId);
             model.addAttribute("tId", tId);
         }
         model.addAttribute("count", orderBiz.getOrderCount());
-        int num=orderBiz.findCount(status);
+        int num=orderBiz.findCount("5",0);
         model.addAttribute("num",num);
         return "yuyue";
     }

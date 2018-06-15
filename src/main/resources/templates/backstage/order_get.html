@@ -37,17 +37,14 @@
         </tr>
         <tr>
             <td class="get_td">量体日期:</td>
-            <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd')}">2017-5-12 12:00:00</td>
+            <td th:text="${order.createTime}"></td>
             <td class="get_td">送货日期:</td>
-            <td th:text="${#dates.format(order.deliveryTime,'yyyy-MM-dd')}">2017-5-28 12:00:00</td>
+            <td th:text="${order.deliveryTime}"></td>
         </tr>
         <tr>
             <td rowspan="5" class="get_td">备注:</td>
             <td colspan="3" rowspan="5">
-            <textarea  rows="5" cols="70" readonly class="get_textarea" th:text="${order.comment}">
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-我发您的三地飞鸟撒UI得分你丢萨芬你史蒂夫暖色调击飞蛋u9sadufnasd卜sdfssgdsgsdgfsdgfsdfgsdzvcgfdgsgewgwdgffdsgsdgsdfgsfg
-                </textarea>
+            <textarea  rows="5" cols="70" readonly class="get_textarea" th:text="${order.comment}"></textarea>
             </td>
         </tr>
         <!-- border: 0px transparent;overflow:hidden;-->

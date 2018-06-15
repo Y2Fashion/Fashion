@@ -16,9 +16,7 @@ public interface OrderDao {
      * id 时间段(1:以后 ,2:今天  ,3:以前)
      * @return
      */
-    public int findCount(@Param("status")String status,@Param("id") int id);
-//
-//
+    public int findCount(@Param("status") String status, @Param("id") int id);
 
     /**
      * 预约
@@ -31,7 +29,7 @@ public interface OrderDao {
      * 查询
      * @return
      */
-    public List<Order> findAll(@Param("status")String status,@Param("pageNo")Integer pageNo,@Param("pageSize")Integer pageSize);
+    public List<Order> findAll(@Param("status") String status, @Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 
     /**
      * 以ID查询
@@ -52,7 +50,13 @@ public interface OrderDao {
      * @param orderId
      * @return
      */
-    public int Del(@Param("orderId")Integer orderId);
+    public int Del(@Param("orderId") Integer orderId);
+
+    /**
+     * 查询订单编号
+     * @return
+     */
+    public List<Order> findId();
 
     /***
      * 根据时间段查询所有订单
@@ -61,7 +65,5 @@ public interface OrderDao {
      * @param sum 每页条数
      * @return
      */
-    List<Order> findTime(@Param("id") String id,@Param("num") int num,@Param("sum") int sum);
-//
-//
+    List<Order> findTime(@Param("status") String status, @Param("num") int num, @Param("sum") int sum);
 }

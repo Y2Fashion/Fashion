@@ -51,6 +51,7 @@ public class LoginController {
         }
     }
     @RequestMapping("/home")
+    @GetMapping("/")
     public String index(HttpSession session){
         if(session.getAttribute("user_role")!=null){
             return "/backstage/indexs";

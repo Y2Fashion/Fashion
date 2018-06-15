@@ -10,7 +10,7 @@ public interface OrderBiz {
      * 查询预订总数
      * @return
      */
-    public int findCount(String status);
+    public int findCount(String status, int id);
 
     /**
      * 预约
@@ -22,7 +22,7 @@ public interface OrderBiz {
      * 查询
      * @return
      */
-    public Pager<Order> findAll(String status,Integer pageNo,Integer pageSize);
+    public Pager<Order> findAll(String status, Integer pageNo, Integer pageSize);
     /**
      * 以ID查询
      * @param orderId
@@ -41,6 +41,11 @@ public interface OrderBiz {
      * @return
      */
     public int Del(Integer orderId);
+    /**
+     * 查询订单编号
+     * @return
+     */
+    public List<Order> findId();
 
 
     /***
@@ -50,7 +55,7 @@ public interface OrderBiz {
      * @param sum 每页条数
      * @return
      */
-    public Pager<Order> findTime(String id,int num,int sum);
+    public Pager<Order> findTime(String id, int num, int sum);
 
     public int getOrderCount();
 

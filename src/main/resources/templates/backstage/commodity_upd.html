@@ -38,7 +38,7 @@
                         <td class="q_td">
                             <input type="text" name='commodityName' class="u_t" th:value="${comm.commodityName}" value="衣服名称(长度为5-12位)" onblur="input(this)"/>
                         </td>
-                        <td colspan="2" rowspan="5">
+                        <td colspan="2" rowspan="4">
                             <img th:src="@{'/static/image/'+${comm.photoPath}}" width="100%" height="40%" />
                         </td>
                     </tr>
@@ -62,19 +62,17 @@
                     <tr>
                         <td class="p_td">服装类型:</td>
                         <td class="q_td">
-                            <select class="u_t" name="type">
+                            <input type="hidden" name="type" th:value="${comm.type}">
+                            <input type="text" class="u_t"  th:value="${type}"/>
+
+                            <!--<select class="u_t" name="type">
                                 <option selected="selected" th:value="${comm.type}" th:text="${type}">Saab</option>
                                 <option value="1" >男士西装</option>
                                 <option value="2">女士西装</option>
-                            </select>
+                            </select>-->
                         </td>
                     </tr>
-                    <tr>
-                        <td class="p_td"  style="line-height:2.9em">修改图片:</td>
-                        <td class="q_td r_td" >
-                            <!--<input type="file" name="file"/>-->
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="p_td">原价格:</td>
                         <td class="q_td">

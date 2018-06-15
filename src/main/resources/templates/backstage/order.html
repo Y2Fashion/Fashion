@@ -32,12 +32,13 @@
             <option value="请选择">请选择</option>
             <option name="statu" th:each="s:${status}" th:value="${s.sta}" th:text="${s.sta}"></option>
         </select>
-        <input type="submit" style="width:50px" value="搜索" id="sub"/>
+        <input type="hidden" th:value="${sta}" id="st"/>
+        <input type="button" style="width:50px" value="搜索" id="sub"/>
     </form>
     <div class="tools">
         <ul class="toolbar">
             <li id="dels"><span><img src="/static/image/backstage/t03.png" /></span>批量删除</li>
-            <li onclick="user_management_password('添加订单','ooo_add','900','400')"><span>
+            <li onclick="user_management_add('添加订单','order_add','900','400')"><span>
           <img src="/static/image/backstage/t01.png" /></span>添加</li>
         </ul>
         <span class="x-right" style="line-height:25px">共有数据：<span th:text="${pages.totalRows}"></span> 条</span></xblock>
@@ -86,9 +87,9 @@
             <td th:text="${pa.clienteleName}"></td>
             <td th:text="${pa.clientelePhone}">123456</td>
             <td class="order_td_address" th:text="${pa.clienteleAddress}">深圳市龙华区龙华大道某某小区512号</td>
-            <td th:text="${#dates.format(pa.createTime,'yyyy-MM-dd')}">2018-05-12 12:00:00</td>
-            <td th:text="${pa.status}" id="st">/td>
-            <td th:text="${#dates.format(pa.deliveryTime,'yyyy-MM-dd')}">2018-06-13 13:13:32</td>
+            <td th:text="${pa.createTime}"></td>
+            <td th:text="${pa.status}">/td>
+            <td th:text="${pa.deliveryTime}">2018-06-13 13:13:32</td>
             <td class="order_td_remarks" th:text="${pa.comment}">
                 男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
             </td>
@@ -127,7 +128,7 @@
         &nbsp;&nbsp;
         &nbsp;&nbsp;第<span th:text="${pages.pageNo}" id="pageNo"></span> 页/共<span th:text="${pages.totalPage}" id="total"></span> 页&nbsp;&nbsp;共<span th:text="${pages.totalRows}"></span> 条记录
         <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text" name="num" th:value="${pages.pageNo}"id="num"onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+                <input type="text" name="num" th:value="${pages.pageNo}"id="num">
              </span> <span class="jump gobtn" ><input id="Go" type="button" value="GO"></input></span>
     </div>
 </div>
@@ -174,7 +175,7 @@
     })
     /*首页*/
     $("#one").click(function () {
-        var s=$("#st").text();
+        var s=$("#st").val();
         var pageNo=1;
         var url="order"+"?cars="+s;
         url=url+"&pageNo="+pageNo;
@@ -182,7 +183,7 @@
     })
     /*上一页*/
     $("#two").click(function () {
-        var s=$("#st").text();
+        var s=$("#st").val();
         var pageNo=$("#pageNo").text();
         pageNo--;
         var url="order"+"?cars="+s;
@@ -191,7 +192,7 @@
     })
     /*下一页*/
     $("#thr").click(function () {
-        var s=$("#st").text();
+        var s=$("#st").val();
         var pageNo=$("#pageNo").text();
         pageNo++;
         var url="order"+"?cars="+s;
@@ -200,7 +201,7 @@
     })
     /*末页*/
     $("#four").click(function () {
-        var s=$("#st").text();
+        var s=$("#st").val();
         var pageNo=$("#total").text();
         var url="order"+"?cars="+s;
         url=url+"&pageNo="+pageNo;
@@ -209,8 +210,12 @@
 
     /*页面跳转*/
     $("#Go").click(function () {
-        var s=$("#st").text();
+        var s=$("#st").val();
         var num=$("#num").val();
+        var taol=$("#total").text();
+        if(num>taol){
+            num=taol;
+        }
         var url="order"+"?cars="+s;
         url=url+"&pageNo="+num;
         window.location.href=url;

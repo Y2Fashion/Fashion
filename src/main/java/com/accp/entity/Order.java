@@ -1,7 +1,7 @@
 package com.accp.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 订单表
@@ -15,8 +15,8 @@ public class Order implements Serializable {
     private String  clienteleAddress;//客户地址
     private String  comment;//备注
     private String status;//状态
-    private Date createTime;//预约时间
-    private Date deliveryTime;//交货时间
+    private String createTime;//预约时间
+    private String deliveryTime;//交货时间
     private Commodity commodity =new Commodity();//产品类
 
 
@@ -68,11 +68,11 @@ public class Order implements Serializable {
         this.comment = comment;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -84,11 +84,11 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Date getDeliveryTime() {
+    public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 

@@ -5,6 +5,7 @@ import com.accp.entity.User;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ public class UserController {
      * 因为是刚进入，是查询全部
      */
     @RequestMapping("user")
+    @GetMapping("/")
     public String user_list(Model model,HttpSession session){
         if(session.getAttribute("user_role")==null){
             return "redirect:/login";
@@ -39,6 +41,7 @@ public class UserController {
         model.addAttribute("sex","");
         model.addAttribute("state","");
         model.addAttribute("pager",list);
+        model.addAttribute("user_role",user);
         return "/backstage/user";
     }
 
@@ -52,7 +55,12 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_pager")
-    public String user_pager(Model model,String role,String sex,String state,Integer num){
+    @GetMapping("/")
+    public String user_pager(Model model,String role,String sex,String state,Integer num,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
+        User users=(User)session.getAttribute("user_role");
         User user=new User();
         user.setUserRole(role);
         user.setUserSex(sex);
@@ -62,6 +70,7 @@ public class UserController {
         model.addAttribute("sex",sex);
         model.addAttribute("state",state);
         model.addAttribute("pager",list);
+        model.addAttribute("user_role",users);
         return "/backstage/user";
     }
 
@@ -72,7 +81,11 @@ public class UserController {
      */
     @RequestMapping("user_dels")
     @ResponseBody
-    public String user_dels(@RequestParam(value = "arr[]") Integer[] arr){
+    @GetMapping("/")
+    public String user_dels(@RequestParam(value = "arr[]") Integer[] arr,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         boolean yesNo=userBiz.removes(arr);
         return "redirect:/user";
     }
@@ -83,7 +96,11 @@ public class UserController {
      */
     @RequestMapping("user_del")
     @ResponseBody
-    public String user_del(Integer id){
+    @GetMapping("/")
+    public String user_del(Integer id,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         boolean yesNo=userBiz.remove(id);
         return "redirect:/user";
     }
@@ -95,6 +112,7 @@ public class UserController {
      */
     @RequestMapping("user_upd_state")
     @ResponseBody
+    @GetMapping("/")
     public void upd_State(Integer id,String state){
         userBiz.upd_User(new User(id,state));
     }
@@ -104,7 +122,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_add")
-    public String user_add(Model model,User user){
+    @GetMapping("/")
+    public String user_add(Model model,User user,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         if(user.getUserName()==null){
             return "/backstage/user_management_add";
         }else{
@@ -120,7 +142,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_upd_pwd")
+    @GetMapping("/")
     public String user_pwd(Model model,Integer id,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         User user=userBiz.getById(id);
         session.setAttribute("ppd",user.getUserPwd());
         user.setUserPwd("");//密码就不保存在model中一起发送到客服端
@@ -137,7 +163,11 @@ public class UserController {
      */
     @RequestMapping("pwd_pwd")
     @ResponseBody
+    @GetMapping("/")
     public String pwd_Pwd(Model model,String pwd , HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         String ppd=session.getAttribute("ppd").toString();
         if(ppd.equals(pwd)){
             return "true";
@@ -153,7 +183,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("upd_pwd")
+    @GetMapping("/")
     public String upd_Pwd(Model model,User user, HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         if(userBiz.upd_User(user)){
             session.removeAttribute("ppd");//清空密码
             model.addAttribute("add_err","成功");

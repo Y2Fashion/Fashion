@@ -84,26 +84,10 @@ public class Admin {
 
 
 
-    /**
-     * 进入添加订单页面
-     *
-     * @return
-     */
-    @RequestMapping("/order_add")
-    public String order_add() {
-        return "backstage/order_add";
-    }
 
 
-    /**
-     * 进入订单修改页面
-     *
-     * @return
-     */
-    @RequestMapping("/order_upd")
-    public String order_upd() {
-        return "backstage/order_upd";
-    }
+
+
 
     /**
      * 进入产品管理页面
@@ -111,6 +95,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity")
+    @GetMapping("/")
     public String commodity(Model model, Integer pageNo) {
         FirstType fType = new FirstType();
         fType.setfId(0);
@@ -127,6 +112,7 @@ public class Admin {
 
     @RequestMapping("/commodityAjax")
     @ResponseBody
+    @GetMapping("/")
     public Pager<Commodity> commodityAjax(Model model, @RequestParam(value = "type[]") Integer[] type, Integer pageNo) {
 
         if (type.length == 1) {
@@ -147,6 +133,7 @@ public class Admin {
 
     @RequestMapping("/getCommodityByType")
     @ResponseBody
+    @GetMapping("/")
     public Pager<Commodity> getCommodityByType(Integer type[], Integer pageNo) {
        /* Integer thirdType=null;
         Integer secondType=null;
@@ -163,6 +150,7 @@ public class Admin {
      * @return
      */
     @RequestMapping(value = "/commodity_add", method = RequestMethod.GET)
+    @GetMapping("/")
     public String commodity_add(Model model) {
         FirstType firstType = new FirstType();
         firstType.setfId(0);
@@ -175,12 +163,13 @@ public class Admin {
     }
 
     @RequestMapping(value = "/commodity_add", method = RequestMethod.POST)
+    @GetMapping("/")
     public String commodity_add(Model model, HttpServletResponse response, @ModelAttribute("commodity") Commodity commodity, BindingResult result, @RequestParam("fileImg") MultipartFile fileImg) {
         if (result.hasErrors()) {
             return "redirect:/commodity_add";
         }
         if (!fileImg.isEmpty()) {
-            String path = "E:\\idea-workspace\\Fashion\\src\\main\\resources\\static\\image\\";
+            String path = "E:\\05李石祥\\Y2\\Fashion\\src\\main\\resources\\static\\image\\";
             String uploadFilename = fileImg.getOriginalFilename();
             String ext = FilenameUtils.getExtension(uploadFilename);
             if (fileImg.getSize() > 5000000) {
@@ -230,6 +219,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity_get")
+    @GetMapping("/")
     public String commodity_get(@RequestParam("ids") Integer ids, Model model) {
         Commodity comm = commodityBiz.findId(ids);
         Lining lining = liNingBiz.getLiNingById(comm.getlId());
@@ -248,6 +238,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity_show")
+    @GetMapping("/")
     public String commodity_show(@RequestParam("comid") Integer comid, Model model) {
         model.addAttribute("picture", pictureBiz.getPictureList(comid));
         return "backstage/commodity_show";
@@ -259,6 +250,7 @@ public class Admin {
      * @return
      */
     @RequestMapping(value = "/commodity_upd", method = RequestMethod.GET)
+    @GetMapping("/")
     public String commodity_upd(Model model, @RequestParam("ids") Integer ids) {
         Commodity comm = commodityBiz.findId(ids);
         Lining lining = liNingBiz.getLiNingById(comm.getlId());
@@ -271,6 +263,7 @@ public class Admin {
 
     @RequestMapping(value = "/commodity_upd", method = RequestMethod.POST)
     @ResponseBody
+    @GetMapping("/")
     public String commodity_upd(HttpServletResponse response,Commodity commodity) throws Exception{
 
         String flag=" ";
@@ -286,6 +279,7 @@ public class Admin {
 
     @RequestMapping("/getSecondType")
     @ResponseBody
+    @GetMapping("/")
     public List<SecondType> getSecondType(Model model, Integer firstType) {
         SecondType secondType = new SecondType();
         secondType.setSecondType("请选择");
@@ -297,6 +291,7 @@ public class Admin {
 
     @RequestMapping("/getThirdType")
     @ResponseBody
+    @GetMapping("/")
     public List<ThirdType> getThirdType(Integer secondType) {
         ThirdType thirdType = new ThirdType();
         thirdType.setsId(null);
@@ -309,12 +304,14 @@ public class Admin {
     }
 
     @RequestMapping("/aaa")
+    @GetMapping("/")
     public String update() {
         return "redirect:/commodity";
     }
 
     @RequestMapping("/commodity_del")
     @ResponseBody
+    @GetMapping("/")
     public String delete(Integer comId) {
         Integer id = commodityBiz.commoditydel(comId);
         return null;
@@ -323,6 +320,7 @@ public class Admin {
 
     @RequestMapping("/commodity_dels")
     @ResponseBody
+    @GetMapping("/")
     public String commodityDel(@RequestParam(value = "arr[]") Integer[] arr) {
         List<Integer> a = Arrays.asList(arr);
         for (Integer i : a) {
@@ -338,6 +336,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity_updImg")
+    @GetMapping("/")
     public String commodity_updImg(){
         return "backstage/commodity_updImg";
     }
@@ -355,6 +354,7 @@ public class Admin {
      * 进入布料库存--添加
      */
     @RequestMapping("/lining_add")
+    @GetMapping("/")
     public String lining_add(){
         return "backstage/lining_add";
     }
@@ -384,78 +384,7 @@ public class Admin {
     }
 
 
-    /**
-     * 模糊查询及分页
-     * @param model
-     * @param pageNo
-     * @param cars
-     * @return
-     */
-    @RequestMapping("/order")
-    @GetMapping("/")
-    public String order(Model model ,Integer pageNo,String cars){
-        Pager<Order> pager=orderBiz.findAll(cars,pageNo,2);
-        model.addAttribute("pages",pager);
-        model.addAttribute("status",statusBiz.getAll());
-        return "/backstage/order";
-    }
-    @RequestMapping("/order_get")
-    @GetMapping("/")
-    public String orderget(Model model,Integer id){
-        model.addAttribute("order",orderBiz.findById(id));
-        return "/backstage/order_get";
-    }
 
-    /**
-     * 跳修改页面
-     * @param model
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/order_upd",method=RequestMethod.GET)
-    @GetMapping("/")
-    public String orderupd(Model model,Integer id){
-        model.addAttribute("order",orderBiz.findById(id));
-        return "/backstage/order_upd";
-    }
-    /*
-     * 修改
-     * @param model
-     * @param id
-     * @param crea
-     * @param del
-     * @param name
-     * @param phone
-     * @param sta
-     * @param address
-     * @param com
-     * @return
-     */
-    @RequestMapping(value = "/order_upd",method=RequestMethod.POST)
-    @GetMapping("/")
-    public String update(Model model,Integer id,String crea,String del,
-    String name,String phone,String sta,String address,String com) {
-        Order order = new Order();
-        order.setComment(com);
-        order.setClientelePhone(phone);
-        order.setClienteleName(name);
-        order.setClienteleAddress(address);
-        Date c = null;
-        Date d = null;
-        try {
-            c = java.sql.Date.valueOf(crea);
-            d = java.sql.Date.valueOf(del);
-            order.setCreateTime(c);
-            order.setDeliveryTime(d);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        order.setOrderId(id);
-        order.setStatus(sta);
-        int num = orderBiz.Update(order);
-        return "redirect:/order";
-
-    }
     /**
      * 添加布料使用情况
      */
@@ -496,89 +425,12 @@ public class Admin {
         return "backstage/Purchase_upd";
     }
 
-    /**
-     * 跳增加页面
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/order_add",method=RequestMethod.GET)
-    public String orderadd(Model model) {
-        return "/backstage/order_add";
-    }
 
-    /**
-     * 增加
-     * @param model
-     * @param crea
-     * @param del
-     * @param name
-     * @param phone
-     * @param sta
-     * @param address
-     * @param com
-     * @return
-     */
-    @RequestMapping(value = "/order_add",method=RequestMethod.POST)
-    public String orderadd(Model model,String crea,String del,
-                         String name,String phone,String sta,String address,String com){
-        Order order=new Order();
-        order.setComment(com);
-        order.setClientelePhone(phone);
-        order.setClienteleName(name);
-        order.setClienteleAddress(address);
-        Date c=null;
-        Date d=null;
-        try{
-            c=java.sql.Date.valueOf(crea);
-            d=java.sql.Date.valueOf(del);
-
-        }catch (Exception e){
-            e.getMessage();
-        }
-        order.setCreateTime(c);
-        order.setDeliveryTime(d);
-
-        order.setStatus(sta);
-        int num= orderBiz.Add(order);
-        return  "redirect:/order";
-
-
-    }
-
-    /**
-     * 单个删除
-     * @param orderId
-     * @return
-     */
-    @RequestMapping("/del")
-    public String del(Integer orderId){
-        orderBiz.Del(orderId);
-
-        return "redirect:/order";
-    }
-
-    /**
-     * 批量删除
-     * @param arr
-     * @return
-     */
-    @RequestMapping("/dels")
-    @ResponseBody
-    public String dels(@RequestParam(value = "arr[]") Integer[] arr){
-        List<Integer> a= Arrays.asList(arr);
-        for(Integer i:a){
-            if(i!=null){
-                //System.out.println(i);
-                orderBiz.Del(i);
-            }
-
-        }
-        return "redirect:/order";
-    }
     /*
      * 柱形算图
      * */
     @RequestMapping("/CommodityTopView")
+    @GetMapping("/")
     public String goZView(Model model){
 
         List<String>dataName=new ArrayList<String>();
@@ -609,6 +461,7 @@ public class Admin {
     }
 
     @RequestMapping("/ThreeTypeView")
+    @GetMapping("/")
     public String goThreeTypeView(Model model){
 
         List<String> typeName=new ArrayList<String>();
@@ -642,6 +495,7 @@ public class Admin {
     }
 
     @RequestMapping("/lineView")
+    @GetMapping("/")
     private String goToLineView(Model model){
         List<UserOrder> userOrders=new ArrayList<UserOrder>();
         List<String> dataName=new ArrayList<String>();
@@ -693,6 +547,7 @@ public class Admin {
     }
 
     @RequestMapping("BazaarView")
+    @GetMapping("/")
     public String goVazaarView(Model model){
         List<UserOrder> userOrders=new ArrayList<UserOrder>();
         List<String> dataName=new ArrayList<String>();

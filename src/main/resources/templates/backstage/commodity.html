@@ -207,12 +207,14 @@
     /*批量删除*/
     $("#dels").click(function () {
         var requirement = [];
+
         $("#checkboxs :checkbox").each(function (i, obj) { //遍历table里的全部checkbox
             if (obj.checked) {
                 requirement[i] = obj.value;
                 i++;
             }
         });
+        console.log(requirement);
         if (requirement.length < 1) {
             layer.alert('请选择要删除的商品。', {icon: 6});
         } else {
@@ -288,7 +290,7 @@
         })
     }
     function getCommodityByType(obj) {
-        alert(obj.value);
+
         var type=[];
         $("#type option:selected").each(function (i, obj) { //遍历Select里的全部Option
             type[i] = obj.value;
@@ -314,8 +316,6 @@
             pageNo = pageNo - 1;
         } else if ("下一页" == obj.text) {
             pageNo = pageNo + 1;
-        }else if("GO"==obj.value){
-            pageNo=$('[name="Go"]').val();
         } else {
             pageNo = parseInt($(".totalPage").text());
         }
@@ -385,7 +385,7 @@
         $(".totalRows").html(parseInt(data.totalRows));
         for (var i = 0; i < data.datas.length; i++) {
             var htmlText = '<tr>';
-            htmlText+='<td>'+'<input type="checkbox" th:value="'+data.datas[i].id+'" name="selected"' +
+            htmlText+='<td>'+'<input type="checkbox" value="'+data.datas[i].id+'" name="selected"' +
                 ' claee="ckecks">'+'</td>';
             htmlText += '<td>' + data.datas[i].id + '</td>';
             htmlText += '<td>' + data.datas[i].commodityName + '</td>';
@@ -407,6 +407,7 @@
             });
         }
     }
+
 
 </script>
 </body>

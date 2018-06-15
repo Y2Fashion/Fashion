@@ -70,9 +70,9 @@
             <td th:text="${pa.clienteleName}"></td>
             <td th:text="${pa.clientelePhone}">123456</td>
             <td class="order_td_address" th:text="${pa.clienteleAddress}">深圳市龙华区龙华大道某某小区512号</td>
-            <td th:text="${#dates.format(pa.createTime,'yyyy-MM-dd')}">2018-05-12 12:00:00</td>
+            <td th:text="${pa.createTime}">2018-05-12 12:00:00</td>
             <td th:text="${pa.status}" id="st">/td>
-            <td th:text="${#dates.format(pa.deliveryTime,'yyyy-MM-dd')}">2018-06-13 13:13:32</td>
+            <td th:text="${pa.deliveryTime}">2018-06-13 13:13:32</td>
             <td class="order_td_remarks" th:text="${pa.comment}">
                 男，西装，纯棉，蓝色，130,180,60,问加你第四姐夫决赛几点爱福家撒覅是紧固件奥林
             </td>
