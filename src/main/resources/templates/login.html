@@ -11,6 +11,17 @@
     <script language="javascript" src="/static/js/backstage/md5.js"></script>
     <script language="javascript" src="/static/js/backstage/login.js"></script>
 </head>
+<style type="text/css">
+    h1{
+        margin: 5% 41% 0 39%;
+        padding: 3px 15px;
+        font-size: 30px;
+        color: #ffffff;
+        opacity: 0.5;
+        background-color: #000000;
+        border-radius: 10px;
+    }
+</style>
 <body style="background-color:#1c77ac; background-image: url(/static/image/backstage/light.png);background-repeat:no-repeat; background-position:center top; overflow:hidden;">
 <div id="mainBody">
     <div id="cloud1" class="cloud"></div>
@@ -21,7 +32,7 @@
         <li><a href="#">返回首页</a></li>
     </ul>
 </div>
-<div class="loginbody">衣邦人平台管理系统</span>
+<div class="loginbody"><h1>衣邦人平台管理系统</h1></span>
     <div class="loginbox">
         <ul>
             <span th:text="${error_login}" calss="errorsss"

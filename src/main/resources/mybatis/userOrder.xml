@@ -6,18 +6,18 @@
     <!--查询销量榜前十-->
     <select id="selectCommdityTop10" resultType="UserOrder">
       SELECT commodityId,COUNT(commodityId)AS countCID FROM `userorder`
-      WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS='交货成功')
+      WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS=(select id from status where sta='交货成功'))
       GROUP BY commodityId ORDER BY countCID desc LIMIT 0,10
     </select>
     <!--查询所有已有销售记录的类型-->
     <select id="selectThreeTypes" resultType="UserOrder">
         SELECT threeTypeId FROM userorder
-        WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS='交货成功') GROUP BY threeTypeId
+        WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS=(select id from status where sta='交货成功')) GROUP BY threeTypeId
     </select>
     <!--按类型查询各个月的销量-->
     <select id="selectSaleByMonth" resultType="UserOrder">
         SELECT SUM(countCID) as countCID,month(createTime)as time FROM userorder
-        WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS='交货成功')
+        WHERE orderId IN(SELECT orderId FROM `order` WHERE STATUS=(select id from status where sta='交货成功'))
         AND threeTypeId=#{threeTypeID} GROUP BY MONTH(createTime),threeTypeId
     </select>
     <!--按地区查询订单-->

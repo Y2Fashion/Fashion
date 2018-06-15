@@ -352,8 +352,8 @@ var _hmt = _hmt || [];
 								  	 <img th:each="picture:${commodity.pictures}" th:src="@{'/static/image/'+${picture.path}}" alt="">
 								<br/>
                             </div>
-				<div class="rmtj"><img src="/static/image/hotsale.png" tppabs="https://ossstatic.ybren.com/PC/good_img/hotsale.png" alt="" ></div>
-				<div class="swiper-container">
+				<div class="rmtj" th:if="${not #lists.isEmpty(commoditys)}"><img src="/static/image/hotsale.png" tppabs="https://ossstatic.ybren.com/PC/good_img/hotsale.png" alt="" ></div>
+				<div class="swiper-container"  th:if="${not #lists.isEmpty(commoditys)}">
 			        <div class="swiper-wrapper">
 						<div class="swiper-slide">
 							<ul>
@@ -365,29 +365,6 @@ var _hmt = _hmt || [];
 								</li>
 						</ul>
 						</div>
-						<div class="swiper-slide">
-							<ul>
-						<li>
-							<a href="itemDetail.html-erp_item_id=YS1006&from=WAP-BDS-PZ.htm" >
-								<img src="5a9d3553194d2.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-05/5a9d3553194d2.jpg" alt="" ><span><font color="#FA5F29">会员价￥3986.00</font><br />个性绿流行色全羊毛时尚单西</span>
-							</a>
-						</li>
-								<li>
-									<a href="itemDetail.html-erp_item_id=YS0596&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS0596&from=WAP-BDS-PZ">
-										<img src="5aa0950fe6e53.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-08/5aa0950fe6e53.jpg" alt="" ><span><font color="#FA5F29">会员价￥3786.00</font><br />蓝色大方格男士商务单西</span>
-									</a>
-								</li>
-								<li>
-									<a href="itemDetail.html-erp_item_id=YS0666&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS0666&from=WAP-BDS-PZ">
-										<img src="5a40c90b497cb.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40c90b497cb.jpg" alt="" ><span><font color="#FA5F29">会员价￥2680.00</font><br />暗红色轻薄舒适男士休闲便西</span>
-									</a>
-								</li>
-								<li>
-									<a href="itemDetail.html-erp_item_id=YS0562&from=WAP-BDS-PZ.htm" tppabs="https://www.ybren.com/index.php/Home/Index/itemDetail.html?erp_item_id=YS0562&from=WAP-BDS-PZ">
-										<img src="5a40ab3cc50be.jpg" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2017-12-25/5a40ab3cc50be.jpg" alt="" ><span><font color="#FA5F29">会员价￥2493.00</font><br />灰色小格纹理男士商务时尚单西</span>
-									</a>
-								</li>
-					</ul></div>
 
 					</div>
 

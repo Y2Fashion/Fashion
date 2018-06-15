@@ -5,6 +5,7 @@ import com.accp.entity.Order;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -25,7 +26,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping("main_get")
-    public String mian_Get(Model model,Integer id){
+    @GetMapping("/")
+    public String mian_Get(Model model,String id){
         Pager<Order> pager=orderBiz.findTime(id,1,2);
         model.addAttribute("mainTime_ID",id);
         model.addAttribute("page",pager);
@@ -40,7 +42,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping("main_Get_Pager")
-    public String get_Pager(Model model,Integer id,Integer num){
+    @GetMapping("/")
+    public String get_Pager(Model model,String id,Integer num){
         Pager<Order> pager=orderBiz.findTime(id,num,2);
         model.addAttribute("mainTime_ID",id);
         model.addAttribute("page",pager);

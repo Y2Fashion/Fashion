@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +39,7 @@ public class CommodityController {
 
     //按三极分类类型查询商品
     @RequestMapping("/selectCommodityList")
+    @GetMapping("/")
     public String findType(HttpServletRequest request,Model model,Integer typeId) {
         //添加用户记录
         String IP=Iputil.getIpAddr(request);
@@ -84,6 +86,7 @@ public class CommodityController {
     //ajax按三极分类类型查询商品
     @RequestMapping("/ajaxCommodityList")
     @ResponseBody
+    @GetMapping("/")
     public List<Commodity> ajaxCommodityList(HttpServletRequest request,Integer typeId){
 
         //添加用户操作记录
@@ -117,6 +120,9 @@ public class CommodityController {
             Commodity commodity=new Commodity();
             commodity.setType(typeId);
             commodityList=biz.findType(commodity);
+            for (Commodity c :commodityList) {
+                c.setLining(liNingBiz.getLiNingById(c.getlId()));
+            }
             redisUtil.lPush(key,commodityList);
         }
         return commodityList;
@@ -124,18 +130,19 @@ public class CommodityController {
 
     // 首页
     @RequestMapping("/index")
+    @GetMapping("/")
     public String goToIndex(Model model, HttpServletRequest request){
-
-
-
-
         /*获取访问者IP*/
         String IP=Iputil.getIpAddr(request);
         List<AccessingData> accessingDatas=accessingDataBiz.getAccessingDataList(IP);
         List<AccessingData> accessingDatas2=new ArrayList<AccessingData>();
+        List<AccessingData> accessingDatas3=new ArrayList<AccessingData>();
+        AccessingData accessingDataCount=null;
+        AccessingData accessingDataTime=null;
         if(accessingDatas!=null){
             Storage.accessingData=accessingDatas;
             //获取访问者达到要求的商品
+            redisUtil.remove("interestList");
             if(redisUtil.exists("interestList")){
                 List<Commodity> commodities=(List<Commodity>)redisUtil.lRange("interestList",0,redisUtil.length("interestList")).get(0);
                 model.addAttribute("interestList",commodities);
@@ -146,15 +153,37 @@ public class CommodityController {
                     if(ad.getcId()!=null&&ad.getcId()>0&&(ad.getLookCount()>=3||ad.getLookTime()>=180)){
                         accessingDatas2.add(ad);
                     }
-                    if(accessingDatas2.size()>0){
-                        List<Commodity> commodities=commodityBiz.getCommListByXQArray(accessingDatas2);
-                        for (Commodity c : commodities) {
-                            c.setOriginalPrice(c.getVipPrice()-100);
+                }
+                for (AccessingData ad2:accessingDatas2) {
+                    if(ad2.getLookCount()>3 && ad2.getLookTime()<180){
+                        if(accessingDataCount==null){
+                            accessingDataCount=ad2;
+                        }else if (accessingDataCount.getLookCount()<ad2.getLookCount()){
+                            accessingDataCount=ad2;
                         }
-                        model.addAttribute("interestList",commodities);
-                        redisUtil.lPush("interestList",commodities);
-                        model.addAttribute("bool",1);
+                    }else{
+                        if(accessingDataTime==null){
+                            accessingDataTime=ad2;
+                        }else if (accessingDataTime.getLookTime()<ad2.getLookTime()){
+                            accessingDataTime=ad2;
+                        }
                     }
+                }
+                if(accessingDataCount!=null){
+                    accessingDatas3.add(accessingDataCount);
+                }
+                if(accessingDataTime!=null){
+                    accessingDatas3.add(accessingDataTime);
+                }
+                if(accessingDatas3.size()>0){
+                    List<Commodity> commodities=commodityBiz.getCommListByXQArray(accessingDatas3);
+                    for (Commodity c : commodities) {
+                        c.setOriginalPrice(c.getVipPrice()-100);
+                    }
+                    model.addAttribute("interestList",commodities);
+                    model.addAttribute("listSize",commodities.size());
+                    redisUtil.lPush("interestList",commodities);
+                    model.addAttribute("bool",1);
                 }
             }
             //获取用户的历史访问记录
@@ -170,7 +199,6 @@ public class CommodityController {
             }
         }
         redisUtil.lPush("userIP", IP);
-
         //获取各类型商品 按热度查询
         List<Commodity> xiZhuangHitsList=null;
         List<Commodity> chenSanHitsList=null;
@@ -199,7 +227,6 @@ public class CommodityController {
             redisUtil.lPush("niuZaiKuHitsList",niuZaiKuHitsList);
             redisUtil.lPush("nvShiHitsList",nvShiHitsList);
         }
-
         model.addAttribute("xiZhuangHitsList",xiZhuangHitsList);
         model.addAttribute("chenSanHitsList",chenSanHitsList);
         model.addAttribute("kuZhuangHitsList",kuZhuangHitsList);
@@ -211,6 +238,7 @@ public class CommodityController {
 
     //按二级分类查询以热度排序
     @RequestMapping("getCommodityListBySType")
+    @GetMapping("/")
     public String getCommodityListBySType(Model model,String SecondTypeId){
         model.addAttribute("commodityList",biz.getCommoditys(SecondTypeId));
         return "WAP-BDS-PZ";
@@ -218,12 +246,12 @@ public class CommodityController {
 
     //衣服详细页面
     @RequestMapping("/selectCommodity")
+    @GetMapping("/")
     public String goToXiangXi(Model model,Integer id,HttpServletRequest request) {
         /*获取进入商品时间*/
         Date time=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         request.getSession().setAttribute(id.toString(),df.format(time));
-
         Commodity commodity=biz.findId(id);
         Lining lining=liNingBiz.getLiNingById(commodity.getlId());
         List<Lining> LiNingList=liNingBiz.getLiNingList();

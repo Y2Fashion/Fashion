@@ -7,10 +7,7 @@ import com.accp.entity.*;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -32,6 +29,7 @@ public class ChannelController {
      * 供应商渠道
      */
     @RequestMapping("/Channel")
+    @GetMapping("/")
     public String channel(Model model,Integer pageNo ,Integer cmId,Integer clId,Integer fId,
                           String com,String col,String pattern){
         List<Flower> flower=flowerBiz.findFlower();
@@ -73,6 +71,7 @@ public class ChannelController {
      * 添加供应商渠道页面
      */
     @RequestMapping(value = "/Channel_add",method = RequestMethod.GET)
+    @GetMapping("/")
     public String channel_upd(Model model){
         List<Flower> flower=flowerBiz.findFlower();
         model.addAttribute("flower",flower);
@@ -88,6 +87,7 @@ public class ChannelController {
      * 添加供应商渠道
      */
     @RequestMapping(value = "/Channel_add",method = RequestMethod.POST)
+    @GetMapping("/")
     public String channel_add(Model model,Channel channel){
         channelBiz.Add(channel);
         return "redirect:/Channel";
@@ -98,6 +98,7 @@ public class ChannelController {
      * @return
      */
     @RequestMapping("/delChannel")
+    @GetMapping("/")
     public String del(Integer id){
         channelBiz.del(id);
 
@@ -111,6 +112,7 @@ public class ChannelController {
      */
     @RequestMapping(value = "/delChannels",method = RequestMethod.POST)
     @ResponseBody
+    @GetMapping("/")
     public String dels(@RequestParam(value = "arr[]") Integer[] arr){
         List<Integer> a= Arrays.asList(arr);
         for(Integer i:a){

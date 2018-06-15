@@ -16,11 +16,9 @@
 		<script src="/static/js/swiper.min.js" tppabs="https://ossstatic.ybren.com/PC/js/swiper.min.js"></script>
 		<link rel="stylesheet" href="/static/css/swiper.min.css" tppabs="https://www.ybren.com/Public/css/swiper.min.css">
 		<script src="/static/js/jquery.1.7.2.min.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.1.7.2.min.js"></script>
-		<!-- <link href="//ossstatic.ybren.com/PC/css/video-js.min.css" rel="stylesheet">
-		<script src="//ossstatic.ybren.com/PC/js/video.min.js"></script> -->
 		<link href="/static/css/index20180208.css" tppabs="https://ossstatic.ybren.com/PC/css/index20180208.css" rel="stylesheet" >
 		<script type="text/javascript" src="/static/js/jquery.cityselect.new.js" tppabs="https://ossstatic.ybren.com/PC/js/jquery.cityselect.new.js"></script>
-		<link href="/static/css/common.css" tppabs="https://www.ybren.com/Public/css/common.css" rel="stylesheet"/>
+		<link href="/static/css/">
 		<style type="text/css">
 			body,p,form,h1,h2,h3,h4,h5,h6,ul,li,section,div,*{padding:0;margin:0}
 			ul,ol,li{list-style:none; vertical-align: top;}
@@ -36,8 +34,6 @@
 			}
 			.nav{border-bottom: 1px solid #515151;}
 			.content{width: 1185px;margin:0 auto;padding:45px 0 90px;overflow: hidden;}
-
-
 			#Idiv .list{overflow: hidden; float: left;width: 1017px;}
 			#Idiv .list li{float: left;overflow: hidden;width: 244px;margin-bottom: 10px;margin-right: 8px;}
 			#Idiv .list li:nth-child(4n){margin-right: 0;}
@@ -54,18 +50,20 @@
 			}
 			#Idiv .list .desc .p_desc {color: #005bac;font-size: 10px;margin-bottom: 9px;text-align: left;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 			#Idiv .list .desc font {font-weight: bold;font-size: 14px;color: #262626;float: left;margin-right: 5px;}
-
 		</style>
 		<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-86988233-1', 'auto');
-ga('send', 'pageview');
+            ga('create', 'UA-86988233-1', 'auto');
+            ga('send', 'pageview');
 
-</script>
+		</script>
+		<style type="text/css">
+			.chinese_to_english{position: absolute;top:67px;right:0px;color: #FFFFFF;}
+		</style>
 		<script langue="javascript">
 			/*
 			* 弹框事件
@@ -74,6 +72,7 @@ ga('send', 'pageview');
             {
                 var listSize=$("[name='listSize']").val();
                 console.log(listSize);
+                console.log(260*listSize);
                 var Idiv=document.getElementById("Idiv");
                 Idiv.style.width=265*listSize+"px";
                 Idiv.style.display="block";
@@ -121,10 +120,12 @@ ga('send', 'pageview');
 				padding:0px;
 				margin:0px;
 			}
+
 			#Idiv
 			{
 				height:380px;
 				position:absolute;
+				z-index: 9999;
 				z-index:1000;
 				border:2px solid #ffffff;
 				background:#ffffff;
@@ -137,6 +138,7 @@ ga('send', 'pageview');
 				background-repeat: no-repeat;
 				background-size: cover;
 				padding: auto auto;
+
 			}
 		</style>
 		<style type="text/css">
@@ -148,9 +150,9 @@ ga('send', 'pageview');
 	<input type="hidden" name="listSize" th:value="${listSize}">
 	<div id="Idiv" style="display:none;" >
 		<a href="javascript:void(0)" onclick="closeDiv()" style="font-size: 16px; float: right;"><img style="width: 25px;height: 25px" src="/static/image/timg.jpg"></a>
+		<h4 style="color: rgb(255,23,21);margin-bottom:15px;text-align: center">降价啦！直降100</h4>
 		<ul class="list">
 			<li style="display: inline;" th:each="commodity:${interestList}">
-				<h4 style="color: rgb(255,23,21);margin-bottom:15px;text-align: center">降价啦！直降100</h4>
 				<a th:href="@{'selectCommodity?id='+${commodity.id}}" target="_blank" tppabs="https://www.ybren.com/home/itemdetail/YS1056/from/WAP-BDS-PZ">
 					<img th:src="@{'/static/image/'+${commodity.photoPath}}" tppabs="https://appybrencdn.oss-cn-hangzhou.aliyuncs.com/Uploads/Items/products/2018-03-06/5a9e0b71b196a.jpg" alt="" >
 					<div class="desc">
@@ -236,11 +238,11 @@ ga('send', 'pageview');
 		<div class="head"><!--头部-->
 			<div class="topbar">		  
 				<img src="/static/image/fourpoint.jpg" tppabs="https://ossstatic.ybren.com/PC/web/index/fourpoint.jpg" alt="贝嘟科技" style="margin-right: 100px;">
-				<div class="chinese_to_english">
+				<!--<div class="chinese_to_english">
 					<span style="font-size: 16px;font-weight: bold;">中文</span>
 					<span style="font-size: 19px;color: #9C9C9C;">/</span>
 					<a href="javascript:if(confirm('https://ybren.com/index.php/Home/Index/Yuyue?lag=english  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ����һ�����·���ⲿ������Ϊ������ʼ��ַ�ĵ�ַ��  \n\n�����ڷ������ϴ���?'))window.location='https://ybren.com/index.php/Home/Index/Yuyue?lag=english'" tppabs="https://ybren.com/index.php/Home/Index/Yuyue?lag=english" style="font-size: 12px;color: #9C9C9C;">English</a>
-				</div>
+				</div>-->
 				<a class="logo" href="index.html" tppabs="https://www.ybren.com/"><img src="/static/image/logo.png" tppabs="https://ossstatic.ybren.com/PC/web/index/logo.png" alt="贝嘟科技"></a>
 				<div class="left_nav">
 					<ul>
@@ -654,22 +656,51 @@ ga('send', 'pageview');
     #cnzz_stat_icon_1257829290{display: none;}
 </style>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255644252'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1255644252%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257829290'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257829290%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>  		
-		<div class="foot_yuyue" style="background-color: #E2AF1B">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257829290'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257829290%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+
+	<div class="foot_yuyue" style="display: block;">
+		<div class="ycont">
+			<form action="" enctype="multipart/form-data" method="post" name="quantity">
+				<ul>
+					<li>
+						<label class="con-le" for="name">姓名：</label>
+						<input type="text" name="name" value="" id="name" placeholder="">
+					</li>
+					<li>
+						<label for="tel">电话：</label>
+						<input type="tel" name="tel" value="" id="tel" placeholder="">
+					</li>
+					<li id="city">
+						<label for="city"><img src="//ossstatic.ybren.com/PC/web/index/pro.png"></label>
+						<select class="prov" id="prov" style="width:100px;margin-left: 0;"><option value="请选择">请选择</option><option value="北京">北京</option><option value="天津">天津</option><option value="河北">河北</option><option value="山西">山西</option><option value="内蒙古">内蒙古</option><option value="辽宁">辽宁</option><option value="吉林">吉林</option><option value="黑龙江">黑龙江</option><option value="上海">上海</option><option value="江苏">江苏</option><option value="浙江">浙江</option><option value="安徽">安徽</option><option value="福建">福建</option><option value="江西">江西</option><option value="山东">山东</option><option value="河南">河南</option><option value="湖北">湖北</option><option value="湖南">湖南</option><option value="广东">广东</option><option value="广西">广西</option><option value="重庆">重庆</option><option value="四川">四川</option><option value="贵州">贵州</option><option value="云南">云南</option><option value="陕西">陕西</option><option value="新疆">新疆</option></select>
+						<select class="city" id="ccity"><option value="请选择">请选择</option></select>
+						<select class="dist" id="dist"><option value="请选择">请选择</option></select>
+					</li>
+					<li style="width: 220px;display:none;">
+						<label for="time"><img src=""></label>
+						<select class="time" id="ddate" style="width: 150px"><option value="0">客服电话确认时间</option></select>
+					</li>
+					<li><a class="sub" href="javascript:;" onclick="javascript:yuyue();">立即预约&gt;&gt;</a></li>
+				</ul>
+			</form>
+		</div>
+	</div>
+
+	<!--<div class="foot_yuyue" style="background-color: #E2AF1B">
 			<div class="ycont">
 				<form action="" enctype="multipart/form-data" method="post" name="quantity">
 				<ul>				
 					<li>
-						<label class="con-le"  style="width: 50px" for="name">姓名：</label>
-						<input type="text" name="name" value="" id="name" placeholder="">
+						<label class="con-le"  style="width: 50px;background-color: #E2AF1B" for="name">姓名：</label>
+						<input type="text" style="background-color: #E2AF1B;" name="name" value="" id="name" placeholder="">
 					</li>								
 					<li>
-						<label for="tel" style="width: 50px">电话：</label>
-						<input type="tel" name="tel" value="" id="tel" placeholder="">
+						<label for="tel"  style="width: 50px;background-color: #E2AF1B;">电话：</label>
+						<input type="tel" style="background-color: #E2AF1B;" name="tel" value="" id="tel" placeholder="">
 					</li>				
 					<li id="city">
 						<label for="city"><img src="/static/image/pro.png" tppabs="https://ossstatic.ybren.com/PC/web/index/pro.png"></label>
-						<select class="prov" id="prov" style="width:100px;margin-left: 0;"></select> 
+						<select class="prov" id="prov" style="width:100px;margin-left: 0;"></select>
 						<select class="city" id="ccity" disabled="disabled"></select>
 						<select class="dist" id="dist"  disabled="disabled"></select>
 					</li>	
@@ -685,7 +716,7 @@ ga('send', 'pageview');
 				</ul>
 			</form>	
 			</div>
-		</div>
+		</div>-->
 		<script>
 			$(function(){		
                             
@@ -726,7 +757,7 @@ ga('send', 'pageview');
 		        }
 		      
 		        var tel = $("#tel").val();
-		        var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+		        var telReg = !!tel.match(/^(0|86|17951)?(1[3456789][0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
 				//如果手机号码不能通过验证
 				if(telReg == false){
                                      alert('请输入“正确手机号码”');
@@ -766,22 +797,23 @@ ga('send', 'pageview');
                 $('.osureLoading .osureLoading_s_top').html('<img src="loading.gif"/*tpa=https://www.ybren.com/Public/img/loading.gif*/ style="vertical-align: text-bottom;"> 正在提交您的预约单，请稍候');	
                 $('.shade').show();
                 $('.osureLoading').show();
-                        
-		        $.post( "https://www.ybren.com/index.php/Home/Index/yuyuesave.html",{"name":name,"sex":sex,"height":height,"weight":weight,"tel":tel,"category":category,"appDateTime":ddate,"address":address,"note":note,"prov":prov,"city":city,"dist":dist,"from":from,"keywords":keywords,"plan":plan,"idea":idea,"subtype":1,"spread_code":spread_code},function(data) {             
 
-    		        	$('.osureLoading .osureLoading_s_top').hide();
-    		        	$('.osureLoading').hide();
-                                $('.shade').hide();
-			        	
-			        if(data['status'] == '1'){        
-			        	 alert(data['message']);
+                var address=prov+city+dist;
+                //alert(prov);
+                //alert(address);
 
-			        }else{
-                      alert('温馨提示：'+data['message']);
-					}
-			    },'json');
+                $.ajax({
+                    url:"/AddOrder",
+                    dataType:"json",
+                    data:{"name":name,"phone":tel,"address":address,"com":note},
+                    type:"post",
+                    success:function (data) {
+                        alert("预约成功");
+                        window.location.href="/yuyue";
+                    }
+                })
 		    }
-			
+
 		</script>
 	</body>
 </html>

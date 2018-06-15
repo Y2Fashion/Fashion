@@ -18,10 +18,8 @@ import com.accp.util.RedisUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -67,6 +65,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/commodity")
+    @GetMapping("/")
     public String commodity(Model model,Integer type,Integer pageNo){
         FirstType firstType = new FirstType();
         firstType.setfId(0);
@@ -174,6 +173,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/order")
+    @GetMapping("/")
     public String order(Model model ,Integer pageNo,String cars){
         Pager<Order> pager=orderBiz.findAll(cars,pageNo,2);
         model.addAttribute("pages",pager);
@@ -181,6 +181,7 @@ public class Admin {
         return "/backstage/order";
     }
     @RequestMapping("/order_get")
+    @GetMapping("/")
     public String orderget(Model model,Integer id){
         model.addAttribute("order",orderBiz.findById(id));
         return "/backstage/order_get";
@@ -193,6 +194,7 @@ public class Admin {
      * @return
      */
     @RequestMapping(value = "/order_upd",method=RequestMethod.GET)
+    @GetMapping("/")
     public String orderupd(Model model,Integer id){
         model.addAttribute("order",orderBiz.findById(id));
         return "/backstage/order_upd";
@@ -211,6 +213,7 @@ public class Admin {
      * @return
      */
     @RequestMapping(value = "/order_upd",method=RequestMethod.POST)
+    @GetMapping("/")
     public String update(Model model,Integer id,String crea,String del,
     String name,String phone,String sta,String address,String com) {
         Order order = new Order();
@@ -270,6 +273,7 @@ public class Admin {
      * 修改布料进货订单
      */
     @RequestMapping("/Purchase_upd")
+    @GetMapping("/")
     public String purchase_upd(){
         return "backstage/Purchase_upd";
     }
@@ -297,6 +301,7 @@ public class Admin {
      * @return
      */
     @RequestMapping(value = "/order_add",method=RequestMethod.POST)
+    @GetMapping("/")
     public String orderadd(Model model,String crea,String del,
                          String name,String phone,String sta,String address,String com){
         Order order=new Order();
@@ -329,6 +334,7 @@ public class Admin {
      * @return
      */
     @RequestMapping("/del")
+    @GetMapping("/")
     public String del(Integer orderId){
         orderBiz.Del(orderId);
 
@@ -342,6 +348,7 @@ public class Admin {
      */
     @RequestMapping("/dels")
     @ResponseBody
+    @GetMapping("/")
     public String dels(@RequestParam(value = "arr[]") Integer[] arr){
         List<Integer> a= Arrays.asList(arr);
         for(Integer i:a){
@@ -357,6 +364,7 @@ public class Admin {
      * 柱形算图
      * */
     @RequestMapping("/CommodityTopView")
+    @GetMapping("/")
     public String goZView(Model model){
 
         List<String>dataName=new ArrayList<String>();
@@ -387,6 +395,7 @@ public class Admin {
     }
 
     @RequestMapping("/ThreeTypeView")
+    @GetMapping("/")
     public String goThreeTypeView(Model model){
 
         List<String> typeName=new ArrayList<String>();
@@ -420,6 +429,7 @@ public class Admin {
     }
 
     @RequestMapping("/lineView")
+    @GetMapping("/")
     private String goToLineView(Model model){
         List<UserOrder> userOrders=new ArrayList<UserOrder>();
         List<String> dataName=new ArrayList<String>();
@@ -471,6 +481,7 @@ public class Admin {
     }
 
     @RequestMapping("BazaarView")
+    @GetMapping("/")
     public String goVazaarView(Model model){
         List<UserOrder> userOrders=new ArrayList<UserOrder>();
         List<String> dataName=new ArrayList<String>();

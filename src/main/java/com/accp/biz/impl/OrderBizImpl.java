@@ -81,12 +81,12 @@ public class OrderBizImpl implements OrderBiz {
      * @param sum 每页条数
      * @return
      */
-    public Pager<Order> findTime(int id,int num,int sum){
+    public Pager<Order> findTime(String id,int num,int sum){
 //      datetime-local
         Pager<Order> pager=new Pager<Order>();
         pager.setPageNo(num);//当前页数
         pager.setPageSize(sum);//每页显示的条数
-        pager.setTotalRows(dao.findCount("",id));//总条数
+        pager.setTotalRows(dao.findCount(id,0));//总条数
         pager.setTotalPage((pager.getTotalRows()+sum-1)/sum);//总页数
         pager.setDatas(dao.findTime(id,(num-1)*sum,sum));//存放集合
         return pager;

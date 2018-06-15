@@ -65,13 +65,16 @@ public class CommodityBizImpl implements CommodityBiz {
         List<ThirdType> thirdTypes=thirdTypeBiz.getThirdTypeList(secondTypeId);
         Integer[] thirdTypeArry=new Integer[thirdTypes.size()];
         int i=0;
-        if(thirdTypes!=null){
+        if(thirdTypes!=null&&thirdTypes.size()>0){
             for (ThirdType third:thirdTypes) {
                 thirdTypeArry[i]=third.gettId();
                 i++;
             }
+            return commodityDao.selectCommodityList(thirdTypeArry);
+        }else{
+            return new ArrayList<Commodity>();
         }
-        return commodityDao.selectCommodityList(thirdTypeArry);
+
     }
 
     /*
@@ -130,7 +133,6 @@ public class CommodityBizImpl implements CommodityBiz {
     * */
     @Override
     public List<Commodity> getCommodityListByArray(List<AccessingData> typeIDList) {
-        System.out.println(typeIDList);
         Integer[] typeIdList=new Integer[typeIDList.size()];
         for (int i=0;i<typeIDList.size();i++) {
             typeIdList[i]=typeIDList.get(i).getcId();

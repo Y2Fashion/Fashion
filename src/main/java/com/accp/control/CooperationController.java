@@ -11,6 +11,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.logging.log4j.util.Activator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,7 @@ public class CooperationController {
     //添加供应商
     @RequestMapping("/addCooperation")
     @ResponseBody
+    @GetMapping("/")
     private Map addCooperation(String QiYeName,String NAME,String CreateDate,String Phone,String QiYeAddress,
                                 String zhiWu,String FaRen, String Email,String YeWuFanWei,String CanPingLei,
                                 String CanNeng, String JiaGongXS,String CanPingFengGe,String PingPaiHeZuo,

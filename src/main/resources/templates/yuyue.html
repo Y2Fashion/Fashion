@@ -308,7 +308,7 @@
         }
 
         var tel = $("#tel").val();
-        var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+        var telReg = !!tel.match(/^(0|86|17951)?(1[3456789][0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
         //如果手机号码不能通过验证
         if(telReg == false){
             alert('请输入正确手机号码');
@@ -341,27 +341,7 @@
             _taq.push({convert_id: '55378709639', event_type:"form"}); //今日头条统计代码
         }
 
-        // 转圈等待
-        $.post( "yuyuesave.html"/*tpa=https://www.ybren.com/index.php/Home/Index/yuyuesave.html*/,
-			{"name":name,"sex":sex,"height":height,"weight":weight,"tel":tel,"category":category,
-				"appDateTime":ddate,"address":address,"note":note,"prov":prov,"city":city,
-				"dist":dist,"from":from,"keywords":keywords,"plan":plan,"idea":idea,"subtype":1,"spread_code":spread_code},
-			function(data) {
-
-            if(data['status'] == '1'){
-                alert(data['message']);
-
-                $('#name').val("");
-                $("#tel").val("");
-                $("#note").val("");
-            }else{
-                alert(data['message']);
-            }
-        },'json');
 	var address=prov+city+dist;
-        //alert(prov);
-	//alert(address);
-
 		$.ajax({
 			url:"/AddOrder",
 			dataType:"json",
@@ -372,8 +352,6 @@
                 window.location.href="/yuyue";
             }
 		})
-
-
     }
 </script>
 
@@ -435,8 +413,6 @@
 			</ul>
 			<ul class="fsec1">
 				<li style="padding-bottom: 5px;padding-left: 0;color: #FFFFFF;"><a  class="ftitle" target="_blank" href="javascript:void(0)">产品中心</a></li>
-
-				<!-- <li><a target="_blank" href="/index.php/Home/Index/Fabric">面料品牌</a></li> -->
 				<li><a target="_blank" href="maintenance" tppabs="https://www.ybren.com/index.php/Home/Index/maintenance">保养手册</a></li>
 				<li><a target="_blank" href="service" tppabs="https://www.ybren.com/index.php/Home/Index/service">售后服务</a></li>
 				<li><a target="_blank" href="Daka" tppabs="https://www.ybren.com/index.php/Home/Activity/Daka">大咖定制秀</a></li>

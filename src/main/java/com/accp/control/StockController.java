@@ -9,6 +9,7 @@ import com.accp.entity.Stock;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +27,7 @@ public class StockController {
      * 进入布料库存
      */
     @RequestMapping("/lining")
+    @GetMapping("/")
     public String lining(Model model, Integer pageNo , Integer cmId, Integer clId, Integer fId,
                          String com, String col, String pattern){
         List<Flower> flower=flowerBiz.findFlower();
@@ -75,6 +77,7 @@ public class StockController {
      * 进入布料库存--查看
      */
     @RequestMapping( "/lining_get")
+    @GetMapping("/")
     public String lining_get(Model model,Integer id){
         Stock stock=stockBiz.findId(id);
         model.addAttribute("stock",stock);
@@ -85,6 +88,7 @@ public class StockController {
      * 进入布料库存--修改
      */
     @RequestMapping(value = "/lining_upd",method = RequestMethod.GET)
+    @GetMapping("/")
     public String lining_upd(Model model,Integer id){
         Stock stock=stockBiz.findId(id);
         model.addAttribute("stock",stock);
@@ -94,6 +98,7 @@ public class StockController {
      * 修改布料库存
      */
     @RequestMapping(value = "/lining_upd",method = RequestMethod.POST)
+    @GetMapping("/")
     public String lining_upd(Model model,Stock stock){
         stockBiz.update(stock);
         return "redirect:/lining";

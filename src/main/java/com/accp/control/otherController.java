@@ -14,6 +14,7 @@ import com.accp.entity.Order;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,6 +41,7 @@ public class otherController {
     * */
     @RequestMapping("monitor")
     @ResponseBody
+    @GetMapping("/")
     private void monitor(String cId,HttpServletRequest request){
         DateFormat dfsf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date orderTime=new Date();
@@ -159,6 +161,7 @@ public class otherController {
      * @return
      */
     @RequestMapping("/yuyue")
+    @GetMapping("/")
     public String goToYuYue(Model model,Integer cId,Integer tId,String status) {
         if (cId != null && tId != null) {
             model.addAttribute("cId", cId);
@@ -171,6 +174,7 @@ public class otherController {
     }
     @RequestMapping("/AddOrder")
     @ResponseBody
+    @GetMapping("/")
     public String AddOrder(String name,String phone,String address,String com){
         Order order=new Order();
         order.setClienteleAddress(address);
@@ -182,6 +186,7 @@ public class otherController {
     }
 
     @RequestMapping("/succeed_detail21")
+    @GetMapping("/")
     public String succeed_detail21(){
         return "succeed_detail.html-sid=1";
     }

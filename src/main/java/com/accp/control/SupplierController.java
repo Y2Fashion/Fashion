@@ -4,10 +4,7 @@ import com.accp.biz.SupplierBiz;
 import com.accp.entity.Supplier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -23,6 +20,7 @@ public class SupplierController {
      *供应商
      */
     @RequestMapping("/Supplier")
+    @GetMapping("/")
     public String supplier(Model model, Integer pageNo){
         model.addAttribute("pager",supplierBiz.findAll(pageNo,2));
         return "backstage/Supplier";
@@ -39,6 +37,7 @@ public class SupplierController {
      * 添加供应商
      */
     @RequestMapping(value = "/Supplier_add",method = RequestMethod.POST)
+    @GetMapping("/")
     public String supplier_add(Supplier supplier){
         supplierBiz.Add(supplier);
         return "redirect:/Supplier";
@@ -48,6 +47,7 @@ public class SupplierController {
      * 查看供应商
      */
     @RequestMapping("/Supplier_get")
+    @GetMapping("/")
     public String supplier_get(Model model,Integer id){
         model.addAttribute("Coop",supplierBiz.findById(id));
         return "backstage/Supplier_get";
@@ -57,6 +57,7 @@ public class SupplierController {
      * 修改供应商页面
      */
     @RequestMapping(value = "/Supplier_upd",method = RequestMethod.GET)
+    @GetMapping("/")
     public String supplier_upd(Model model,Integer id){
         model.addAttribute("Coop",supplierBiz.findById(id));
         return "backstage/Supplier_upd";
@@ -65,6 +66,7 @@ public class SupplierController {
      * 修改供应商
      */
     @RequestMapping(value = "/Supplier_upd",method = RequestMethod.POST)
+    @GetMapping("/")
     public String supplier_upd(Supplier supplier){
         supplierBiz.Update(supplier);
         return "redirect:/Supplier";
@@ -75,6 +77,7 @@ public class SupplierController {
      * @return
      */
     @RequestMapping("/delSupplier")
+    @GetMapping("/")
     public String del(Integer id){
         supplierBiz.Del(id);
 
@@ -87,6 +90,7 @@ public class SupplierController {
      * @return
      */
     @RequestMapping("/delsSupplier")
+    @GetMapping("/")
     @ResponseBody
     public String dels(@RequestParam(value = "arr[]") Integer[] arr){
         List<Integer> a= Arrays.asList(arr);

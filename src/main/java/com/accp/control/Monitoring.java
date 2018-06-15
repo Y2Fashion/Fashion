@@ -34,7 +34,6 @@ public class Monitoring {
     * */
     @Scheduled(cron = "0 0/1 * * * ?")
     private void ModifyAccessingData(){
-        System.out.println("成功！");
         if(redisUtil.exists("userIP")){
             String IP= (String) redisUtil.lRange("userIP",0,redisUtil.length("userIP")).get(0);
             if(Storage.accessingData.size()>0){

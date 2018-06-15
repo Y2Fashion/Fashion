@@ -6,22 +6,23 @@
 <mapper namespace="com.accp.dao.OrderDao">
     <!--查询预订总数   2:今天，1未量体，3:已量体-->
     <select id="findCount" resultType="int">
-        SELECT COUNT(*) FROM `order`
+        SELECT count(*)  FROM `order`
         <where>
-            <if test="status!=null and status!=''">
+            <if test="status !=null and status!=''">
                 and status=#{status}
-            </if>
-            <if test="id == 2">
-                AND DATE(createTime) = DATE(NOW())
-            </if>
-            <if test="id == 1">
-                AND DATE(createTime) >DATE(NOW())
-            </if>
-            <if test="id == 3">
-                AND DATE(createTime)  &lt; DATE(NOW())
             </if>
         </where>
     </select>
+    <!--
+     <if test="id == 2">
+                AND DATE(createTime) = DATE(NOW())
+            </if>
+            <if test="id == 1">
+                status=1
+            </if>
+            <if test="id == 3">
+                status=3
+            </if>-->
     <!--预约-->
     <insert id="Add" parameterType="Order">
         INSERT INTO `order`(clienteleName,clientelePhone,clienteleAddress,`comment`,createTime,`status`,deliveryTime)
@@ -61,22 +62,28 @@
 
     <!--查询所在时间段的订单  今天，未量体，已量体-->
     <select id="findTime" resultType="Order">
-        SELECT * FROM `order`
+        SELECT s.sta STATUS,`order`.*  FROM `order` INNER JOIN `status` AS s ON s.id=`order`.status
         <where>
-            <if test="id ==2">
-                DATE(createTime) = DATE(NOW())
-            </if>
-            <if test="id ==1">
-                DATE(createTime) >DATE(NOW())
-            </if>
-            <if test="id ==3">
-                DATE(createTime)  &lt; DATE(NOW())
+            <if test="id!=null and id!=''">
+                and status=#{id}
             </if>
         </where>
         ORDER BY createTime
         LIMIT #{num},#{sum};
     </select>
     <select id="selectOrderCount" resultType="Integer">
-        select count(*) from `Order` where status='交货成功';
+        select count(*) from `Order` where status=(select id from status where sta='交货成功');
     </select>
+
+    <!--
+    <if test="id ==2">
+                DATE(createTime) = DATE(NOW())
+            </if>
+            <if test="id ==1">
+               status=1
+            </if>
+            <if test="id ==3">
+                DATE(createTime)  &lt; DATE(NOW())
+            </if>
+    -->
 </mapper>

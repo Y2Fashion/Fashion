@@ -7,6 +7,7 @@ import com.accp.entity.SecondType;
 import com.accp.util.RedisUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,7 @@ public class IndexController {
     //下拉查询
 	@RequestMapping("/pull")
 	@ResponseBody
+	@GetMapping("/")
 	public List<SecondType> pull() {
 		List<FirstType> first=null;
 		List<SecondType> second=null;
@@ -58,6 +60,7 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/make",method = RequestMethod.GET)
+	@GetMapping("/")
 	public ModelAndView make(){
 		ModelAndView view = new ModelAndView();
 		view.setViewName("pc-baoyang");

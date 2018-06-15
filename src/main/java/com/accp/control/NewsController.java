@@ -7,6 +7,7 @@ import com.accp.util.RedisUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,6 +27,7 @@ public class NewsController {
 
     @RequestMapping("getNews")
     @ResponseBody
+    @GetMapping("/")
     private List<News> getNews(Model model, Integer pageNo, String newsType){
         int pageStart=(pageNo-1)*6;
         List<News> newsList=(List<News>)redisUtil.lRange(newsType,0,redisUtil.length(newsType)-1).get(0);
@@ -40,6 +42,7 @@ public class NewsController {
 
     // 新闻动态
     @RequestMapping("/media")
+    @GetMapping("/")
     public String goToMedia(Model model){
        List<News> news=new ArrayList<News>();
         List<News> newList=new ArrayList<News>();
@@ -60,6 +63,7 @@ public class NewsController {
 
     @RequestMapping("getNewsByType")
     @ResponseBody
+    @GetMapping("/")
     public List<News> getNewsByType(Model model,String newsType){
         List<News> news=new ArrayList<News>();
         List<News> newList=new ArrayList<News>();

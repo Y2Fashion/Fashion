@@ -50,7 +50,7 @@ public interface OrderBiz {
      * @param sum 每页条数
      * @return
      */
-    public Pager<Order> findTime(int id,int num,int sum);
+    public Pager<Order> findTime(String id,int num,int sum);
 
     public int getOrderCount();
 

@@ -17,6 +17,8 @@ public interface OrderDao {
      * @return
      */
     public int findCount(@Param("status")String status,@Param("id") int id);
+//
+//
 
     /**
      * 预约
@@ -59,5 +61,7 @@ public interface OrderDao {
      * @param sum 每页条数
      * @return
      */
-    List<Order> findTime(@Param("id") int id,@Param("num") int num,@Param("sum") int sum);
+    List<Order> findTime(@Param("id") String id,@Param("num") int num,@Param("sum") int sum);
+//
+//
 }

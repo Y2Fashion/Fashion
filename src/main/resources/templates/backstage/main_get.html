@@ -66,7 +66,6 @@
         <tbody id="cheks">
         <!--  /*@thymesVar id="pages" type="package.Pager"*/-->
         <tr th:each="pa:${page.datas}">
-            <td><input type="checkbox" th:value="${pa.orderId}" name="selected"  class="cheks"></td>
             <td th:text="${pa.orderId}" class="oid"></td>
             <td th:text="${pa.clienteleName}"></td>
             <td th:text="${pa.clientelePhone}">123456</td>

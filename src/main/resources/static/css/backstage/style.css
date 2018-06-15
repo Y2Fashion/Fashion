@@ -127,6 +127,7 @@ h2 {
 	width: 692px;
 	height: 336px;
 	background: url(../../image/backstage/longinfo.jpg) no-repeat;
+	background-size:100% 100% ;
 	margin-top: 30px;
 }
 .loginbox ul {
