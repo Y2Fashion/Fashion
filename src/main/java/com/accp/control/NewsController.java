@@ -1,10 +1,9 @@
 package com.accp.control;
 
-import com.accp.biz.NewsBiz;
 import com.accp.biz.impl.NewsBizImpl;
 import com.accp.entity.News;
 import com.accp.util.RedisUtil;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 public class NewsController {
@@ -24,6 +23,7 @@ public class NewsController {
     private NewsBizImpl newsBiz;
     @Resource
     private RedisUtil redisUtil;
+
 
     @RequestMapping("getNews")
     @ResponseBody

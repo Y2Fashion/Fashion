@@ -21,7 +21,8 @@
 	</div>
     <div class="user">
 		<!-- /*@thymesVar id="user_role" type="package.Object" */ -->
-		<span th:text="${user_role.userRole+':'+user_role.userName}"></span>
+		<!--<span th:text="${user_role.userRole+':'+user_role.userName}"></span>-->
+		<span th:text="${user_role.userRole+':'+user_role.name}"></span>
     </div>
 </body>
 </html>

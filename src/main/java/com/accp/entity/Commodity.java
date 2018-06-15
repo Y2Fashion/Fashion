@@ -19,6 +19,19 @@ public class Commodity implements Serializable {
     private Integer type;//类型
     private String lId;//材质Id
     private Integer hits;//点击量
+
+    private ThirdType thirdType;
+
+   /* private SecondType secondType;
+
+    private FirstType firstType;*/
+
+   /* private Integer firstType;//一级类型Id
+
+    private Integer secondType;//二级类型Id
+
+    private Integer thirdType;//三级类型Id*/
+
     private Lining lining=new Lining();
     private List<Picture> pictures=new ArrayList<Picture>();
 
@@ -109,4 +122,28 @@ public class Commodity implements Serializable {
     public void setType(Integer type) {
         this.type = type;
     }
+
+    public ThirdType getThirdType() {
+        return thirdType;
+    }
+
+    public void setThirdType(ThirdType thirdType) {
+        this.thirdType = thirdType;
+    }
+
+   /* public SecondType getSecondType() {
+        return secondType;
+    }
+
+    public void setSecondType(SecondType secondType) {
+        this.secondType = secondType;
+    }
+
+    public FirstType getFirstType() {
+        return firstType;
+    }
+
+    public void setFirstType(FirstType firstType) {
+        this.firstType = firstType;
+    }*/
 }

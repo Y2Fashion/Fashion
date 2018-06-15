@@ -28,36 +28,27 @@
                                                                         style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <form action="commodity" style="width:85%" method="post">
-        <label>一级分类:</label>
-        <select class="sssss" name="cars" onchange="xxx(this)">
-            <option class="firstClick" th:value="${firstType.fId}" th:each="firstType:${firstTypeList}"
-                    th:text="${firstType.firstType}">请选择
-            </option>
-        </select>
-        <label>二级分类</label>
-        <select name="name">
-            <option th:each="secondTypt:${secondTypeList}" th:value="${secondTypt.sId}"
-                    th:text="${secondTypt.secondType}">请选择
-            </option>
-        </select>
-        <label>三级分类</label>
-        <select name="type">
-            <option value="volvo">请选择</option>
-            <option value="saab" th:each="thirdType:${thirdTypeList}" th:text="${thirdType.thirdType}"
-                    th:value="${thirdType.tId}">男
-            </option>
-        </select>
-        <input type="submit" style="width:50px" value="搜索"/>
-    </form>
+
+        <label>商品类型:</label>
+        <div style="display: inline" id="type">
+
+            <select class="firstType" name="cars" onchange="getSecondType(this.value)">
+                <option class="firstClick" th:value="${firstType.fId}" th:each="firstType:${firstTypeList}"
+                        th:text="${firstType.firstType}">请选择
+                </option>
+            </select>
+
+        </div>
+        <input type="button" style="width:50px" value="搜索" onclick="getCommodity(this)"/>
+
     <div class="tools">
         <ul class="toolbar">
-            <li><span><img src="/static/image/backstage/t03.png"/></span>批量删除</li>
+            <li id="dels"><span><img src="/static/image/backstage/t03.png"/></span>批量删除</li>
             <li onclick="user_management_add('添加服装','commodity_add','600','435')"><span>
           <img src="/static/image/backstage/t01.png"/></span>添加
             </li>
         </ul>
-        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+        <span class="x-right" style="line-height:25px">共有数据：<i class="sun" th:text="${totalRows}"></i> 条</span></xblock>
     </div>
     <table class="tablelist">
         <thead>
@@ -88,12 +79,13 @@
             </th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="commodity:${page.datas}">
+        <tbody id="checkboxs">
+        <tr th:each="commodity:${commodity}">
             <td>
-                <input type="checkbox" value="1" name="selected">
+                <input type="checkbox" th:value="${commodity.id}" name="selected" claee="ckecks">
             </td>
-            <td th:text="${commodity.id}">
+
+            <td class="comId" th:text="${commodity.id}">
                 1
             </td>
             <td th:text="${commodity.commodityName}">求大神</td>
@@ -110,71 +102,312 @@
                 2015-07-13 13:13:32
             </td>
             <td class="td-manage">
-                <a title="查看" href="javascript:;"
-                   onclick="user_management_edit('查看服装详情','commodity_get','4','','430')"
+                <!--<input type="hidden" name="ids" th:value="${commodity.id}"/>-->
+                <a th:attr="ids=${commodity.id}" title="查看" href="javascript:;"
+                   onclick="user_management_edit('查看服装详情','commodity_get','4','','430',this)"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe615;</i>
                 </a>
-                <a style="text-decoration:none"
-                   onclick="user_management_password('修改服装详情','commodity_upd','10001','900','400')"
+
+                <a style="text-decoration:none" th:attr="ids=${commodity.id}"
+                   onclick="user_management_password('修改服装详情','commodity_upd','4','','430',this)"
                    href="javascript:;" title="修改">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                <a th:attr="ids=${commodity.id}" title="删除" onclick="remove(this)" href="javascript:;"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
-
-
         </tbody>
     </table>
+    <input type="hidden" th:value="${pageNo}" />
     <div class="page" v-show="show">
+        <div style="display: inline">
+        <a href="javascript:;" onclick="getCommodity(this)" id="page">首页</a>
 
+        <!--<a th:if="${pageNo} &gt '1' " href="javascript:;" class="lastPage"  onclick="getCommodity(this)">上一页</a>
+-->
+        <a th:if="${pageNo} < ${totalPage}" href="javascript:;" onclick="getCommodity(this)">下一页</a>
 
-        <a href="commodity?pageNo=1">首页</a>
-        <a th:if="${page.pageNo} &gt '1' " th:href="@{'commodity?pageNo='+${page.pageNo-1}}">上一页</a>
-        <a th:if="${page.pageNo} < ${page.totalPage}" th:href="@{'commodity?pageNo='+${page.pageNo+1}}">下一页</a>
-
-        <a th:href="@{'commodity?pageNo='+${page.totalPage}}">末页</a>
+        <a href="javascript:;" onclick="getCommodity(this)">末页</a>
+        </div>
+        <!--<input type="hidden" th:value="${page.totalPage}" class="totalPage">-->
         &nbsp;&nbsp;
-        &nbsp;&nbsp;第<span th:text="${page.pageNo}"></span>页/共<span th:text="${page.totalPage}"></span>页&nbsp;&nbsp;共<span th:text="${page.totalRows}"></span>条记录
-                <span class="jumppoint">跳转到：</span> <span class="jumpinp">
-                <input type="text" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
-             </span> <span class="jump gobtn">GO</span>
-            </div>
+        &nbsp;&nbsp;第<span class="pageNo" id="pagenum" >1</span>页/共<span class="totalPage" th:text="${totalPage}">
+    </span>页&nbsp;&nbsp;共<span class="totalRows" th:text="${totalRows}"></span>条记录
+        <!--<span class="jumppoint">跳转到：</span> <span class="jumpinp">
+                <input type="text" name="Go" onblur="input(this)"/>
+             </span> <button class="jump gobtn" onclick="getCommodity(this)" th:value="GO">GO</button>-->
+    </div>
 </div>
-<br />
-<br />
-<br />
-        <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
-        <script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
-        <script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
-        <script src="/static/js/backstage/js.js" charset="utf-8"></script>
-        <script>
-            layui.use(['laydate','element','laypage','layer'], function(){
-                $ = layui.jquery;//jquery
-              lement = layui.element();//面包导航
-              laypage = layui.laypage;//分页
-              layer = layui.layer;//弹出层
+<br/>
+<br/>
+<br/>
+<script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/x-layui.js" charset="utf-8"></script>
+<script src="/static/js/backstage/jquery2.js" charset="utf-8"></script>
+<script src="/static/js/backstage/js.js" charset="utf-8"></script>
+<script src="/static/js/jquery-1.8.3.min.js"></script>
+<script>
+    layui.use(['laydate', 'element', 'laypage', 'layer'], function () {
+        $ = layui.jquery;//jquery
+        lement = layui.element();//面包导航
+        laypage = layui.laypage;//分页
+        layer = layui.layer;//弹出层
 
+    });
+   function input(obj) {
+       if(obj.value<1 ){
+           layer.alert('页数不能小于1。', {icon: 6});
+       }
+       if(obj.value>$("[class='totalPage']").text()){
+           layer.alert('页数不能大于最大页数。', {icon: 6});
+       }
+       return;
+   }
+
+    /*商品-添加*/
+    function user_management_add(title, url, w, h) {
+
+        x_admin_show(title, url, w, h);
+    }
+
+    // 商品-查看
+    function user_management_edit(title, url, id, w, h, t) {
+        var ids = $(t).attr("ids");
+        var urls = url + '?ids=' + ids;
+        alert(urls);
+        x_admin_show(title, urls, w, h);
+    }
+
+    /*商品-修改*/
+    function user_management_password(title, url, id, w, h,t) {
+        var ids = $(t).attr("ids");
+        var urls = url + '?ids=' + ids;
+        x_admin_show(title, urls, w, h);
+    }
+
+    $('.tablelist tbody tr:odd').addClass('odd');
+
+    function remove(obj) {
+        var id = $(obj).attr('ids');
+        layer.confirm('确定要删除吗？', function () {
+            $.ajax({
+                url: "/commodity_del",
+                data: {"comId": id},
+                success: function () {
+                   location.reload(true);
+                }
+            })
+        })
+    }
+
+    /*批量删除*/
+    $("#dels").click(function () {
+        var requirement = [];
+        $("#checkboxs :checkbox").each(function (i, obj) { //遍历table里的全部checkbox
+            if (obj.checked) {
+                requirement[i] = obj.value;
+                i++;
+            }
+        });
+        if (requirement.length < 1) {
+            layer.alert('请选择要删除的商品。', {icon: 6});
+        } else {
+            layer.confirm('确定要删除吗？', function () {
+                $.ajax({
+                    url: "commodity_dels",
+                    data: {"arr": requirement},
+                    type: "post",
+                    success: function () {
+                        location.reload(true);
+                    }
+                })
+            })
+        }
+
+    })
+
+   /* function eachData(data) {
+        $(".SecondType").children().filter("option").remove();
+        for (var i = 0; i < data.length; i++) {
+            var htm = '<option value="' + data[i].sId + '" selected="selected">' + data[i].secondType + '</option>'
+
+            $.each($(".SecondType"), function (i, t) {
+                $(t).html(htm + $(t).html());
+            })
+        }
+
+    }*/
+
+    function getSecondType(firstType) {
+        $(".firstType").nextAll().remove();
+        var htmlText = "<select class='secondType' onchange='getThirdType(this.value)'></select>";
+        if (0 != firstType) {
+            $("#type").append(htmlText);
+        }
+        $.ajax({
+            url: "/getSecondType",
+            dataType: "json",
+            data: {"firstType": firstType},
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var htm = '<option value="' + data[i].sId + '" selected="selected">' + data[i].secondType + '</option>'
+                    $.each($(".secondType"), function (i, t) {
+                        $(t).html(htm + $(t).html());
+                    })
+                }
+            }
+        })
+    }
+
+    function getThirdType(secondType) {
+        $(".secondType").nextAll().remove();
+        var htmlText = "<select class='thirdType' ></select>"
+        if (secondType > 0) {
+            $("#type").append(htmlText)
+        }
+        $.ajax({
+            url: "/getThirdType",
+            dataType: "json",
+            data: {"secondType": secondType},
+            success: function (data) {
+
+                $(".thirdType").children().filter("option").remove();
+                for (var i = 0; i < data.length; i++) {
+                    var htm = '<option value="' + data[i].tId + '" selected="selected">' + data[i].thirdType + '</option>'
+                    $.each($(".thirdType"), function (i, t) {
+                        $(t).html(htm + $(t).html());
+                    })
+                }
+
+            }
+
+        })
+    }
+    function getCommodityByType(obj) {
+        alert(obj.value);
+        var type=[];
+        $("#type option:selected").each(function (i, obj) { //遍历Select里的全部Option
+            type[i] = obj.value;
+            i++;
+        });
+        $("#checkboxs").children('tr').remove();
+       $.ajax({
+           url:"/commodityAjax",
+           data:{"type":type,"pageNo":1},
+           dataType:"json",
+           success:function (data) {
+               eachData(data);
+           }
+       })
+    }
+    function getCommodity(obj) {
+        $(".page div").html(" ");
+        $("#checkboxs").children('tr').remove();
+        var pageNo = parseInt($("[type='hidden']").val());
+        if ("首页" == obj.text || "搜索" == obj.value) {
+            pageNo = 1;
+        } else if ("上一页" == obj.text) {
+            pageNo = pageNo - 1;
+        } else if ("下一页" == obj.text) {
+            pageNo = pageNo + 1;
+        }else if("GO"==obj.value){
+            pageNo=$('[name="Go"]').val();
+        } else {
+            pageNo = parseInt($(".totalPage").text());
+        }
+        var type=[];
+        $("#type option:selected").each(function (i, obj) { //遍历Select里的全部Option
+            type[i] = obj.value;
+            i++;
+        });
+        var page;
+        var pageText='<a href="javascript:;" onclick="getCommodity(this)" id="page" >首页</a>';
+        var lastText='<a href="javascript:;" class="lastPage"  onclick="getCommodity(this)">上一页</a>';
+        var nextText='<a href="javascript:;" onclick="getCommodity(this)">下一页</a>';
+        var totalPageText='<a href="javascript:;" onclick="getCommodity(this)">末页</a>';
+        if(pageNo==1){
+            page=pageText+nextText+totalPageText;
+        }
+        if(pageNo>1){
+            page=pageText+lastText+nextText+totalPageText;
+        }
+        if(pageNo==parseInt($(".totalPage").text())){
+            page=pageText+lastText+totalPageText;
+        }
+        $(".page div").html(page);
+        $.ajax({
+            url: "/commodityAjax",
+            dataType: "json",
+            data: {"pageNo": pageNo, "type": type},
+            success: function (data) {
+                eachData(data);
+                /*$("[type='hidden']").val(data.pageNo);
+                $(".totalPage").val(data.totalPage);
+                $(".pageNo").html(parseInt(data.pageNo));
+                for (var i = 0; i < data.datas.length; i++) {
+                    var htmlText = '<tr>';
+                    htmlText+='<td>'+'<input type="checkbox" th:value="'+data.datas[i].id+'" name="selected"' +
+                    ' claee="ckecks">'+'</td>';
+                    htmlText += '<td>' + data.datas[i].id + '</td>'
+                    htmlText += '<td>' + data.datas[i].commodityName + '</td>';
+                    htmlText += '<td>' + data.datas[i].originalPrice + '</td>';
+                    htmlText += '<td>' + data.datas[i].vipPrice + '</td>';
+                    htmlText += '<td>' + data.datas[i].type + '</td>';
+                    htmlText+='<td>'+data.datas[i].hits+'</td>';
+                    htmlText += '<td class="td-manage">' + '<a th:attr="ids=' + data.datas[i].id + '" title="查看" href="javascript:;"' +
+                        'onclick="user_management_edit(\'查看服装详情\',\'commodity_get\',\'4\',\'\',\'430\',this)"' +
+                        'class="ml-5" style="text-decoration:none">' + '<i class="layui-icon">&#xe615;</i>' + '</a>';
+                    htmlText += '<a style="text-decoration:none" href="javascript:;" title="修改" ' +
+                        'onclick="user_management_password(\'修改服装详情\',\'commodity_upd\',\'10001\',\'900\',\'400\')">' +
+                        '<i class="layui-icon">&#xe642;</i>' + '</a>';
+                    htmlText += '<a th:attr="ids=' + data.datas[i].id + '" title="删除" onclick="remove(this)" href="javascript:;"' +
+                        'style="text-decoration:none">' + '<i class="layui-icon">&#xe640;</i>' + '</a>' + '</td>';
+                    htmlText += '</tr>';
+                 $.each($("#checkboxs"), function (i, t) {
+                        $(t).html(htmlText + $(t).html());
+                    });
+                }
+*/
+            }
+        })
+
+    }
+
+    function eachData(data){
+        $(".sun").html(data.totalRows);
+        $("[type='hidden']").val(data.pageNo);
+        $(".totalPage").html(data.totalPage);
+        $(".pageNo").html(parseInt(data.pageNo));
+        $(".totalRows").html(parseInt(data.totalRows));
+        for (var i = 0; i < data.datas.length; i++) {
+            var htmlText = '<tr>';
+            htmlText+='<td>'+'<input type="checkbox" th:value="'+data.datas[i].id+'" name="selected"' +
+                ' claee="ckecks">'+'</td>';
+            htmlText += '<td>' + data.datas[i].id + '</td>';
+            htmlText += '<td>' + data.datas[i].commodityName + '</td>';
+            htmlText += '<td>' + data.datas[i].originalPrice + '</td>';
+            htmlText += '<td>' + data.datas[i].vipPrice + '</td>';
+            htmlText += '<td>' + data.datas[i].type + '</td>';
+            htmlText+='<td>'+data.datas[i].hits+'</td>';
+            htmlText += '<td class="td-manage">' + '<a ids=' + data.datas[i].id + ' title="查看" href="javascript:;"' +
+                'onclick="user_management_edit(\'查看服装详情\',\'commodity_get\',\'4\',\'\',\'430\',this)"' +
+                'class="ml-5" style="text-decoration:none">' + '<i class="layui-icon">&#xe615;</i>' + '</a>';
+            htmlText += '<a style="text-decoration:none" ids=' + data.datas[i].id + ' href="javascript:;" title="修改" ' +
+                'onclick="user_management_password(\'修改服装详情\',\'commodity_upd\',\'4\',\'\',\'430\',this)">' +
+                '<i class="layui-icon">&#xe642;</i>' + '</a>';
+            htmlText += '<a th:attr="ids=' + data.datas[i].id + '" title="删除" onclick="remove(this)" href="javascript:;"' +
+                'style="text-decoration:none">' + '<i class="layui-icon">&#xe640;</i>' + '</a>' + '</td>';
+            htmlText += '</tr>';
+            $.each($("#checkboxs"), function (i, t) {
+                $(t).html(htmlText + $(t).html());
             });
+        }
+    }
 
-            /*商品-添加*/
-            function user_management_add(title,url,w,h){
-                x_admin_show(title,url,w,h);
-            }
-            // 商品-查看
-            function user_management_edit (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
-            }
-            /*商品-修改*/
-            function user_management_password(title,url,id,w,h){
-                x_admin_show(title,url,w,h);  
-            }
-           
-	$('.tablelist tbody tr:odd').addClass('odd');
-            </script>
-    </body>
+</script>
+</body>
 </html>

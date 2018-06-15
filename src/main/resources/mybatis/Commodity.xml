@@ -3,8 +3,47 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.CommodityDao">
+    <resultMap id="CommodityMap" type="Commodity">
+        <id property="id" column="id"/>
+        <result property="commodityName" column="commodityName"/>
+        <result property="originalPrice" column="originalPrice"/>
+        <result property="vipPrice" column="vipPrice"/>
+        <result property="photoPath" column="photoPath"/>
+        <result property="state" column="state"/>
+        <result property="type" column="type"/>
+        <result property="lId" column="lId"/>
+        <result property="hits" column="hits"/>
+        <association property="thirdType" javaType="ThirdType">
+            <id property="tId" column="tId"></id>
+            <result property="thirdType" column="thirdType"></result>
+            <result property="sId" column="sId"></result>
+            <association property="secondType" javaType="com.accp.entity.SecondType">
+           <id property="sId" column="sId"></id>
+           <result property="secondType" column="secondType"></result>
+           <result property="fId" column="fId"></result>
+                <association property="firstType" javaType="com.accp.entity.FirstType">
+                    <id property="fId" column="fId"></id>
+                    <result property="firstType" column="firstType"></result>
+                </association>
+             </association>
+        </association>
+    </resultMap>
+
+
+    <select id="commodityList" resultMap="CommodityMap">
+        SELECT c.* FROM commodity c JOIN thirdtype t ON c.TYPE=t.tId JOIN secondtype s ON t.sId=s.sId
+        JOIN firsttype f ON s.fId=f.fId
+
+        <where>
+            <if test="type != null and type !=0">and t.tId=#{type}</if>
+            <if test="secondType != null and secondType !=0">AND s.sId=#{secondType}</if>
+           <if test="firstType != null and firstType !=0">AND f.fId=#{firstType}</if>
+        </where>
+        ORDER BY c.hits DESC LIMIT #{pageNo},8;
+    </select>
+
     <!--分类查询-->
-    <select id="findType" parameterType="Commodity" resultType="Commodity" >
+    <select id="findType" parameterType="Commodity" resultType="Commodity">
         SELECT * FROM commodity WHERE TYPE=#{type};
     </select>
     <!--查询单个商品-->
@@ -26,13 +65,31 @@
         </set>
         where id=#{id}
     </update>
+
+    <!--修改商品信息-->
+    <update id="updataCommodity" parameterType="Commodity">
+        update Commodity
+        <set>
+            <if test="commodityName!=null and commodityName!=''">commodityName=#{commodityName},</if>
+            <if test="originalPrice!=null and originalPrice!=''">originalPrice=#{originalPrice},</if>
+            <if test="vipPrice!=null and vipPrice!=''">vipPrice=#{vipPrice},</if>
+            <if test="photoPath!=null and photoPath!=''">photoPath=#{photoPath},</if>
+            <if test="state!=null and state!=''">state=#{state},</if>
+            <if test="type!=null and type!=''">type=#{type},</if>
+            <if test="lId!=null and lId!=''">lId=#{lId},</if>
+            <if test="hits!=null and hits!=''">hits=#{hits},</if>
+        </set>
+        where id=#{id}
+    </update>
+
     <select id="selectCommodityList" resultType="Commodity">
         select * from Commodity where type in
         <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
-          #{thirdTypeArry}
+            #{thirdTypeArry}
         </foreach>
         order by hits desc limit 0,8;
     </select>
+
     <select id="selectCommodityListByIP" resultType="Commodity">
         select * from Commodity where id in
         <foreach collection="array" item="thirdTypeArry" open="(" separator="," close=")">
@@ -41,20 +98,33 @@
         order by hits desc limit 0,8;
     </select>
 
-    <select id="commodityList" resultType="Commodity">
+    <!--<select id="commodityList" resultType="Commodity">
           SELECT * FROM commodity
           <where>
               <if test="type != null ">and type=#{type}</if>
           </where>
            ORDER BY hits DESC LIMIT #{pageNo},8;
-    </select>
+    </select>-->
 
     <select id="commodityCount" resultType="Integer">
-      SELECT COUNT(1) FROM commodity
-      <where>
-          <if test="type != null "> and type=#{type}</if>
-      </where>
+        SELECT COUNT(1) FROM commodity c JOIN thirdtype t ON c.TYPE=t.tId JOIN secondtype s ON t.sId=s.sId
+        JOIN firsttype f ON s.fId=f.fId
+        <where>
+            <if test="type != null and type !=0">and t.tId=#{type}</if>
+            <if test="secondType != null and secondType !=0">AND s.sId=#{secondType}</if>
+            <if test="firstType != null and firstType !=0">AND f.fId=#{firstType}</if>
+        </where>
     </select>
+
+    <delete id="commoditydel">
+       DELETE FROM commodity WHERE id = #{id};
+    </delete>
+
+    <insert id="insertCommodity" parameterType="Commodity">
+        INSERT INTO commodity(commodityName,originalPrice,vipPrice,photoPath,state,`TYPE`,lid)
+   VALUES (#{commodityName},#{originalPrice},#{vipPrice},#{photoPath},#{state},#{type},#{lId});
+    </insert>
+
 <!--按id查询商品-->
     <select id="selectCommodityById" resultType="Commodity" parameterType="Integer">
         select * from Commodity where ID=#{id}

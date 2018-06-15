@@ -5,7 +5,6 @@ import com.accp.entity.User;
 import com.accp.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +24,17 @@ public class UserController {
      * 因为是刚进入，是查询全部
      */
     @RequestMapping("user")
-    @GetMapping("/")
-    public String user_list(Model model){
-//        User user=new User("管理员","", Date.valueOf("2018-03-29"),"");
-        Pager<User> list=userBiz.list(new User(),1);
+    public String user_list(Model model,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
+        User user=(User)session.getAttribute("user_role");
+        Pager<User> list=null;
+        if(user.getUserRole().equals("超级管理员")||user.getUserRole().equals("管理员")){
+            list=userBiz.list(new User(),1);
+        }else{
+            list=userBiz.list(user);
+        }
         model.addAttribute("role","");
         model.addAttribute("sex","");
         model.addAttribute("state","");
@@ -46,7 +52,6 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_pager")
-    @GetMapping("/")
     public String user_pager(Model model,String role,String sex,String state,Integer num){
         User user=new User();
         user.setUserRole(role);
@@ -67,7 +72,6 @@ public class UserController {
      */
     @RequestMapping("user_dels")
     @ResponseBody
-    @GetMapping("/")
     public String user_dels(@RequestParam(value = "arr[]") Integer[] arr){
         boolean yesNo=userBiz.removes(arr);
         return "redirect:/user";
@@ -79,7 +83,6 @@ public class UserController {
      */
     @RequestMapping("user_del")
     @ResponseBody
-    @GetMapping("/")
     public String user_del(Integer id){
         boolean yesNo=userBiz.remove(id);
         return "redirect:/user";
@@ -101,7 +104,6 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_add")
-    @GetMapping("/")
     public String user_add(Model model,User user){
         if(user.getUserName()==null){
             return "/backstage/user_management_add";
@@ -118,7 +120,6 @@ public class UserController {
      * @return
      */
     @RequestMapping("user_upd_pwd")
-    @GetMapping("/")
     public String user_pwd(Model model,Integer id,HttpSession session){
         User user=userBiz.getById(id);
         session.setAttribute("ppd",user.getUserPwd());
@@ -136,7 +137,6 @@ public class UserController {
      */
     @RequestMapping("pwd_pwd")
     @ResponseBody
-    @GetMapping("/")
     public String pwd_Pwd(Model model,String pwd , HttpSession session){
         String ppd=session.getAttribute("ppd").toString();
         if(ppd.equals(pwd)){
@@ -153,7 +153,6 @@ public class UserController {
      * @return
      */
     @RequestMapping("upd_pwd")
-    @GetMapping("/")
     public String upd_Pwd(Model model,User user, HttpSession session){
         if(userBiz.upd_User(user)){
             session.removeAttribute("ppd");//清空密码

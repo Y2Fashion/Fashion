@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <img src="/static/image/backstage/tupian4.jpg"
+    <img th:each="pic:${picture}" th:src="@{'/static/image/'+${pic.Path}}"
          style="width: 80%;height:160px; margin:10%;" title="关联tuping " alt="关联"/>
 <script src="/static/lib/layui/layui.js" charset="utf-8">
         </script>

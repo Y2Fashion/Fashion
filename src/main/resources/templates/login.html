@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>后台登录界面</title>
     <link href="/static/css/backstage/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/backstage/LoginValidation.css">
     <script language="JavaScript" src="/static/js/backstage/jquery2.js"></script>
+    <script src="/static/js/backstage/jquery-1.11.0.min.js"></script>
     <script src="/static/js/backstage/cloud.js" type="text/javascript"></script>
     <script language="javascript" src="/static/js/backstage/js.js"></script>
     <script language="javascript" src="/static/js/backstage/md5.js"></script>
@@ -37,7 +39,7 @@
         <ul>
             <span th:text="${error_login}" calss="errorsss"
                   style="position:absolute;top:45px;left:460px;color:red;font-size: 20px;"></span>
-            <form action="/login_go" method="post">
+            <form action="/login_go" method="post" onsubmit="return xxx()">
             <li>
                 <input name="username" type="text" class="loginuser"
                        placeholder="请输入用户名" onclick="error_hide()"/>
@@ -46,9 +48,12 @@
                 <input name="pwd" type="password"
                        class="loginpwd" placeholder="密码" onblur="login_pwd(this)"/>
             </li>
-            <li>
-                <input name="" type="text" class="loginy" placeholder="输入验证码"/><label><img
-                    src="/static/image/backstage/images.jpg"/></label>
+            <li class="outer">
+                    <div class="filter-box"></div>
+                    <span>
+                        滑动解锁
+                    </span>
+                    <div class="inner">&gt;&gt;</div>
             </li>
             <li>
                 <input name="" type="submit" class="loginbtn" value="登录"

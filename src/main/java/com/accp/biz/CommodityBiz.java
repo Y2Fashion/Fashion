@@ -40,6 +40,25 @@ public interface CommodityBiz {
     * */
     public List<Commodity> getCommoditys(boolean bool);
 
+
+
+    public Pager<Commodity> commodityList(Integer type,Integer secondType,Integer firstType,Integer pageNo);
+
+    Integer commoditydel(Integer id);
+
+    /**
+     * 添加商品
+     * @param commodity
+     * @return
+     */
+    boolean insertCommodity(Commodity commodity);
+
+    /**
+     * 修改商品
+     * @param commodity
+     * @return
+     */
+    boolean updataCommodity(Commodity commodity);
     /*
     * 按多个三级ID查询
     * */
@@ -50,10 +69,10 @@ public interface CommodityBiz {
     * */
     List<Commodity> getCommListByXQArray(List<AccessingData> accessingData);
 
-    /*
+   /* *//*
     * 分页查询
-    * */
-    public Pager<Commodity> commodityList(Integer type,Integer pageNo);
+    * *//*
+    public Pager<Commodity> commodityList(Integer type,Integer pageNo);*/
 
     /*
     * 按id查询商品

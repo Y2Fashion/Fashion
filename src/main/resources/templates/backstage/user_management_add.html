@@ -27,7 +27,7 @@
         <div class="x-body">
             <form class="layui-form" action="user_add" method="post">
                 <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
+                    <label class="layui-form-label">
                         <span class="x-red">*</span>用户名称</label>
                     <div class="layui-input-inline">
                         <input type="text"  name="userName" class="layui-input">
@@ -56,6 +56,18 @@
                         <input type="password" id="L_repass" name="userPwds" class="layui-input" onblur="login_pwd(this)">
                     </div>
                 </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>员工姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>必填
+                    </div>
+                </div>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">
                         <span class="x-red">*</span>用户角色</label>
@@ -64,7 +76,7 @@
                             <option value="业务员">业务员</option>
                             <option value="加工师傅">加工师傅</option>
                             <option value="仓库管理员">仓库管理员</option>
-                            <option value="财务">财务</option>
+                            <option value="客服">客服</option>
                             <option value="管理员">管理员</option>
                             <option value="超级管理员">超级管理员</option>
                         </select>

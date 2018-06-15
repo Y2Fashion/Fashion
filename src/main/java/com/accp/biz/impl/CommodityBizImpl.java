@@ -16,6 +16,7 @@ import java.util.List;
 
 @Service
 public class CommodityBizImpl implements CommodityBiz {
+
     @Resource
     private CommodityDao commodityDao;
 
@@ -116,16 +117,31 @@ public class CommodityBizImpl implements CommodityBiz {
     }
 
     @Override
-    public Pager<Commodity> commodityList(Integer type, Integer pageNo) {
+    public Pager<Commodity> commodityList(Integer type,Integer secondType,Integer firstType,Integer pageNo) {
         if(null == pageNo){
             pageNo=1;
         }
         Pager<Commodity> pager = new Pager<>();
         pager.setPageNo(pageNo);
-        pager.setTotalRows(commodityDao.commodityCount(type));
+        pager.setTotalRows(commodityDao.commodityCount(type,secondType,firstType));
         pager.setTotalPage((pager.getTotalRows()+8-1)/8);
-        pager.setDatas(commodityDao.commodityList(type,pageNo-1));
+        pager.setDatas(commodityDao.commodityList(type,secondType,firstType,pageNo-1));
         return pager;
+    }
+
+    @Override
+    public Integer commoditydel(Integer id) {
+        return commodityDao.commoditydel(id);
+    }
+
+    @Override
+    public boolean insertCommodity(Commodity commodity) {
+        return commodityDao.insertCommodity(commodity)>0;
+    }
+
+    @Override
+    public boolean updataCommodity(Commodity commodity) {
+        return commodityDao.updataCommodity(commodity) > 0;
     }
 
     /*
@@ -165,6 +181,11 @@ public class CommodityBizImpl implements CommodityBiz {
         return commodityDao.selectCommodityListByIP(cIdList);
     }
 
+   /* @Override
+    public Pager<Commodity> commodityList(Integer type, Integer pageNo) {
+        return null;
+    }
+*/
     @Override
     public Commodity getCommodityById(Integer id) {
         return commodityDao.selectCommodityById(id);

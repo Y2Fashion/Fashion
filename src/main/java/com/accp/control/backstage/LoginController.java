@@ -34,11 +34,15 @@ public class LoginController {
     @RequestMapping("/login_go")
     @GetMapping("/")
     public String loGin_go(Model model, String username, String pwd , HttpSession session){
+        if(username==null){
+            username="-1111111";
+        }
+        if(pwd ==null){
+            pwd="-11111111";
+        }
         User user=new User(username,pwd,"已启用");
         User users=userBiz.get(user);
         if(users!=null&&users.getId()>0){
-            users.setUserPwd("");
-//            String tishi=users.getUserRole()+":"+users.getUserName();
             session.setAttribute("user_role",users);
             return "forward:/home";
         }else{
@@ -58,18 +62,29 @@ public class LoginController {
     @RequestMapping("/head")
     @GetMapping("/")
     public String loGin_head(Model model,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         User role=(User)session.getAttribute("user_role");
         model.addAttribute("user_role",role);
         return "/backstage/head";
     }
 
     @RequestMapping("/left")
-    public String loGin_left(){
+    public String loGin_left(Model model,HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
+        User role=(User)session.getAttribute("user_role");
+        model.addAttribute("user_role",role);
         return "/backstage/left";
     }
 
     @RequestMapping("/main")
-    public String loGin_main(){
+    public String loGin_main(HttpSession session){
+        if(session.getAttribute("user_role")==null){
+            return "redirect:/login";
+        }
         return "/backstage/main";
     }
 

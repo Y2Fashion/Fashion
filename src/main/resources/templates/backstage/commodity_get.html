@@ -21,38 +21,39 @@
             <table border="1px black;">
                 <tr>
                     <td>服装编号:</td>
-                    <td>1</td>
-                    <td style="background: url('/static/image/backstage/shuji4.jpg');background-size:100% 100%;" colspan="2" rowspan="5">
+                    <td th:text="${comm.id}" class="comId">1</td>
+                    <td colspan="2" rowspan="5">
+                        <img th:src="@{'/static/image/'+${comm.photoPath}}" width="100%" height="300px" />
                     </td>
                 </tr>
                 <tr>
                     <td>服装名称:</td>
-                    <td>SaaS大V书上的撒打算</td>
+                    <td th:text="${comm.commodityName}">SaaS大V书上的撒打算</td>
                 </tr>
                 <tr>
                     <td>点击量:</td>
-                    <td>100000</td>
+                    <td th:text="${comm.hits}">100000</td>
                 </tr>
                 <tr>
                     <td>衣服材质:</td>
-                    <td>SaaS大V书上的撒打算</td>
+                    <td th:text="${lining}">SaaS大V书上的撒打算</td>
                 </tr>
                 <tr>
                     <td>服装类型:</td>
-                    <td>还能拿死阿斯顿</td>
+                    <td th:text="${type}">还能拿死阿斯顿</td>
                 </tr>
                 <tr>
                     <td>服装状态:</td>
-                    <td>新品</td>
+                    <td th:text="${comm.state}">新品</td>
                     <td>关联图片1:</td>
                     <td>
                         <u style="cursor:pointer"
-                           onclick="user_management_show('关联图片2:','commodity_show','10001','360','300')">
+                           onclick="user_management_show('关联图片:','commodity_show','','360','300')">
                             关联图片2:
                         </u>
                     </td>
                 </tr>
-                <tr>
+               <!-- <tr>
                     <td>关联图片2:</td>
                     <td>
                         <u style="cursor:pointer"
@@ -67,12 +68,12 @@
                             关联图片2:
                         </u>
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td>出厂价格:</td>
-                    <td>9527.00</td>
+                    <td th:text="${comm.originalPrice}">9527.00</td>
                     <td>会员价格:</td>
-                    <td>4325.00</td>
+                    <td th:text="${comm.vipPrice}">4325.00</td>
                 </tr>
             </table>
         </div>
@@ -88,7 +89,10 @@
             });
             /*图片-查看*/
             function user_management_show(title,url,id,w,h){
-                x_admin_show(title,url,w,h);
+                id=$(".comId").text();
+                alert(id);
+                var urls=url+"?comid="+id;
+                x_admin_show(title,urls,w,h);
             }
         </script>
     </body>

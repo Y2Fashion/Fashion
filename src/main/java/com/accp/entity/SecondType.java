@@ -12,6 +12,8 @@ public class SecondType implements Serializable {
     private String secondType;//二级类型
     private Integer fId;//一级ID
 
+    private FirstType firstType;
+
     public Integer getsId() {
         return sId;
     }
@@ -34,5 +36,13 @@ public class SecondType implements Serializable {
 
     public void setfId(Integer fId) {
         this.fId = fId;
+    }
+
+    public FirstType getFirstType() {
+        return firstType;
+    }
+
+    public void setFirstType(FirstType firstType) {
+        this.firstType = firstType;
     }
 }

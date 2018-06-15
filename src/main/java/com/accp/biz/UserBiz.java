@@ -24,6 +24,8 @@ public interface UserBiz {
      */
     Pager<User> list(User user, int num);
 
+    Pager<User> list(User user);
+
     /***
      * 符合某条件的用户条数
      * @return  返回集合

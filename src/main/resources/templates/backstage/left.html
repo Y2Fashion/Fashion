@@ -21,7 +21,11 @@
             </div>
         </a>
         <!--订单管理-->
-        <dl class="system_log">
+        <dl th:if="${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'
+            || user_role.userRole == '仓库管理员'
+            || user_role.userRole == '客服'
+            || user_role.userRole == '业务员'}" class="system_log">
             <dt>
                 <img class="icon1" src="/static/image/backstage/coin09.png" />
                 <img class="icon2" src="/static/image/backstage/coin10.png" />
@@ -35,49 +39,64 @@
                 <a href="order" target="main" class="cks">订单管理</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
-
         </dl>
+
         <!--布料管理-->
-      <dl class="system_log">
-            <dt>
+        <dl th:if="${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'
+            || user_role.userRole == '仓库管理员'
+            || user_role.userRole == '加工师傅'}" class="system_log">
+            <dt th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'
+                    || user_role.userRole == '仓库管理员'}">
                 <img class="icon1" src="/static/image/backstage/coin09.png" />
                 <img class="icon2" src="/static/image/backstage/coin10.png" />
                 布料管理
                 <img class="icon3" src="/static/image/backstage/coin19.png" />
                 <img class="icon4" src="/static/image/backstage/coin20.png" />
             </dt>
-            <dd>
+            <dd th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'
+                    || user_role.userRole == '仓库管理员'}">
                 <img class="coin11" src="/static/image/backstage/coin111.png" />
                 <img class="coin22" src="/static/image/backstage/coin222.png" />
                 <a href="stock/lining" target="main" class="cks">布料库存</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
-            <dd>
+            <dd th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'
+                    || user_role.userRole == '仓库管理员'
+                    || user_role.userRole == '加工师傅'}">
                 <img class="coin11" src="/static/image/backstage/coin111.png" />
                 <img class="coin22" src="/static/image/backstage/coin222.png" />
                 <a href="Use" target="main" class="cks">布料使用情况</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
-            <dd>
+            <dd th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'
+                    || user_role.userRole == '仓库管理员'}">
                 <img class="coin11" src="/static/image/backstage/coin111.png" />
                 <img class="coin22" src="/static/image/backstage/coin222.png" />
                 <a href="Purchase" target="main" class="cks">布料进货</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
-            <dd>
+            <dd th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'}">
                 <img class="coin11" src="/static/image/backstage/coin111.png" />
                 <img class="coin22" src="/static/image/backstage/coin222.png" />
                 <a href="Channel" target="main" class="cks">布料供应渠道</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
-            <dd>
+            <dd th:if="${user_role.userRole == '超级管理员'
+                    || user_role.userRole == '管理员'}">
                 <img class="coin11" src="/static/image/backstage/coin111.png" />
                 <img class="coin22" src="/static/image/backstage/coin222.png" />
                 <a href="Supplier" target="main" class="cks">布料供应商</a>
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
         </dl>
-        <!--客户管理-->
+
+        <!--用户管理-->
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/static/image/backstage/coin07.png" />
@@ -95,7 +114,9 @@
         </dl>
 
         <!--产品管理-->
-        <dl class="system_log">
+        <dl th:if="${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'}"
+            class="system_log">
             <dt>
                 <img class="icon1" src="/static/image/backstage/coin07.png" />
                 <img class="icon2" src="/static/image/backstage/coin08.png" />
@@ -116,70 +137,10 @@
                 <img class="icon5" src="/static/image/backstage/coin21.png" />
             </dd>
         </dl>
-        <!--数据管理-->
-        <!--       <dl class="system_log">
-                   <dt>
-                       <img class="icon1" src="image/coin05.png" />
-                       <img class="icon2" src="image/coin06.png" />
-                        数据管理
-                        <img class="icon3" src="image/coin19.png" />
-                        <img class="icon4" src="image/coin20.png" />
-                   </dt>
-                   <dd>
-                       <img class="coin11" src="image/coin111.png" />
-                       <img class="coin22" src="image/coin222.png" />
-                       <a class="cks" href="Warning_management.html" target="main">预警信息管理</a>
-                       <img class="icon5" src="image/coin21.png" />
-                   </dd>
-                   <dd>
-                       <img class="coin11" src="image/coin111.png" />
-                       <img class="coin22" src="image/coin222.png" />
-                       <a class="cks" href="Data_management.html" target="main">数据管理</a>
-                       <img class="icon5" src="image/coin21.png" />
-                   </dd>
-                   <dd>
-                       <img class="coin11" src="image/coin111.png" />
-                       <img class="coin22" src="image/coin222.png" />
-                       <a class="cks" href="shujutongji.html" target="main">数据统计</a>
-                       <img class="icon5" src="image/coin21.png" />
-                   </dd>
-               </dl>-->
 
-        <dl class="system_log">
-            <dt>
-                <img class="icon1" src="/static/image/backstage/coin03.png" />
-                <img class="icon2" src="/static/image/backstage/coin04.png" />
-                网站信息管理
-                <img class="icon3" src="/static/image/backstage/coin19.png" />
-                <img class="icon4" src="/static/image/backstage/coin20.png" />
-            </dt>
-            <dd>
-                <img class="coin11" src="/static/image/backstage/coin111.png" />
-                <img class="coin22" src="/static/image/backstage/coin222.png" />
-                <a href="Home.html" target="main" class="cks">首页</a>
-                <img class="icon5" src="/static/image/backstage/coin21.png" />
-            </dd>
-            <dd>
-                <img class="coin11" src="/static/image/backstage/coin111.png" />
-                <img class="coin22" src="/static/image/backstage/coin222.png" />
-                <a href="About_us.html" target="main" class="cks">关于我们</a>
-                <img class="icon5" src="/static/image/backstage/coin21.png" />
-            </dd>
-            <dd>
-                <img class="coin11" src="/static/image/backstage/coin111.png" />
-                <img class="coin22" src="/static/image/backstage/coin222.png" />
-                <a href="New.html" target="main" class="cks">心理新闻</a>
-                <img class="icon5" src="/static/image/backstage/coin21.png" />
-            </dd>
-            <dd>
-                <img class="coin11" src="/static/image/backstage/coin111.png" />
-                <img class="coin22" src="/static/image/backstage/coin222.png" />
-                <a href="Download-pic.html" target="main" class="cks">资源下载</a>
-                <img class="icon5" src="/static/image/backstage/coin21.png" />
-            </dd>
-        </dl>
-
-        <dl class="system_log">
+        <dl th:if="${user_role.userRole == '超级管理员'
+            || user_role.userRole == '管理员'}"
+                class="system_log">
             <dt>
                 <img class="icon1" src="/static/image/backstage/coinL1.png" />
                 <img class="icon2" src="/static/image/backstage/coinL2.png" />
